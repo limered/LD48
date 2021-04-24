@@ -45,22 +45,22 @@ namespace Systems.Player
         private static void ControlPlayer(MovementComponent comp)
         {
             var movementDirection = Vector2.zero;
-            if (KeyCode.UpArrow.IsPressed())
+            if (KeyCode.W.IsPressed())
             {
                 movementDirection.y += 1;
             }
 
-            if (KeyCode.DownArrow.IsPressed())
+            if (KeyCode.S.IsPressed())
             {
                 movementDirection.y += -1;
             }
 
-            if (KeyCode.LeftArrow.IsPressed())
+            if (KeyCode.A.IsPressed())
             {
                 movementDirection.x += -1;
             }
 
-            if (KeyCode.RightArrow.IsPressed())
+            if (KeyCode.D.IsPressed())
             {
                 movementDirection.x += 1;
             }

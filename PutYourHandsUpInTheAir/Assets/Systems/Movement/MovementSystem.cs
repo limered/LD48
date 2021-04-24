@@ -40,8 +40,8 @@ namespace Systems.Movement
             var positionChange = component.Velocity * Time.fixedDeltaTime;
             component.transform.position = new Vector3(
                 component.transform.position.x + positionChange.x,
-                0.1f,
-                component.transform.position.z + positionChange.y);
+                component.transform.position.y + positionChange.y,
+                0.1f);
         }
 
         private static void Animate(MovementComponent component)
