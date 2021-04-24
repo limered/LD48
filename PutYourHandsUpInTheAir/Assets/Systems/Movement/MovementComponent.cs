@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Systems.Movement
 {
-    [RequireComponent(typeof(Rigidbody), typeof(Collider))]
+    [RequireComponent(typeof(Rigidbody))]
     public class MovementComponent : GameComponent
     {
         public float Speed;
