@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 2666235342249832515}
   - component: {fileID: 2666235342249832514}
   - component: {fileID: 2666235342249832513}
-  - component: {fileID: -232347160844976393}
   m_Layer: 0
   m_Name: Tourist
   m_TagString: Untagged
@@ -168,18 +167,4 @@ MonoBehaviour:
   collider: {fileID: 0}
   brainDelayInSeconds: 2
   debugCurrentState: 
---- !u!114 &-232347160844976393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2666235342249832527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 208c3c6cb1a37434aa7e6ee5195c87bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentDistractionType: 0
-  DistractionProgress:
-    value: 0
+  debugTargetDistance: {x: 0, y: 0}

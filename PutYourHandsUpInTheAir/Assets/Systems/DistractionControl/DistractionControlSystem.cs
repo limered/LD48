@@ -51,9 +51,8 @@ namespace Systems.DistractionControl
             switch (component.DistractionType)
             {
                 case DistractionType.Tiger:
-                    touristBrain.AddComponent<TigerDistractionTouristComponent>();
-                    touristBrain.GetComponent<DistractedTouristComponent>()
-                            .CurrentDistractionType = component.DistractionType;
+                    var comp = touristBrain.AddComponent<TigerDistractionTouristComponent>();
+                    comp.CurrentDistractionType = component.DistractionType;
                     return;
                 default:
                     throw new ArgumentOutOfRangeException();
