@@ -1,5 +1,5 @@
 using SystemBase;
-using GameState.States.Tourist;
+using Systems.Tourist.States;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;

@@ -1,10 +1,6 @@
 ﻿using SystemBase.StateMachineBase;
-using Systems;
-using Systems.Tourist;
-using GameState.Messages.Common;
-using UniRx;
 
-namespace GameState.States.Tourist
+namespace Systems.Tourist.States
 {
     [NextValidStates(typeof(FollowingGuide), typeof(Contemplating))]
     public class Distracted : BaseState<TouristMovementComponent>

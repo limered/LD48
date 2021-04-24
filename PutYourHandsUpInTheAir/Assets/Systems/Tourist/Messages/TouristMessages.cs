@@ -1,7 +1,6 @@
-using Systems.Tourist;
 using UnityEngine;
 
-namespace GameState.Messages.Tourist
+namespace Systems.Tourist.Messages
 {
     public class TouristMessages
     {
