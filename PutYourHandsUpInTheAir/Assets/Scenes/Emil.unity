@@ -378,11 +378,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
-  Friction: 0
+  Friction: 1
   MaxSpeed: 10
   Collider: {fileID: 0}
   Direction:
-    value: {x: 0, y: 0, z: 0}
+    value: {x: 0, y: 0}
 --- !u!54 &585038704
 Rigidbody:
   m_ObjectHideFlags: 0
