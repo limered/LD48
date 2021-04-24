@@ -5,6 +5,7 @@ using Systems.Tourist.States;
 using UniRx;
 using Unity.VisualScripting;
 using UnityEngine;
+using Utils.Plugins;
 
 namespace Systems.DistractionControl
 {
@@ -15,11 +16,12 @@ namespace Systems.DistractionControl
 
         public override void Register(DistractionControlConfig component)
         {
+            RegisterWaitable(component);
+
             Observable
                 .Timer(TimeSpan.FromSeconds(component.DistractionTimerValue))
                 .Subscribe(_ => component.DistractionTrigger.Execute())
                 .AddTo(component);
-            
         }
 
         public override void Register(DistractionComponent component)
@@ -35,7 +37,6 @@ namespace Systems.DistractionControl
 
         private void RegisterComponentToTrigger(DistractionComponent component, DistractionControlConfig config)
         {
-            
             config.DistractionTrigger
                 .Subscribe(_ => component.StartDistraction.Execute())
                 .AddTo(component);

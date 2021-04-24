@@ -14,7 +14,7 @@ namespace Systems.Distractions
         public override void Register(TigerDistractionTouristComponent component)
         {
             var touristBrain = component.GetComponent<TouristBrainComponent>();
-            touristBrain.States.GoToState(new GoingToAttraction(new Vector2(5, 5)));
+            touristBrain.States.GoToState(new GoingToAttraction(new Vector2(2, 2)));
             touristBrain.States.CurrentState
                 .Where(state => state is Interacting)
                 .Subscribe(_ => StartInteracting(component))
