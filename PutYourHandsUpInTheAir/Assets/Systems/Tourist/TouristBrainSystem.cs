@@ -15,9 +15,10 @@ namespace Systems.Tourist
         public override void Register(TouristBrainComponent component)
         {
             component.tag = "tourist";
-            component.touristName = TouristNames.All[Random.Range(0, TouristNames.All.Length)];
+            if (string.IsNullOrWhiteSpace(component.touristName))
+                component.touristName = TouristNames.All[Random.Range(0, TouristNames.All.Length)];
             component.States.Start(new GoingIntoLevel());
-            
+
             var movement = component.GetComponent<MovementComponent>();
 
             component.States.CurrentState
@@ -55,7 +56,7 @@ namespace Systems.Tourist
                 })
                 .AddTo(component);
         }
-        
+
         private void GoingToIdlePosition(TouristBrainComponent tourist, MovementComponent movement)
         {
             var deltaToCenter = -tourist.transform.position; //(0,0,0) is level center
@@ -69,10 +70,16 @@ namespace Systems.Tourist
             // TODO: talking to each other 
         }
 
-        private void GoingToAttraction(GoingToAttraction attraction, TouristBrainComponent tourist, MovementComponent movement)
+        private void GoingToAttraction(GoingToAttraction attraction, TouristBrainComponent tourist,
+            MovementComponent movement)
         {
-            //var delta = //TODO: need delta to attraction here
-            // movement.Direction.Value = delta.normalized;
+            var delta = attraction.AttractionPosition - (Vector2)tourist.transform.position;
+            movement.Direction.Value = delta.normalized;
+
+            // SystemUpdate()
+            //     .TakeWhile(_ => delta.magnitude > 0.1f)
+            //     .Subscribe(_ => {}, () => { tourist.States.CurrentState. })
+            //     .AddTo(attraction.StateDisposables);
         }
 
         private void Interacting(Interacting interacting, TouristBrainComponent tourist, MovementComponent movement)
