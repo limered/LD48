@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndScene.unity
     guid: 8142f8bb10a167b42814a6592a7d5877
+  - enabled: 1
+    path: Assets/Scenes/CollectMoneyScene.unity
+    guid: f76eaa8e778c445428533cfc054c89d5
   m_configObjects: {}
