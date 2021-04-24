@@ -1,8 +1,7 @@
 ﻿using GameState.States;
 using SystemBase;
 using SystemBase.StateMachineBase;
-using GameState.Messages.Common;
-using GameState.States.Common;
+using GameState.Messages;
 using StrongSystems.Audio.Helper;
 using UniRx;
 using UnityEngine;

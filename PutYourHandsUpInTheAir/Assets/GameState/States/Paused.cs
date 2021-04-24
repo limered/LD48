@@ -1,9 +1,9 @@
 ﻿using SystemBase.StateMachineBase;
 using Systems;
-using GameState.Messages.Common;
+using GameState.Messages;
 using UniRx;
 
-namespace GameState.States.Common
+namespace GameState.States
 {
     [NextValidStates(typeof(Running))]
     public class Paused : BaseState<Game>
