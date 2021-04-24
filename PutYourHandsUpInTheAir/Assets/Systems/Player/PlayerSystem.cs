@@ -30,7 +30,7 @@ namespace Systems.Player
 
         private void StartMovingState(PlayerComponent component)
         {
-            component.GetComponentInChildren<Animator>().SetFloat("Speed", component.IsMoving.Value ? 7f : 0f);
+            //component.GetComponentInChildren<Animator>().SetFloat("Speed", component.IsMoving.Value ? 7f : 0f);
         }
 
         public override void Register(MovementComponent component)

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Systems.DistractionControl;
 using Systems.Tourist;
 using Systems.Tourist.States;
 using UnityEngine;
@@ -23,7 +24,7 @@ namespace Systems.Distractions
         {
             return touristBrains
                 .Randomize()
-                .FirstOrDefault(touristBrain => touristBrain.GetComponent<BaseDistractionComponent>() == null);
+                .FirstOrDefault(touristBrain => touristBrain.GetComponent<DistractionComponent>() == null);
         }
     }
 }
