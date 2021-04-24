@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Systems.Tourist.States
 {
-    [NextValidStates()]
+    [NextValidStates(typeof(Interacting))]
     public class GoingToAttraction : BaseState<TouristBrainComponent>
     {
         public Vector2 AttractionPosition { get; }

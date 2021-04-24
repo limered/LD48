@@ -65,14 +65,20 @@ namespace Systems.Tourist
         private void GoingToIdlePosition(BaseState<TouristBrainComponent> state, TouristBrainComponent tourist,
             MovementComponent movement)
         {
-            var center = Vector2.zero;
-            movement.Direction.Value = -tourist.transform.position.normalized;
-
             SystemUpdate()
-                .Select(_ => center - (Vector2) tourist.transform.position)
-                .TakeWhile(delta => delta.magnitude > 0.1f)
-                .Subscribe(_ => { }, () => { tourist.States.GoToState(new Idle()); })
-                .AddTo(state.StateDisposables);
+                .Select(_ => -(Vector2) tourist.transform.position)
+                .Subscribe(delta =>
+                    {
+                        if (delta.magnitude < 0.1f)
+                        {
+                            tourist.States.GoToState(new Idle());
+                        }
+                        else
+                        {
+                            movement.Direction.Value = -tourist.transform.position.normalized;
+                        }
+                    })
+                .AddTo(state);
         }
 
         private void Idle(Idle state, TouristBrainComponent tourist, MovementComponent movement)
@@ -81,10 +87,10 @@ namespace Systems.Tourist
 
             if (tourist.collider)
             {
-                // tourist.collider.OnCollisionStayAsObservable()
-                //     .Delay(TimeSpan.FromSeconds(Random.Range(0, tourist.brainDelayInSeconds)))
-                //     .TakeUntil(state)
-                //     .Subscribe();
+                tourist.collider.OnCollisionStayAsObservable()
+                    .Delay(TimeSpan.FromSeconds(Random.Range(0, tourist.brainDelayInSeconds)))
+                    .Subscribe()
+                    .AddTo(state);
             }
 
             // SystemUpdate()
@@ -102,14 +108,22 @@ namespace Systems.Tourist
         private void GoingToAttraction(GoingToAttraction attraction, TouristBrainComponent tourist,
             MovementComponent movement)
         {
-            movement.Direction.Value =
-                (attraction.AttractionPosition - (Vector2) tourist.transform.position).normalized;
-
             SystemUpdate()
                 .Select(_ => attraction.AttractionPosition - (Vector2) tourist.transform.position)
-                .TakeWhile(delta => delta.magnitude > 0.1f)
-                .Subscribe(_ => { }, () => { tourist.States.GoToState(new Interacting()); })
-                .AddTo(attraction.StateDisposables);
+                .Do(delta => tourist.debugTargetDistance = delta)
+                .Subscribe(delta =>
+                {
+                    if (delta.magnitude < 0.1f)
+                    {
+                        tourist.States.GoToState(new Interacting());
+                    }
+                    else
+                    {
+                        movement.Direction.Value =
+                            (attraction.AttractionPosition - (Vector2) tourist.transform.position).normalized;
+                    }
+                })
+                .AddTo(attraction);
         }
 
         private void Interacting(Interacting interacting, TouristBrainComponent tourist, MovementComponent movement)

@@ -14,9 +14,9 @@ namespace Systems.Tourist
         public SphereCollider collider;
         public float brainDelayInSeconds = 2f;
         public string debugCurrentState;
+        public Vector2 debugTargetDistance;
 
-        public StateContext<TouristBrainComponent> States { get; } =
-            new StateContext<TouristBrainComponent>();
+        public StateContext<TouristBrainComponent> States { get; } = new StateContext<TouristBrainComponent>();
     }
 
     public static class TouristNames
