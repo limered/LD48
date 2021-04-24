@@ -11,6 +11,9 @@ namespace Systems.Tourist
     public class TouristBrainComponent : GameComponent
     {
         public string touristName;
+        public SphereCollider collider;
+        public float brainDelayInSeconds = 2f;
+        public string debugCurrentState;
 
         public StateContext<TouristBrainComponent> States { get; } =
             new StateContext<TouristBrainComponent>();
