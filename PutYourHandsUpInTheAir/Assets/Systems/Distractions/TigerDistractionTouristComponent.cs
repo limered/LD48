@@ -1,8 +1,6 @@
-﻿using SystemBase;
-
-namespace Systems.Distractions
+﻿namespace Systems.Distractions
 {
-    public class TigerDistractionTouristComponent : GameComponent
+    public class TigerDistractionTouristComponent : DistractedTouristComponent
     {
     }
 }

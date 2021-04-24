@@ -4,8 +4,6 @@ using Systems.Distractions;
 using Systems.Tourist.States;
 using UniRx;
 using Unity.VisualScripting;
-using UnityEngine;
-using Utils.Plugins;
 
 namespace Systems.DistractionControl
 {
@@ -54,6 +52,8 @@ namespace Systems.DistractionControl
             {
                 case DistractionType.Tiger:
                     touristBrain.AddComponent<TigerDistractionTouristComponent>();
+                    touristBrain.GetComponent<DistractedTouristComponent>()
+                            .CurrentDistractionType = component.DistractionType;
                     return;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -63,6 +63,7 @@ namespace Systems.DistractionControl
 
     public enum DistractionType
     {
+        None,
         Tiger,
     }
 }

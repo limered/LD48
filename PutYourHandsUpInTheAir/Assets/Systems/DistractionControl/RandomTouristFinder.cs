@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Systems.DistractionControl;
 using Systems.Tourist;
 using Systems.Tourist.States;
 using UnityEngine;
 using Utils.DotNet;
 
-namespace Systems.Distractions
+namespace Systems.DistractionControl
 {
     public class RandomTouristFinder
     {

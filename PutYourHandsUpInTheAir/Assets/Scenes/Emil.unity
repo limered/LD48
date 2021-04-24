@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d428beebe820cd408544f6e37da1038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DistractionType: 0
+  DistractionType: 1
 --- !u!114 &164279553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +297,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   touristName: 
+  collider: {fileID: 0}
+  brainDelayInSeconds: 2
+  debugCurrentState: 
 --- !u!114 &881102120
 MonoBehaviour:
   m_ObjectHideFlags: 0
