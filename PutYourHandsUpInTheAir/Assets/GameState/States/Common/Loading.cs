@@ -1,9 +1,9 @@
 ﻿using SystemBase.StateMachineBase;
 using Systems;
-using Systems.GameState.Messages;
+using GameState.Messages.Common;
 using UniRx;
 
-namespace GameState.States
+namespace GameState.States.Common
 {
     [NextValidStates(typeof(StartScreen))]
     public class Loading : BaseState<Game>

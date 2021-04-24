@@ -1,5 +1,5 @@
-﻿using GameState.States;
-using SystemBase;
+﻿using SystemBase;
+using GameState.States.Common;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;

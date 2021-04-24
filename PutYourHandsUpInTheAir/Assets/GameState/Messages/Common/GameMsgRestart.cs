@@ -1,4 +1,4 @@
-﻿namespace Systems.GameState.Messages
+﻿namespace GameState.Messages.Common
 {
     class GameMsgRestart
     {

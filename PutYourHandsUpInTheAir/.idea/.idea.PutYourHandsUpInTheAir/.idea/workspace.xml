@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6c7a0b74-1b8e-4330-a94a-218f0b74efa2" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/52CB1CEB-6F2C-4E45-93AA-39AB96DC4803/f3/8a28ebdf/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/52CB1CEB-6F2C-4E45-93AA-39AB96DC4803/6f/0fc962ef/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <changedPaths>
+      <option value="$PROJECT_DIR$/Assets/Systems/Tourists/TouristMovementSystem.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/States/Common/GameOver.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/States/Common/Loading.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/States/Common/Paused.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/States/Common/StartScreen.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/States/Tourist/Running.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/Messages/Common/GameMsgEnd.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/Messages/Common/GameMsgFinishedLoading.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/Messages/Common/GameMsgPause.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/Messages/Common/GameMsgRestart.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/Messages/Common/GameMsgStart.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/Messages/Common/GameMsgUnpause.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/Messages/Tourist/TouristMsgGotGathered.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/Messages/Tourist/TouristMessages.cs" />
+      <option value="$PROJECT_DIR$/Assets/Systems/Game.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/States/Tourist/RunningTowardInterestingThing.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/States/Tourist/FollowingGuide.cs" />
+      <option value="$PROJECT_DIR$/Assets/Systems/Movement/MovementSystem.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/States/Movement/Running.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/States/Common/Running.cs" />
+      <option value="$PROJECT_DIR$/Assets/Systems/Tourist/AttractionComponent.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/States/Tourist/Contemplating.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameState/States/Tourist/Distracted.cs" />
+      <option value="$PROJECT_DIR$/Assets/Systems/Tourist/TouristMovementSystem.cs" />
+      <option value="$PROJECT_DIR$/Assets/Systems/Tourist/TouristMovementComponent.cs" />
+    </changedPaths>
+  </component>
+  <component name="ProjectId" id="1rcXp9wRi5xShVrLRfAMz04Nztk" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Discover.Launch.Via.Unity" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6c7a0b74-1b8e-4330-a94a-218f0b74efa2" name="Default Changelist" comment="" />
+      <created>1619276531394</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1619276531394</updated>
+      <workItem from="1619276534253" duration="3907000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
