@@ -11,7 +11,8 @@ namespace SystemBase.StateMachineBase
 
         protected BaseState()
         {
-            if (Attribute.GetCustomAttribute(GetType(), typeof(NextValidStatesAttribute)) is NextValidStatesAttribute definedAttribute)
+            if (Attribute.GetCustomAttribute(GetType(), typeof(NextValidStatesAttribute)) is NextValidStatesAttribute
+                definedAttribute)
             {
                 ValidNextStates = new ReadOnlyCollection<Type>(definedAttribute.ValidStateChanges);
             }
@@ -38,6 +39,11 @@ namespace SystemBase.StateMachineBase
         {
             Dispose();
             return true;
+        }
+
+        public override string ToString()
+        {
+            return GetType().Name;
         }
     }
 }
