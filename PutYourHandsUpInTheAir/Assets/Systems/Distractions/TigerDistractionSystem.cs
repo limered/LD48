@@ -1,29 +1,26 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using SystemBase;
+﻿using SystemBase;
 using Systems.DistractionControl;
 using Systems.Tourist;
 using Systems.Tourist.States;
 using UniRx;
 using Unity.VisualScripting;
 using UnityEngine;
-using Utils.DotNet;
 
 namespace Systems.Distractions
 {
     [GameSystem(typeof(DistractionControlSystem))]
     public class TigerDistractionSystem : GameSystem<TigerDistractionComponent, TigerDistractionTouristComponent>
     {
-        private RandomTouristFinder _randomTouristFinder = new RandomTouristFinder();
+        private readonly RandomTouristFinder _randomTouristFinder = new RandomTouristFinder();
 
         public override void Register(TigerDistractionComponent component)
         {
             component.StartDistraction
-                .Subscribe(_ => AddDistractionToRamdomStranger(component))
+                .Subscribe(_ => AddDistractionToRandomStranger())
                 .AddTo(component);
         }
 
-        private void AddDistractionToRamdomStranger(TigerDistractionComponent component)
+        private void AddDistractionToRandomStranger()
         {
             var touristBrain = _randomTouristFinder.FindRandomTouristWithoutDistraction();
 
@@ -36,7 +33,7 @@ namespace Systems.Distractions
         public override void Register(TigerDistractionTouristComponent component)
         {
             var touristBrain = component.GetComponent<TouristBrainComponent>();
-            touristBrain.States.GoToState(new GoingToAttraction());
+            touristBrain.States.GoToState(new GoingToAttraction(new Vector2(5, 5)));
             touristBrain.States.CurrentState
                 .Where(state => state is Interacting)
                 .Subscribe(_ => StartInteracting(component))
