@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 396610579}
   - component: {fileID: 396610581}
   - component: {fileID: 396610580}
+  - component: {fileID: 396610582}
   m_Layer: 5
   m_Name: BlackoutPanel
   m_TagString: Untagged
@@ -58,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.07058824}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -75,6 +76,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &396610582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396610578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa243bdc4a405514780363a82bb17481, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Room: {fileID: 3735034271173043881}
+  FadeTime: 0.5
 --- !u!1 &622296385
 GameObject:
   m_ObjectHideFlags: 0
