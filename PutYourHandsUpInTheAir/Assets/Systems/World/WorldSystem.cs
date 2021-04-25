@@ -1,4 +1,5 @@
 ﻿using SystemBase;
+using Utils;
 
 namespace Systems.World
 {
@@ -7,7 +8,7 @@ namespace Systems.World
     {
         public override void Register(WorldComponent component)
         {
-            
+            //var game = IoC.Game
         }
     }
 }
