@@ -1,11 +1,9 @@
 ﻿using SystemBase;
+using Systems.Room.Events;
 using Systems.Tourist;
 using Systems.Tourist.States;
-using GameState.States;
 using UniRx;
-using UniRx.Triggers;
 using UnityEngine;
-using Utils;
 using Utils.Plugins;
 
 namespace Systems.Room
@@ -13,17 +11,23 @@ namespace Systems.Room
     [GameSystem]
     public class RoomSystem : GameSystem<RoomComponent, TouristBrainComponent>
     {
-        public override void Register(RoomComponent component)
+        public override void Register(RoomComponent room)
         {
-            RegisterWaitable(component);
-            component.State.Start(new RoomCreate());
+            RegisterWaitable(room);
+            room.State.Start(new RoomCreate());
 
-            SystemUpdate(component)
+            SystemUpdate(room)
                 .Where(compo => compo.State.CurrentState.Value is RoomRunning)
                 .Subscribe(ProgressRoom)
-                .AddToLifecycleOf(component);
+                .AddToLifecycleOf(room);
 
-            component.TimeLeftInRoom = component.MaxTimeInRoom;
+            room.TimeLeftInRoom = room.MaxTimeInRoom;
+
+            room.State.GoToState(new RoomWalkIn());
+            MessageBroker.Default
+                .Receive<RoomAllTouristsEntered>()
+                .Subscribe(_ => room.State.GoToState(new RoomRunning()))
+                .AddToLifecycleOf(room);
         }
 
         private void ProgressRoom(RoomComponent room)
@@ -34,7 +38,10 @@ namespace Systems.Room
             if (room.TimeLeftInRoom <= 0)
             {
                 room.State.GoToState(new RoomWalkOut());
-                // Wait for allTourists walked out
+                MessageBroker.Default
+                    .Receive<RoomAllTouristsLeft>()
+                    .Subscribe(_ => room.State.GoToState(new RoomDestroy()))
+                    .AddToLifecycleOf(room);
             }
         }
 
@@ -49,8 +56,6 @@ namespace Systems.Room
         {
             component.States.GoToState(new GoingIntoLevel());
             component.transform.position = room.SpawnInPosition;
-
-
         }
     }
 }
