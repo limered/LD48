@@ -195,6 +195,7 @@ GameObject:
   - component: {fileID: 2666235342249832515}
   - component: {fileID: 2666235342249832514}
   - component: {fileID: 2666235342249832513}
+  - component: {fileID: 4899717811737049112}
   m_Layer: 0
   m_Name: Tourist
   m_TagString: Untagged
@@ -265,9 +266,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   touristName: 
-  socialDistanceCollider: {fileID: 1791925132}
+  socialDistanceCollider: {fileID: 4899717811737049112}
   idleMinTimeWithoutMovementInSeconds: 15
   idleSpeed: 8
   normalSpeed: 10
   debugCurrentState: 
   debugTargetDistance: {x: 0, y: 0}
+--- !u!135 &4899717811737049112
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666235342249832527}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0, z: 0}
