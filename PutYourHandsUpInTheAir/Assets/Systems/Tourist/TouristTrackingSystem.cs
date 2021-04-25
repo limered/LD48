@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using SystemBase;
 using Systems.Room;
+using Systems.Room.Events;
 using Systems.Tourist.States;
-using GameState.Messages;
 using UniRx;
 using UnityEngine;
 using Utils.Plugins;
-using Object = System.Object;
 using Random = UnityEngine.Random;
 
 namespace Systems.Tourist
@@ -24,14 +21,16 @@ namespace Systems.Tourist
             RegisterWaitable(config);
         }
 
-        public override void Register(RoomComponent component)
+        public override void Register(RoomComponent room)
         {
             WaitOn<TouristConfigComponent>().Then(config =>
-                    component.State.CurrentState
+                    room.State.CurrentState
                         .First(state => state is RoomWalkIn)
-                        .Do(_ => _tourists = GenerateTourists(config, component)))
+                        .Do(_ => _tourists = GenerateTourists(config, room)))
                 .Subscribe()
-                .AddToLifecycleOf(component);
+                .AddToLifecycleOf(room);
+
+            WaitOnAllTouristsInIdleToStart(room);
         }
 
         public override void Register(TouristBrainComponent component)
@@ -57,6 +56,29 @@ namespace Systems.Tourist
                 .AddToLifecycleOf(component);
         }
 
+        private static bool RoomIsInWalkInState(RoomComponent component)
+        {
+            return component.State.CurrentState.Value is RoomWalkIn;
+        }
+
+        private void WaitOnAllTouristsInIdleToStart(RoomComponent room)
+        {
+            WaitOn<TouristConfigComponent>()
+                .Where(_ => RoomIsInWalkInState(room))
+                .Where(_ => AllTouristsAreInIdle())
+                .First()
+                .Subscribe(_ => StartRoom())
+                .AddToLifecycleOf(room);
+        }
+        private bool AllTouristsAreInIdle()
+        {
+            return _tourists.All(t => t.GetComponent<TouristBrainComponent>().States.CurrentState.Value is Idle);
+        }
+
+        private void StartRoom()
+        {
+            MessageBroker.Default.Publish(new RoomAllTouristsEntered());
+        }
         private GameObject[] GenerateTourists(TouristConfigComponent config, RoomComponent room)
         {
             var tourists = Enumerable.Range(0, config.initialTouristCount)
@@ -71,7 +93,7 @@ namespace Systems.Tourist
                 .Select(tourist =>
                 {
                     var objectInstance = UnityEngine.Object.Instantiate(config.touristPrefab,
-                        room.SpawnInPosition.transform.position + (Vector3) Random.insideUnitCircle,
+                        room.SpawnInPosition.transform.position + (Vector3)Random.insideUnitCircle,
                         Quaternion.identity);
 
                     var brain = objectInstance.GetComponent<TouristBrainComponent>();
