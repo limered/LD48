@@ -47,8 +47,9 @@ public class TigerAnimationSystem : GameSystem<DistractionComponent>
             var animator = component.GetComponent<Animator>();
             if (state is Dead)
             {
-                animator.Play("TigerFallingAsleep_Head");
-                //animator.Play("TigerKill");
+                animator.Play("TigerAttack_Head");
+                animator.Play("TigerAttack_Body");
+                animator.Play("TigerAttack_Tail");
             }
             else if (state is GoingBackToIdle)
             {
