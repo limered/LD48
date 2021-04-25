@@ -46,7 +46,7 @@ namespace Systems.Tourist
         public override void Register(RoomComponent room)
         {
             Debug.Log($"NEW ROOM {room.name}");
-            
+
             WaitOn<TouristConfigComponent>()
                 .Then(config =>
                     room.State.CurrentState
@@ -57,7 +57,8 @@ namespace Systems.Tourist
                             {
                                 Debug.Log("RoomWalkIn - first level");
                                 _tourists = GenerateTourists(config, room);
-                                _touristDumps = new TouristDump[_tourists.Length];
+                                _touristDumps = _tourists
+                                    .Select(t => new TouristDump(t.GetComponent<TouristBrainComponent>())).ToArray();
                             }
                             else //level 2 -> END
                             {
@@ -193,7 +194,8 @@ namespace Systems.Tourist
         private bool AllTouristsAreInIdle()
         {
             return _tourists != null &&
-                   _tourists.All(t => t.GetComponent<TouristBrainComponent>().States.CurrentState.Value is Idle);
+                   _tourists.Where(x => x != null)
+                       .All(t => t.GetComponent<TouristBrainComponent>().States.CurrentState.Value is Idle);
         }
 
         private void StartRoom()
@@ -217,12 +219,12 @@ namespace Systems.Tourist
                     var objectInstance = Object.Instantiate(config.touristPrefab,
                         room.SpawnInPosition.transform.position + (Vector3) Random.insideUnitCircle,
                         Quaternion.identity, room.TouristGroup != null ? room.TouristGroup.transform : room.transform);
-                    
+
                     var brain = objectInstance.GetComponent<TouristBrainComponent>();
                     brain.tag = "tourist";
                     tourist.Apply(brain);
                     brain.States.Start(new GoingIntoLevel());
-                    
+
                     return objectInstance;
                 })
                 .ToArray();
@@ -239,12 +241,12 @@ namespace Systems.Tourist
                 var objectInstance = Object.Instantiate(config.touristPrefab,
                     room.SpawnInPosition.transform.position + (Vector3) Random.insideUnitCircle,
                     Quaternion.identity, room.TouristGroup != null ? room.TouristGroup.transform : room.transform);
-                
+
                 var brain = objectInstance.GetComponent<TouristBrainComponent>();
                 brain.tag = "tourist";
                 tourist.Apply(brain);
                 brain.States.Start(new GoingIntoLevel());
-                
+
                 return objectInstance;
             }).ToArray();
         }
