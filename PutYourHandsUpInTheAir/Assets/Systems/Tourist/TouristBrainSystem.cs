@@ -8,6 +8,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using Utils.Plugins;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Systems.Tourist
@@ -20,6 +21,7 @@ namespace Systems.Tourist
             component.tag = "tourist";
             if (string.IsNullOrWhiteSpace(component.touristName))
                 component.touristName = TouristNames.All[Random.Range(0, TouristNames.All.Length)];
+            component.gameObject.name = component.touristName;
 
             component.States.Start(new GoingIntoLevel());
 
@@ -34,7 +36,9 @@ namespace Systems.Tourist
                     {
                         //this prevents a deadlock when setting the state directly
                         Observable.Timer(TimeSpan.FromSeconds(0))
-                            .Subscribe(_ => component.States.GoToState(new GoingBackToIdle(Random.insideUnitCircle /*<- gather around this point*/)))
+                            .Subscribe(_ =>
+                                component.States.GoToState(
+                                    new GoingBackToIdle(Random.insideUnitCircle /*<- gather around this point*/)))
                             .AddTo(state);
                     }
                     else if (state is GoingBackToIdle goingIdle)
@@ -60,6 +64,16 @@ namespace Systems.Tourist
                     else if (state is Dead)
                     {
                         //TODO: rotting animation
+                        movement.Direction.Value = Vector2.zero;
+                        // Object.Destroy(movement);
+                        if (component.GetComponent<Collider>()) Object.Destroy(component.GetComponent<Collider>());
+                        var body = component.GetComponent<TouristBodyComponent>();
+                        if (body)
+                        {
+                            body.livingBody.SetActive(false);
+                            body.deadBody.SetActive(true);
+                            body.deadBody.transform.Rotate(new Vector3(0, 0, 1), 360 * Random.value);
+                        }
                     }
                     else if (state is WalkingOutOfLevel)
                     {

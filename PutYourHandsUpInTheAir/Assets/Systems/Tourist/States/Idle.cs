@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace Systems.Tourist.States
 {
-    [NextValidStates(typeof(PickingInterest), typeof(WalkingOutOfLevel), typeof(GoingBackToIdle))]
+    [NextValidStates(typeof(PickingInterest), typeof(WalkingOutOfLevel), typeof(GoingBackToIdle),
+        /*just for testing*/typeof(Dead) /*just for testing*/)]
     public class Idle : BaseState<TouristBrainComponent>
     {
         /// They will try to gather around that point
@@ -13,12 +14,11 @@ namespace Systems.Tourist.States
         {
             IdlePosition = idlePosition;
         }
-        
+
         public override void Enter(StateContext<TouristBrainComponent> context)
         {
-
         }
-        
+
         public override string ToString()
         {
             return $"{nameof(Idle)}({IdlePosition})";
