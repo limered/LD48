@@ -31,6 +31,26 @@ namespace Systems.Tourist
                 .AddToLifecycleOf(room);
 
             WaitOnAllTouristsInIdleToStart(room);
+
+            WaitOnRoomToGetInWalkOutState(room);
+        }
+
+        private void WaitOnRoomToGetInWalkOutState(RoomComponent room)
+        {
+            room.State.CurrentState
+                .Where(state => state is RoomWalkOut)
+                .Subscribe(_ => PutAllTouristsInWalkOutState(room))
+                .AddToLifecycleOf(room);
+        }
+
+        private void PutAllTouristsInWalkOutState(RoomComponent room)
+        {
+            foreach (var tourist in _tourists)
+            {
+                tourist.GetComponent<TouristBrainComponent>()
+                    .States
+                    .GoToState(new WalkingOutOfLevel(room.SpawnOutPosition.transform));
+            }
         }
 
         public override void Register(TouristBrainComponent component)
@@ -63,7 +83,7 @@ namespace Systems.Tourist
 
         private void WaitOnAllTouristsInIdleToStart(RoomComponent room)
         {
-            WaitOn<TouristConfigComponent>()
+            SystemUpdate()
                 .Where(_ => RoomIsInWalkInState(room))
                 .Where(_ => AllTouristsAreInIdle())
                 .First()
@@ -72,7 +92,7 @@ namespace Systems.Tourist
         }
         private bool AllTouristsAreInIdle()
         {
-            return _tourists.All(t => t.GetComponent<TouristBrainComponent>().States.CurrentState.Value is Idle);
+            return _tourists != null && _tourists.All(t => t.GetComponent<TouristBrainComponent>().States.CurrentState.Value is Idle);
         }
 
         private void StartRoom()
