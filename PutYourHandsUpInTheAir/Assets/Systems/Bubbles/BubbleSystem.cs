@@ -5,6 +5,7 @@ using Systems.Tourist;
 using Systems.Distractions;
 using Systems.DistractionControl;
 using Systems.Tourist.States;
+using SystemBase.StateMachineBase;
 
 [GameSystem]
 public class BubbleSystem : GameSystem<TouristBrainComponent>
@@ -16,28 +17,33 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
         touristBrainComponent.States.CurrentState
             .Subscribe(state =>
             {
-                if (state is PickingInterest)
-                {
-                    ShowPickingInterest(bubbleComponent);
-                }
-                else if (state is GoingToAttraction)
-                {
-                    ShowDistractionBubble(bubbleComponent, touristBrainComponent);
-                }
-                else if (state is Interacting)
-                {
-                    ShowDistractionProgress(bubbleComponent, touristBrainComponent);
-                }
-                else if (state is Dead)
-                {
-                    ShowDeathBubble(bubbleComponent);
-                }
-                else
-                {
-                    ShowBubble(bubbleComponent, false);
-                }
+                HandleTouristState(touristBrainComponent, bubbleComponent, state);
             })
             .AddTo(touristBrainComponent);
+    }
+
+    private void HandleTouristState(TouristBrainComponent touristBrainComponent, BubbleComponent bubbleComponent, BaseState<TouristBrainComponent> state)
+    {
+        if (state is PickingInterest)
+        {
+            ShowPickingInterest(bubbleComponent);
+        }
+        else if (state is GoingToAttraction)
+        {
+            ShowDistractionBubble(bubbleComponent, touristBrainComponent);
+        }
+        else if (state is Interacting)
+        {
+            ShowDistractionProgress(bubbleComponent, touristBrainComponent);
+        }
+        else if (state is Dead)
+        {
+            ShowDeathBubble(bubbleComponent);
+        }
+        else
+        {
+            ShowBubble(bubbleComponent, false);
+        }
     }
 
     private void ShowPickingInterest(BubbleComponent component)
