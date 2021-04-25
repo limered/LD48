@@ -251,14 +251,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tourist
       objectReference: {fileID: 0}
-    - target: {fileID: 8759374890750551745, guid: 5d1bb522923484caba9f73f0aecf367b, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8759374890750551745, guid: 5d1bb522923484caba9f73f0aecf367b, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1459146929
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d1bb522923484caba9f73f0aecf367b, type: 3}
 --- !u!1 &432991819
