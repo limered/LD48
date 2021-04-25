@@ -186,6 +186,7 @@ MonoBehaviour:
   DistractionInteractionDuration: 0
   DistractionProgressColor: {r: 1, g: 0, b: 0, a: 1}
   InteractionPosition: {fileID: 1796977117}
+  IsTriggered: 0
 --- !u!114 &164279553
 MonoBehaviour:
   m_ObjectHideFlags: 0
