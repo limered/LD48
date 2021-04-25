@@ -3,7 +3,6 @@ using Systems.DistractionControl;
 using Systems.Player;
 using Systems.Tourist;
 using Systems.Tourist.States;
-using Assets.Utils.Math;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -22,6 +21,11 @@ namespace Systems.Distractions
                 .Where(state => state is Interacting)
                 .Subscribe(_ => StartInteracting(component))
                 .AddTo(component);
+        }
+
+        public override void Register(PlayerComponent component)
+        {
+            RegisterWaitable(component);
         }
 
         private void StartInteracting(TigerDistractionTouristComponent component)
@@ -66,11 +70,6 @@ namespace Systems.Distractions
             }
 
             comp.DistractionProgress.Value = 1 - comp.LastDistractionProgressTime / comp.MaxProgressTime;
-        }
-
-        public override void Register(PlayerComponent component)
-        {
-            RegisterWaitable(component);
         }
     }
 }
