@@ -50,7 +50,7 @@ namespace Systems.Tourist
             WaitOn<TouristConfigComponent>()
                 .Then(config =>
                     room.State.CurrentState
-                        // .First(state => state is RoomWalkIn)
+                        .First(state => state is RoomWalkIn)
                         .Do(_ =>
                         {
                             if (_tourists == null) //first level
