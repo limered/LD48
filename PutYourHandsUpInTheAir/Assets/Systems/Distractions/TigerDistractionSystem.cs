@@ -32,7 +32,7 @@ namespace Systems.Distractions
                 .AddTo(component);
 
             WaitOn<PlayerComponent>()
-                .Subscribe()
+                .Subscribe(player => StartPlayerCollisionTracking(component, player))
                 .AddTo(component);
         }
 
