@@ -7,37 +7,31 @@ using Systems.DistractionControl;
 using Systems.Tourist.States;
 
 [GameSystem]
-public class BubbleSystem : GameSystem<BubbleComponent, TouristBrainComponent>
+public class BubbleSystem : GameSystem<TouristBrainComponent>
 {
-    public override void Register(BubbleComponent component)
+    public override void Register(TouristBrainComponent touristBrainComponent)
     {
-        RegisterWaitable(component);
-    }
+        var bubbleComponent = touristBrainComponent.GetComponentInChildren<BubbleComponent>();
 
-    public override void Register(TouristBrainComponent component)
-    {
-        WaitOn<BubbleComponent>()
-            .Subscribe(bubbleComponent => Register(component, bubbleComponent))
-            .AddTo(component);
-    }
-
-    public void Register(TouristBrainComponent touristBrainComponent, BubbleComponent bubbleComponent)
-    {
         touristBrainComponent.States.CurrentState.Subscribe(state =>
         {
             if (state is PickingInterest)
             {
                 ShowPickingInterest(bubbleComponent);
-            } else if (state is GoingToAttraction)
+            }
+            else if (state is GoingToAttraction)
             {
                 ShowDistractionBubble(bubbleComponent, touristBrainComponent);
-            } else if (state is Interacting)
+            }
+            else if (state is Interacting)
             {
                 ShowDistractionProgress(bubbleComponent, touristBrainComponent);
-            } else if (state is Dead)
+            }
+            else if (state is Dead)
             {
                 ShowDeathBubble(bubbleComponent);
-            } else
+            }
+            else
             {
                 ShowBubble(bubbleComponent, false);
             }
@@ -75,7 +69,7 @@ public class BubbleSystem : GameSystem<BubbleComponent, TouristBrainComponent>
     private void ShowBubble(BubbleComponent component, bool show)
     {
         component.gameObject.SetActive(show);
-        if(show)
+        if(!show)
         {
             var spriteRenderer = component.gameObject.GetComponent<SpriteRenderer>();
             spriteRenderer.color = Color.white;
