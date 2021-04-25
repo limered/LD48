@@ -9,5 +9,6 @@ namespace Systems.DistractionControl
         public float DistractionInteractionDuration;
         public Color DistractionProgressColor;
         public Transform InteractionPosition;
+        public SphereCollider InteractionCollider;
     }
 }
