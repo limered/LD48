@@ -53,9 +53,12 @@ namespace Systems.Distractions
         private void CollideWithPlayer(Collider coll)
         {
             Object.Destroy(coll.gameObject.GetComponent<DistractedTouristComponent>());
-            coll.gameObject.GetComponent<TouristBrainComponent>()
-                .States
-                .GoToState(new GoingBackToIdle(Random.insideUnitCircle));
+            var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
+            if (tourist)
+            {
+                tourist.States
+                    .GoToState(new GoingBackToIdle(Random.insideUnitCircle));
+            }
         }
 
         private void UpdateTimer(TigerDistractionTouristComponent comp)

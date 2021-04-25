@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SystemBase;
 using Systems.Distractions;
+using Systems.Room;
 using Systems.Tourist;
 using Systems.Tourist.States;
 using UniRx;
@@ -24,9 +25,10 @@ namespace Systems.DistractionControl
     }
 
     [GameSystem]
-    public class DistractionControlSystem : GameSystem<DistractionControlConfig, DistractionComponent>
+    public class DistractionControlSystem : GameSystem<DistractionControlConfig, DistractionComponent, RoomComponent>
     {
         private readonly RandomTouristFinder _randomTouristFinder = new RandomTouristFinder();
+        private readonly ReactiveProperty<RoomComponent> _currentRoom = new ReactiveProperty<RoomComponent>();
 
         public override void Register(DistractionControlConfig component)
         {
@@ -34,6 +36,7 @@ namespace Systems.DistractionControl
 
             Observable
                 .Interval(TimeSpan.FromSeconds(component.DistractionTimerValue))
+                .Where(_ => _currentRoom.Value.State.CurrentState.Value is RoomRunning)
                 .Subscribe(_ => TriggerDistractions(component))
                 .AddTo(component);
         }
@@ -43,6 +46,11 @@ namespace Systems.DistractionControl
             WaitOn<DistractionControlConfig>()
                 .Subscribe(config => RegisterComponentToTrigger(component, config))
                 .AddTo(component);
+        }
+
+        public override void Register(RoomComponent component)
+        {
+            _currentRoom.Value = component;
         }
 
         private void TriggerDistractions(DistractionControlConfig component)

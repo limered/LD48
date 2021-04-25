@@ -21,15 +21,7 @@ namespace Systems.DistractionControl
                 .Randomize()
                 .ForEach(t => queuedRandoms.Enqueue(t));
 
-
             return queuedRandoms;
-        }
-
-        private TouristBrainComponent GetRandomTouristWithoutDistraction(List<TouristBrainComponent> touristBrains)
-        {
-            return touristBrains
-                .Randomize()
-                .FirstOrDefault(touristBrain => touristBrain.GetComponent<DistractedTouristComponent>() == null);
         }
     }
 }
