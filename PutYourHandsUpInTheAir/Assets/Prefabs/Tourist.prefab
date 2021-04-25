@@ -234,6 +234,7 @@ GameObject:
   - component: {fileID: 2666235342249832513}
   - component: {fileID: 4899717811737049112}
   - component: {fileID: 3492671645544282497}
+  - component: {fileID: 3355293365520363688}
   m_Layer: 0
   m_Name: Tourist
   m_TagString: tourist
@@ -345,6 +346,20 @@ MonoBehaviour:
   head: {fileID: 3993217842214371662}
   body: {fileID: 570666334580328611}
   deadBody: {fileID: 1934080280486871941}
+--- !u!114 &3355293365520363688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666235342249832527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88fa9b2e3254754a62a1e2910e63aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wobbleInterval: 0.1
+  wobbleMaxExtend: 0.5
 --- !u!1 &5981872623458108547
 GameObject:
   m_ObjectHideFlags: 0

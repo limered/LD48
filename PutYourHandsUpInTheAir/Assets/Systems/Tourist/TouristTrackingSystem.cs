@@ -211,13 +211,13 @@ namespace Systems.Tourist
                 {
                     var objectInstance = Object.Instantiate(config.touristPrefab,
                         room.SpawnInPosition.transform.position + (Vector3) Random.insideUnitCircle,
-                        Quaternion.identity);
+                        Quaternion.identity, room.TouristGroup != null ? room.TouristGroup.transform : room.transform);
+                    
                     var brain = objectInstance.GetComponent<TouristBrainComponent>();
                     brain.tag = "tourist";
                     tourist.Apply(brain);
                     brain.States.Start(new GoingIntoLevel());
-
-
+                    
                     return objectInstance;
                 })
                 .ToArray();
@@ -233,11 +233,13 @@ namespace Systems.Tourist
 
                 var objectInstance = Object.Instantiate(config.touristPrefab,
                     room.SpawnInPosition.transform.position + (Vector3) Random.insideUnitCircle,
-                    Quaternion.identity);
+                    Quaternion.identity, room.TouristGroup != null ? room.TouristGroup.transform : room.transform);
+                
                 var brain = objectInstance.GetComponent<TouristBrainComponent>();
                 brain.tag = "tourist";
                 tourist.Apply(brain);
                 brain.States.Start(new GoingIntoLevel());
+                
                 return objectInstance;
             }).ToArray();
         }

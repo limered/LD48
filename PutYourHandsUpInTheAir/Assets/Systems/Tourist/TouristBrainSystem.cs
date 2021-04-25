@@ -75,7 +75,7 @@ namespace Systems.Tourist
                                 movement.Direction.Value = (walkOut.Target.position-component.transform.position).normalized;
                                 movement.MaxSpeed = movement.Speed = component.normalSpeed;
                             })
-                            .AddTo(walkOut);
+                            .AddToLifecycleOf(component);
                     }
                 })
                 .AddToLifecycleOf(component);

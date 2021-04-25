@@ -10,6 +10,7 @@ namespace Systems.Room
         public GameObject SpawnInPosition;
         public GameObject GatherPosition;
         public GameObject SpawnOutPosition;
+        public GameObject TouristGroup;
         public float MaxTimeInRoom = 30;
         public float TimeLeftInRoom;
         public FloatReactiveProperty RoomTimeProgress = new FloatReactiveProperty();
