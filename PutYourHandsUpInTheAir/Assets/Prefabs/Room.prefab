@@ -1067,6 +1067,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3166819889843631989, guid: be3ca18dd4490d244a1f6e625b5df8d6, type: 3}
+      propertyPath: sprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166819889843631989, guid: be3ca18dd4490d244a1f6e625b5df8d6, type: 3}
+      propertyPath: sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 1c4f354fb95cfc541b429080d34b6810, type: 3}
+    - target: {fileID: 3166819889843631989, guid: be3ca18dd4490d244a1f6e625b5df8d6, type: 3}
+      propertyPath: sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: b375345aee51ad34d8a2e50511870686, type: 3}
+    - target: {fileID: 3166819889843631989, guid: be3ca18dd4490d244a1f6e625b5df8d6, type: 3}
+      propertyPath: sprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 3b76404f8cc7e0b48aee21cf06023074, type: 3}
     - target: {fileID: 3166819889843631990, guid: be3ca18dd4490d244a1f6e625b5df8d6, type: 3}
       propertyPath: m_Name
       value: RoomExitBlock

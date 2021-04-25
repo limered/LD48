@@ -7,5 +7,7 @@ namespace Systems.RoomExitBlock
     {
         public Sprite[] sprites;
         public SpriteRenderer spriteRenderer;
+        public Transform leftBorder;
+        public Transform rightBorder;
     }
 }

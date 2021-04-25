@@ -5,13 +5,14 @@ using UnityEngine;
 
 namespace Systems.RoomExitBlock
 {
+    [GameSystem]
     public class RoomExitBlockSystem : GameSystem<RoomExitBlockComponent, RoomComponent>
     {
         public override void Register(RoomComponent component)
         {
             WaitOn<RoomExitBlockComponent>().Subscribe(roomExitBlockComponent =>
                 {
-                    var divider = 100f / roomExitBlockComponent.sprites.Length;
+                    var divider = 1f / roomExitBlockComponent.sprites.Length;
                     component.RoomTimeProgress.Subscribe(roomProgress =>
                         UpdateBlockedPath(roomProgress, divider, roomExitBlockComponent));
                     component.State.AfterStateChange.Where(newState => newState is RoomWalkOut)
