@@ -56,7 +56,6 @@ namespace Systems.Tourist
                     }
                     else if (state is Dead)
                     {
-                        //TODO: rotting animation
                         movement.Direction.Value = Vector2.zero;
                         // Object.Destroy(movement);
                         if (component.GetComponent<Collider>()) Object.Destroy(component.GetComponent<Collider>());
@@ -68,9 +67,10 @@ namespace Systems.Tourist
                             body.deadBody.transform.Rotate(new Vector3(0, 0, 1), 360 * Random.value);
                         }
                     }
-                    else if (state is WalkingOutOfLevel)
+                    else if (state is WalkingOutOfLevel walkOut)
                     {
-                        //TODO: walk to the top part (Exit Zone) of the level 
+                        movement.Direction.Value = Vector2.zero;
+                        movement.Speed = component.normalSpeed;
                     }
                 })
                 .AddToLifecycleOf(component);

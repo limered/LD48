@@ -23,7 +23,8 @@ namespace Systems.Tourist
 
         public override void Register(RoomComponent room)
         {
-            WaitOn<TouristConfigComponent>().Then(config =>
+            WaitOn<TouristConfigComponent>()
+                .Then(config =>
                     room.State.CurrentState
                         .First(state => state is RoomWalkIn)
                         .Do(_ => _tourists = GenerateTourists(config, room)))
