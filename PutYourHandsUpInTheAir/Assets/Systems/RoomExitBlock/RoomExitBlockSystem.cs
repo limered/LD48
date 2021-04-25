@@ -2,6 +2,7 @@
 using Systems.Room;
 using UniRx;
 using UnityEngine;
+using Utils.Plugins;
 
 namespace Systems.RoomExitBlock
 {
@@ -14,12 +15,12 @@ namespace Systems.RoomExitBlock
                 {
                     var divider = 1f / roomExitBlockComponent.sprites.Length;
                     component.RoomTimeProgress.Subscribe(roomProgress =>
-                        UpdateBlockedPath(roomProgress, divider, roomExitBlockComponent));
+                        UpdateBlockedPath(roomProgress, divider, roomExitBlockComponent)).AddToLifecycleOf(component);
                     component.State.AfterStateChange.Where(newState => newState is RoomWalkOut)
                         .Subscribe(_ => RemoveRoomExitBlock(roomExitBlockComponent))
-                        .AddTo(component);
+                        .AddToLifecycleOf(component);
                 })
-                .AddTo(component);
+                .AddToLifecycleOf(component);
         }
 
         public override void Register(RoomExitBlockComponent component)
