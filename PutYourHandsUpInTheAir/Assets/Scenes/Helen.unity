@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spider
       objectReference: {fileID: 0}
+    - target: {fileID: 1916653266101724132, guid: 8c4f0b406ca9f294192c55fe0f3ebe96, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c4f0b406ca9f294192c55fe0f3ebe96, type: 3}
 --- !u!1 &164279549
@@ -243,6 +247,7 @@ MonoBehaviour:
   DistractionInteractionDuration: 0
   DistractionProgressColor: {r: 1, g: 0, b: 0, a: 1}
   InteractionPosition: {fileID: 1796977117}
+  InteractionCollider: {fileID: 0}
 --- !u!114 &164279553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,6 +488,10 @@ PrefabInstance:
     - target: {fileID: 2674991842247269088, guid: 48d20792e845a194489682b40d32fcaa, type: 3}
       propertyPath: m_Name
       value: Butterfly
+      objectReference: {fileID: 0}
+    - target: {fileID: 2674991842247269088, guid: 48d20792e845a194489682b40d32fcaa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2674991842247269090, guid: 48d20792e845a194489682b40d32fcaa, type: 3}
       propertyPath: m_RootOrder
