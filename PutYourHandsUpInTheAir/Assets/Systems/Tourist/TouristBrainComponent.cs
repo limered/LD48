@@ -12,7 +12,7 @@ namespace Systems.Tourist
     {
         public string touristName;
         public SphereCollider socialDistanceCollider;
-        public float idleMinTimeWithoutMovementInSeconds = 5f;
+        public float idleMinTimeWithoutMovementInSeconds = 3f;
         public float idleSpeed = 1f;
         public float normalSpeed = 1f;
         public string debugCurrentState;

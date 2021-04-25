@@ -40,7 +40,7 @@ namespace Systems.Distractions
                 comp.DistractionProgress.Value = 1;
                 comp.GetComponent<TouristBrainComponent>()
                     .States
-                    .GoToState(new GoingBackToIdle());
+                    .GoToState(new GoingBackToIdle(Vector2.zero));
                 Object.Destroy(comp);
             }
 

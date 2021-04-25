@@ -15,7 +15,7 @@ namespace Assets.Utils.Math
             return new Vector2(v.x, v.z);
         }
 
-        public static float Angle(Vector2 vector)
+        public static float Angle(this Vector2 vector)
         {
             return Angle(vector, Vector2.up);
         }
@@ -25,7 +25,7 @@ namespace Assets.Utils.Math
             return Mathf.Deg2Rad * Vector2.Angle(zeroAngleNormal, vector.normalized);
         }
 
-        public static Vector2 FromAngle(float angle)
+        public static Vector2 FromAngle(this float angle)
         {
             angle += 90 * Mathf.Deg2Rad;
             return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));

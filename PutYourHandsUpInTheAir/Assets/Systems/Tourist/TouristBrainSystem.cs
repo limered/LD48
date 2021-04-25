@@ -3,6 +3,7 @@ using SystemBase;
 using SystemBase.StateMachineBase;
 using Systems.Movement;
 using Systems.Tourist.States;
+using Assets.Utils.Math;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -29,9 +30,16 @@ namespace Systems.Tourist
                 .Do(state => component.debugCurrentState = $"{state}")
                 .Subscribe(state =>
                 {
-                    if (state is GoingIntoLevel || state is GoingBackToIdle)
+                    if (state is GoingIntoLevel) //TODO: do we need this state?
                     {
-                        GoingToIdlePosition(state, component, movement);
+                        //this prevents a deadlock when setting the state directly
+                        Observable.Timer(TimeSpan.FromSeconds(0))
+                            .Subscribe(_ => component.States.GoToState(new GoingBackToIdle(Random.insideUnitCircle /*<- gather around this point*/)))
+                            .AddTo(state);
+                    }
+                    else if (state is GoingBackToIdle goingIdle)
+                    {
+                        GoingToIdlePosition(goingIdle, component, movement);
                     }
                     else if (state is Idle idle)
                     {
@@ -61,22 +69,21 @@ namespace Systems.Tourist
                 .AddTo(component);
         }
 
-        private void GoingToIdlePosition(BaseState<TouristBrainComponent> state, TouristBrainComponent tourist,
+        private void GoingToIdlePosition(GoingBackToIdle state, TouristBrainComponent tourist,
             MovementComponent movement)
         {
-            movement.Speed = tourist.normalSpeed;
-            
             SystemUpdate()
-                .Select(_ => -(Vector2) tourist.transform.position)
+                .Select(_ => state.IdlePosition - (Vector2) tourist.transform.position)
                 .Subscribe(delta =>
                 {
                     if (delta.magnitude < 0.1f)
                     {
-                        tourist.States.GoToState(new Idle());
+                        tourist.States.GoToState(new Idle(state.IdlePosition));
                     }
                     else
                     {
-                        movement.Direction.Value = -tourist.transform.position.normalized;
+                        movement.Speed = tourist.normalSpeed;
+                        movement.Direction.Value = delta.normalized;
                     }
                 })
                 .AddTo(state);
@@ -85,7 +92,6 @@ namespace Systems.Tourist
         private void Idle(Idle state, TouristBrainComponent tourist, MovementComponent movement)
         {
             movement.Direction.Value = Vector2.zero;
-            movement.Speed = tourist.idleSpeed;
 
             if (tourist.socialDistanceCollider)
             {
@@ -112,7 +118,11 @@ namespace Systems.Tourist
 
                         return Vector2.zero;
                     })
-                    .Subscribe(direction => { movement.Direction.Value = direction; })
+                    .Subscribe(direction =>
+                    {
+                        movement.Direction.Value = direction;
+                        movement.Speed = tourist.idleSpeed;
+                    })
                     .AddTo(state);
 
                 //=== keep distance to border ===
@@ -129,24 +139,30 @@ namespace Systems.Tourist
                     )
                     .Subscribe(x =>
                     {
-                        var centerDelta = (Vector2) ( /*center*/ -tourist.transform.position).normalized;
+                        var centerDelta = (state.IdlePosition - (Vector2) tourist.transform.position).normalized;
                         movement.Direction.Value = x.move ? centerDelta.normalized : Vector2.zero;
+                        movement.Speed = tourist.idleSpeed;
                     })
                     .AddTo(state);
 
                 //=== start move randomly when not moved for 10 secs ===
                 movement.Direction
                     .DistinctUntilChanged()
-                    .Throttle(TimeSpan.FromSeconds(tourist.idleMinTimeWithoutMovementInSeconds))
                     .Where(dir => dir == Vector2.zero)
+                    .Throttle(TimeSpan.FromSeconds(Random.Range(1f,
+                        tourist.idleMinTimeWithoutMovementInSeconds)))
+                    .Do(_ => movement.Direction.Value =
+                        (state.IdlePosition - (Vector2) movement
+                            .transform.position).Rotate(Random.Range(-90, 90)))
+                    .SelectMany(_ => Observable.Timer(TimeSpan.FromSeconds(Random.value)))
                     .Subscribe(_ =>
                     {
-                        movement.Direction.Value = Random.insideUnitCircle.normalized;
+                        movement.Direction.Value = Vector2.zero;
+                        movement.Speed = Random.Range(0f, tourist.idleSpeed);
                     })
                     .AddTo(state);
-
             }
-            
+
             // TODO: talking to each other 
         }
 
@@ -154,7 +170,7 @@ namespace Systems.Tourist
             MovementComponent movement)
         {
             movement.Speed = tourist.normalSpeed;
-            
+
             SystemUpdate()
                 .Select(_ => attraction.AttractionPosition - (Vector2) tourist.transform.position)
                 .Do(delta => tourist.debugTargetDistance = delta)

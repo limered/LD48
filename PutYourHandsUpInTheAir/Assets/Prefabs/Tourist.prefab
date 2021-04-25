@@ -272,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   touristName: 
   socialDistanceCollider: {fileID: 4899717811737049112}
-  idleMinTimeWithoutMovementInSeconds: 15
+  idleMinTimeWithoutMovementInSeconds: 5
   idleSpeed: 8
   normalSpeed: 10
   debugCurrentState: 
