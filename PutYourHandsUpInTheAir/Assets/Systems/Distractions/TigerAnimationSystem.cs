@@ -28,6 +28,7 @@ public class TigerAnimationSystem : GameSystem<DistractionComponent>
         {
             var animator = component.GetComponent<Animator>();
             animator.Play("TigerWakingUp_Head");
+            animator.Play("TigerBody_Idle");
             animator.Play("TigerWakingUp_Tail");
 
             collidingObject.GetComponent<TouristBrainComponent>().States.CurrentState
@@ -54,6 +55,8 @@ public class TigerAnimationSystem : GameSystem<DistractionComponent>
             else if (state is GoingBackToIdle)
             {
                 animator.Play("TigerFallingAsleep_Head");
+                animator.Play("TigerBody_Idle");
+                animator.Play("TigerTail_Idle");
             }
         }
     }
