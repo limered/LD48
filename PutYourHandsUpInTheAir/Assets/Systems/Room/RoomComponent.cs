@@ -1,4 +1,5 @@
 ﻿using SystemBase;
+using SystemBase.StateMachineBase;
 using UniRx;
 using UnityEngine;
 
@@ -12,5 +13,6 @@ namespace Systems.Room
         public float TimeInRoom = 30;
         public float TimeLeftInRoom;
         public FloatReactiveProperty RoomTimeProgress = new FloatReactiveProperty();
+        public StateContext<RoomComponent> State = new StateContext<RoomComponent>();
     }
 }
