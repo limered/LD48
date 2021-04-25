@@ -403,6 +403,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: EasyRooms.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: EasyRooms.Array.data[0]
+      value: 
+      objectReference: {fileID: 5907574603959349327, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
     - target: {fileID: 4066499535153139368, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -519,6 +527,22 @@ PrefabInstance:
     - target: {fileID: 7525365751968712200, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676779944528555198, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676779944528555198, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676779945125788995, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676779945125788995, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.91
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
