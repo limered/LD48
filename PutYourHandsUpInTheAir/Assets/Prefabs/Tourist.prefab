@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 4899717811737049112}
   m_Layer: 0
   m_Name: Tourist
-  m_TagString: Untagged
+  m_TagString: tourist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

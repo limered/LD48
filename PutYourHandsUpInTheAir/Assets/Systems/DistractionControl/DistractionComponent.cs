@@ -1,5 +1,4 @@
 ﻿using SystemBase;
-using UniRx;
 using UnityEngine;
 
 namespace Systems.DistractionControl
@@ -10,8 +9,5 @@ namespace Systems.DistractionControl
         public float DistractionInteractionDuration;
         public Color DistractionProgressColor;
         public Transform InteractionPosition;
-
-        public ReactiveCommand StartDistraction = new ReactiveCommand();
-
     }
 }

@@ -1,12 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using SystemBase;
 using Systems.Distractions;
+using Systems.Tourist;
 using Systems.Tourist.States;
 using UniRx;
 using Unity.VisualScripting;
+using Random = UnityEngine.Random;
+
 
 namespace Systems.DistractionControl
 {
+    public enum DistractionType
+    {
+        None,
+        Tiger,
+    }
+
     [GameSystem]
     public class DistractionControlSystem : GameSystem<DistractionControlConfig, DistractionComponent>
     {
@@ -18,7 +29,7 @@ namespace Systems.DistractionControl
 
             Observable
                 .Interval(TimeSpan.FromSeconds(component.DistractionTimerValue))
-                .Subscribe(_ => component.DistractionTrigger.Execute())
+                .Subscribe(_ => TriggerDistractions(component))
                 .AddTo(component);
         }
 
@@ -27,46 +38,42 @@ namespace Systems.DistractionControl
             WaitOn<DistractionControlConfig>()
                 .Subscribe(config => RegisterComponentToTrigger(component, config))
                 .AddTo(component);
+        }
 
-            component.StartDistraction
-                .Subscribe(_ => AddDistractionToRandomStranger(component))
-                .AddTo(component);
+        private void TriggerDistractions(DistractionControlConfig component)
+        {
+            Queue<TouristBrainComponent> tourists = _randomTouristFinder.FindTouristsWithoutDistraction();
+            while (tourists.Any())
+            {
+                var distractionComponent = component
+                    .DistractionComponents[(int) (Random.value * component.DistractionComponents.Count)];
+
+                AddDistractionToRandomStranger(distractionComponent, tourists.Dequeue());
+            }
         }
 
         private void RegisterComponentToTrigger(DistractionComponent component, DistractionControlConfig config)
         {
-            config.DistractionTrigger
-                .Subscribe(_ => component.StartDistraction.Execute())
-                .AddTo(component);
+            config.DistractionComponents.Add(component);
         }
 
-        private void AddDistractionToRandomStranger(DistractionComponent component)
+        private void AddDistractionToRandomStranger(DistractionComponent component, TouristBrainComponent brain)
         {
-            var touristBrain = _randomTouristFinder.FindRandomTouristWithoutDistraction();
+            if (!brain) return;
 
-            if (!touristBrain) return;
-
-            touristBrain.States.GoToState(new PickingInterest());
+            brain.States.GoToState(new PickingInterest());
 
             switch (component.DistractionType)
             {
                 case DistractionType.Tiger:
-                    var comp = touristBrain.AddComponent<TigerDistractionTouristComponent>();
-                    comp.CurrentDistractionType = component.DistractionType;
+                    var comp = brain.AddComponent<TigerDistractionTouristComponent>();
+                    comp.CreatedFrom = component;
                     comp.LastDistractionProgressTime = component.DistractionInteractionDuration;
-                    comp.MaxProgressTime = component.DistractionInteractionDuration;
-                    comp.ProgressColor = component.DistractionProgressColor;
-                    comp.InteractionPosition = component.InteractionPosition;
                     return;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
-    }
-
-    public enum DistractionType
-    {
-        None,
-        Tiger,
     }
 }

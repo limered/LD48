@@ -7,10 +7,11 @@ namespace Systems.Distractions
 {
     public class DistractedTouristComponent : GameComponent
     {
-        public DistractionType CurrentDistractionType;
-        public Color ProgressColor;
         public FloatReactiveProperty DistractionProgress = new FloatReactiveProperty(0);
-        public float MaxProgressTime { get; set; }
-        public Transform InteractionPosition { get; set; }
+        public DistractionComponent CreatedFrom;
+        public DistractionType CurrentDistractionType => CreatedFrom.DistractionType;
+        public Color ProgressColor => CreatedFrom.DistractionProgressColor;
+        public float MaxProgressTime => CreatedFrom.DistractionInteractionDuration;
+        public Transform InteractionPosition => CreatedFrom.InteractionPosition;
     }
 }

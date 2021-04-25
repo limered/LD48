@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Systems.Distractions;
 using Systems.Tourist;
 using Systems.Tourist.States;
 using UnityEngine;
@@ -9,21 +10,25 @@ namespace Systems.DistractionControl
 {
     public class RandomTouristFinder
     {
-        public TouristBrainComponent FindRandomTouristWithoutDistraction()
+        public Queue<TouristBrainComponent> FindTouristsWithoutDistraction()
         {
-            List<TouristBrainComponent> touristBrains = GameObject.FindGameObjectsWithTag("tourist")
+            var queuedRandoms = new Queue<TouristBrainComponent>();
+
+            GameObject.FindGameObjectsWithTag("tourist")
                 .Select(t => t.GetComponent<TouristBrainComponent>())
                 .Where(brain => brain.States.CurrentState.Value is Idle)
-                .ToList();
+                .ToList()
+                .Randomize()
+                .ForEach(t => queuedRandoms.Enqueue(t));
 
-            return GerRandomTouristWithoutDistraction(touristBrains);
+            return queuedRandoms;
         }
 
-        private TouristBrainComponent GerRandomTouristWithoutDistraction(List<TouristBrainComponent> touristBrains)
+        private TouristBrainComponent GetRandomTouristWithoutDistraction(List<TouristBrainComponent> touristBrains)
         {
             return touristBrains
                 .Randomize()
-                .FirstOrDefault(touristBrain => touristBrain.GetComponent<DistractionComponent>() == null);
+                .FirstOrDefault(touristBrain => touristBrain.GetComponent<DistractedTouristComponent>() == null);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using SystemBase;
+﻿using System.Collections.Generic;
+using SystemBase;
 using UniRx;
 
 namespace Systems.DistractionControl
@@ -7,5 +8,6 @@ namespace Systems.DistractionControl
     {
         public float DistractionTimerValue = 5f;
         public ReactiveCommand DistractionTrigger = new ReactiveCommand();
+        public List<DistractionComponent> DistractionComponents = new List<DistractionComponent>();
     }
 }
