@@ -4,9 +4,11 @@ using SystemBase.StateMachineBase;
 using Systems.Room;
 using Systems.Room.Events;
 using Systems.Tourist.States;
+using GameState.States;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using Utils;
 using Utils.Plugins;
 using Random = UnityEngine.Random;
 
@@ -16,15 +18,28 @@ namespace Systems.Tourist
     public class TouristTrackingSystem : GameSystem<TouristConfigComponent, TouristBrainComponent, RoomComponent>
     {
         /// Assigned when Room switches to RoomWalkIn state
+        /// temporary variable holding all tourists that started alive in the current Room 
         private GameObject[] _tourists;
 
-        /// Created when Room switches to RoomWalkIn state
-        /// Elements populated when Room switches to RoomWalkOut state
+        /// Created when Game starts, and the first Room is entered
+        /// Elements get populated when Tourists leave the room or die
+        /// This variable is present during the whole game and can always be used
+        /// to check for the current survival status of the group
         private TouristDump[] _touristDumps;
 
         public override void Register(TouristConfigComponent config)
         {
             RegisterWaitable(config);
+
+            //=== Reset tourists ====
+            IoC.Game.GameStateContext.CurrentState
+                .Where(state => state is Running)
+                .Subscribe(_ =>
+                {
+                    _tourists = null;
+                    _touristDumps = null;
+                })
+                .AddToLifecycleOf(config);
         }
 
         public override void Register(RoomComponent room)
@@ -35,8 +50,15 @@ namespace Systems.Tourist
                         .First(state => state is RoomWalkIn)
                         .Do(_ =>
                         {
-                            _tourists = GenerateTourists(config, room);
-                            _touristDumps = new TouristDump[_tourists.Length];
+                            if (_tourists == null) //first level
+                            {
+                                _tourists = GenerateTourists(config, room);
+                                _touristDumps = new TouristDump[_tourists.Length];
+                            }
+                            else //level 2 -> END
+                            {
+                                _tourists = LoadTourists(config, room);
+                            }
                         }))
                 .Subscribe()
                 .AddToLifecycleOf(room);
@@ -72,10 +94,13 @@ namespace Systems.Tourist
                 {
                     for (int i = 0; i < _tourists.Length; i++)
                     {
-                        var tourist = _tourists[i].GetComponent<TouristBrainComponent>();
-                        if (brain == tourist)
+                        if (_tourists[i])
                         {
-                            _touristDumps[i] = new TouristDump(brain);
+                            var tourist = _tourists[i].GetComponent<TouristBrainComponent>();
+                            if (brain == tourist)
+                            {
+                                _touristDumps[i] = new TouristDump(brain);
+                            }
                         }
                     }
 
@@ -110,10 +135,13 @@ namespace Systems.Tourist
                 {
                     for (int i = 0; i < _tourists.Length; i++)
                     {
-                        var tourist = _tourists[i].GetComponent<TouristBrainComponent>();
-                        if (component == tourist)
+                        if (_tourists[i])
                         {
-                            _touristDumps[i] = new TouristDump(component);
+                            var tourist = _tourists[i].GetComponent<TouristBrainComponent>();
+                            if (component == tourist)
+                            {
+                                _touristDumps[i] = new TouristDump(component);
+                            }
                         }
                     }
 
@@ -184,18 +212,34 @@ namespace Systems.Tourist
                     var objectInstance = Object.Instantiate(config.touristPrefab,
                         room.SpawnInPosition.transform.position + (Vector3) Random.insideUnitCircle,
                         Quaternion.identity);
-
                     var brain = objectInstance.GetComponent<TouristBrainComponent>();
                     brain.tag = "tourist";
+                    tourist.Apply(brain);
                     brain.States.Start(new GoingIntoLevel());
 
-                    tourist.Apply(brain);
 
                     return objectInstance;
                 })
                 .ToArray();
 
             return tourists;
+        }
+
+        private GameObject[] LoadTourists(TouristConfigComponent config, RoomComponent room)
+        {
+            return _touristDumps.Select(tourist =>
+            {
+                if (!tourist.IsAlive) return null;
+
+                var objectInstance = Object.Instantiate(config.touristPrefab,
+                    room.SpawnInPosition.transform.position + (Vector3) Random.insideUnitCircle,
+                    Quaternion.identity);
+                var brain = objectInstance.GetComponent<TouristBrainComponent>();
+                brain.tag = "tourist";
+                tourist.Apply(brain);
+                brain.States.Start(new GoingIntoLevel());
+                return objectInstance;
+            }).ToArray();
         }
     }
 }
