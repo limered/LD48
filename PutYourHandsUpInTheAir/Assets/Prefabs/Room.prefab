@@ -926,7 +926,7 @@ MonoBehaviour:
   SpawnInPosition: {fileID: 1152597045229142343}
   GatherPosition: {fileID: 5540822021671676306}
   SpawnOutPosition: {fileID: 385970361167760384}
-  MaxTimeInRoom: 30
+  MaxTimeInRoom: 5
   TimeLeftInRoom: 0
   RoomTimeProgress:
     value: 0

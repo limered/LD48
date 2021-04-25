@@ -33,8 +33,15 @@ namespace Systems.Room
         {
         }
     }
-
+    [NextValidStates(typeof(RoomNext))]
     public class RoomDestroy : BaseState<RoomComponent>
+    {
+        public override void Enter(StateContext<RoomComponent> context)
+        {
+        }
+    }
+
+    public class RoomNext : BaseState<RoomComponent>
     {
         public override void Enter(StateContext<RoomComponent> context)
         {

@@ -50,6 +50,11 @@ namespace Systems.Room
             {
                 var alpha = (Time.timeSinceLevelLoad - EndStamp) / comp.FadeTime;
                 comp.GetComponent<Image>().color = Color.Lerp(Show, Hidden, alpha);
+
+                if (alpha > 1f)
+                {
+                    comp.Room.State.GoToState(new RoomNext());
+                }
             }
         }
     }
