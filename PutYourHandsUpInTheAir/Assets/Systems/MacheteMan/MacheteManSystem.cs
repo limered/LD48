@@ -33,7 +33,7 @@ namespace Systems.MacheteMan
                         new Vector2(
                             Random.Range(roomBlockExitComponent.leftBorder.position.x,
                                 roomBlockExitComponent.rightBorder.position.x),
-                            roomBlockExitComponent.transform.position.y);
+                            roomBlockExitComponent.leftBorder.position.y);
 
                     SystemUpdate().Where(_ => component.State.CurrentState.Value is MacheteManPrepare)
                         .Subscribe(_ => MoveToExitBlock(component,
