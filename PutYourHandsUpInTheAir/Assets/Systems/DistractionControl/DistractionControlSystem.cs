@@ -59,7 +59,7 @@ namespace Systems.DistractionControl
 
         private void AddDistractionToRandomStranger(DistractionComponent component, TouristBrainComponent brain)
         {
-            if (!brain) return;
+            if (!brain || !component) return;
 
             brain.States.GoToState(new PickingInterest());
 
