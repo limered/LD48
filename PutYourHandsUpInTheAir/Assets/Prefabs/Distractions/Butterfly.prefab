@@ -47,7 +47,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2674991841311685196}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -229,6 +229,7 @@ MonoBehaviour:
   DistractionInteractionDuration: 2
   DistractionProgressColor: {r: 0.2251691, g: 0.69112015, b: 0.8679245, a: 1}
   InteractionPosition: {fileID: 2674991841311685199}
+  InteractionCollider: {fileID: 0}
 --- !u!95 &242096486341353295
 Animator:
   serializedVersion: 3
