@@ -76,9 +76,9 @@ namespace Systems.DistractionControl
                     comp.LastDistractionProgressTime = component.DistractionInteractionDuration;
                     return;
                 case DistractionType.Butterfly:
-                    var butterflyCompo = brain.AddComponent<ButterflyDistractionTouristComponent>();
-                    butterflyCompo.CreatedFrom = component;
-                    butterflyCompo.LastDistractionProgressTime = component.DistractionInteractionDuration;
+                    var butterflyComp = brain.AddComponent<ButterflyDistractionTouristComponent>();
+                    butterflyComp.CreatedFrom = component;
+                    butterflyComp.LastDistractionProgressTime = component.DistractionInteractionDuration;
                     return;
                 default:
                     throw new ArgumentOutOfRangeException();
