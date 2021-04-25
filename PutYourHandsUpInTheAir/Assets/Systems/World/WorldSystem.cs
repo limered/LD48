@@ -1,5 +1,5 @@
 ﻿using SystemBase;
-using Utils;
+using UnityEngine;
 
 namespace Systems.World
 {
@@ -8,7 +8,13 @@ namespace Systems.World
     {
         public override void Register(WorldComponent component)
         {
-            //var game = IoC.Game
+            LoadFirstLevel(component);
+        }
+
+        private void LoadFirstLevel(WorldComponent component)
+        {
+            var lvlPrefab = component.EasyRooms[0];
+            Object.Instantiate(lvlPrefab);
         }
     }
 }
