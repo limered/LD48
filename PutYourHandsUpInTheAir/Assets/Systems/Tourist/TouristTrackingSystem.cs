@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using SystemBase;
+using Systems.Room;
+using Systems.Tourist.States;
 using GameState.Messages;
 using UniRx;
 using UnityEngine;
@@ -12,7 +14,7 @@ using Random = UnityEngine.Random;
 namespace Systems.Tourist
 {
     [GameSystem]
-    public class TouristTrackingSystem : GameSystem<TouristConfigComponent, TouristBrainComponent>
+    public class TouristTrackingSystem : GameSystem<TouristConfigComponent, TouristBrainComponent, RoomComponent>
     {
         /// Assigned when GameMsgStart is received
         private GameObject[] _tourists;
@@ -20,11 +22,16 @@ namespace Systems.Tourist
         public override void Register(TouristConfigComponent config)
         {
             RegisterWaitable(config);
+        }
 
-            MessageBroker.Default.Receive<GameMsgStart>()
-                .Subscribe(start => { _tourists = GenerateTourists(config); }).AddToLifecycleOf(config);
-            
-            MessageBroker.Default.Publish(new GameMsgStart());
+        public override void Register(RoomComponent component)
+        {
+            WaitOn<TouristConfigComponent>().Then(config =>
+                    component.State.CurrentState
+                        .First(state => state is RoomWalkIn)
+                        .Do(_ => _tourists = GenerateTourists(config, component)))
+                .Subscribe()
+                .AddToLifecycleOf(component);
         }
 
         public override void Register(TouristBrainComponent component)
@@ -41,16 +48,16 @@ namespace Systems.Tourist
                         (headIndex, bodyIndex) => (headIndex, bodyIndex))
                     .Do(i =>
                     {
-                        if (i.headIndex <= config.topParts.Length) 
+                        if (i.headIndex <= config.topParts.Length)
                             body.head.sprite = config.topParts[i.headIndex];
-                        if (i.bodyIndex <= config.bottomParts.Length) 
+                        if (i.bodyIndex <= config.bottomParts.Length)
                             body.body.sprite = config.bottomParts[i.bodyIndex];
                     }))
                 .Subscribe()
                 .AddToLifecycleOf(component);
         }
 
-        private GameObject[] GenerateTourists(TouristConfigComponent config)
+        private GameObject[] GenerateTourists(TouristConfigComponent config, RoomComponent room)
         {
             var tourists = Enumerable.Range(0, config.initialTouristCount)
                 .Select(_ => new TouristDump
@@ -63,11 +70,14 @@ namespace Systems.Tourist
                 })
                 .Select(tourist =>
                 {
-                    var objectInstance = UnityEngine.Object.Instantiate(config.touristPrefab, config.spawnPosition,
+                    var objectInstance = UnityEngine.Object.Instantiate(config.touristPrefab,
+                        room.SpawnInPosition.transform.position + (Vector3) Random.insideUnitCircle,
                         Quaternion.identity);
 
                     var brain = objectInstance.GetComponent<TouristBrainComponent>();
-                    // var body = objectInstance.GetComponent<TouristBodyComponent>();
+                    brain.tag = "tourist";
+                    brain.States.Start(new GoingIntoLevel());
+
                     tourist.Apply(brain);
 
                     return objectInstance;

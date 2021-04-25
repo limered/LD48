@@ -19,10 +19,7 @@ namespace Systems.Tourist
         public override void Register(TouristBrainComponent component)
         {
             var movement = component.GetComponent<MovementComponent>();
-            component.tag = "tourist";
 
-            component.States.Start(new GoingIntoLevel());
-            
             component.States.CurrentState
                 .LogOnNext(state => $"{component.touristName}: {state}")
                 .Do(state => component.debugCurrentState = $"{state}")
