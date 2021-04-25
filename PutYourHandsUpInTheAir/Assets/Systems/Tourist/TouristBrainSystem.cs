@@ -69,8 +69,13 @@ namespace Systems.Tourist
                     }
                     else if (state is WalkingOutOfLevel walkOut)
                     {
-                        movement.Direction.Value = Vector2.zero;
-                        movement.Speed = component.normalSpeed;
+                        SystemUpdate()
+                            .Subscribe(_ =>
+                            {
+                                movement.Direction.Value = (walkOut.Target.position-component.transform.position).normalized;
+                                movement.MaxSpeed = movement.Speed = component.normalSpeed;
+                            })
+                            .AddTo(walkOut);
                     }
                 })
                 .AddToLifecycleOf(component);
@@ -89,7 +94,7 @@ namespace Systems.Tourist
                     }
                     else
                     {
-                        movement.Speed = tourist.normalSpeed;
+                        movement.MaxSpeed = movement.Speed = tourist.normalSpeed;
                         movement.Direction.Value = delta.normalized;
                     }
                 })
@@ -128,7 +133,7 @@ namespace Systems.Tourist
                     .Subscribe(direction =>
                     {
                         movement.Direction.Value = direction;
-                        movement.Speed = tourist.idleSpeed;
+                        movement.MaxSpeed = movement.Speed = tourist.idleSpeed;
                     })
                     .AddTo(state);
 
@@ -148,7 +153,7 @@ namespace Systems.Tourist
                     {
                         var centerDelta = (state.IdlePosition - (Vector2) tourist.transform.position).normalized;
                         movement.Direction.Value = x.move ? centerDelta.normalized : Vector2.zero;
-                        movement.Speed = tourist.idleSpeed;
+                        movement.MaxSpeed = movement.Speed = tourist.idleSpeed;
                     })
                     .AddTo(state);
 
@@ -165,7 +170,7 @@ namespace Systems.Tourist
                     .Subscribe(_ =>
                     {
                         movement.Direction.Value = Vector2.zero;
-                        movement.Speed = Random.Range(0f, tourist.idleSpeed);
+                        movement.MaxSpeed = movement.Speed = Random.Range(0f, tourist.idleSpeed);
                     })
                     .AddTo(state);
             }
@@ -176,7 +181,7 @@ namespace Systems.Tourist
         private void GoingToAttraction(GoingToAttraction attraction, TouristBrainComponent tourist,
             MovementComponent movement)
         {
-            movement.Speed = tourist.normalSpeed;
+            movement.MaxSpeed = movement.Speed = tourist.normalSpeed;
 
             SystemUpdate()
                 .Select(_ => attraction.AttractionPosition - (Vector2) tourist.transform.position)

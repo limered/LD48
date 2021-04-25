@@ -1,9 +1,11 @@
 ﻿using System.Linq;
 using SystemBase;
+using SystemBase.StateMachineBase;
 using Systems.Room;
 using Systems.Room.Events;
 using Systems.Tourist.States;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using Utils.Plugins;
 using Random = UnityEngine.Random;
@@ -13,8 +15,12 @@ namespace Systems.Tourist
     [GameSystem]
     public class TouristTrackingSystem : GameSystem<TouristConfigComponent, TouristBrainComponent, RoomComponent>
     {
-        /// Assigned when GameMsgStart is received
+        /// Assigned when Room switches to RoomWalkIn state
         private GameObject[] _tourists;
+
+        /// Created when Room switches to RoomWalkIn state
+        /// Elements populated when Room switches to RoomWalkOut state
+        private TouristDump[] _touristDumps;
 
         public override void Register(TouristConfigComponent config)
         {
@@ -27,7 +33,11 @@ namespace Systems.Tourist
                 .Then(config =>
                     room.State.CurrentState
                         .First(state => state is RoomWalkIn)
-                        .Do(_ => _tourists = GenerateTourists(config, room)))
+                        .Do(_ =>
+                        {
+                            _tourists = GenerateTourists(config, room);
+                            _touristDumps = new TouristDump[_tourists.Length];
+                        }))
                 .Subscribe()
                 .AddToLifecycleOf(room);
 
@@ -40,11 +50,11 @@ namespace Systems.Tourist
         {
             room.State.CurrentState
                 .Where(state => state is RoomWalkOut)
-                .Subscribe(_ => PutAllTouristsInWalkOutState(room))
+                .Subscribe(state => PutAllTouristsInWalkOutState(room, state))
                 .AddToLifecycleOf(room);
         }
 
-        private void PutAllTouristsInWalkOutState(RoomComponent room)
+        private void PutAllTouristsInWalkOutState(RoomComponent room, BaseState<RoomComponent> state)
         {
             foreach (var tourist in _tourists)
             {
@@ -52,17 +62,72 @@ namespace Systems.Tourist
                     .States
                     .GoToState(new WalkingOutOfLevel(room.SpawnOutPosition.transform));
             }
+
+            //=== Collect walked out Tourists ====
+            room.SpawnOutPosition
+                .OnTriggerEnterAsObservable()
+                .Where(c => c.gameObject.CompareTag("tourist"))
+                .SelectWhereNotNull(c => c.gameObject.GetComponent<TouristBrainComponent>())
+                .Subscribe(brain =>
+                {
+                    for (int i = 0; i < _tourists.Length; i++)
+                    {
+                        var tourist = _tourists[i].GetComponent<TouristBrainComponent>();
+                        if (brain == tourist)
+                        {
+                            _touristDumps[i] = new TouristDump(brain);
+                        }
+                    }
+
+                    CheckForRoomFinish();
+                })
+                .AddTo(state);
+        }
+
+        private void CheckForRoomFinish()
+        {
+            if (_touristDumps.All(x => x != null))
+            {
+                if (_touristDumps.Any(x => x.IsAlive))
+                {
+                    MessageBroker.Default.Publish(new RoomAllTouristsLeft());
+                    Debug.Log($"Room finished. {_touristDumps.Count(x => x.IsAlive)} tourists survived");
+                }
+                else
+                {
+                    //TODO: Game Over State
+                }
+            }
         }
 
         public override void Register(TouristBrainComponent component)
         {
             var body = component.GetComponent<TouristBodyComponent>();
 
+            //=== Collect dead Tourists ====
+            component.States.CurrentState.Where(state => state is Dead)
+                .Subscribe(_ =>
+                {
+                    for (int i = 0; i < _tourists.Length; i++)
+                    {
+                        var tourist = _tourists[i].GetComponent<TouristBrainComponent>();
+                        if (component == tourist)
+                        {
+                            _touristDumps[i] = new TouristDump(component);
+                        }
+                    }
+
+                    CheckForRoomFinish();
+                })
+                .AddToLifecycleOf(component);
+
+            //=== Update name ====
             component.touristName
                 .Where(n => !string.IsNullOrWhiteSpace(n))
                 .Subscribe(name => component.gameObject.name = name)
                 .AddToLifecycleOf(component);
 
+            //=== Update Head/Body Sprite ====
             WaitOn<TouristConfigComponent>()
                 .Then(config => Observable.Zip(component.headPartIndex, component.bodyPartIndex,
                         (headIndex, bodyIndex) => (headIndex, bodyIndex))
@@ -91,15 +156,18 @@ namespace Systems.Tourist
                 .Subscribe(_ => StartRoom())
                 .AddToLifecycleOf(room);
         }
+
         private bool AllTouristsAreInIdle()
         {
-            return _tourists != null && _tourists.All(t => t.GetComponent<TouristBrainComponent>().States.CurrentState.Value is Idle);
+            return _tourists != null &&
+                   _tourists.All(t => t.GetComponent<TouristBrainComponent>().States.CurrentState.Value is Idle);
         }
 
         private void StartRoom()
         {
             MessageBroker.Default.Publish(new RoomAllTouristsEntered());
         }
+
         private GameObject[] GenerateTourists(TouristConfigComponent config, RoomComponent room)
         {
             var tourists = Enumerable.Range(0, config.initialTouristCount)
@@ -113,8 +181,8 @@ namespace Systems.Tourist
                 })
                 .Select(tourist =>
                 {
-                    var objectInstance = UnityEngine.Object.Instantiate(config.touristPrefab,
-                        room.SpawnInPosition.transform.position + (Vector3)Random.insideUnitCircle,
+                    var objectInstance = Object.Instantiate(config.touristPrefab,
+                        room.SpawnInPosition.transform.position + (Vector3) Random.insideUnitCircle,
                         Quaternion.identity);
 
                     var brain = objectInstance.GetComponent<TouristBrainComponent>();
