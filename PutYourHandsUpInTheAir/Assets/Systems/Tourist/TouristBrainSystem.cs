@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using SystemBase;
 using SystemBase.StateMachineBase;
 using Systems.Movement;
@@ -65,49 +64,97 @@ namespace Systems.Tourist
         private void GoingToIdlePosition(BaseState<TouristBrainComponent> state, TouristBrainComponent tourist,
             MovementComponent movement)
         {
+            movement.Speed = tourist.normalSpeed;
+            
             SystemUpdate()
                 .Select(_ => -(Vector2) tourist.transform.position)
                 .Subscribe(delta =>
+                {
+                    if (delta.magnitude < 0.1f)
                     {
-                        if (delta.magnitude < 0.1f)
-                        {
-                            tourist.States.GoToState(new Idle());
-                        }
-                        else
-                        {
-                            movement.Direction.Value = -tourist.transform.position.normalized;
-                        }
-                    })
+                        tourist.States.GoToState(new Idle());
+                    }
+                    else
+                    {
+                        movement.Direction.Value = -tourist.transform.position.normalized;
+                    }
+                })
                 .AddTo(state);
         }
 
         private void Idle(Idle state, TouristBrainComponent tourist, MovementComponent movement)
         {
             movement.Direction.Value = Vector2.zero;
+            movement.Speed = tourist.idleSpeed;
 
-            if (tourist.collider)
+            if (tourist.socialDistanceCollider)
             {
-                tourist.collider.OnCollisionStayAsObservable()
-                    .Delay(TimeSpan.FromSeconds(Random.Range(0, tourist.brainDelayInSeconds)))
-                    .Subscribe()
-                    .AddTo(state);
-            }
+                //=== keep distance to each other ===
+                Observable.Merge(
+                        tourist.socialDistanceCollider.OnTriggerStayAsObservable()
+                            .Where(c => c.gameObject.CompareTag("tourist"))
+                            .Select(collider => (collider, move: true)),
+                        tourist.socialDistanceCollider.OnTriggerExitAsObservable()
+                            .Where(c => c.gameObject.CompareTag("tourist"))
+                            .Select(collider => (collider, move: false)),
+                        tourist.socialDistanceCollider.OnTriggerEnterAsObservable()
+                            .Where(c => c.gameObject.CompareTag("tourist"))
+                            .Select(collider => (collider, move: false))
+                    )
+                    .Select(x =>
+                    {
+                        if (x.move)
+                        {
+                            var delta = (Vector2) (tourist.transform.position - x.collider.transform.position);
+                            if (delta == Vector2.zero) delta = Random.insideUnitCircle.normalized;
+                            return delta;
+                        }
 
-            // SystemUpdate()
-            //     .Where(_ => tourist.collider != null)
-            //     .Select(_ => tourist.collider)
-            //     .Subscribe(myCollider =>
-            //     {
-            //         myCollider
-            //     })
-            //     .AddTo(state.StateDisposables);
-            // TODO: idle "wusel" movement
+                        return Vector2.zero;
+                    })
+                    .Subscribe(direction => { movement.Direction.Value = direction; })
+                    .AddTo(state);
+
+                //=== keep distance to border ===
+                Observable.Merge(
+                        tourist.socialDistanceCollider.OnTriggerStayAsObservable()
+                            .Where(c => c.gameObject.CompareTag("levelBorder"))
+                            .Select(collider => (collider, move: true)),
+                        tourist.socialDistanceCollider.OnTriggerExitAsObservable()
+                            .Where(c => c.gameObject.CompareTag("levelBorder"))
+                            .Select(collider => (collider, move: false)),
+                        tourist.socialDistanceCollider.OnTriggerEnterAsObservable()
+                            .Where(c => c.gameObject.CompareTag("levelBorder"))
+                            .Select(collider => (collider, move: false))
+                    )
+                    .Subscribe(x =>
+                    {
+                        var centerDelta = (Vector2) ( /*center*/ -tourist.transform.position).normalized;
+                        movement.Direction.Value = x.move ? centerDelta.normalized : Vector2.zero;
+                    })
+                    .AddTo(state);
+
+                //=== start move randomly when not moved for 10 secs ===
+                movement.Direction
+                    .DistinctUntilChanged()
+                    .Throttle(TimeSpan.FromSeconds(tourist.idleMinTimeWithoutMovementInSeconds))
+                    .Where(dir => dir == Vector2.zero)
+                    .Subscribe(_ =>
+                    {
+                        movement.Direction.Value = Random.insideUnitCircle.normalized;
+                    })
+                    .AddTo(state);
+
+            }
+            
             // TODO: talking to each other 
         }
 
         private void GoingToAttraction(GoingToAttraction attraction, TouristBrainComponent tourist,
             MovementComponent movement)
         {
+            movement.Speed = tourist.normalSpeed;
+            
             SystemUpdate()
                 .Select(_ => attraction.AttractionPosition - (Vector2) tourist.transform.position)
                 .Do(delta => tourist.debugTargetDistance = delta)

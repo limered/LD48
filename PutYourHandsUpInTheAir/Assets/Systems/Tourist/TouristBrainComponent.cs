@@ -11,8 +11,10 @@ namespace Systems.Tourist
     public class TouristBrainComponent : GameComponent
     {
         public string touristName;
-        public SphereCollider collider;
-        public float brainDelayInSeconds = 2f;
+        public SphereCollider socialDistanceCollider;
+        public float idleMinTimeWithoutMovementInSeconds = 5f;
+        public float idleSpeed = 1f;
+        public float normalSpeed = 1f;
         public string debugCurrentState;
         public Vector2 debugTargetDistance;
 

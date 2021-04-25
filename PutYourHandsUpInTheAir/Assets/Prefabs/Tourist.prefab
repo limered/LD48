@@ -265,7 +265,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   touristName: 
-  collider: {fileID: 0}
-  brainDelayInSeconds: 2
+  socialDistanceCollider: {fileID: 1791925132}
+  idleMinTimeWithoutMovementInSeconds: 15
+  idleSpeed: 8
+  normalSpeed: 10
   debugCurrentState: 
   debugTargetDistance: {x: 0, y: 0}
