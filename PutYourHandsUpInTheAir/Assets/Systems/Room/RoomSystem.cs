@@ -11,6 +11,8 @@ namespace Systems.Room
     {
         public override void Register(RoomComponent room)
         {
+            Debug.Log("New Room Added");
+
             RegisterWaitable(room);
             room.State.Start(new RoomCreate());
             room.State.CurrentState
@@ -24,11 +26,12 @@ namespace Systems.Room
 
             room.TimeLeftInRoom = room.MaxTimeInRoom;
 
-            room.State.GoToState(new RoomWalkIn());
             MessageBroker.Default
                 .Receive<RoomAllTouristsEntered>()
                 .Subscribe(_ => room.State.GoToState(new RoomRunning()))
                 .AddToLifecycleOf(room);
+
+            room.State.GoToState(new RoomWalkIn());
         }
 
         private void ProgressRoom(RoomComponent room)
