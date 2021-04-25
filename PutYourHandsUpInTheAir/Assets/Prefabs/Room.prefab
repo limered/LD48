@@ -91,7 +91,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385970361167760384}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -187,7 +187,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152597045229142343}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -283,7 +283,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5540822021671676306}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -473,6 +473,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5907574603959349326}
   - component: {fileID: 3735034271173043881}
+  - component: {fileID: 616607745}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -519,6 +520,22 @@ MonoBehaviour:
   TimeLeftInRoom: 0
   RoomTimeProgress:
     value: 0
+  CurrentState:
+    value: 
+--- !u!114 &616607745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907574603959349327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0fd8a41272856548b6ed0965d1f1602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DistractionTimerValue: 2
+  DistractionComponents: []
 --- !u!1001 &401523943174118518
 PrefabInstance:
   m_ObjectHideFlags: 0
