@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Room: {fileID: 3735034271173043881}
-  FadeTime: 0.5
+  FadeTime: 3
 --- !u!1 &622296385
 GameObject:
   m_ObjectHideFlags: 0
