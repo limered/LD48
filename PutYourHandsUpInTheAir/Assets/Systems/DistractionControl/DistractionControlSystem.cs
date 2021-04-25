@@ -17,7 +17,7 @@ namespace Systems.DistractionControl
             RegisterWaitable(component);
 
             Observable
-                .Timer(TimeSpan.FromSeconds(component.DistractionTimerValue))
+                .Interval(TimeSpan.FromSeconds(component.DistractionTimerValue))
                 .Subscribe(_ => component.DistractionTrigger.Execute())
                 .AddTo(component);
         }
