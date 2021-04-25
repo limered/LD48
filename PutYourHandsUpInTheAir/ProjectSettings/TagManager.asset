@@ -6,6 +6,7 @@ TagManager:
   tags:
   - tourist
   - levelBorder
+  - bus
   layers:
   - Default
   - TransparentFX

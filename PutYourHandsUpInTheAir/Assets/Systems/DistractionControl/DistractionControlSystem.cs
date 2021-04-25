@@ -8,6 +8,7 @@ using Systems.Tourist;
 using Systems.Tourist.States;
 using UniRx;
 using Unity.VisualScripting;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 
@@ -21,7 +22,8 @@ namespace Systems.DistractionControl
         Camera,
         Spider,
         Swamp,
-        Money
+        Money,
+        Bus
     }
 
     [GameSystem]
@@ -92,6 +94,12 @@ namespace Systems.DistractionControl
                     var spiderComp = brain.AddComponent<SpiderDistractionTouristComponent>();
                     spiderComp.CreatedFrom = component;
                     spiderComp.LastDistractionProgressTime = component.DistractionInteractionDuration;
+                    return;
+                case DistractionType.Bus:
+                    var busComp = brain.AddComponent<BusDistractionTouristComponent>();
+                    busComp.CreatedFrom = component;
+                    busComp.EndPosititon = new Vector2(-5.0f, 4.0f);
+                    busComp.LastDistractionProgressTime = component.DistractionInteractionDuration;
                     return;
                 default:
                     throw new ArgumentOutOfRangeException();
