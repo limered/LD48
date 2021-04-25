@@ -21,7 +21,7 @@ namespace Systems.Tourist
             var movement = component.GetComponent<MovementComponent>();
 
             component.States.CurrentState
-                .LogOnNext(state => $"{component.touristName}: {state}")
+                // .LogOnNext(state => $"{component.touristName}: {state}")
                 .Do(state => component.debugCurrentState = $"{state}")
                 .Subscribe(state =>
                 {

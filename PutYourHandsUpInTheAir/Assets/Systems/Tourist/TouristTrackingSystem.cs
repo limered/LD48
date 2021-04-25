@@ -36,6 +36,7 @@ namespace Systems.Tourist
                 .Where(state => state is Running)
                 .Subscribe(_ =>
                 {
+                    Debug.Log("------------------ NEW GAME ----------------");
                     _tourists = null;
                     _touristDumps = null;
                 })
@@ -47,16 +48,18 @@ namespace Systems.Tourist
             WaitOn<TouristConfigComponent>()
                 .Then(config =>
                     room.State.CurrentState
-                        .First(state => state is RoomWalkIn)
+                        // .First(state => state is RoomWalkIn)
                         .Do(_ =>
                         {
                             if (_tourists == null) //first level
                             {
+                                Debug.Log("RoomWalkIn - first level");
                                 _tourists = GenerateTourists(config, room);
                                 _touristDumps = new TouristDump[_tourists.Length];
                             }
                             else //level 2 -> END
                             {
+                                Debug.Log("RoomWalkIn - 2-END level");
                                 _tourists = LoadTourists(config, room);
                             }
                         }))
