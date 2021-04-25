@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &61032432 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3735034271173043881, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+  m_PrefabInstance: {fileID: 5907574602541142903}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d1547e1e2131f8498875394ff5d4350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100536861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -180,6 +191,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8996e6e3fcc8a78429a10095ab70f24f, type: 3}
+--- !u!1 &396610578 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 396610578, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+  m_PrefabInstance: {fileID: 5907574602541142903}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &396610582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396610578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa243bdc4a405514780363a82bb17481, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Room: {fileID: 61032432}
+  FadeTime: 0.5
 --- !u!1 &432991819
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,27 +426,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21e5177a0dff19b46a19da7e50dd781c, type: 3}
---- !u!1 &1275096018 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5907574603063625898, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
-  m_PrefabInstance: {fileID: 5907574602541142903}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1275096019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1275096018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8101f4e64ca444c4d83edcf31f6d32bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GroundTextures:
-  - {fileID: 21300000, guid: 0ba7112cc530d7c4daa76943ade91048, type: 3}
-  - {fileID: 21300000, guid: 8c44e4c6658a3e14684370d54aa34ecb, type: 3}
-  - {fileID: 21300000, guid: 01b7f1952201799478ccc71354df7b14, type: 3}
 --- !u!1001 &5907574602541142903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -424,49 +433,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3735034271173043881, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
-      propertyPath: GroundPrefabs.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3735034271173043881, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
-      propertyPath: GroundPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 0ba7112cc530d7c4daa76943ade91048, type: 3}
-    - target: {fileID: 3735034271173043881, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
-      propertyPath: GroundPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 8c44e4c6658a3e14684370d54aa34ecb, type: 3}
-    - target: {fileID: 3735034271173043881, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
-      propertyPath: GroundPrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: 01b7f1952201799478ccc71354df7b14, type: 3}
-    - target: {fileID: 5907574602149738824, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5907574602149738824, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5907574602149738824, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0.09019608
-      objectReference: {fileID: 0}
-    - target: {fileID: 5907574602149738824, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.14117648
-      objectReference: {fileID: 0}
-    - target: {fileID: 5907574602149738824, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.03137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 5907574603063625896, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5907574603063625896, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
+    - target: {fileID: 396610580, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+      propertyPath: m_Color.a
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5907574603959349326, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
       propertyPath: m_RootOrder
