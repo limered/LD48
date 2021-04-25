@@ -359,7 +359,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 200
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -474,6 +474,26 @@ PrefabInstance:
     - target: {fileID: 2643515788820517953, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_Name
       value: StartButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643515788820518015, guid: 3038181747652df468bd19d0728aac93, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.019607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643515788820518015, guid: 3038181747652df468bd19d0728aac93, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.019607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643515788820518015, guid: 3038181747652df468bd19d0728aac93, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.019607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643515788820518015, guid: 3038181747652df468bd19d0728aac93, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1875102381}
+    - target: {fileID: 2643515788820518015, guid: 3038181747652df468bd19d0728aac93, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartGame
       objectReference: {fileID: 0}
     - target: {fileID: 2643515790031440794, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_Text
@@ -755,7 +775,7 @@ GameObject:
   - component: {fileID: 1875102382}
   - component: {fileID: 1875102381}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -914,7 +934,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 527ca72d6ececba468bbc85a0426e909, type: 3}
-    m_FontSize: 48
+    m_FontSize: 52
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
