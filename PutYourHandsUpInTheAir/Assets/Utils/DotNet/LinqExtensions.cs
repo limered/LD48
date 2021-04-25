@@ -17,7 +17,7 @@ namespace Utils.DotNet
             var result = new List<T>(list.Count);
             while (list.Count > 0)
             {
-                var rnd = (int) Random.value * list.Count;
+                var rnd = (int) (Random.value * list.Count);
                 result.Add(list[rnd]);
                 list.RemoveAt(rnd);
             }
