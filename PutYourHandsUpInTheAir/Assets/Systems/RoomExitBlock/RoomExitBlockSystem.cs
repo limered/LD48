@@ -9,28 +9,24 @@ namespace Systems.RoomExitBlock
     [GameSystem]
     public class RoomExitBlockSystem : GameSystem<RoomExitBlockComponent, RoomComponent>
     {
+        private readonly ReactiveProperty<RoomExitBlockComponent> _blockComponent = new ReactiveProperty<RoomExitBlockComponent>();
+
         public override void Register(RoomComponent component)
         {
-            WaitOn<RoomExitBlockComponent>().Subscribe(roomExitBlockComponent =>
+            _blockComponent.WhereNotNull().Subscribe(roomExitBlockComponent =>
                 {
                     var divider = 1f / roomExitBlockComponent.sprites.Length;
                     component.RoomTimeProgress.Subscribe(roomProgress =>
-                        UpdateBlockedPath(roomProgress, divider, roomExitBlockComponent)).AddToLifecycleOf(component);
-                    component.State.AfterStateChange.Where(newState => newState is RoomWalkOut)
-                        .Subscribe(_ => RemoveRoomExitBlock(roomExitBlockComponent))
+                        UpdateBlockedPath(roomProgress, divider, roomExitBlockComponent))
                         .AddToLifecycleOf(component);
+                    _blockComponent.Value = null;
                 })
                 .AddToLifecycleOf(component);
         }
 
         public override void Register(RoomExitBlockComponent component)
         {
-            RegisterWaitable(component);
-        }
-
-        private static void RemoveRoomExitBlock(RoomExitBlockComponent roomExitBlockComponent)
-        {
-            Object.Destroy(roomExitBlockComponent.gameObject);
+            _blockComponent.Value = component;
         }
 
         private static void UpdateBlockedPath(float roomProgress, float divider,
