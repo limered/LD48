@@ -45,6 +45,8 @@ namespace Systems.Tourist
 
         public override void Register(RoomComponent room)
         {
+            Debug.Log($"NEW ROOM {room.name}");
+            
             WaitOn<TouristConfigComponent>()
                 .Then(config =>
                     room.State.CurrentState
