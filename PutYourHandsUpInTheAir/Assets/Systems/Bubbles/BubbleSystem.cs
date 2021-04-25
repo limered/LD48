@@ -13,29 +13,31 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
     {
         var bubbleComponent = touristBrainComponent.GetComponentInChildren<BubbleComponent>();
 
-        touristBrainComponent.States.CurrentState.Subscribe(state =>
-        {
-            if (state is PickingInterest)
+        touristBrainComponent.States.CurrentState
+            .Subscribe(state =>
             {
-                ShowPickingInterest(bubbleComponent);
-            }
-            else if (state is GoingToAttraction)
-            {
-                ShowDistractionBubble(bubbleComponent, touristBrainComponent);
-            }
-            else if (state is Interacting)
-            {
-                ShowDistractionProgress(bubbleComponent, touristBrainComponent);
-            }
-            else if (state is Dead)
-            {
-                ShowDeathBubble(bubbleComponent);
-            }
-            else
-            {
-                ShowBubble(bubbleComponent, false);
-            }
-        });
+                if (state is PickingInterest)
+                {
+                    ShowPickingInterest(bubbleComponent);
+                }
+                else if (state is GoingToAttraction)
+                {
+                    ShowDistractionBubble(bubbleComponent, touristBrainComponent);
+                }
+                else if (state is Interacting)
+                {
+                    ShowDistractionProgress(bubbleComponent, touristBrainComponent);
+                }
+                else if (state is Dead)
+                {
+                    ShowDeathBubble(bubbleComponent);
+                }
+                else
+                {
+                    ShowBubble(bubbleComponent, false);
+                }
+            })
+            .AddTo(touristBrainComponent);
     }
 
     private void ShowPickingInterest(BubbleComponent component)
