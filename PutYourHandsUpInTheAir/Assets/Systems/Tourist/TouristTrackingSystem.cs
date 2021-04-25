@@ -84,7 +84,7 @@ namespace Systems.Tourist
 
         private void PutAllTouristsInWalkOutState(RoomComponent room, BaseState<RoomComponent> state)
         {
-            foreach (var tourist in _tourists)
+            foreach (var tourist in _tourists.Where(t => t != null))
             {
                 tourist.GetComponent<TouristBrainComponent>()
                     .States
