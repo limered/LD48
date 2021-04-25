@@ -47,7 +47,7 @@ public class BubbleSystem : GameSystem<BubbleComponent, TouristBrainComponent>
     private void ShowPickingInterest(BubbleComponent component)
     {
         var spriteRenderer = component.gameObject.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = component.Bubbles[1];
+        spriteRenderer.sprite = component.Bubbles[0];
         ShowBubble(component, true);
     }
 
