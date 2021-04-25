@@ -219,7 +219,6 @@ MonoBehaviour:
   DistractionInteractionDuration: 2
   DistractionProgressColor: {r: 1, g: 0, b: 0, a: 1}
   InteractionPosition: {fileID: 4283641651090035856}
-  IsTriggered: 0
 --- !u!95 &6340294627035379458
 Animator:
   serializedVersion: 3
