@@ -916,6 +916,18 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5653544716545335102, guid: 21e5177a0dff19b46a19da7e50dd781c, type: 3}
+      propertyPath: Speed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653544716545335102, guid: 21e5177a0dff19b46a19da7e50dd781c, type: 3}
+      propertyPath: Friction
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653544716545335102, guid: 21e5177a0dff19b46a19da7e50dd781c, type: 3}
+      propertyPath: MaxSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5653544716545335103, guid: 21e5177a0dff19b46a19da7e50dd781c, type: 3}
       propertyPath: m_RootOrder
       value: 4
