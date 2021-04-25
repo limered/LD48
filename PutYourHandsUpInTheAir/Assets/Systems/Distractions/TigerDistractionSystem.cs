@@ -6,6 +6,7 @@ using Systems.Tourist.States;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using Utils.Plugins;
 using Object = UnityEngine.Object;
 
 namespace Systems.Distractions
@@ -20,7 +21,11 @@ namespace Systems.Distractions
             touristBrain.States.CurrentState
                 .Where(state => state is Interacting)
                 .Subscribe(_ => StartInteracting(component))
-                .AddTo(component);
+                .AddToLifecycleOf(component);
+
+            WaitOn<PlayerComponent>()
+                .Subscribe(player => StartPlayerCollisionTracking(component, player))
+                .AddToLifecycleOf(component);
         }
 
         public override void Register(PlayerComponent component)
@@ -33,11 +38,7 @@ namespace Systems.Distractions
             component.UpdateAsObservable()
                 .Where(_ => component)
                 .Subscribe(_ => UpdateTimer(component))
-                .AddTo(component);
-
-            WaitOn<PlayerComponent>()
-                .Subscribe(player => StartPlayerCollisionTracking(component, player))
-                .AddTo(component);
+                .AddToLifecycleOf(component);
         }
 
         private void StartPlayerCollisionTracking(
@@ -46,11 +47,12 @@ namespace Systems.Distractions
         {
             player.OnTriggerEnterAsObservable()
                 .Subscribe(CollideWithPlayer)
-                .AddTo(component);
+                .AddToLifecycleOf(component);
         }
 
         private void CollideWithPlayer(Collider coll)
         {
+            Object.Destroy(coll.gameObject.GetComponent<DistractedTouristComponent>());
             coll.gameObject.GetComponent<TouristBrainComponent>()
                 .States
                 .GoToState(new GoingBackToIdle(Random.insideUnitCircle));

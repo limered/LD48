@@ -5,6 +5,7 @@ using Systems.Tourist.States;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using Utils.Plugins;
 
 namespace Systems.Distractions
 {
@@ -18,7 +19,7 @@ namespace Systems.Distractions
             touristBrain.States.CurrentState
                 .Where(state => state is Interacting)
                 .Subscribe(_ => StartInteracting(component))
-                .AddTo(component);
+                .AddToLifecycleOf(component);
         }
 
         private static void StartInteracting(ButterflyDistractionTouristComponent component)
@@ -26,7 +27,7 @@ namespace Systems.Distractions
             component.UpdateAsObservable()
                 .Where(_ => component)
                 .Subscribe(_ => UpdateTimer(component))
-                .AddTo(component);
+                .AddToLifecycleOf(component);
         }
 
         private static void UpdateTimer(ButterflyDistractionTouristComponent comp)
