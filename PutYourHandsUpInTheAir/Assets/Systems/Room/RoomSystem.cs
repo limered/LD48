@@ -3,6 +3,7 @@ using Systems.Tourist;
 using Systems.Tourist.States;
 using GameState.States;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using Utils;
 using Utils.Plugins;
@@ -18,17 +19,23 @@ namespace Systems.Room
             component.State.Start(new RoomCreate());
 
             SystemUpdate(component)
-                .Where(_ => IoC.Game.GameStateContext.CurrentState.Value is Running)
+                .Where(compo => compo.State.CurrentState.Value is RoomRunning)
                 .Subscribe(ProgressRoom)
                 .AddToLifecycleOf(component);
 
-            component.TimeLeftInRoom = component.TimeInRoom;
+            component.TimeLeftInRoom = component.MaxTimeInRoom;
         }
 
         private void ProgressRoom(RoomComponent room)
         {
             room.TimeLeftInRoom -= Time.deltaTime;
-            room.RoomTimeProgress.Value = 1 - room.TimeLeftInRoom / room.TimeInRoom;
+            room.RoomTimeProgress.Value = 1 - room.TimeLeftInRoom / room.MaxTimeInRoom;
+
+            if (room.TimeLeftInRoom <= 0)
+            {
+                room.State.GoToState(new RoomWalkOut());
+                // Wait for allTourists walked out
+            }
         }
 
         public override void Register(TouristBrainComponent component)
