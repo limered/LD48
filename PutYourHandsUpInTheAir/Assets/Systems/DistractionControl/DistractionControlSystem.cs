@@ -53,6 +53,9 @@ namespace Systems.DistractionControl
                 case DistractionType.Tiger:
                     var comp = touristBrain.AddComponent<TigerDistractionTouristComponent>();
                     comp.CurrentDistractionType = component.DistractionType;
+                    comp.LastDistractionProgressTime = component.DistractionInteractionDuration;
+                    comp.MaxProgressTime = component.DistractionInteractionDuration;
+                    comp.ProgressColor = component.DistractionProgressColor;
                     return;
                 default:
                     throw new ArgumentOutOfRangeException();

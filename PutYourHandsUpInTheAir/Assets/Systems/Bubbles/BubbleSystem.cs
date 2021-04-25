@@ -86,7 +86,7 @@ public class BubbleSystem : GameSystem<BubbleComponent, TouristBrainComponent>
     {
         var spriteRenderer = bubbleComponent.gameObject.GetComponent<SpriteRenderer>();
         var distractedTourist = touristBrainComponent.GetComponent<DistractedTouristComponent>();
-        var activatedColor = distractedTourist.ActivatedColor;
+        var activatedColor = distractedTourist.ProgressColor;
         distractedTourist.DistractionProgress.Subscribe( progress => {
             spriteRenderer.color = Color32.Lerp(Color.white, activatedColor, progress);
         });

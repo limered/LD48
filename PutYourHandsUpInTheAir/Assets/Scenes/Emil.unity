@@ -183,6 +183,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DistractionType: 1
+  DistractionInteractionDuration: 3
+  DistractionProgressColor: {r: 1, g: 0, b: 0, a: 0}
 --- !u!114 &164279553
 MonoBehaviour:
   m_ObjectHideFlags: 0

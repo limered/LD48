@@ -2,6 +2,6 @@
 {
     public class TigerDistractionTouristComponent : DistractedTouristComponent
     {
-        public float LastDistractionTime { get; set; }
+        public float LastDistractionProgressTime { get; set; }
     }
 }

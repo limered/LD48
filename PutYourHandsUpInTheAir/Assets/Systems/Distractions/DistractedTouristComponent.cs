@@ -8,7 +8,8 @@ namespace Systems.Distractions
     public class DistractedTouristComponent : GameComponent
     {
         public DistractionType CurrentDistractionType;
+        public Color ProgressColor;
         public FloatReactiveProperty DistractionProgress = new FloatReactiveProperty(0);
-        public Color ActivatedColor;
+        public float MaxProgressTime { get; set; }
     }
 }
