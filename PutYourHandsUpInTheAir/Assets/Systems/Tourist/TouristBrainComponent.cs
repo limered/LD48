@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SystemBase;
 using SystemBase.StateMachineBase;
 using Systems.Movement;
+using UniRx;
 using UnityEngine;
 
 namespace Systems.Tourist
@@ -10,8 +11,10 @@ namespace Systems.Tourist
     [RequireComponent(typeof(MovementComponent))]
     public class TouristBrainComponent : GameComponent
     {
-        public string touristName;
+        public StringReactiveProperty touristName = new StringReactiveProperty();
         public SphereCollider socialDistanceCollider;
+        public IntReactiveProperty headPartIndex = new IntReactiveProperty();
+        public IntReactiveProperty bodyPartIndex = new IntReactiveProperty();
         public float idleMinTimeWithoutMovementInSeconds = 3f;
         public float idleSpeed = 1f;
         public float normalSpeed = 1f;
