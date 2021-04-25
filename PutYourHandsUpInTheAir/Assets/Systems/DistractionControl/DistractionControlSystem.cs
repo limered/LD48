@@ -19,7 +19,7 @@ namespace Systems.DistractionControl
         Butterfly,
         Camera,
         Spider,
-        Swump,
+        Swamp,
         Money
     }
 
