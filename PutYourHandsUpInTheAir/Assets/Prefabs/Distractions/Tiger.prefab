@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DistractionType: 1
-  DistractionInteractionDuration: 3
+  DistractionInteractionDuration: 2
   DistractionProgressColor: {r: 1, g: 0, b: 0, a: 1}
   InteractionPosition: {fileID: 4283641651090035856}
 --- !u!1 &4283641651090035857
@@ -228,8 +228,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1459146929
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4abfac5148fd916469cb909478d9c4e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

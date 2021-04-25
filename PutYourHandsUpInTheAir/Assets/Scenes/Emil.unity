@@ -826,10 +826,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4283641650618369390, guid: 7393130da9248594898a065006020760, type: 3}
-      propertyPath: DistractionInteractionDuration
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4283641650618369391, guid: 7393130da9248594898a065006020760, type: 3}
       propertyPath: m_Name
       value: Tiger (1)
