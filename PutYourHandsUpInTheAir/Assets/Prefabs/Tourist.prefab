@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bubbles:
   - {fileID: 21300000, guid: 8db650832e255b440bc26f0b69090a01, type: 3}
-  - {fileID: 21300000, guid: 5be0692eb058d8849b3582cce66c4b67, type: 3}
+  - {fileID: 21300000, guid: 585545a703993b04aac373d5d54f4f5d, type: 3}
   - {fileID: 21300000, guid: 155d3e294316c2448bd077dfad9a42b0, type: 3}
 --- !u!212 &8759374890750551745
 SpriteRenderer:
