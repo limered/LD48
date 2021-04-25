@@ -80,6 +80,11 @@ namespace Systems.DistractionControl
                     butterflyComp.CreatedFrom = component;
                     butterflyComp.LastDistractionProgressTime = component.DistractionInteractionDuration;
                     return;
+                case DistractionType.Spider:
+                    var spiderComp = brain.AddComponent<SpiderDistractionTouristComponent>();
+                    spiderComp.CreatedFrom = component;
+                    spiderComp.LastDistractionProgressTime = component.DistractionInteractionDuration;
+                    return;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
