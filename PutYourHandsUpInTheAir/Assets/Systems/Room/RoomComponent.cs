@@ -7,9 +7,9 @@ namespace Systems.Room
 {
     public class RoomComponent : GameComponent
     {
-        public Vector2 SpawnInPosition;
-        public Vector2 GatherPosition;
-        public Vector2 SpawnOutPosition;
+        public GameObject SpawnInPosition;
+        public GameObject GatherPosition;
+        public GameObject SpawnOutPosition;
         public float MaxTimeInRoom = 30;
         public float TimeLeftInRoom;
         public FloatReactiveProperty RoomTimeProgress = new FloatReactiveProperty();

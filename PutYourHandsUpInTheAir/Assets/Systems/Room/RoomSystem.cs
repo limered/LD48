@@ -55,7 +55,7 @@ namespace Systems.Room
         private void ResetTourist(TouristBrainComponent component, RoomComponent room)
         {
             component.States.GoToState(new GoingIntoLevel());
-            component.transform.position = room.SpawnInPosition;
+            component.transform.position = room.SpawnInPosition.transform.position;
         }
     }
 }
