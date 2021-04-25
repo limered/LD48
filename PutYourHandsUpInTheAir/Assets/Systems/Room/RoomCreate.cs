@@ -2,16 +2,8 @@
 
 namespace Systems.Room
 {
-    [NextValidStates(typeof(RoomPrepare))]
-    public class RoomCreate : BaseState<RoomComponent>
-    {
-        public override void Enter(StateContext<RoomComponent> context)
-        {
-        }
-    }
-
     [NextValidStates(typeof(RoomWalkIn))]
-    public class RoomPrepare : BaseState<RoomComponent>
+    public class RoomCreate : BaseState<RoomComponent>
     {
         public override void Enter(StateContext<RoomComponent> context)
         {

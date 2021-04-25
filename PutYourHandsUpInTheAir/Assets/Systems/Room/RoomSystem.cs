@@ -15,6 +15,9 @@ namespace Systems.Room
         {
             RegisterWaitable(room);
             room.State.Start(new RoomCreate());
+            room.State.CurrentState
+                .Subscribe(state => room.CurrentState.Value = state.GetType().ToString())
+                .AddToLifecycleOf(room);
 
             SystemUpdate(room)
                 .Where(compo => compo.State.CurrentState.Value is RoomRunning)
@@ -35,14 +38,13 @@ namespace Systems.Room
             room.TimeLeftInRoom -= Time.deltaTime;
             room.RoomTimeProgress.Value = 1 - room.TimeLeftInRoom / room.MaxTimeInRoom;
 
-            if (room.TimeLeftInRoom <= 0)
-            {
-                room.State.GoToState(new RoomWalkOut());
-                MessageBroker.Default
-                    .Receive<RoomAllTouristsLeft>()
-                    .Subscribe(_ => room.State.GoToState(new RoomDestroy()))
-                    .AddToLifecycleOf(room);
-            }
+            if (!(room.TimeLeftInRoom <= 0)) return;
+
+            room.State.GoToState(new RoomWalkOut());
+            MessageBroker.Default
+                .Receive<RoomAllTouristsLeft>()
+                .Subscribe(_ => room.State.GoToState(new RoomDestroy()))
+                .AddToLifecycleOf(room);
         }
 
         public override void Register(TouristBrainComponent component)

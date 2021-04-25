@@ -14,5 +14,6 @@ namespace Systems.Room
         public float TimeLeftInRoom;
         public FloatReactiveProperty RoomTimeProgress = new FloatReactiveProperty();
         public StateContext<RoomComponent> State = new StateContext<RoomComponent>();
+        public StringReactiveProperty CurrentState = new StringReactiveProperty();
     }
 }
