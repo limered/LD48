@@ -43,12 +43,12 @@ namespace Systems.Room
         {
             if (comp.Room.State.CurrentState.Value is RoomWalkIn)
             {
-                var alpha = 1 - comp.FadeTime / (Time.timeSinceLevelLoad - StartStamp);
+                var alpha = (Time.timeSinceLevelLoad - StartStamp) / comp.FadeTime;
                 comp.GetComponent<Image>().color = Color.Lerp(Hidden, Show, alpha);
             }
             else if (comp.Room.State.CurrentState.Value is RoomDestroy)
             {
-                var alpha = 1 - comp.FadeTime / (Time.timeSinceLevelLoad - EndStamp);
+                var alpha = (Time.timeSinceLevelLoad - EndStamp) / comp.FadeTime;
                 comp.GetComponent<Image>().color = Color.Lerp(Show, Hidden, alpha);
             }
         }
