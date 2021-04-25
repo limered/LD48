@@ -16,6 +16,11 @@ namespace Systems.DistractionControl
     {
         None,
         Tiger,
+        Butterfly,
+        Camera,
+        Spider,
+        Swump,
+        Money
     }
 
     [GameSystem]

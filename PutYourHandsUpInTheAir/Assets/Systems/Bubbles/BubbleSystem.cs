@@ -54,6 +54,20 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
         if (distractionType is DistractionType.Tiger)
         {
             spriteRenderer.sprite = bubbleComponent.Bubbles[2];
+        } else if (distractionType is DistractionType.Butterfly) {
+            spriteRenderer.sprite = bubbleComponent.Bubbles[4];
+        } else if (distractionType is DistractionType.Camera)
+        {
+            spriteRenderer.sprite = bubbleComponent.Bubbles[5];
+        } else if (distractionType is DistractionType.Spider)
+        {
+            spriteRenderer.sprite = bubbleComponent.Bubbles[6];
+        } else if (distractionType is DistractionType.Swump)
+        {
+            spriteRenderer.sprite = bubbleComponent.Bubbles[7];
+        } else if (distractionType is DistractionType.Money)
+        {
+            spriteRenderer.sprite = bubbleComponent.Bubbles[8];
         } else
         {
             ShowBubble(bubbleComponent, false);
