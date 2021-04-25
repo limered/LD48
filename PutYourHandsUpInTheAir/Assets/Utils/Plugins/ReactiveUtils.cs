@@ -1,4 +1,5 @@
 using System;
+using SystemBase;
 using UniRx;
 using UnityEngine;
 
@@ -118,6 +119,18 @@ namespace Utils.Plugins
                     onDispose();
                 });
             });
+        }
+
+        public static T AddToLifecycleOf<T>(this T disposable, GameComponent gameComponent)
+            where T:IDisposable
+        {
+            if (gameComponent != null)
+            {
+                return gameComponent.AddDisposablele(disposable);
+            }
+            disposable.Dispose();
+            return disposable;
+
         }
 
         public static void DoNothing<T>(T _)
@@ -259,5 +272,6 @@ namespace Utils.Plugins
         }
 
         #endregion Filter
+
     }
 }

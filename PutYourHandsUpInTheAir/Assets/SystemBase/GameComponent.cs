@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Systems;
 using UniRx;
 using UnityEngine;
@@ -9,23 +10,14 @@ namespace SystemBase
 {
     public class GameComponent : MonoBehaviour, IGameComponent
     {
+        public List<IDisposable> ComponentDisposables = new List<IDisposable>();
         public virtual IGameSystem System { get; set; }
-
         public void RegisterToGame()
         {
             IoC.Resolve<Game>().RegisterComponent(this);
         }
 
-        protected void Start()
-        {
-            RegisterToGame();
-
-            OverwriteStart();
-        }
-
-        protected virtual void OverwriteStart() { }
-
-        public IObservable<TComponent> WaitOn<TComponent>(ReactiveProperty<TComponent> componentToWaitOnTo) 
+        public IObservable<TComponent> WaitOn<TComponent>(ReactiveProperty<TComponent> componentToWaitOnTo)
             where TComponent : GameComponent
         {
             return componentToWaitOnTo.WhereNotNull().Select(waitedComponent => waitedComponent);
@@ -39,6 +31,26 @@ namespace SystemBase
                 .Select(waitedComponent => waitedComponent)
                 .Subscribe(onNext)
                 .AddTo(this);
+        }
+
+        public T AddDisposablele<T>(T disposable) where T : IDisposable
+        {
+            ComponentDisposables.Add(disposable);
+            return disposable;
+        }
+
+        protected void Start()
+        {
+            RegisterToGame();
+
+            OverwriteStart();
+        }
+
+        protected virtual void OverwriteStart() { }
+
+        protected void OnDestroy()
+        {
+            ComponentDisposables.ForEach(disposable => disposable.Dispose());
         }
     }
 
