@@ -9,6 +9,7 @@ namespace Systems.DistractionControl
         public DistractionType DistractionType;
         public float DistractionInteractionDuration;
         public Color DistractionProgressColor;
+        public Transform InteractionPosition;
 
         public ReactiveCommand StartDistraction = new ReactiveCommand();
 

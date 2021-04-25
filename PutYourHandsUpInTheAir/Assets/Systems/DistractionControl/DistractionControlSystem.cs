@@ -56,6 +56,7 @@ namespace Systems.DistractionControl
                     comp.LastDistractionProgressTime = component.DistractionInteractionDuration;
                     comp.MaxProgressTime = component.DistractionInteractionDuration;
                     comp.ProgressColor = component.DistractionProgressColor;
+                    comp.InteractionPosition = component.InteractionPosition;
                     return;
                 default:
                     throw new ArgumentOutOfRangeException();
