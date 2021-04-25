@@ -95,6 +95,11 @@ namespace Systems.DistractionControl
                     spiderComp.CreatedFrom = component;
                     spiderComp.LastDistractionProgressTime = component.DistractionInteractionDuration;
                     return;
+                case DistractionType.Money:
+                    var moneyComp = brain.AddComponent<MoneyDistractionTouristComponent>();
+                    moneyComp.CreatedFrom = component;
+                    moneyComp.LastDistractionProgressTime = component.DistractionInteractionDuration;
+                    return;
                 case DistractionType.Bus:
                     var busComp = brain.AddComponent<BusDistractionTouristComponent>();
                     busComp.CreatedFrom = component;
