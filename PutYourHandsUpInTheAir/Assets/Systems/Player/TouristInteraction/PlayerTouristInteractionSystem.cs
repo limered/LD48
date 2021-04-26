@@ -58,7 +58,11 @@ namespace Systems.Player.TouristInteraction
 
         private void PlayerLeavesTourist((Collider coll, PlayerComponent player) obj)
         {
-            Object.Destroy(obj.coll.gameObject.GetComponent<IsNearPlayerComponent>());
+            IsNearPlayerComponent[] comps = obj.coll.gameObject.GetComponents<IsNearPlayerComponent>();
+            foreach (var comp in comps)
+            {
+                Object.Destroy(comp);
+            }
         }
 
         private void TouristCollidesWithPlayer((Collider coll, PlayerComponent player) obj)

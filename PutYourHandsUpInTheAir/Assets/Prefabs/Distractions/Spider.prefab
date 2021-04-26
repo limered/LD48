@@ -221,6 +221,7 @@ MonoBehaviour:
   DistractionProgressColor: {r: 0.74001604, g: 0, b: 0.8509804, a: 1}
   InteractionPosition: {fileID: 1916653267243960973}
   InteractionCollider: {fileID: 0}
+  FireOnce: 0
 --- !u!95 &27776580971232864
 Animator:
   serializedVersion: 3
@@ -288,7 +289,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1916653267556470943}
-  - component: {fileID: 1916653267556470941}
   - component: {fileID: 1916653267556470942}
   m_Layer: 0
   m_Name: Body
@@ -311,19 +311,6 @@ Transform:
   m_Father: {fileID: 1916653266101724130}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1916653267556470941
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1916653267556470928}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5648432, y: 0.46257517, z: 1}
-  m_Center: {x: 0.015236855, y: -0.0010592788, z: 0}
 --- !u!212 &1916653267556470942
 SpriteRenderer:
   m_ObjectHideFlags: 0
