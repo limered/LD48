@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 490696153701388339}
   - component: {fileID: 490696153701388336}
   - component: {fileID: 490696153701388337}
+  - component: {fileID: 6376997188779121593}
   m_Layer: 0
   m_Name: MachetaMan
   m_TagString: Untagged
@@ -401,6 +402,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6376997188779121593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490696153701388342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88fa9b2e3254754a62a1e2910e63aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wobbleInterval: 0.02
+  wobbleFactor: 0.02
+  wobbleTarget: {fileID: 490696153211417565}
+  wobbleAxis: {x: 0, y: 1, z: 0}
 --- !u!1001 &952015336698948766
 PrefabInstance:
   m_ObjectHideFlags: 0
