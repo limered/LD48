@@ -236,9 +236,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8d9ba2a31c4cff9534124ec21a1a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 1.5
-  Friction: 1
-  MaxSpeed: 20
+  Speed: 10
+  Friction: 9
+  MaxSpeed: 10
   Collider: {fileID: 0}
   Direction:
     value: {x: 0, y: 0}
@@ -261,10 +261,10 @@ MonoBehaviour:
     value: 0
   bodyPartIndex:
     value: 0
-  idleMinTimeWithoutMovementInSeconds: 1
+  idleMinTimeWithoutMovementInSeconds: 0.3
   idleSpeed: 10
-  normalSpeed: 20
-  attractedSpeed: 20
+  normalSpeed: 10
+  attractedSpeed: 10
   debugCurrentState: 
   debugTargetDistance: {x: 0, y: 0}
 --- !u!114 &3492671645544282497

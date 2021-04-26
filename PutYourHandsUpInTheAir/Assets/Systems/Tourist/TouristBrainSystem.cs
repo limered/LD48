@@ -114,9 +114,21 @@ namespace Systems.Tourist
             Observable.Interval(TimeSpan.FromSeconds(tourist.idleMinTimeWithoutMovementInSeconds))
                 .Subscribe(_ =>
                 {
-                    movement.Direction.Value =
-                        (state.IdlePosition - (Vector2) movement
-                            .transform.position).Rotate(Random.Range(-90, 90));
+                    var stop = Random.value * 10;
+                    if (stop < 6)
+                    {
+                        movement.Direction.Value = Vector2.zero;
+                    }
+                    else
+                    {
+                        var pos = state.IdlePosition + Random.insideUnitCircle;
+                        var rndMovement = (pos - (Vector2) movement.transform.position)
+                            .Rotate(Random.Range(-90, 90))
+                            .normalized;
+                        var delta = movement.Direction.Value + rndMovement;
+                        movement.Direction.Value = delta.normalized;
+                    }
+
                     movement.MaxSpeed = tourist.idleSpeed;
                 })
                 .AddTo(state);
