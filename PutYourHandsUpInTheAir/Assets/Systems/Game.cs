@@ -24,6 +24,7 @@ namespace Systems
             Init();
 
             MessageBroker.Default.Publish(new GameMsgFinishedLoading());
+            MessageBroker.Default.Publish(new GameMsgStart());
         }
 
         private void Start()
