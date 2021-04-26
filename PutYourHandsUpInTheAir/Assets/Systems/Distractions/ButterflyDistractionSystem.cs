@@ -40,6 +40,7 @@ namespace Systems.Distractions
             if (!tourist || tourist != player.TargetedTourist.Value) return;
 
             var comp = coll.gameObject.GetComponent<ButterflyDistractionTouristComponent>();
+            if (!comp) return;
             comp.DistractionProgress.Value = 1;
             tourist.States
                 .GoToState(new GoingBackToIdle(Random.insideUnitCircle));

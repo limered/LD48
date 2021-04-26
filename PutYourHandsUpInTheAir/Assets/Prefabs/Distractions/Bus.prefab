@@ -281,3 +281,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartPosititon: {x: 1, y: 1}
   EndPosititon: {x: -10, y: 0}
+  DriveInTime: 15

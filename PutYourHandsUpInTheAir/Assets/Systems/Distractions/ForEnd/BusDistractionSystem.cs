@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using SystemBase;
 using Systems.DistractionControl;
@@ -18,32 +19,10 @@ namespace Systems.Distractions.ForEnd
     {
         public override void Register(BusComponent bus)
         {
-            SystemUpdate()
-                .Where(_ => !bus.enteredScene)
-                .Subscribe(_ => {
-                    GameObject[] tourists = GameObject.FindGameObjectsWithTag("tourist");
-                    if(!tourists.Any())
-                    {
-                        return;
-                    }
+            Observable.Timer(TimeSpan.FromSeconds(bus.DriveInTime))
+                .Subscribe(_ => SpawnBus(bus))
+                .AddToLifecycleOf(bus);
 
-                    var allPaid = tourists.All(t => {
-                            var touristComp = t.GetComponent<TouristBrainComponent>();
-                            return touristComp && touristComp.HasPaid;
-                        }
-                    );
-
-                    Debug.Log("Paid " + allPaid);
-
-                    if (allPaid)
-                    {
-                        AddBussDistractionToAllPeople(tourists, bus.GetComponentInParent<DistractionComponent>());
-                        bus.enteredScene = true;
-                        var movementComp = bus.GetComponent<MovementComponent>();
-                        movementComp.Direction.Value = bus.StartPosititon - (Vector2)bus.transform.position;
-                    }
-                })
-                .AddTo(bus);
 
             SystemUpdate()
                 .Where(_ => bus.enteredScene && !bus.leftScene)
@@ -53,6 +32,12 @@ namespace Systems.Distractions.ForEnd
                     {
                         return;
                     }
+                    GameObject[] tourists = GameObject.FindGameObjectsWithTag("tourist");
+                    if (!tourists.Any())
+                    {
+                        return;
+                    }
+                    AddBussDistractionToAllPeople(tourists, bus.GetComponentInParent<DistractionComponent>());
                     bus.leftScene = true;
                     bus.transform.position = bus.StartPosititon;
                     var movementComp = bus.GetComponent<MovementComponent>();
@@ -67,6 +52,13 @@ namespace Systems.Distractions.ForEnd
                         SceneManager.LoadScene("AdvancedEndScene");
                     }
                 }).AddTo(bus);
+        }
+
+        private void SpawnBus(BusComponent bus)
+        {
+            bus.enteredScene = true;
+            var movementComp = bus.GetComponent<MovementComponent>();
+            movementComp.Direction.Value = bus.StartPosititon - (Vector2)bus.transform.position;
         }
 
         private void AddBussDistractionToAllPeople(GameObject[] tourists, DistractionComponent distraction)
