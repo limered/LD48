@@ -122,11 +122,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2674991841686138923}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5648432, y: 0.41865137, z: 1}
-  m_Center: {x: 0.015236855, y: 0.0037305802, z: 0}
+  m_Size: {x: 2.268731, y: 0.75005585, z: 1}
+  m_Center: {x: -0.00652194, y: 0.16943285, z: 0}
 --- !u!212 &2674991841686138917
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -166,7 +166,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1459146929
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 0cc6f3372899ecf46828e0d6398b0bfc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
