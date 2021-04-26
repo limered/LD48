@@ -36,7 +36,14 @@ namespace Systems.RoomExitBlock
             if (progressIndex >= roomExitBlockComponent.sprites.Length)
             {
                 roomExitBlockComponent.spriteRenderer.enabled = false;
+                roomExitBlockComponent.particles.Play();
                 return;
+            }
+
+            if (roomExitBlockComponent.ActiveSpriteIndex != progressIndex)
+            {
+                roomExitBlockComponent.particles.Play();
+                roomExitBlockComponent.ActiveSpriteIndex = progressIndex;
             }
 
             roomExitBlockComponent.spriteRenderer.sprite = roomExitBlockComponent.sprites[progressIndex];

@@ -9,5 +9,7 @@ namespace Systems.RoomExitBlock
         public SpriteRenderer spriteRenderer;
         public Transform leftBorder;
         public Transform rightBorder;
+        public ParticleSystem particles;
+        public int ActiveSpriteIndex { get; set; }
     }
 }
