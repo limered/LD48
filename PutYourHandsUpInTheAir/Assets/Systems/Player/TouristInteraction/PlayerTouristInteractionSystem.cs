@@ -1,26 +1,38 @@
 ﻿using SystemBase;
 using Systems.Tourist;
 using UniRx;
+using UnityEngine;
+using UnityEngine.UIElements;
+using Utils;
 using Utils.Plugins;
 
 namespace Systems.Player.TouristInteraction
 {
     [GameSystem]
-    public class PlayerTouristInteractionSystem : GameSystem<PlayerComponent, TouristBrainComponent>
+    public class PlayerTouristInteractionSystem : GameSystem<PlayerComponent>
     {
         private readonly ReactiveProperty<PlayerComponent> _currentPlayer = new ReactiveProperty<PlayerComponent>();
 
-        public override void Register(PlayerComponent component)
+        public override void Register(PlayerComponent player)
         {
-            _currentPlayer.Value = component;
+            _currentPlayer.Value = player;
+
+            SystemUpdate(player)
+                .Subscribe(CheckTouristForClick)
+                .AddToLifecycleOf(player);
         }
 
-        public override void Register(TouristBrainComponent component)
+        private void CheckTouristForClick(PlayerComponent player)
         {
-            //_currentPlayer
-            //    .WhereNotNull()
-            //    .Subscribe(player => )
-            //    .AddToLifecycleOf(component);
+            var touristLayer = LayerMask.NameToLayer("Tourist");
+
+            if (Input.GetMouseButtonDown((int)MouseButton.LeftMouse))
+            {
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, 1 << touristLayer)) return;
+
+                player.TargetedTourist = hit.transform.GetComponent<TouristBrainComponent>();
+            }
         }
     }
 }

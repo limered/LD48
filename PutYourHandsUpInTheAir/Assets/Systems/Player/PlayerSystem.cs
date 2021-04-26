@@ -30,24 +30,25 @@ namespace Systems.Player
         private static void ControlPlayer(MovementComponent comp)
         {
             var floorLayer = LayerMask.NameToLayer("Floor");
+            var touristLayer = LayerMask.NameToLayer("Tourist");
             var player = comp.GetComponent<PlayerComponent>();
-
-            if (Input.GetMouseButtonDown((int)MouseButton.LeftMouse))
-            {
-                Debug.Log("click");
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, 1 << floorLayer)) return;
-
-                Debug.Log(hit.point.x);
-                player.TargetedTourist = null;
-                player.TargetVector = new Vector3(hit.point.x, hit.point.y);
-            }
 
             var targetVec = player.TargetedTourist != null
                 ? player.TargetedTourist.transform.position 
                 : player.TargetVector;
 
             comp.Direction.Value = (targetVec - comp.transform.position).normalized;
+
+            if (Input.GetMouseButtonDown((int)MouseButton.LeftMouse) 
+                && !player.TouristOnlyMode)
+            {
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out var _tHit, Mathf.Infinity, 1 << touristLayer)) return;
+                if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, 1 << floorLayer)) return;
+
+                player.TargetedTourist = null;
+                player.TargetVector = new Vector3(hit.point.x, hit.point.y);
+            }
         }
 
         public override void Register(PlayerSpawnerComponent component)

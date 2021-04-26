@@ -52,6 +52,7 @@ MonoBehaviour:
     value: 0
   TargetedTourist: {fileID: 0}
   TargetVector: {x: 0, y: 0, z: 0}
+  TouristOnlyMode: 0
 --- !u!65 &5653544716545335072
 BoxCollider:
   m_ObjectHideFlags: 0

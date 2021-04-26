@@ -10,5 +10,8 @@ namespace Systems.Player
         public BoolReactiveProperty IsMoving;
         public TouristBrainComponent TargetedTourist;
         public Vector3 TargetVector;
+
+        public bool TouristOnlyMode;
+        public bool TouristClicked { get; set; }
     }
 }
