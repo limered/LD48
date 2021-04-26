@@ -131,15 +131,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
-      propertyPath: FirstLevel
-      value: 
-      objectReference: {fileID: 8396090924697026441, guid: a1131b1af407a1c458596af54c00b6d6, type: 3}
-    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
-      propertyPath: PlayTestMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
-      propertyPath: PlayTestRoomPrefab
+      propertyPath: EasyRooms.Array.data[0]
       value: 
       objectReference: {fileID: 4568844813494698965, guid: 3bc7daa961f63d9448d5140dc17926da, type: 3}
     - target: {fileID: 4066499535153139368, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
@@ -185,10 +177,6 @@ PrefabInstance:
     - target: {fileID: 4066499535153139368, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4066499535153139369, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
-      propertyPath: initialTouristCount
-      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4066499535153139370, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: m_Name
