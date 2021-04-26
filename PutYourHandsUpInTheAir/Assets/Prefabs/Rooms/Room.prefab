@@ -161,7 +161,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 9d334c5257bcf5f488ee2eed90726221, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -375,7 +375,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 9d334c5257bcf5f488ee2eed90726221, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -808,7 +808,8 @@ GameObject:
   - component: {fileID: 5907574603063625896}
   - component: {fileID: 5907574603063625897}
   - component: {fileID: 1275096019}
-  m_Layer: 0
+  - component: {fileID: 6103022710625197423}
+  m_Layer: 3
   m_Name: boden
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -897,6 +898,19 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0ba7112cc530d7c4daa76943ade91048, type: 3}
   - {fileID: 21300000, guid: 8c44e4c6658a3e14684370d54aa34ecb, type: 3}
   - {fileID: 21300000, guid: 01b7f1952201799478ccc71354df7b14, type: 3}
+--- !u!65 &6103022710625197423
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907574603063625898}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.22, y: 9.6, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0.15}
 --- !u!1 &5907574603959349327
 GameObject:
   m_ObjectHideFlags: 0
