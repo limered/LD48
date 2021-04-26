@@ -44,7 +44,6 @@ public class BusDistractionSystem : GameSystem<BusDistractionTouristComponent, B
             {
                 if(bus.transform.position.x > bus.StartPosititon.x)
                 {
-                    Debug.Log("drive!");
                     return;
                 }
                 bus.leftScene = true;
