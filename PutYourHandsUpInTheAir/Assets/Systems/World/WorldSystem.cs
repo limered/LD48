@@ -41,11 +41,22 @@ namespace Systems.World
         private void LoadNextLevel(WorldComponent component)
         {
             Object.Destroy(component.CurrentLevel.Value);
-            var lvlPrefab = component.EasyRooms[(int)(Random.value * component.EasyRooms.Length)];
-            LoadLevel(component, lvlPrefab);
+            if(component.CurrentLevelNr.Value >= component.MaxLevelCount)
+            {
+                var lvlPrefab = component.LastLevel;
+                LoadLevel(component, lvlPrefab);
+            }
+            else
+            {
+                var lvlPrefab = component.EasyRooms[(int)(Random.value * component.EasyRooms.Length)];
+                LoadLevel(component, lvlPrefab);
+            }
+            
         }
         private void LoadNextLevelOnRoomNextState(WorldComponent world, RoomComponent room)
         {
+            if (world.CurrentLevelNr.Value > world.MaxLevelCount) return;
+
             room.State.CurrentState
                 .Where(state => state is RoomNext)
                 .Subscribe(_ => LoadNextLevel(world))
