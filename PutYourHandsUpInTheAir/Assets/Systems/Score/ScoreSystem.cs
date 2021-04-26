@@ -47,7 +47,7 @@ namespace Systems.Score
                     var causalities = tourists.Count(x => !x.IsAlive);
 
                     text.text =
-                        $"{survivors} of {survivors + causalities} tourists survived the trip. You earn {survivors * component.moneyPerSurvivor} Money.";
+                        $"{survivors} of {survivors + causalities} tourists survived the trip. You've earned {survivors * component.moneyPerSurvivor} Money.";
                 })
                 .AddToLifecycleOf(component);
         }

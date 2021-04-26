@@ -686,7 +686,7 @@ PrefabInstance:
     - target: {fileID: 2643515788820518015, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1875102381}
+      objectReference: {fileID: 0}
     - target: {fileID: 2643515788820518015, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: EndGame
@@ -875,7 +875,7 @@ PrefabInstance:
     - target: {fileID: 2643515788820518015, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1875102381}
+      objectReference: {fileID: 0}
     - target: {fileID: 2643515788820518015, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartGame
@@ -925,10 +925,10 @@ RectTransform:
   m_Father: {fileID: 111942651}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 85.123, y: 117.86449}
-  m_SizeDelta: {x: 630.25, y: 164.281}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 80, y: 90}
+  m_SizeDelta: {x: -160, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1600597462
 MonoBehaviour:
@@ -998,51 +998,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   touristStats:
     value: []
---- !u!1 &1875102380
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1875102382}
-  - component: {fileID: 1875102381}
-  m_Layer: 0
-  m_Name: Game
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1875102381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875102380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 150a16b658b911640bcdc828853b1cee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DebugMainFrameCallback:
-    value: 
---- !u!4 &1875102382
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875102380}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1879346310
 GameObject:
   m_ObjectHideFlags: 0
