@@ -221,16 +221,16 @@ Canvas:
   m_GameObject: {fileID: 892316553}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 5907574602149738824}
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -171314353
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &892316556
@@ -906,7 +906,8 @@ GameObject:
   - component: {fileID: 5907574603063625896}
   - component: {fileID: 5907574603063625897}
   - component: {fileID: 1275096019}
-  m_Layer: 0
+  - component: {fileID: 2069763018698954580}
+  m_Layer: 3
   m_Name: boden
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -995,6 +996,19 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0ba7112cc530d7c4daa76943ade91048, type: 3}
   - {fileID: 21300000, guid: 8c44e4c6658a3e14684370d54aa34ecb, type: 3}
   - {fileID: 21300000, guid: 01b7f1952201799478ccc71354df7b14, type: 3}
+--- !u!65 &2069763018698954580
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907574603063625898}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.22, y: 9.6, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0.15}
 --- !u!1 &5907574603959349327
 GameObject:
   m_ObjectHideFlags: 0

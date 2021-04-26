@@ -237,13 +237,13 @@ MonoBehaviour:
   - {fileID: 5907574603959349327, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
   MediumRooms: []
   HardRooms: []
-  MaxLevelCount: 6
+  MaxLevelCount: 1
   CurrentLevelNr:
     value: 0
   CurrentLevel:
     value: {fileID: 0}
   PlayTestMode: 1
-  PlayTestRoomPrefab: {fileID: 5907574603959349327, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+  PlayTestRoomPrefab: {fileID: 5907574603959349327, guid: 0f3ece0e3d3946e4595c6fe99532ede9, type: 3}
 --- !u!1001 &3024022636357685988
 PrefabInstance:
   m_ObjectHideFlags: 0

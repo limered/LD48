@@ -64,6 +64,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 396610580, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 616607745, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
       propertyPath: DistractionTimerValue
       value: 4
@@ -75,6 +79,14 @@ PrefabInstance:
     - target: {fileID: 892316557, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
       propertyPath: m_RenderMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 892316557, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 892316557, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -171314353
       objectReference: {fileID: 0}
     - target: {fileID: 5907574603063625898, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
       propertyPath: m_IsActive

@@ -53,3 +53,6 @@ TagManager:
   - name: Cursor
     uniqueID: 4193263039
     locked: 0
+  - name: FadeOut
+    uniqueID: 4123652943
+    locked: 0
