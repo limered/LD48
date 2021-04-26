@@ -59,6 +59,7 @@ public class TigerAnimationSystem : GameSystem<DistractionComponent>
                 animator.Play("TigerAttack_Head");
                 animator.Play("TigerAttack_Body");
                 animator.Play("TigerAttack_Tail");
+                tigerComponent.GetComponent<AudioSource>().Play();
             }
             else if (state is GoingBackToIdle)
             {
