@@ -173,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DistractionType: 6
   DistractionInteractionDuration: 3
-  DistractionProgressColor: {r: 0, g: 0.754717, b: 0.122515485, a: 1}
+  DistractionProgressColor: {r: 0.23529412, g: 0.5176471, b: 0.41960785, a: 1}
   InteractionPosition: {fileID: 2674991841311685199}
   InteractionCollider: {fileID: 0}
+  FireOnce: 0
