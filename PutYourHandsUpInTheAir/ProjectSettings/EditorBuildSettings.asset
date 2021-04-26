@@ -12,9 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Instruction.unity
     guid: 0dedfc1d32713774fa29f367df4c5a70
   - enabled: 1
-    path: Assets/Scenes/EndScene.unity
-    guid: 8142f8bb10a167b42814a6592a7d5877
-  - enabled: 1
     path: Assets/Scenes/CollectMoneyScene.unity
     guid: f76eaa8e778c445428533cfc054c89d5
+  - enabled: 1
+    path: Assets/Scenes/AdvancedEndScene.unity
+    guid: 64c8420e7d9a06346aa62f8e20f4a044
   m_configObjects: {}
