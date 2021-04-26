@@ -91,7 +91,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2674991841686138922}
-  - component: {fileID: 2674991841686138916}
   - component: {fileID: 2674991841686138917}
   m_Layer: 0
   m_Name: Sprite Placeholder
@@ -114,19 +113,6 @@ Transform:
   m_Father: {fileID: 2674991842247269090}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2674991841686138916
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2674991841686138923}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5648432, y: 0.41865137, z: 1}
-  m_Center: {x: 0.015236855, y: 0.0037305802, z: 0}
 --- !u!212 &2674991841686138917
 SpriteRenderer:
   m_ObjectHideFlags: 0

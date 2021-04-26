@@ -1,5 +1,6 @@
 ﻿using SystemBase;
 using Systems.DistractionControl;
+using Systems.Player;
 using Systems.Tourist;
 using Systems.Tourist.States;
 using UniRx;
@@ -10,7 +11,7 @@ using Utils.Plugins;
 namespace Systems.Distractions
 {
     [GameSystem(typeof(DistractionControlSystem))]
-    public class ButterflyDistractionSystem : GameSystem<ButterflyDistractionTouristComponent>
+    public class ButterflyDistractionSystem : GameSystem<ButterflyDistractionTouristComponent, PlayerComponent>
     {
         public override void Register(ButterflyDistractionTouristComponent component)
         {
@@ -20,6 +21,34 @@ namespace Systems.Distractions
                 .Where(state => state is Interacting)
                 .Subscribe(_ => StartInteracting(component))
                 .AddToLifecycleOf(component);
+
+            WaitOn<PlayerComponent>()
+                .Subscribe(player => StartPlayerCollisionTracking(component, player))
+                .AddToLifecycleOf(component);
+        }
+
+        private void StartPlayerCollisionTracking(ButterflyDistractionTouristComponent component, PlayerComponent player)
+        {
+            player.OnTriggerEnterAsObservable()
+                .Subscribe(coll => CollideWithPlayer(coll, player))
+                .AddToLifecycleOf(component);
+        }
+
+        private void CollideWithPlayer(Collider coll, PlayerComponent player)
+        {
+            var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
+            if (!tourist || tourist != player.TargetedTourist.Value) return;
+
+            var comp = coll.gameObject.GetComponent<ButterflyDistractionTouristComponent>();
+            comp.DistractionProgress.Value = 1;
+            tourist.States
+                .GoToState(new GoingBackToIdle(Random.insideUnitCircle));
+            Object.Destroy(comp);
+        }
+
+        public override void Register(PlayerComponent component)
+        {
+            RegisterWaitable(component);
         }
 
         private static void StartInteracting(ButterflyDistractionTouristComponent component)
