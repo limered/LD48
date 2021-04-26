@@ -960,7 +960,7 @@ MonoBehaviour:
   GatherPosition: {fileID: 5540822021671676306}
   SpawnOutPosition: {fileID: 385970361167760384}
   TouristGroup: {fileID: 3108285283619315766}
-  MaxTimeInRoom: 600
+  MaxTimeInRoom: 10
   TimeLeftInRoom: 0
   RoomTimeProgress:
     value: 0
@@ -978,7 +978,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0fd8a41272856548b6ed0965d1f1602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DistractionTimerValue: 600
+  DistractionTimerValue: 1
+  TouristsPerDistraction: 1
   DistractionComponents: []
 --- !u!1001 &401523943174118518
 PrefabInstance:

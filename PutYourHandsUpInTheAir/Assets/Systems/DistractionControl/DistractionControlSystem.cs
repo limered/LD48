@@ -58,17 +58,18 @@ namespace Systems.DistractionControl
         private void TriggerDistractions(DistractionControlConfig component)
         {
             Queue<TouristBrainComponent> tourists = _randomTouristFinder.FindTouristsWithoutDistraction();
-            while (tourists.Any() && component.DistractionComponents.Any())
+            List<DistractionComponent> distractionComponents = component
+                .DistractionComponents
+                .Where(c => !c.HasFired)
+                .ToList();
+            var distractionGiven = 0;
+            while (tourists.Any() 
+                   && distractionComponents.Any() 
+                   && distractionGiven < component.TouristsPerDistraction)
             {
-                List<DistractionComponent> distractionComponents = component
-                    .DistractionComponents
-                    .Where(c => !c.HasFired)
-                    .ToList();
-
-                var distractionComponent = distractionComponents
-                    .ElementAt((int) (Random.value * distractionComponents.Count()));
-
+                var distractionComponent = distractionComponents[(int) (Random.value * distractionComponents.Count())];
                 AddDistractionToRandomStranger(distractionComponent, tourists.Dequeue());
+                distractionGiven++;
             }
         }
 
