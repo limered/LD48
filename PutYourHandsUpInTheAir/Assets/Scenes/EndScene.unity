@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -152,10 +152,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1567617571}
   - {fileID: 1334674451}
   - {fileID: 1980874674}
   - {fileID: 2141211125}
+  - {fileID: 1517819347}
+  - {fileID: 1567617571}
   - {fileID: 1069954144}
   m_Father: {fileID: 1011943468}
   m_RootOrder: 0
@@ -496,7 +497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_AnchorMax.x
@@ -552,11 +553,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 80
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 180
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -623,7 +624,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 111942651}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -668,6 +669,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334674450}
   m_CullTransparentMesh: 1
+--- !u!1 &1517819346
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1517819347}
+  - component: {fileID: 1517819349}
+  - component: {fileID: 1517819348}
+  m_Layer: 5
+  m_Name: EndText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1517819347
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517819346}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 111942651}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 75, y: -173.28271}
+  m_SizeDelta: {x: 450, y: 351.0451}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1517819348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517819346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.16470589, g: 0.1764706, b: 0.25490198, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 527ca72d6ececba468bbc85a0426e909, type: 3}
+    m_FontSize: 28
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 200
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: The next group is already waiting to go deeper and deeper into the jungle.
+--- !u!222 &1517819349
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517819346}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1567617570
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -685,7 +765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_AnchorMax.x
@@ -741,11 +821,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 80
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 300
+      value: 248
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -923,12 +1003,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 111942651}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 80, y: -150}
-  m_SizeDelta: {x: 450, y: 800}
+  m_AnchoredPosition: {x: 80, y: 250}
+  m_SizeDelta: {x: 450, y: 66.883}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1980874675
 MonoBehaviour:
@@ -983,8 +1063,10 @@ GameObject:
   - component: {fileID: 2141211125}
   - component: {fileID: 2141211127}
   - component: {fileID: 2141211126}
+  - component: {fileID: 2141211129}
+  - component: {fileID: 2141211128}
   m_Layer: 5
-  m_Name: EndText
+  m_Name: EndScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1002,12 +1084,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 111942651}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 80, y: -270}
-  m_SizeDelta: {x: 450, y: 800}
+  m_AnchoredPosition: {x: 75, y: 113.92009}
+  m_SizeDelta: {x: 491.1837, y: 184.8306}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2141211126
 MonoBehaviour:
@@ -1042,11 +1124,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'You earned 400 Super Money.
-
-
-    The next group is already waiting to
-    go deeper and deeper into the jungle.'
+  m_Text: You earned 400 Super Money.
 --- !u!222 &2141211127
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1055,3 +1133,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2141211124}
   m_CullTransparentMesh: 1
+--- !u!114 &2141211128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141211124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ba929ddec444c19f4cf24cf6a43f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moneyPerSurvivor: 15
+--- !u!114 &2141211129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141211124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57933521ba164a0c88306ae9ad53575a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  touristStats:
+    value: []

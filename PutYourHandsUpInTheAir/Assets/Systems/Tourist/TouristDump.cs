@@ -1,8 +1,10 @@
-﻿using Systems.Tourist.States;
+﻿using System;
+using Systems.Tourist.States;
 using UnityEngine;
 
 namespace Systems.Tourist
 {
+    [Serializable]
     public class TouristDump
     {
         public string Name { get; set; }

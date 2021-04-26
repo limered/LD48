@@ -3,7 +3,9 @@ using SystemBase;
 using SystemBase.StateMachineBase;
 using Systems.Room;
 using Systems.Room.Events;
+using Systems.Score.Messages;
 using Systems.Tourist.States;
+using GameState.Messages;
 using GameState.States;
 using UniRx;
 using UniRx.Triggers;
@@ -26,6 +28,8 @@ namespace Systems.Tourist
         /// This variable is present during the whole game and can always be used
         /// to check for the current survival status of the group
         private TouristDump[] _touristDumps;
+
+        public TouristDump[] TouristStats => _touristDumps.ToArray();
 
         public override void Register(TouristConfigComponent config)
         {
@@ -126,14 +130,15 @@ namespace Systems.Tourist
             {
                 if (_touristDumps.Any(x => x.IsAlive))
                 {
-                    MessageBroker.Default.Publish(new RoomAllTouristsLeft());
                     Debug.Log($"Room finished. {_touristDumps.Count(x => x.IsAlive)} tourists survived");
                 }
                 else
                 {
-                    //TODO: Game Over State
                     Debug.Log($"Room finished. Everyone died...");
                 }
+                
+                MessageBroker.Default.Publish(new RoomAllTouristsLeft());
+                MessageBroker.Default.Publish(new UpdateScoreMsg(TouristStats));
             }
         }
 
