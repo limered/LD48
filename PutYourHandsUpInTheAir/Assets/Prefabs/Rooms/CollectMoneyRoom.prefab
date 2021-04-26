@@ -1294,6 +1294,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlantsEndScene
       objectReference: {fileID: 0}
+    - target: {fileID: 3087392198919308953, guid: eb89a2b75d36388468311c8d77d3a88c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8158503625207663771, guid: eb89a2b75d36388468311c8d77d3a88c, type: 3}
       propertyPath: m_RootOrder
       value: 12
