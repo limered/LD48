@@ -7,7 +7,6 @@ TagManager:
   - tourist
   - levelBorder
   - bus
-  - CollectMoneyRoom
   layers:
   - Default
   - TransparentFX
@@ -50,6 +49,12 @@ TagManager:
     locked: 0
   - name: Plants
     uniqueID: 3160717675
+    locked: 0
+  - name: Animal
+    uniqueID: 2164011707
+    locked: 0
+  - name: PlantsForeground
+    uniqueID: 3406360979
     locked: 0
   - name: Cursor
     uniqueID: 4193263039
