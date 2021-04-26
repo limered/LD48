@@ -15,5 +15,8 @@ namespace Systems.World
         public int MaxLevelCount = 6;
         public IntReactiveProperty CurrentLevelNr = new IntReactiveProperty(0);
         public ReactiveProperty<GameObject> CurrentLevel = new ReactiveProperty<GameObject>();
+
+        public bool PlayTestMode = false;
+        public GameObject PlayTestRoomPrefab;
     }
 }

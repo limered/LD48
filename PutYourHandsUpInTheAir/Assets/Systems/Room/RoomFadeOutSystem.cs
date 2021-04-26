@@ -24,11 +24,13 @@ namespace Systems.Room
                 .AddToLifecycleOf(component);
 
             component.Room.State.CurrentState
+                .WhereNotNull()
                 .Where(state => state is RoomWalkIn)
                 .Subscribe(_ => StartStamp = Time.timeSinceLevelLoad)
                 .AddToLifecycleOf(component);
 
             component.Room.State.CurrentState
+                .WhereNotNull()
                 .Where(state => state is RoomDestroy)
                 .Subscribe(_ => EndStamp = Time.timeSinceLevelLoad)
                 .AddToLifecycleOf(component);

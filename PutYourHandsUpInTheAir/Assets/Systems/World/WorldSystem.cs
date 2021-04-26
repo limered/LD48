@@ -26,7 +26,10 @@ namespace Systems.World
 
         private void LoadFirstLevel(WorldComponent component)
         {
-            var lvlPrefab = component.FirstLevel;
+
+            var lvlPrefab = (component.PlayTestMode) 
+                ? component.PlayTestRoomPrefab 
+                : component.FirstLevel;
             LoadLevel(component, lvlPrefab);
         }
 
@@ -41,7 +44,13 @@ namespace Systems.World
         private void LoadNextLevel(WorldComponent component)
         {
             Object.Destroy(component.CurrentLevel.Value);
-            if(component.CurrentLevelNr.Value >= component.MaxLevelCount)
+            if (component.PlayTestMode)
+            {
+                var lvlPrefab = component.PlayTestRoomPrefab;
+                LoadLevel(component, lvlPrefab);
+                
+            }
+            else if (component.CurrentLevelNr.Value >= component.MaxLevelCount)
             {
                 var lvlPrefab = component.LastLevel;
                 LoadLevel(component, lvlPrefab);
@@ -55,7 +64,7 @@ namespace Systems.World
         }
         private void LoadNextLevelOnRoomNextState(WorldComponent world, RoomComponent room)
         {
-            if (world.CurrentLevelNr.Value > world.MaxLevelCount) return;
+            if (!world.PlayTestMode && world.CurrentLevelNr.Value > world.MaxLevelCount) return;
 
             room.State.CurrentState
                 .Where(state => state is RoomNext)
