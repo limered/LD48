@@ -96,8 +96,11 @@ namespace Systems.Distractions
             if (tourist && player.TargetedTourist.Value == tourist)
             {
                 var distractionComponent = coll.gameObject.GetComponent<TigerDistractionTouristComponent>();
-                distractionComponent.LastDistractionProgressTime =
-                    distractionComponent.CreatedFrom.DistractionInteractionDuration;
+                if(distractionComponent)
+                {
+                    distractionComponent.LastDistractionProgressTime =
+                        distractionComponent.CreatedFrom.DistractionInteractionDuration;
+                }
 
                 tourist.States
                     .GoToState(new GoingBackToIdle(Random.insideUnitCircle));

@@ -160,9 +160,12 @@ namespace Systems.Distractions
             if (tourist && player.TargetedTourist.Value == tourist)
             {
                 var distractionComponent = coll.gameObject.GetComponent<SpiderDistractionTouristComponent>();
-                distractionComponent.LastDistractionProgressTime =
-                    distractionComponent.CreatedFrom.DistractionInteractionDuration;
-                distractionComponent.IsPoisoned = false;
+                if(distractionComponent)
+                {
+                    distractionComponent.LastDistractionProgressTime =
+                        distractionComponent.CreatedFrom.DistractionInteractionDuration;
+                    distractionComponent.IsPoisoned = false;
+                }
 
                 tourist.States
                     .GoToState(new GoingBackToIdle(Random.insideUnitCircle));
