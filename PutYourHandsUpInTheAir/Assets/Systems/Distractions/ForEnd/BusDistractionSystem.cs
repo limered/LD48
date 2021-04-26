@@ -6,6 +6,7 @@ using Systems.Tourist;
 using Systems.Tourist.States;
 using UniRx;
 using UniRx.Triggers;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utils.Plugins;
 
@@ -19,7 +20,7 @@ namespace Systems.Distractions.ForEnd
             SystemUpdate()
                 .Where(_ => !bus.enteredScene)
                 .Subscribe(_ => {
-                    var tourists = GameObject.FindGameObjectsWithTag("tourist");
+                    GameObject[] tourists = GameObject.FindGameObjectsWithTag("tourist");
                     if(!tourists.Any())
                     {
                         return;
@@ -32,7 +33,7 @@ namespace Systems.Distractions.ForEnd
                     );
                     if (allPaid)
                     {
-                        bus.GetComponentInParent<DistractionComponent>().enabled = true;
+                        AddBussDistractionToAllPeople(tourists, bus.GetComponentInParent<DistractionComponent>());
                         bus.enteredScene = true;
                         var movementComp = bus.GetComponent<MovementComponent>();
                         movementComp.Direction.Value = bus.StartPosititon - (Vector2)bus.transform.position;
@@ -55,11 +56,24 @@ namespace Systems.Distractions.ForEnd
                 });
         }
 
+        private void AddBussDistractionToAllPeople(GameObject[] tourists, DistractionComponent distraction)
+        {
+            foreach (var tourist in tourists.Select(t => t.GetComponent<TouristBrainComponent>()))
+            {
+                tourist.States.GoToState(new PickingInterest());
+
+                var busComp = tourist.AddComponent<BusDistractionTouristComponent>();
+                busComp.BusStopPosition = distraction.GetComponent<BusComponent>().StartPosititon;
+                busComp.CreatedFrom = distraction;
+                busComp.LastDistractionProgressTime = distraction.DistractionInteractionDuration;
+            }
+        }
+
         public override void Register(BusDistractionTouristComponent component)
         {
             var touristBrain = component.GetComponent<TouristBrainComponent>();
         
-            touristBrain.States.GoToState(new GoingToAttraction(component.InteractionPosition.position));
+            touristBrain.States.GoToState(new GoingToAttraction(component.BusStopPosition));
             touristBrain.States.CurrentState
                 .Where(state => state is Interacting)
                 .Subscribe(_ => StartInteracting(component, touristBrain))

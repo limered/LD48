@@ -52,6 +52,10 @@ namespace Systems.Movement
             {
                 component.Velocity = futureVel;
             }
+            else
+            {
+                component.Velocity = component.Velocity.normalized * component.MaxSpeed;
+            }
         }
 
         private static void ApplyFriction(MovementComponent component)
