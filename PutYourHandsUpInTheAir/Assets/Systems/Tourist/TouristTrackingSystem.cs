@@ -132,6 +132,7 @@ namespace Systems.Tourist
                 else
                 {
                     //TODO: Game Over State
+                    Debug.Log($"Room finished. Everyone died...");
                 }
             }
         }
