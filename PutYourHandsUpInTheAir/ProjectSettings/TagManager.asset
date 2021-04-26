@@ -47,3 +47,6 @@ TagManager:
   - name: Tourist
     uniqueID: 1459146929
     locked: 0
+  - name: Plants
+    uniqueID: 3160717675
+    locked: 0
