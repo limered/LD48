@@ -2,29 +2,27 @@
 using UniRx;
 using UnityEngine;
 using Utils.Plugins;
+using Random = UnityEngine.Random;
 
 namespace Systems.Movement
 {
-    public class WobbleSystem : GameSystem<RunWobbleComponent, MovementComponent>
+    [GameSystem]
+    public class WobbleSystem : GameSystem<RunWobbleComponent>
     {
         public override void Register(RunWobbleComponent component)
         {
-            SystemUpdate()
-                .Subscribe(_ =>
-                {
-                    //TODO: wobble
-                })
-                .AddToLifecycleOf(component);
-        }
+            var movement = component.GetComponent<MovementComponent>();
+            var startTime = Time.time - Random.value * 10000;
 
-        public override void Register(MovementComponent component)
-        {
-            var wobble = component.GetComponent<RunWobbleComponent>();
-            
-            component.Direction
-                .Subscribe(direction =>
+            SystemUpdate()
+                .Select(_ => Time.time - startTime)
+                .Select(time =>
+                    Mathf.Sin(time / component.wobbleInterval) * movement.Velocity.magnitude *
+                    component.wobbleFactor)
+                .Subscribe(sinus =>
                 {
-                    //TODO: update wobble
+                    var target = component.wobbleTarget ? component.wobbleTarget : component.gameObject;
+                    target.transform.localPosition = component.wobbleAxis * sinus;
                 })
                 .AddToLifecycleOf(component);
         }

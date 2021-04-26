@@ -287,8 +287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8d9ba2a31c4cff9534124ec21a1a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
-  Friction: 5
+  Speed: 2
+  Friction: 2
   MaxSpeed: 5
   Collider: {fileID: 0}
   Direction:
@@ -314,7 +314,7 @@ MonoBehaviour:
     value: 0
   idleMinTimeWithoutMovementInSeconds: 5
   idleSpeed: 2
-  normalSpeed: 10
+  normalSpeed: 7
   debugCurrentState: 
   debugTargetDistance: {x: 0, y: 0}
 --- !u!135 &4899717811737049112
@@ -358,8 +358,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d88fa9b2e3254754a62a1e2910e63aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wobbleInterval: 0.1
-  wobbleMaxExtend: 0.5
+  wobbleInterval: 0.04
+  wobbleFactor: 0.02
+  wobbleTarget: {fileID: 2666235340766684270}
+  wobbleAxis: {x: 0, y: 1, z: 0}
 --- !u!1 &5981872623458108547
 GameObject:
   m_ObjectHideFlags: 0

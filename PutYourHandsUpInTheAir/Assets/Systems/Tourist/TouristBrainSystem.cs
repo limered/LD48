@@ -20,7 +20,7 @@ namespace Systems.Tourist
         {
             var movement = component.GetComponent<MovementComponent>();
 
-            component.States.CurrentState
+            component.States.CurrentState 
                 // .LogOnNext(state => $"{component.touristName}: {state}")
                 .Do(state => component.debugCurrentState = $"{state}")
                 .Subscribe(state =>
@@ -73,7 +73,7 @@ namespace Systems.Tourist
                             .Subscribe(_ =>
                             {
                                 movement.Direction.Value = (walkOut.Target.position-component.transform.position).normalized;
-                                movement.MaxSpeed = movement.Speed = component.normalSpeed;
+                                movement.MaxSpeed = component.normalSpeed;
                             })
                             .AddToLifecycleOf(component);
                     }
@@ -98,7 +98,7 @@ namespace Systems.Tourist
                     }
                     else
                     {
-                        movement.MaxSpeed = movement.Speed = tourist.normalSpeed;
+                        movement.MaxSpeed = tourist.normalSpeed;
                         movement.Direction.Value = delta.normalized;
                     }
                 })
@@ -137,7 +137,7 @@ namespace Systems.Tourist
                     .Subscribe(direction =>
                     {
                         movement.Direction.Value = direction;
-                        movement.MaxSpeed = movement.Speed = tourist.idleSpeed;
+                        movement.MaxSpeed = tourist.idleSpeed;
                     })
                     .AddTo(state);
 
@@ -157,7 +157,7 @@ namespace Systems.Tourist
                     {
                         var centerDelta = (state.IdlePosition - (Vector2) tourist.transform.position).normalized;
                         movement.Direction.Value = x.move ? centerDelta.normalized : Vector2.zero;
-                        movement.MaxSpeed = movement.Speed = tourist.idleSpeed;
+                        movement.MaxSpeed = tourist.idleSpeed;
                     })
                     .AddTo(state);
 
@@ -174,7 +174,7 @@ namespace Systems.Tourist
                     .Subscribe(_ =>
                     {
                         movement.Direction.Value = Vector2.zero;
-                        movement.MaxSpeed = movement.Speed = Random.Range(0f, tourist.idleSpeed);
+                        movement.MaxSpeed = Random.Range(0f, tourist.idleSpeed);
                     })
                     .AddTo(state);
             }
@@ -185,7 +185,7 @@ namespace Systems.Tourist
         private void GoingToAttraction(GoingToAttraction attraction, TouristBrainComponent tourist,
             MovementComponent movement)
         {
-            movement.MaxSpeed = movement.Speed = tourist.normalSpeed;
+            movement.MaxSpeed = tourist.normalSpeed;
 
             SystemUpdate()
                 .Select(_ => attraction.AttractionPosition - (Vector2) tourist.transform.position)
