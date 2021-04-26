@@ -6,7 +6,6 @@ using StrongSystems.Audio.Helper;
 using UniRx;
 using UnityEngine;
 using Utils;
-using UnityEngine.SceneManagement;
 
 namespace Systems
 {
@@ -25,7 +24,6 @@ namespace Systems
             Init();
 
             MessageBroker.Default.Publish(new GameMsgFinishedLoading());
-            MessageBroker.Default.Publish(new GameMsgStart());
         }
 
         private void Start()
@@ -40,22 +38,6 @@ namespace Systems
             base.Init();
 
             IoC.RegisterSingleton<ISFXComparer>(()=> new SFXComparer());
-        }
-
-        public void StartInstruction()
-        {
-            SceneManager.LoadScene("Instruction");
-        }
-
-        public void StartGame()
-        {
-            MessageBroker.Default.Publish(new GameMsgStart());
-            //SceneManager.LoadScene("Jungle");
-        }
-
-        public void EndGame()
-        {
-            Application.Quit();
         }
     }
 }
