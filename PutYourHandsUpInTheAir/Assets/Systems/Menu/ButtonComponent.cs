@@ -6,9 +6,7 @@ public class ButtonComponent : GameComponent
 {
     public void StartGame()
     {
-        Debug.Log("hey! start!");
-        SceneManager.LoadScene("AdvancedEndScene");
-        //SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Main");
     }
 
     public void EndGame()
@@ -18,6 +16,6 @@ public class ButtonComponent : GameComponent
 
     public void StartInstruction()
     {
-        SceneManager.LoadScene("Instruction");
+        SceneManager.LoadScene("InstructionScene");
     }
 }
