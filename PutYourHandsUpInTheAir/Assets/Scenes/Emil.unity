@@ -187,6 +187,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: FirstLevel
+      value: 
+      objectReference: {fileID: 7721235312565522134, guid: bdff130fc9e69664aa0013184a389520, type: 3}
+    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: EasyRooms.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: EasyRooms.Array.data[0]
+      value: 
+      objectReference: {fileID: 8396090924697026441, guid: a1131b1af407a1c458596af54c00b6d6, type: 3}
+    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: EasyRooms.Array.data[1]
+      value: 
+      objectReference: {fileID: 4568844813494698965, guid: 3bc7daa961f63d9448d5140dc17926da, type: 3}
     - target: {fileID: 4066499535153139368, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: m_RootOrder
       value: 1
