@@ -207,7 +207,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialTouristCount: 10
   touristPrefab: {fileID: 2666235342249832527, guid: 5d1bb522923484caba9f73f0aecf367b, type: 3}
-  spawnPosition: {x: 0, y: -10, z: 0}
   topParts:
   - {fileID: 21300000, guid: 626cb7f725199194abbf931085b1f255, type: 3}
   - {fileID: 21300000, guid: bb98f4c595d8c77479dfae0abf0224df, type: 3}
