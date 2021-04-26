@@ -8,6 +8,7 @@ using UniRx;
 using UniRx.Triggers;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utils.Plugins;
 
 namespace Systems.Distractions.ForEnd
@@ -53,6 +54,15 @@ namespace Systems.Distractions.ForEnd
                     bus.transform.position = bus.StartPosititon;
                     var movementComp = bus.GetComponent<MovementComponent>();
                     movementComp.Direction.Value = Vector2.zero;
+                });
+
+            SystemUpdate()
+                .Where(_ => bus.leftScene)
+                .Subscribe(_ => {
+                    if (bus.transform.position.x < bus.EndPosititon.x)
+                    {
+                        SceneManager.LoadScene("AdvancedEndScene");
+                    }
                 });
         }
 

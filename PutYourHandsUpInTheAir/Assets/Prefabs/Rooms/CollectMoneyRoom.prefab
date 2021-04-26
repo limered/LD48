@@ -225,7 +225,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385970361167760384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: 6.51, z: 0}
+  m_LocalPosition: {x: -4.99, y: 0.53, z: 0}
   m_LocalScale: {x: 3.88, y: 2.85, z: 1}
   m_Children: []
   m_Father: {fileID: 5907574603959349326}
@@ -975,22 +975,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1725850973}
     m_Modifications:
-    - target: {fileID: 1360794701496786487, guid: 62b288020228cfc47ba92af20d2a7a02, type: 3}
-      propertyPath: EndPosititon.x
-      value: -6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360794701496786487, guid: 62b288020228cfc47ba92af20d2a7a02, type: 3}
-      propertyPath: EndPosititon.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360794701496786487, guid: 62b288020228cfc47ba92af20d2a7a02, type: 3}
-      propertyPath: StartPosititon.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360794701496786487, guid: 62b288020228cfc47ba92af20d2a7a02, type: 3}
-      propertyPath: StartPosititon.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2674991842247269088, guid: 62b288020228cfc47ba92af20d2a7a02, type: 3}
       propertyPath: m_Name
       value: Bus
