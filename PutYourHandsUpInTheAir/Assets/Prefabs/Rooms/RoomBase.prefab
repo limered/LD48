@@ -659,6 +659,51 @@ MonoBehaviour:
   - {fileID: 3087392198919308953, guid: b9573cdb641fe2c49a54826c59b60311, type: 3}
   - {fileID: 3087392198919308953, guid: ed7e62f02e589fc47899a0f4e17b11d3, type: 3}
   - {fileID: 3087392198919308953, guid: 80d24612032afd74799b7473edec2a49, type: 3}
+--- !u!1 &5208638695258069801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3264707155183080330}
+  - component: {fileID: 1937180560188855823}
+  m_Layer: 0
+  m_Name: BushTrees
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3264707155183080330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5208638695258069801}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -8.45}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5907574603959349326}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1937180560188855823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5208638695258069801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a51421d1f6233c438b9326a7eb85437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BushTreesPrefabs:
+  - {fileID: 2547220157856624577, guid: 59cd6a65ccbcc1944a1fe4cbb1d2cc68, type: 3}
 --- !u!1 &5540822021671676306
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,6 +1051,7 @@ Transform:
   - {fileID: 8696907408552438745}
   - {fileID: 3471353733314513293}
   - {fileID: 1777105609474780075}
+  - {fileID: 3264707155183080330}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
