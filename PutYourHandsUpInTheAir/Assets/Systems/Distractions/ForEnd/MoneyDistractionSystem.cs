@@ -1,5 +1,6 @@
 using SystemBase;
 using Systems.Player;
+using Systems.Player.TouristInteraction;
 using Systems.Tourist;
 using Systems.Tourist.States;
 using UniRx;
@@ -15,6 +16,7 @@ namespace Systems.Distractions.ForEnd
     {
         public override void Register(MoneyDistractionTouristComponent component)
         {
+            Object.Destroy(component.GetComponent<IsNearPlayerComponent>());
             var touristBrain = component.GetComponent<TouristBrainComponent>();
             touristBrain.States.GoToState(new GoingToAttraction(touristBrain.transform.position));
             touristBrain.States.GoToState(new Interacting());

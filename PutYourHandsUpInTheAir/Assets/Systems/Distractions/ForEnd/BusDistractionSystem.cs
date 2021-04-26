@@ -32,6 +32,9 @@ namespace Systems.Distractions.ForEnd
                             return touristComp && touristComp.HasPaid;
                         }
                     );
+
+                    Debug.Log("Paid " + allPaid);
+
                     if (allPaid)
                     {
                         AddBussDistractionToAllPeople(tourists, bus.GetComponentInParent<DistractionComponent>());
