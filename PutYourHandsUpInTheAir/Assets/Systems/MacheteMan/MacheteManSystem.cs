@@ -24,6 +24,21 @@ namespace Systems.MacheteMan
                 .Subscribe(room => ResetMacheteMan(component, room))
                 .AddToLifecycleOf(component);
 
+            WaitOn<RoomComponent>().Subscribe(roomComponent =>
+            {
+                roomComponent.State.CurrentState.Where(_ => roomComponent.State.CurrentState.Value is RoomWalkOut)
+                    .Subscribe(_ => component.State.GoToState(new MacheteManWalkOut())).AddToLifecycleOf(component);
+
+                SystemUpdate().Where(_ => component.State.CurrentState.Value is MacheteManWalkOut)
+                    .Subscribe(_ =>
+                    {
+                        component.animator.enabled = false;
+                        component.TargetPosition = roomComponent.SpawnOutPosition.transform.position;
+                        LeaveRoom(component, roomComponent,
+                            component.GetComponent<MovementComponent>());
+                    }).AddTo(component);
+            });
+
             component.State.CurrentState.Where(_ => component.State.CurrentState.Value is MacheteManClearing)
                 .Subscribe(_ => { component.animator.Play("Chopping"); }).AddTo(component);
 
@@ -36,7 +51,7 @@ namespace Systems.MacheteMan
                             roomBlockExitComponent.leftBorder.position.y);
 
                     SystemUpdate().Where(_ => component.State.CurrentState.Value is MacheteManPrepare)
-                        .Subscribe(_ => MoveToExitBlock(component,
+                        .Subscribe(_ => MoveToRoomBlock(component,
                             component.GetComponent<MovementComponent>())).AddTo(component);
                 })
                 .AddTo(component);
@@ -47,7 +62,20 @@ namespace Systems.MacheteMan
             RegisterWaitable(component);
         }
 
-        private static void MoveToExitBlock(MacheteManComponent macheteManComponent,
+        private static void LeaveRoom(MacheteManComponent macheteManComponent, RoomComponent roomComponent, MovementComponent movementComponent)
+        {
+            var direction = macheteManComponent.TargetPosition - (Vector2)movementComponent.transform.position;
+            if (direction.sqrMagnitude < 0.01)
+            {
+                movementComponent.Direction.Value = Vector2.zero;
+                macheteManComponent.State.GoToState(new MacheteManOutOfLevel());
+                return;
+            }
+
+            movementComponent.Direction.Value = direction.normalized;
+        }
+
+        private static void MoveToRoomBlock(MacheteManComponent macheteManComponent,
             MovementComponent movementComponent)
         {
             var direction = macheteManComponent.TargetPosition - (Vector2) movementComponent.transform.position;

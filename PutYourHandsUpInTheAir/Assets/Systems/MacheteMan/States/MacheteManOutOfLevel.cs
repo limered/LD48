@@ -2,8 +2,7 @@
 
 namespace Systems.MacheteMan
 {
-    [NextValidStates(typeof(MacheteManWalkOut))]
-    public class MacheteManClearing : BaseState<MacheteManComponent>
+    public class MacheteManOutOfLevel : BaseState<MacheteManComponent>
     {
         public override void Enter(StateContext<MacheteManComponent> context)
         {

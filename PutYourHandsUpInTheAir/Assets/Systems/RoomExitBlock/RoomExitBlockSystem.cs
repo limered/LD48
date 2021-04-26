@@ -1,7 +1,6 @@
 ﻿using SystemBase;
 using Systems.Room;
 using UniRx;
-using UnityEngine;
 using Utils.Plugins;
 
 namespace Systems.RoomExitBlock
@@ -35,7 +34,8 @@ namespace Systems.RoomExitBlock
             var progressIndex = (int) (roomProgress / divider);
             if (progressIndex >= roomExitBlockComponent.sprites.Length)
             {
-                progressIndex = roomExitBlockComponent.sprites.Length - 1;
+                roomExitBlockComponent.spriteRenderer.enabled = false;
+                return;
             }
 
             roomExitBlockComponent.spriteRenderer.sprite = roomExitBlockComponent.sprites[progressIndex];
