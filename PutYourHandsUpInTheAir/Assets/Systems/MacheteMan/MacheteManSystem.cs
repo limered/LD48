@@ -33,6 +33,7 @@ namespace Systems.MacheteMan
                     .Subscribe(_ =>
                     {
                         component.animator.enabled = false;
+                        component.particles.gameObject.SetActive(false);
                         component.TargetPosition = roomComponent.SpawnOutPosition.transform.position;
                         LeaveRoom(component, roomComponent,
                             component.GetComponent<MovementComponent>());
@@ -40,7 +41,11 @@ namespace Systems.MacheteMan
             });
 
             component.State.CurrentState.Where(_ => component.State.CurrentState.Value is MacheteManClearing)
-                .Subscribe(_ => { component.animator.Play("Chopping"); }).AddTo(component);
+                .Subscribe(_ =>
+                {
+                    component.animator.Play("Chopping");
+                    component.particles.gameObject.SetActive(true);
+                }).AddTo(component);
 
             WaitOn<RoomExitBlockComponent>().Subscribe(roomBlockExitComponent =>
                 {

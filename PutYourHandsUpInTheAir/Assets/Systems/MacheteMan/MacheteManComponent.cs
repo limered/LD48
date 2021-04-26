@@ -6,6 +6,7 @@ namespace Systems.MacheteMan
 {
     public class MacheteManComponent : GameComponent
     {
+        public ParticleSystem particles;
         [HideInInspector]
         public Animator animator;
         public Vector2 TargetPosition { get; set; }
