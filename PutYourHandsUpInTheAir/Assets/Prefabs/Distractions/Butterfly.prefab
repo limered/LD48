@@ -167,7 +167,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1459146929
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f161eaa0330f61d40a6aa2a309ecb9c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -230,6 +230,7 @@ MonoBehaviour:
   DistractionProgressColor: {r: 0.2251691, g: 0.69112015, b: 0.8679245, a: 1}
   InteractionPosition: {fileID: 2674991841311685199}
   InteractionCollider: {fileID: 0}
+  FireOnce: 0
 --- !u!95 &242096486341353295
 Animator:
   serializedVersion: 3

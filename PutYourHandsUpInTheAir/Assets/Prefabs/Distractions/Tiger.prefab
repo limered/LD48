@@ -154,7 +154,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1459146929
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e8fbc6edad86df747bbdd0faca9a73f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -221,6 +221,7 @@ MonoBehaviour:
   DistractionProgressColor: {r: 1, g: 0, b: 0, a: 1}
   InteractionPosition: {fileID: 4283641651090035856}
   InteractionCollider: {fileID: 5142182168065768450}
+  FireOnce: 0
 --- !u!95 &6340294627035379458
 Animator:
   serializedVersion: 3
@@ -486,7 +487,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1459146929
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: dc9004158abc72a41b991b198edaa52d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
