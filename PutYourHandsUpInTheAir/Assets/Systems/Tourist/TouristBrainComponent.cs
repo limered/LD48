@@ -18,6 +18,7 @@ namespace Systems.Tourist
         public float idleMinTimeWithoutMovementInSeconds = 3f;
         public float idleSpeed = 1f;
         public float normalSpeed = 1f;
+        public float attractedSpeed = 1f;
         public string debugCurrentState;
         public Vector2 debugTargetDistance;
 

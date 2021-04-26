@@ -128,7 +128,7 @@ namespace Systems.Tourist
                         if (x.move)
                         {
                             var delta = (Vector2) (tourist.transform.position - x.collider.transform.position);
-                            if (delta == Vector2.zero) delta = Random.insideUnitCircle.normalized;
+                            if (delta == Vector2.zero) delta = Vector2.zero;
                             return delta;
                         }
 
@@ -185,8 +185,6 @@ namespace Systems.Tourist
         private void GoingToAttraction(GoingToAttraction attraction, TouristBrainComponent tourist,
             MovementComponent movement)
         {
-            movement.MaxSpeed = tourist.normalSpeed;
-
             SystemUpdate()
                 .Select(_ => attraction.AttractionPosition - (Vector2) tourist.transform.position)
                 .Do(delta => tourist.debugTargetDistance = delta)
@@ -200,6 +198,7 @@ namespace Systems.Tourist
                     {
                         movement.Direction.Value =
                             (attraction.AttractionPosition - (Vector2) tourist.transform.position).normalized;
+                        movement.MaxSpeed = tourist.attractedSpeed;
                     }
                 })
                 .AddTo(attraction);
