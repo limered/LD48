@@ -17,8 +17,12 @@ namespace Systems.Movement
             SystemUpdate()
                 .Select(_ => Time.time - startTime)
                 .Select(time =>
-                    Mathf.Sin(time / component.wobbleInterval) * movement.Velocity.magnitude *
-                    component.wobbleFactor)
+                {
+                    var a = Mathf.Sin(time / component.wobbleInterval) * movement.Velocity.magnitude *
+                        component.wobbleFactor;
+
+                    return Mathf.Abs(a) + a;
+                })
                 .Subscribe(sinus =>
                 {
                     var target = component.wobbleTarget ? component.wobbleTarget : component.gameObject;
