@@ -11,26 +11,10 @@ namespace Systems.Player
     [GameSystem(typeof(MovementSystem))]
     public class PlayerSystem : GameSystem<PlayerComponent, MovementComponent, PlayerSpawnerComponent>
     {
-        private GameObject _currentPlayer;
-
         public override void Register(PlayerComponent component)
         {
-            if (_currentPlayer)
-            {
-                Object.Destroy(component.gameObject);
-            }
-            _currentPlayer = component.gameObject;
-
             component.GetComponent<MovementComponent>().Direction
                 .Subscribe(dir => component.IsMoving.Value = dir.magnitude > 0);
-
-            component.IsMoving.Subscribe(obj => StartMovingState(component)).AddTo(component);
-
-        }
-
-        private void StartMovingState(PlayerComponent component)
-        {
-            //component.GetComponentInChildren<Animator>().SetFloat("Speed", component.IsMoving.Value ? 7f : 0f);
         }
 
         public override void Register(MovementComponent component)
