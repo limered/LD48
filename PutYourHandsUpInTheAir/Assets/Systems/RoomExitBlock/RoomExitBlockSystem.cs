@@ -14,9 +14,10 @@ namespace Systems.RoomExitBlock
         {
             _blockComponent.WhereNotNull().Subscribe(roomExitBlockComponent =>
                 {
+                    roomExitBlockComponent.spriteRenderer.enabled = true;
                     var divider = 1f / roomExitBlockComponent.sprites.Length;
-                    component.RoomTimeProgress.Subscribe(roomProgress =>
-                        UpdateBlockedPath(roomProgress, divider, roomExitBlockComponent))
+                    component.RoomTimeProgress
+                        .Subscribe(roomProgress => UpdateBlockedPath(roomProgress, divider, roomExitBlockComponent))
                         .AddToLifecycleOf(component);
                     _blockComponent.Value = null;
                 })
