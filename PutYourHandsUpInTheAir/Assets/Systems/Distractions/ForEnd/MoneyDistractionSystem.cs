@@ -46,9 +46,10 @@ namespace Systems.Distractions.ForEnd
             Object.Destroy(coll.gameObject.GetComponent<MoneyDistractionTouristComponent>());
             var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
             if (!tourist) return;
-
-            tourist.HasPaid = true;
+            
             tourist.States.GoToState(new GoingBackToIdle(tourist.transform.position));
+            tourist.States.GoToState(new Idle(tourist.transform.position));
+            tourist.HasPaid = true;
         }
     }
 }

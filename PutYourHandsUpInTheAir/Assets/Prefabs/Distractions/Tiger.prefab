@@ -411,8 +411,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4283641651274584563}
-  - component: {fileID: 4283641651274584562}
   - component: {fileID: 4970646949504973045}
+  - component: {fileID: 8400456709816555532}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -434,19 +434,6 @@ Transform:
   m_Father: {fileID: 4283641650618369389}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4283641651274584562
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4283641651274584564}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &4970646949504973045
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -499,3 +486,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!136 &8400456709816555532
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283641651274584564}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.17
+  m_Height: 1.04
+  m_Direction: 0
+  m_Center: {x: 0, y: 0.13, z: 0}
