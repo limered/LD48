@@ -7,6 +7,7 @@ namespace Systems.World
     public class WorldComponent : GameComponent
     {
         public GameObject FirstLevel;
+        public GameObject LastLevel;
         public GameObject[] EasyRooms;
         public GameObject[] MediumRooms;
         public GameObject[] HardRooms;
