@@ -9,6 +9,6 @@ namespace Systems.Tourist
         public SpriteRenderer head;
         public SpriteRenderer body;
         
-        public GameObject deadBody;
+        public GameObject blood;
     }
 }

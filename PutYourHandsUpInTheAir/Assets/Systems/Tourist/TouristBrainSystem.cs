@@ -62,9 +62,9 @@ namespace Systems.Tourist
                         var body = component.GetComponent<TouristBodyComponent>();
                         if (body)
                         {
-                            body.livingBody.SetActive(false);
-                            body.deadBody.SetActive(true);
-                            body.deadBody.transform.Rotate(new Vector3(0, 0, 1), 360 * Random.value);
+                            // body.livingBody.SetActive(false);
+                            body.blood.SetActive(true);
+                            body.livingBody.transform.Rotate(new Vector3(0, 0, 1), 360 * Random.value);
                         }
                     }
                     else if (state is WalkingOutOfLevel walkOut)
