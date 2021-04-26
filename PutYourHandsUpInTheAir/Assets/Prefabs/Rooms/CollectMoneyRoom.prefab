@@ -957,7 +957,7 @@ MonoBehaviour:
   GatherPosition: {fileID: 5540822021671676306}
   SpawnOutPosition: {fileID: 385970361167760384}
   TouristGroup: {fileID: 3108285283619315766}
-  MaxTimeInRoom: 5
+  MaxTimeInRoom: 20
   TimeLeftInRoom: 0
   RoomTimeProgress:
     value: 0

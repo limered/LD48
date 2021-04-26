@@ -103,7 +103,6 @@ namespace Systems.DistractionControl
                 case DistractionType.Bus:
                     var busComp = brain.AddComponent<BusDistractionTouristComponent>();
                     busComp.CreatedFrom = component;
-                    busComp.EndPosititon = new Vector2(-5.0f, 4.0f);
                     busComp.LastDistractionProgressTime = component.DistractionInteractionDuration;
                     return;
                 default:

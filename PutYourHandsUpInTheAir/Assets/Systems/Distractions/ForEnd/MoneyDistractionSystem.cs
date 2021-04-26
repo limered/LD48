@@ -1,6 +1,5 @@
 using SystemBase;
 using Systems.Distractions;
-using Systems.Movement;
 using Systems.Player;
 using Systems.Tourist;
 using Systems.Tourist.States;
@@ -61,16 +60,16 @@ public class MoneyDistractionSystem : GameSystem<MoneyDistractionTouristComponen
             PlayerComponent player)
     {
         player.OnTriggerEnterAsObservable()
-            .Subscribe(CollideWithPlayer)
+            .Subscribe(coll => CollideWithPlayer(coll, component))
             .AddToLifecycleOf(component);
     }
 
-    private void CollideWithPlayer(Collider coll)
+    private void CollideWithPlayer(Collider coll, MoneyDistractionTouristComponent component)
     {
-        Object.Destroy(coll.gameObject.GetComponent<DistractedTouristComponent>());
         var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
         if (tourist)
         {
+            component.HasPaid = true;
             tourist.States
                 .GoToState(new GoingBackToIdle(Random.insideUnitCircle));
         }
