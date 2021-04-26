@@ -21,6 +21,8 @@ public class MoneyDistractionSystem : GameSystem<MoneyDistractionTouristComponen
             .Where(state => state is Interacting)
             .Subscribe(_ => StartInteracting(component))
             .AddToLifecycleOf(component);
+
+        component.CreatedFrom.HasFired = component.CreatedFrom.FireOnce;
     }
 
     public override void Register(PlayerComponent component)
@@ -66,10 +68,11 @@ public class MoneyDistractionSystem : GameSystem<MoneyDistractionTouristComponen
 
     private void CollideWithPlayer(Collider coll, MoneyDistractionTouristComponent component)
     {
+        Object.Destroy(coll.gameObject.GetComponent<MoneyDistractionTouristComponent>());
         var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
         if (tourist)
         {
-            component.HasPaid = true;
+            tourist.HasPaid = true;
             tourist.States
                 .GoToState(new GoingBackToIdle(Random.insideUnitCircle));
         }

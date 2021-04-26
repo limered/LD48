@@ -22,6 +22,8 @@ namespace Systems.Tourist
         public Vector2 debugTargetDistance;
 
         public StateContext<TouristBrainComponent> States { get; } = new StateContext<TouristBrainComponent>();
+
+        public bool HasPaid { get; set; }
     }
 
     public static class TouristNames

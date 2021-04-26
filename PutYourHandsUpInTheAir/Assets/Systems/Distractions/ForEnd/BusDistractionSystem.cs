@@ -12,10 +12,10 @@ using Systems.DistractionControl;
 [GameSystem]
 public class BusDistractionSystem : GameSystem<BusDistractionTouristComponent, BusComponent>
 {
-    public override void Register(BusComponent component)
+    public override void Register(BusComponent bus)
     {
         SystemUpdate()
-            .Where(_ => !component.enteredScene)
+            .Where(_ => !bus.enteredScene)
             .Subscribe(_ => {
                 var tourists = GameObject.FindGameObjectsWithTag("tourist");
                 if(!tourists.Any())
@@ -24,19 +24,19 @@ public class BusDistractionSystem : GameSystem<BusDistractionTouristComponent, B
                 }
 
                 var allPaid = tourists.All(t => {
-                    var moneyComp = t.GetComponent<MoneyDistractionTouristComponent>();
-                    return moneyComp && moneyComp.HasPaid;
+                    var touristComp = t.GetComponent<TouristBrainComponent>();
+                    return touristComp && touristComp.HasPaid;
                 }
                 );
                 if (allPaid)
                 {
-                    component.GetComponentInParent<DistractionComponent>().enabled = true;
-                    component.enteredScene = true;
-                    var movementComp = component.GetComponent<MovementComponent>();
-                    movementComp.Direction.Value = component.StartPosititon - (Vector2)component.transform.position;
+                    bus.GetComponentInParent<DistractionComponent>().enabled = true;
+                    bus.enteredScene = true;
+                    var movementComp = bus.GetComponent<MovementComponent>();
+                    movementComp.Direction.Value = bus.StartPosititon - (Vector2)bus.transform.position;
                 }
             })
-            .AddTo(component);
+            .AddTo(bus);
     }
 
     public override void Register(BusDistractionTouristComponent component)
