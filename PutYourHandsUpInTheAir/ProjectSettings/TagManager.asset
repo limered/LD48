@@ -50,3 +50,6 @@ TagManager:
   - name: Plants
     uniqueID: 3160717675
     locked: 0
+  - name: Cursor
+    uniqueID: 4193263039
+    locked: 0
