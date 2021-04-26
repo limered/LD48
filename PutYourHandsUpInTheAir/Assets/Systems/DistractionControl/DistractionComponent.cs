@@ -10,5 +10,8 @@ namespace Systems.DistractionControl
         public Color DistractionProgressColor;
         public Transform InteractionPosition;
         public SphereCollider InteractionCollider;
+        public bool FireOnce = false;
+
+        public bool HasFired { get; set; }
     }
 }

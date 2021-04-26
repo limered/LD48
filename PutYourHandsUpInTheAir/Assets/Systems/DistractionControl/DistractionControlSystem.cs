@@ -61,7 +61,9 @@ namespace Systems.DistractionControl
             while (tourists.Any() && component.DistractionComponents.Any())
             {
                 var distractionComponent = component
-                    .DistractionComponents[(int) (Random.value * component.DistractionComponents.Count)];
+                    .DistractionComponents
+                    .Where(c => !c.HasFired)
+                    .ElementAt((int) (Random.value * component.DistractionComponents.Count));
 
                 AddDistractionToRandomStranger(distractionComponent, tourists.Dequeue());
             }
@@ -75,6 +77,7 @@ namespace Systems.DistractionControl
         private void AddDistractionToRandomStranger(DistractionComponent component, TouristBrainComponent brain)
         {
             if (!brain || !component) return;
+            component.HasFired = component.FireOnce;
 
             brain.States.GoToState(new PickingInterest());
 

@@ -1,3 +1,4 @@
+using Systems.DistractionControl;
 using Systems.Distractions;
 
 public class MoneyDistractionTouristComponent : DistractedTouristComponent
