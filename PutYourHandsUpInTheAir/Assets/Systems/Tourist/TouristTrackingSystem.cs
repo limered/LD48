@@ -98,6 +98,8 @@ namespace Systems.Tourist
                 .SelectWhereNotNull(c => c.gameObject.GetComponent<TouristBrainComponent>())
                 .Subscribe(brain =>
                 {
+                    brain.States.GoToState(new WalkedOut());
+                    
                     for (int i = 0; i < _tourists.Length; i++)
                     {
                         if (_tourists[i])
@@ -117,7 +119,10 @@ namespace Systems.Tourist
 
         private void CheckForRoomFinish()
         {
-            if (_touristDumps.All(x => x != null))
+            if (_tourists.Where(x => x != null)
+                .Select(x => x.GetComponent<TouristBrainComponent>().States.CurrentState.Value)
+                .All(state => state is WalkedOut || state is Dead)
+            )
             {
                 if (_touristDumps.Any(x => x.IsAlive))
                 {

@@ -77,6 +77,10 @@ namespace Systems.Tourist
                             })
                             .AddToLifecycleOf(component);
                     }
+                    else if (state is WalkedOut)
+                    {
+                        movement.Direction.Value = Vector2.zero;
+                    }
                 })
                 .AddToLifecycleOf(component);
         }

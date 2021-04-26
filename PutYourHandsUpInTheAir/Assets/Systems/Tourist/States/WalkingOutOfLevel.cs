@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Systems.Tourist.States
 {
-    [NextValidStates()]
+    [NextValidStates(typeof(WalkedOut))]
     public class WalkingOutOfLevel : BaseState<TouristBrainComponent>
     {
         public Transform Target { get; private set; }

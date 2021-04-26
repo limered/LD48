@@ -1,6 +1,4 @@
 ﻿using SystemBase;
-using Systems.Movement.States;
-using Systems.Tourist;
 using UniRx;
 using UnityEngine;
 using Utils.Plugins;
@@ -11,11 +9,8 @@ namespace Systems.Movement
     {
         public override void Register(RunWobbleComponent component)
         {
-            component.States.Start(new NotWobbling());
-
-            component.States.CurrentState
-                .Where(state => state is Wobbling)
-                .Subscribe(state =>
+            SystemUpdate()
+                .Subscribe(_ =>
                 {
                     //TODO: wobble
                 })
@@ -29,10 +24,7 @@ namespace Systems.Movement
             component.Direction
                 .Subscribe(direction =>
                 {
-                    if(direction != Vector2.zero && wobble.States.CurrentState.Value is NotWobbling) wobble.States.GoToState(new Wobbling());
-                    if(direction == Vector2.zero && wobble.States.CurrentState.Value is Wobbling) wobble.States.GoToState(new NotWobbling());
-                    
-                    
+                    //TODO: update wobble
                 })
                 .AddToLifecycleOf(component);
         }
