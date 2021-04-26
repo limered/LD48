@@ -236,8 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8d9ba2a31c4cff9534124ec21a1a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 30
-  Friction: 20
+  Speed: 1.5
+  Friction: 1
   MaxSpeed: 20
   Collider: {fileID: 0}
   Direction:
@@ -261,10 +261,10 @@ MonoBehaviour:
     value: 0
   bodyPartIndex:
     value: 0
-  idleMinTimeWithoutMovementInSeconds: 5
-  idleSpeed: 3
+  idleMinTimeWithoutMovementInSeconds: 1
+  idleSpeed: 10
   normalSpeed: 20
-  attractedSpeed: 7
+  attractedSpeed: 20
   debugCurrentState: 
   debugTargetDistance: {x: 0, y: 0}
 --- !u!114 &3492671645544282497
@@ -310,7 +310,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &1771741449184892251
 CapsuleCollider:

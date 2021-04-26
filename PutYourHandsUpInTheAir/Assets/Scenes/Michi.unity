@@ -133,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: PlayTestRoomPrefab
       value: 
-      objectReference: {fileID: 1217221591739836992, guid: a28f4f71c6e35d64db636dcead44e2ed, type: 3}
+      objectReference: {fileID: 3875406599220642518, guid: 067fc5b58ef681f4a86924746549059f, type: 3}
     - target: {fileID: 4066499535153139368, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -180,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4066499535153139369, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: initialTouristCount
-      value: 100
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4066499535153139370, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: m_Name

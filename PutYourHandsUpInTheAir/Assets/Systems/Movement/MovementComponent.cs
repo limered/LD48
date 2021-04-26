@@ -1,4 +1,5 @@
-﻿using SystemBase;
+﻿using System;
+using SystemBase;
 using UniRx;
 using UnityEngine;
 
@@ -12,8 +13,9 @@ namespace Systems.Movement
         public float MaxSpeed;
         public Collider Collider;
 
-        public Vector2ReactiveProperty Direction  = new Vector2ReactiveProperty(Vector2.zero);
+        public Vector2ReactiveProperty Direction = new Vector2ReactiveProperty(Vector2.zero);
         public Vector2 Velocity { get; set; }
         public Vector2 Acceleration { get; set; }
+
     }
 }
