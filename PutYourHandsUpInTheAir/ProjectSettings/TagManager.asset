@@ -7,6 +7,7 @@ TagManager:
   - tourist
   - levelBorder
   - bus
+  - CollectMoneyRoom
   layers:
   - Default
   - TransparentFX
