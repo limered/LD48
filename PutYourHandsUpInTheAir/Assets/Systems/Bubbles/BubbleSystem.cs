@@ -64,7 +64,7 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
             spriteRenderer.sprite = bubbleComponent.Bubbles[2];
         } else if (distractionType is DistractionType.Butterfly) {
             spriteRenderer.sprite = bubbleComponent.Bubbles[3];
-        } else if (distractionType is DistractionType.Camera)
+        } else if (distractionType is DistractionType.Bus)
         {
             spriteRenderer.sprite = bubbleComponent.Bubbles[4];
         } else if (distractionType is DistractionType.Spider)
