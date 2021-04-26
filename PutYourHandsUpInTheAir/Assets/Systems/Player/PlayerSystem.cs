@@ -1,4 +1,5 @@
-﻿using SystemBase;
+﻿using System;
+using SystemBase;
 using Systems.Movement;
 using UniRx;
 using UniRx.Triggers;
@@ -33,8 +34,8 @@ namespace Systems.Player
             var touristLayer = LayerMask.NameToLayer("Tourist");
             var player = comp.GetComponent<PlayerComponent>();
 
-            var targetVec = player.TargetedTourist != null
-                ? player.TargetedTourist.transform.position 
+            var targetVec = player.TargetedTourist.Value != null
+                ? player.TargetedTourist.Value.transform.position 
                 : player.TargetVector;
 
             comp.Direction.Value = (targetVec - comp.transform.position).normalized;
@@ -46,8 +47,8 @@ namespace Systems.Player
                 if (Physics.Raycast(ray, out var _tHit, Mathf.Infinity, 1 << touristLayer)) return;
                 if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, 1 << floorLayer)) return;
 
-                player.LastTargetetTourist = player.TargetedTourist;
-                player.TargetedTourist = null;
+                player.LastTargetedTourist.Value = player.TargetedTourist.Value;
+                player.TargetedTourist.Value = null;
                 player.TargetVector = new Vector3(hit.point.x, hit.point.y);
             }
         }

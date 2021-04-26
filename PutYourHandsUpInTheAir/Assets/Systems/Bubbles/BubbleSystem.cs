@@ -56,7 +56,9 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
 
     private void ShowDistractionBubble(BubbleComponent bubbleComponent, TouristBrainComponent touristBrainComponent)
     {
-        var distractionType = touristBrainComponent.GetComponent<DistractedTouristComponent>().CurrentDistractionType;
+        var distracted = touristBrainComponent.GetComponent<DistractedTouristComponent>();
+        if (!distracted) return;
+        var distractionType = distracted.CurrentDistractionType;
         var spriteRenderer = bubbleComponent.gameObject.GetComponent<SpriteRenderer>();
         ShowBubble(bubbleComponent, true);
 

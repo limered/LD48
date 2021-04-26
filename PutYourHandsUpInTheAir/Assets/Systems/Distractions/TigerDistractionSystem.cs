@@ -1,6 +1,7 @@
 ﻿using SystemBase;
 using Systems.DistractionControl;
 using Systems.Player;
+using Systems.Player.TouristInteraction;
 using Systems.Tourist;
 using Systems.Tourist.States;
 using UniRx;
@@ -62,10 +63,10 @@ namespace Systems.Distractions
         private void DuringTouristCollision(Collider coll, PlayerComponent player)
         {
             var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
-            if (tourist && player.TargetedTourist == tourist)
+            if (tourist && player.TargetedTourist.Value == tourist)
             {
                 var distractionComponent = coll.gameObject.GetComponent<TigerDistractionTouristComponent>();
-                if (distractionComponent  && tourist.States.CurrentState.Value is Idle)
+                if (distractionComponent && tourist.States.CurrentState.Value is Idle)
                 {
                     Object.Destroy(distractionComponent);
                 }
@@ -75,10 +76,10 @@ namespace Systems.Distractions
         private void StopCollideWithPlayer(Collider coll, PlayerComponent player)
         {
             var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
-            if (tourist && player.LastTargetetTourist == tourist)
+            if (tourist && player.LastTargetedTourist.Value == tourist)
             {
                 var distractionComponent = coll.gameObject.GetComponent<TigerDistractionTouristComponent>();
-                if(distractionComponent)
+                if (distractionComponent)
                 {
                     distractionComponent.LastDistractionProgressTime =
                         distractionComponent.CreatedFrom.DistractionInteractionDuration;
@@ -92,7 +93,7 @@ namespace Systems.Distractions
         private void CollideWithPlayer(Collider coll, PlayerComponent player)
         {
             var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
-            if (tourist && player.TargetedTourist == tourist)
+            if (tourist && player.TargetedTourist.Value == tourist)
             {
                 var distractionComponent = coll.gameObject.GetComponent<TigerDistractionTouristComponent>();
                 distractionComponent.LastDistractionProgressTime =
@@ -118,5 +119,48 @@ namespace Systems.Distractions
 
             comp.DistractionProgress.Value = 1 - comp.LastDistractionProgressTime / comp.MaxProgressTime;
         }
+
+        //public override void Register(IsNearPlayerComponent component)
+        //{
+        //    component.Player.TargetedTourist
+        //        .WhereNotNull()
+        //        .Where(tourist => component.GetComponent<TigerDistractionTouristComponent>())
+        //        .Where(tourist => tourist.gameObject == component.gameObject)
+        //        .Select(tourist => (tourist, component))
+        //        .Subscribe(PlayerHitTourist)
+        //        .AddToLifecycleOf(component);
+
+        //    component.OnDestroyAsObservable()
+        //        .Where(_ => component.GetComponent<TigerDistractionTouristComponent>())
+        //        .Where(_ => component.gameObject == component.Player.LastTargetedTourist.Value)
+        //        .Subscribe(_ => PlayerLeftTourist(component))
+        //        .AddToLifecycleOf(component);
+        //}
+
+        //private void PlayerLeftTourist(IsNearPlayerComponent component)
+        //{
+        //    var distractionComponent = component.gameObject.GetComponent<TigerDistractionTouristComponent>();
+        //    if (distractionComponent)
+        //    {
+        //        distractionComponent.LastDistractionProgressTime =
+        //            distractionComponent.CreatedFrom.DistractionInteractionDuration;
+
+        //        component.GetComponent<TouristBrainComponent>().States
+        //            .GoToState(new GoingToAttraction(distractionComponent.InteractionPosition.position));
+        //    }
+        //}
+
+        //private void PlayerHitTourist((TouristBrainComponent tourist, IsNearPlayerComponent component) obj)
+        //{
+        //    var playerTarget = obj.tourist;
+        //    var touristNearPlayer = obj.component;
+
+        //    var distractionComponent = touristNearPlayer.gameObject.GetComponent<TigerDistractionTouristComponent>();
+        //    distractionComponent.LastDistractionProgressTime =
+        //        distractionComponent.CreatedFrom.DistractionInteractionDuration;
+
+        //    playerTarget.GetComponent<TouristBrainComponent>().States
+        //        .GoToState(new GoingBackToIdle(Random.insideUnitCircle * 0.5f));
+        //}
     }
 }

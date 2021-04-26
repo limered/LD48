@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Systems.Distractions;
+using Systems.Player.TouristInteraction;
 using Systems.Tourist;
 using Systems.Tourist.States;
 using UnityEngine;
@@ -16,6 +16,7 @@ namespace Systems.DistractionControl
 
             GameObject.FindGameObjectsWithTag("tourist")
                 .Select(t => t.GetComponent<TouristBrainComponent>())
+                .Where(brain => !brain.GetComponent<IsNearPlayerComponent>())
                 .Where(brain => brain.States.CurrentState.Value is Idle)
                 .ToList()
                 .Randomize()
