@@ -41,6 +41,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: PlantsBackground
+    uniqueID: 922045375
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
