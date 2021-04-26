@@ -703,7 +703,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BushTreesPrefabs:
-  - {fileID: 2547220157856624577, guid: 59cd6a65ccbcc1944a1fe4cbb1d2cc68, type: 3}
+  - {fileID: 2547220157856624577, guid: 69ac20cd868ddd048a7f9d4033776ed0, type: 3}
+  - {fileID: 2547220157856624577, guid: d3bf466794407af4d99ad6164968b802, type: 3}
+  - {fileID: 2547220157856624577, guid: fc721d84189b06240baa036fdd40e41c, type: 3}
+  - {fileID: 2547220157856624577, guid: bd364616d8efae14ea87d51e6c2af2f4, type: 3}
+  - {fileID: 2547220157856624577, guid: 9668fe8d224749c4ab9b60cbefd10d14, type: 3}
+  - {fileID: 2547220157856624577, guid: dd6f2eb5f48dce04a972dc57865d3fb4, type: 3}
+  - {fileID: 2547220157856624577, guid: d0eb805712d3ed9428c9f955c4f6d706, type: 3}
 --- !u!1 &5540822021671676306
 GameObject:
   m_ObjectHideFlags: 0
