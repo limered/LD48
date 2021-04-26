@@ -54,7 +54,7 @@ namespace Systems.Distractions.ForEnd
                     bus.transform.position = bus.StartPosititon;
                     var movementComp = bus.GetComponent<MovementComponent>();
                     movementComp.Direction.Value = Vector2.zero;
-                });
+                }).AddTo(bus);
 
             SystemUpdate()
                 .Where(_ => bus.leftScene)
@@ -63,7 +63,7 @@ namespace Systems.Distractions.ForEnd
                     {
                         SceneManager.LoadScene("AdvancedEndScene");
                     }
-                });
+                }).AddTo(bus);
         }
 
         private void AddBussDistractionToAllPeople(GameObject[] tourists, DistractionComponent distraction)
