@@ -31,6 +31,7 @@ namespace Systems.Player.TouristInteraction
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, 1 << touristLayer)) return;
 
+                player.LastTargetetTourist = player.TargetedTourist;
                 player.TargetedTourist = hit.transform.GetComponent<TouristBrainComponent>();
             }
         }

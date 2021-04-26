@@ -13,5 +13,6 @@ namespace Systems.Player
 
         public bool TouristOnlyMode;
         public bool TouristClicked { get; set; }
+        public TouristBrainComponent LastTargetetTourist { get; set; }
     }
 }

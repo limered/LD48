@@ -46,6 +46,7 @@ namespace Systems.Player
                 if (Physics.Raycast(ray, out var _tHit, Mathf.Infinity, 1 << touristLayer)) return;
                 if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, 1 << floorLayer)) return;
 
+                player.LastTargetetTourist = player.TargetedTourist;
                 player.TargetedTourist = null;
                 player.TargetVector = new Vector3(hit.point.x, hit.point.y);
             }

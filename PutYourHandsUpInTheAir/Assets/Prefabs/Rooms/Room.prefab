@@ -992,7 +992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0fd8a41272856548b6ed0965d1f1602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DistractionTimerValue: 1
+  DistractionTimerValue: 5
   TouristsPerDistraction: 1
   DistractionComponents: []
 --- !u!1001 &401523943174118518

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Systems.Tourist.States
 {
-    [NextValidStates(typeof(Idle), typeof(WalkingOutOfLevel))]
+    [NextValidStates(typeof(Idle), typeof(WalkingOutOfLevel), typeof(GoingToAttraction))]
     public class GoingBackToIdle : BaseState<TouristBrainComponent>
     {
         /// They will try to gather around that point

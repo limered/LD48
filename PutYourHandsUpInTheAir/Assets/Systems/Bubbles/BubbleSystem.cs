@@ -28,7 +28,8 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
         {
             ShowPickingInterest(bubbleComponent);
         }
-        else if (state is GoingToAttraction)
+        else if (state is GoingToAttraction 
+                 || state is GoingBackToIdle)
         {
             ShowDistractionBubble(bubbleComponent, touristBrainComponent);
         }
