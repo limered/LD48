@@ -37,6 +37,21 @@ public class BusDistractionSystem : GameSystem<BusDistractionTouristComponent, B
                 }
             })
             .AddTo(bus);
+
+        SystemUpdate()
+            .Where(_ => bus.enteredScene && !bus.leftScene)
+            .Subscribe(_ =>
+            {
+                if(bus.transform.position.x > bus.StartPosititon.x)
+                {
+                    Debug.Log("drive!");
+                    return;
+                }
+                bus.leftScene = true;
+                bus.transform.position = bus.StartPosititon;
+                var movementComp = bus.GetComponent<MovementComponent>();
+                movementComp.Direction.Value = Vector2.zero;
+            });
     }
 
     public override void Register(BusDistractionTouristComponent component)

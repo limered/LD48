@@ -232,6 +232,7 @@ MonoBehaviour:
   DistractionProgressColor: {r: 1, g: 1, b: 1, a: 1}
   InteractionPosition: {fileID: 2674991841311685199}
   InteractionCollider: {fileID: 0}
+  FireOnce: 0
 --- !u!54 &3535506821668447335
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -1073,7 +1073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0fd8a41272856548b6ed0965d1f1602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DistractionTimerValue: 5
+  DistractionTimerValue: 3
   TouristsPerDistraction: 10
   DistractionComponents: []
 --- !u!1001 &1179369737250180433
