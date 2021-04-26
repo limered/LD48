@@ -334,7 +334,7 @@ MonoBehaviour:
   - {fileID: 4568844813494698965, guid: 3bc7daa961f63d9448d5140dc17926da, type: 3}
   MediumRooms: []
   HardRooms: []
-  MaxLevelCount: 1
+  MaxLevelCount: 2
   CurrentLevelNr:
     value: 0
   CurrentLevel:
