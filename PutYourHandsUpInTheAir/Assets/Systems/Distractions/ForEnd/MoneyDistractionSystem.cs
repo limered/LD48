@@ -1,16 +1,18 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using SystemBase;
+using Systems.Distractions;
+using Systems.Movement;
+using Systems.Player;
 using Systems.Tourist;
 using Systems.Tourist.States;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using Utils.Plugins;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 [GameSystem]
-public class MoneyDistractionSystem : GameSystem<MoneyDistractionTouristComponent>
+public class MoneyDistractionSystem : GameSystem<MoneyDistractionTouristComponent, PlayerComponent>
 {
     public override void Register(MoneyDistractionTouristComponent component)
     {
@@ -22,12 +24,21 @@ public class MoneyDistractionSystem : GameSystem<MoneyDistractionTouristComponen
             .AddToLifecycleOf(component);
     }
 
-    private static void StartInteracting(MoneyDistractionTouristComponent component)
+    public override void Register(PlayerComponent component)
+    {
+        RegisterWaitable(component);
+    }
+
+    private void StartInteracting(MoneyDistractionTouristComponent component)
     {
         component.UpdateAsObservable()
-            .Where(_ => component)
+            .Where(_ => component && component.IsPaying)
             .Subscribe(_ => UpdateTimer(component))
             .AddToLifecycleOf(component);
+
+        WaitOn<PlayerComponent>()
+                .Subscribe(player => StartPlayerCollisionTracking(component, player))
+                .AddToLifecycleOf(component);
     }
 
     private static void UpdateTimer(MoneyDistractionTouristComponent comp)
@@ -43,5 +54,25 @@ public class MoneyDistractionSystem : GameSystem<MoneyDistractionTouristComponen
         }
 
         comp.DistractionProgress.Value = 1 - comp.LastDistractionProgressTime / comp.MaxProgressTime;
+    }
+
+
+    private void StartPlayerCollisionTracking(MoneyDistractionTouristComponent component,
+            PlayerComponent player)
+    {
+        player.OnTriggerEnterAsObservable()
+            .Subscribe(CollideWithPlayer)
+            .AddToLifecycleOf(component);
+    }
+
+    private void CollideWithPlayer(Collider coll)
+    {
+        Object.Destroy(coll.gameObject.GetComponent<DistractedTouristComponent>());
+        var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
+        if (tourist)
+        {
+            tourist.States
+                .GoToState(new GoingBackToIdle(Random.insideUnitCircle));
+        }
     }
 }
