@@ -209,7 +209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: PlayTestMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: FinalJungleColor.a
@@ -230,7 +230,7 @@ PrefabInstance:
     - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: PlayTestRoomPrefab
       value: 
-      objectReference: {fileID: 3875406599220642518, guid: 067fc5b58ef681f4a86924746549059f, type: 3}
+      objectReference: {fileID: 7721235312565522134, guid: bdff130fc9e69664aa0013184a389520, type: 3}
     - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: CurrentLevelNr.value
       value: 0

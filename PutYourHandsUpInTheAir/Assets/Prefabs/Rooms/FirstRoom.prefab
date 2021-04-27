@@ -79,6 +79,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Now it's time to collect your reward!
+--- !u!114 &8622669851479169437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7721235312565522134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4a62d92c34e3be428ad1d1f3727f808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FirstRoomTextElement: {fileID: 5524756564136250756}
+  TouristNameText: {fileID: 1297261958037132225}
 --- !u!1 &5524756564136250756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,6 +1245,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3735034271173043881, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+      propertyPath: AllDiesBubble
+      value: 
+      objectReference: {fileID: 3721420897006940898}
     - target: {fileID: 5907574603959349326, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1286,9 +1304,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5907574603959349326, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
   m_PrefabInstance: {fileID: 4241473129793601177}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4241473129352289220 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1725850973, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+--- !u!1 &3721420897006940898 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 682745868845468795, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+  m_PrefabInstance: {fileID: 4241473129793601177}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7721235312565522134 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5907574603959349327, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
   m_PrefabInstance: {fileID: 4241473129793601177}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &4241473130110489875 stripped
@@ -1296,9 +1319,9 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 892316554, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
   m_PrefabInstance: {fileID: 4241473129793601177}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7721235312565522134 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5907574603959349327, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+--- !u!4 &4241473129352289220 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1725850973, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
   m_PrefabInstance: {fileID: 4241473129793601177}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5177171761797359519
