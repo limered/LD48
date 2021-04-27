@@ -48,6 +48,7 @@ namespace Systems.Score
 
                     text.text =
                         $"{survivors} of {survivors + causalities} tourists survived the trip. You've earned {survivors * component.moneyPerSurvivor} Money.";
+                    UnityEngine.Cursor.visible = true;
                 })
                 .AddToLifecycleOf(component);
         }

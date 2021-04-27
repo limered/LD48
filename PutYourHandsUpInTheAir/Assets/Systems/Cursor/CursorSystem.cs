@@ -10,7 +10,6 @@ namespace Systems.Cursor
     {
         public override void Register(CursorComponent component)
         {
-            UnityEngine.Cursor.visible = false;
             component.SpriteRenderer = component.GetComponent<SpriteRenderer>();
 
             var floorLayer = LayerMask.NameToLayer("Floor");
@@ -24,10 +23,12 @@ namespace Systems.Cursor
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out _, Mathf.Infinity, 1 << touristLayer))
             {
+                UnityEngine.Cursor.visible = false;
                 SetCustomCursor(component, component.interactionCursor);
             }
             else if (Physics.Raycast(ray, out _, Mathf.Infinity, 1 << floorLayer))
             {
+                UnityEngine.Cursor.visible = false;
                 SetCustomCursor(component, component.moveCursor);
             }
             else
