@@ -187,6 +187,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: PlayTestMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: PlayTestRoomPrefab
+      value: 
+      objectReference: {fileID: 3875406599220642518, guid: 067fc5b58ef681f4a86924746549059f, type: 3}
     - target: {fileID: 4066499535153139368, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: m_RootOrder
       value: 1

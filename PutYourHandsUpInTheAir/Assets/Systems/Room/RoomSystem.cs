@@ -1,4 +1,5 @@
-﻿using SystemBase;
+﻿using System;
+using SystemBase;
 using Systems.Room.Events;
 using UniRx;
 using UnityEngine;
@@ -9,6 +10,8 @@ namespace Systems.Room
     [GameSystem]
     public class RoomSystem : GameSystem<RoomComponent>
     {
+        private float _animationTime = 5;
+
         public override void Register(RoomComponent room)
         {
             Debug.Log("New Room Added");
@@ -32,6 +35,21 @@ namespace Systems.Room
                 .AddToLifecycleOf(room);
 
             room.State.GoToState(new RoomWalkIn());
+
+            MessageBroker.Default
+                .Receive<RoomEverybodyDied>()
+                .Subscribe(_ => ShowRestartMessage(room))
+                .AddToLifecycleOf(room);
+        }
+
+        private void ShowRestartMessage(RoomComponent room)
+        {
+            Observable.Timer(TimeSpan.FromSeconds(_animationTime))
+                .Subscribe(_ =>
+                {
+                    room.AllDiesBubble.SetActive(true);
+                })
+                .AddToLifecycleOf(room);
         }
 
         private void ProgressRoom(RoomComponent room)

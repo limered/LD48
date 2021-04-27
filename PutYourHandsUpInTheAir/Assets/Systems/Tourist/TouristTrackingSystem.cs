@@ -131,13 +131,14 @@ namespace Systems.Tourist
                 if (_touristDumps.Any(x => x.IsAlive))
                 {
                     Debug.Log($"Room finished. {_touristDumps.Count(x => x.IsAlive)} tourists survived");
+                    MessageBroker.Default.Publish(new RoomAllTouristsLeft());
                 }
                 else
                 {
                     Debug.Log($"Room finished. Everyone died...");
+                    MessageBroker.Default.Publish(new RoomEverybodyDied());
                 }
                 
-                MessageBroker.Default.Publish(new RoomAllTouristsLeft());
                 MessageBroker.Default.Publish(new UpdateScoreMsg(TouristStats));
             }
         }
