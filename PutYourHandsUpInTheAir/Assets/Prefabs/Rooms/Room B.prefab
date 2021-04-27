@@ -736,6 +736,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stones03 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5339566747431408028, guid: d3d6a9175e2ca2a4b90febb72500d67d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5339566747431408028, guid: d3d6a9175e2ca2a4b90febb72500d67d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5339566747431408028, guid: d3d6a9175e2ca2a4b90febb72500d67d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1459146929
+      objectReference: {fileID: 0}
     - target: {fileID: 5339566747431408029, guid: d3d6a9175e2ca2a4b90febb72500d67d, type: 3}
       propertyPath: m_RootOrder
       value: 3
