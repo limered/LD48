@@ -132,20 +132,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: PlayTestMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: PlayTestRoomPrefab
       value: 
-      objectReference: {fileID: 2208283005694695449, guid: 47b6f806d3e38b34cb18ec6f82593d5b, type: 3}
-    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
-      propertyPath: EasyRooms.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
-      propertyPath: EasyRooms.Array.data[5]
-      value: 
-      objectReference: {fileID: 2208283005694695449, guid: 47b6f806d3e38b34cb18ec6f82593d5b, type: 3}
+      objectReference: {fileID: 3875406599220642518, guid: 6faf977ad7b28b8458546c08d892b0b3, type: 3}
     - target: {fileID: 4066499535153139368, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: m_RootOrder
       value: 1
