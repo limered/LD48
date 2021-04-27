@@ -348,6 +348,7 @@ MonoBehaviour:
   - {fileID: 8396090924697026441, guid: a1131b1af407a1c458596af54c00b6d6, type: 3}
   - {fileID: 4568844813494698965, guid: 3bc7daa961f63d9448d5140dc17926da, type: 3}
   - {fileID: 3875406599220642518, guid: 6faf977ad7b28b8458546c08d892b0b3, type: 3}
+  - {fileID: 3720444366163030855, guid: b6dde5f2c8d081944a3788a5104457cd, type: 3}
   MediumRooms: []
   HardRooms: []
   MaxLevelCount: 6

@@ -130,6 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: EasyRooms.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: EasyRooms.Array.data[3]
+      value: 
+      objectReference: {fileID: 3720444366163030855, guid: b6dde5f2c8d081944a3788a5104457cd, type: 3}
     - target: {fileID: 4066499535153139368, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: m_RootOrder
       value: 1
