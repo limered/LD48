@@ -234,10 +234,10 @@ RectTransform:
   m_Father: {fileID: 111942651}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -65}
-  m_SizeDelta: {x: 500, y: 400}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -70}
+  m_SizeDelta: {x: -20, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &169113888
 MonoBehaviour:
@@ -269,7 +269,7 @@ MonoBehaviour:
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'I''m Davi, your guide.
@@ -740,7 +740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_AnchorMin.x
@@ -748,7 +748,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_SizeDelta.x
@@ -792,7 +792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 279
+      value: -201
       objectReference: {fileID: 0}
     - target: {fileID: 2643515788820517952, guid: 3038181747652df468bd19d0728aac93, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -958,10 +958,10 @@ RectTransform:
   m_Father: {fileID: 111942651}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 57, y: 191}
-  m_SizeDelta: {x: 450, y: 66.883}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 220}
+  m_SizeDelta: {x: -120, y: 66.882996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1980874675
 MonoBehaviour:
@@ -993,7 +993,7 @@ MonoBehaviour:
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Welcome to the jungle!
