@@ -1,5 +1,6 @@
 ﻿using SystemBase;
 using Systems.Tourist;
+using Systems.Tourist.States;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -30,9 +31,11 @@ namespace Systems.Player.TouristInteraction
             {
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, 1 << touristLayer)) return;
+                var touristBrain = hit.transform.GetComponent<TouristBrainComponent>();
+                if (!touristBrain || touristBrain.States.CurrentState.Value is Dead) return;
 
                 player.LastTargetedTourist.Value = player.TargetedTourist.Value;
-                player.TargetedTourist.Value = hit.transform.GetComponent<TouristBrainComponent>();
+                player.TargetedTourist.Value = touristBrain;
             }
         }
 

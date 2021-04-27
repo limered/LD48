@@ -681,6 +681,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4283641650618369390, guid: 7393130da9248594898a065006020760, type: 3}
+      propertyPath: DistractionInteractionDuration
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4283641650618369391, guid: 7393130da9248594898a065006020760, type: 3}
       propertyPath: m_Name
       value: Tiger
@@ -2009,7 +2013,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 616607745, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
       propertyPath: DistractionTimerValue
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 616607745, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
       propertyPath: TouristsPerDistraction
@@ -2269,6 +2273,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4283641650618369390, guid: 7393130da9248594898a065006020760, type: 3}
+      propertyPath: DistractionInteractionDuration
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4283641650618369391, guid: 7393130da9248594898a065006020760, type: 3}
       propertyPath: m_Name
       value: Tiger (2)
@@ -2398,6 +2406,10 @@ PrefabInstance:
     - target: {fileID: 4283641650618369389, guid: 7393130da9248594898a065006020760, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283641650618369390, guid: 7393130da9248594898a065006020760, type: 3}
+      propertyPath: DistractionInteractionDuration
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4283641650618369391, guid: 7393130da9248594898a065006020760, type: 3}
       propertyPath: m_Name
