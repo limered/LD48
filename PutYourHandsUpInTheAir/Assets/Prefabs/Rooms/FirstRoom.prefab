@@ -79,20 +79,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Now it's time to collect your reward!
---- !u!114 &8924827829493145413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7721235312565522134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4a62d92c34e3be428ad1d1f3727f808, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FirstRoomTextElement: {fileID: 5524756564136250756}
-  TouristNameText: {fileID: 1297261958037132225}
 --- !u!1 &5524756564136250756
 GameObject:
   m_ObjectHideFlags: 0

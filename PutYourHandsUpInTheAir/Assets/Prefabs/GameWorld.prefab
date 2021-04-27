@@ -353,6 +353,7 @@ MonoBehaviour:
   - {fileID: 2208283005694695449, guid: 47b6f806d3e38b34cb18ec6f82593d5b, type: 3}
   MediumRooms: []
   HardRooms: []
+  FinalJungleColor: {r: 0.13725491, g: 0.027450984, b: 0, a: 0.69803923}
   MaxLevelCount: 6
   CurrentLevelNr:
     value: 0

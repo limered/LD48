@@ -33,12 +33,16 @@ namespace Systems.World
             LoadLevel(component, lvlPrefab);
         }
 
-        private void LoadLevel(WorldComponent component, GameObject lvlPrefab)
+        private void LoadLevel(WorldComponent world, GameObject lvlPrefab)
         {
-            component.CurrentLevelNr.Value++;
+            
+
+            world.CurrentLevelNr.Value++;
             var lvl = Object.Instantiate(lvlPrefab);
-            component.CurrentLevel.Value = lvl;
-            lvl.GetComponent<RoomComponent>();
+            world.CurrentLevel.Value = lvl;
+            var room = lvl.GetComponent<RoomComponent>();
+
+
         }
 
         private void LoadNextLevel(WorldComponent component)
@@ -64,6 +68,20 @@ namespace Systems.World
         }
         private void LoadNextLevelOnRoomNextState(WorldComponent world, RoomComponent room)
         {
+            var fadeComp = room.GetComponentInChildren<RoomFadeOutComponent>();
+            if (fadeComp)
+            {
+                if (world.CurrentLevelNr.Value > world.MaxLevelCount)
+                {
+                    fadeComp.FadeToColor = new Color(0, 0, 0, 0);
+                }
+                else
+                {
+                    var fadeToAlpha = (float) world.CurrentLevelNr.Value / (float) world.MaxLevelCount;
+                    fadeComp.FadeToColor = Color.Lerp(new Color(0, 0, 0, 0), world.FinalJungleColor, fadeToAlpha);
+                }
+            }
+
             if (!world.PlayTestMode && world.CurrentLevelNr.Value > world.MaxLevelCount) return;
 
             room.State.CurrentState

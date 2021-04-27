@@ -10,7 +10,6 @@ namespace Systems.Room
     public class RoomFadeOutSystem : GameSystem<RoomFadeOutComponent>
     {
         private readonly Color Hidden = new Color(0,0,0,1);
-        private readonly Color Show = new Color(0,0,0,0);
 
         private float StartStamp;
         private float EndStamp;
@@ -46,12 +45,12 @@ namespace Systems.Room
             if (comp.Room.State.CurrentState.Value is RoomWalkIn)
             {
                 var alpha = (Time.timeSinceLevelLoad - StartStamp) / comp.FadeTime;
-                comp.GetComponent<Image>().color = Color.Lerp(Hidden, Show, alpha);
+                comp.GetComponent<Image>().color = Color.Lerp(Hidden, comp.FadeToColor, alpha);
             }
             else if (comp.Room.State.CurrentState.Value is RoomDestroy)
             {
                 var alpha = (Time.timeSinceLevelLoad - EndStamp) / comp.FadeTime;
-                comp.GetComponent<Image>().color = Color.Lerp(Show, Hidden, alpha);
+                comp.GetComponent<Image>().color = Color.Lerp(comp.FadeToColor, Hidden, alpha);
 
                 if (alpha > 1f)
                 {
