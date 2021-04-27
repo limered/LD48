@@ -2011,6 +2011,10 @@ PrefabInstance:
       propertyPath: DistractionTimerValue
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 616607745, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
+      propertyPath: TouristsPerDistraction
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5907574603959349326, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
       propertyPath: m_RootOrder
       value: 0

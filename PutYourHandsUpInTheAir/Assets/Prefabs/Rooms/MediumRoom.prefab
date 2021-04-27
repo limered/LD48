@@ -1704,7 +1704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 616607745, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
       propertyPath: DistractionTimerValue
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 616607745, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
       propertyPath: TouristsPerDistraction

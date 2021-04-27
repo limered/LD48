@@ -22,7 +22,7 @@ namespace Systems.FirstRoom
         {
             _firstRoomComponent.WhereNotNull()
                 .Subscribe(first => TigerDistractionTriggered(first, component))
-                .AddToLifecycleOf(component);
+                .AddTo(component);
         }
 
         private void TigerDistractionTriggered(FirstRoomComponent firstRoom, TigerDistractionTouristComponent component)
@@ -30,6 +30,8 @@ namespace Systems.FirstRoom
             var touristName = component.GetComponent<TouristBrainComponent>().touristName.Value;
 
             var touristText = "Hey! " + touristName + " is going to the Tiger! \n Please click on them to save their life!";
+
+            if (!firstRoom || !firstRoom.TouristNameText || !firstRoom.FirstRoomTextElement) return;
 
             firstRoom.TouristNameText.text = touristText;
             firstRoom.FirstRoomTextElement.SetActive(true);
