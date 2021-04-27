@@ -14,7 +14,7 @@ namespace SystemBase
         private readonly Dictionary<Type, int> _inDegrees = new Dictionary<Type, int>();
         private readonly Dictionary<Type, List<IGameSystem>> _systemToComponentMapper = new Dictionary<Type, List<IGameSystem>>();
         private List<IGameSystem> _gameSystems = new List<IGameSystem>();
-        public Type[] ComponentsToRegister { get { return new Type[0]; } }
+        public Type[] ComponentsToRegister => new Type[0];
 
         public virtual void Init()
         {
@@ -27,8 +27,7 @@ namespace SystemBase
 
         public void RegisterComponent(GameComponent component)
         {
-            List<IGameSystem> systemsToRegisterTo;
-            if (!_systemToComponentMapper.TryGetValue(component.GetType(), out systemsToRegisterTo)) return;
+            if (!_systemToComponentMapper.TryGetValue(component.GetType(), out List<IGameSystem> systemsToRegisterTo)) return;
 
             foreach (var system in systemsToRegisterTo)
             {
@@ -38,8 +37,7 @@ namespace SystemBase
 
         public T System<T>() where T : IGameSystem
         {
-            IGameSystem system;
-            if (_gameSystemDict.TryGetValue(typeof(T), out system))
+            if (_gameSystemDict.TryGetValue(typeof(T), out var system))
                 return (T)system;
             throw new ArgumentException("System: " + typeof(T) + " not registered!");
         }

@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using SystemBase;
+using Assets.Utils.Math;
 using ExampleSystems.Example.States;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using Utils;
-using Utils.Math;
 using Utils.Plugins;
 
 namespace ExampleSystems.Example

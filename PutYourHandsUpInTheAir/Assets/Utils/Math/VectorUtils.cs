@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Utils.Math
+namespace Assets.Utils.Math
 {
     public static class VectorUtils
     {
@@ -9,7 +9,13 @@ namespace Utils.Math
         {
             return new Vector2(v.x, v.y);
         }
-        public static float Angle(Vector2 vector)
+
+        public static Vector2 XZ(this Vector3 v)
+        {
+            return new Vector2(v.x, v.z);
+        }
+
+        public static float Angle(this Vector2 vector)
         {
             return Angle(vector, Vector2.up);
         }
@@ -19,7 +25,7 @@ namespace Utils.Math
             return Mathf.Deg2Rad * Vector2.Angle(zeroAngleNormal, vector.normalized);
         }
 
-        public static Vector2 FromAngle(float angle)
+        public static Vector2 FromAngle(this float angle)
         {
             angle += 90 * Mathf.Deg2Rad;
             return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
@@ -95,6 +101,17 @@ namespace Utils.Math
         {
             return (to - from).normalized;
         }
+
+        public static float DistanceToSq(this Vector3 from, Vector3 to)
+        {
+            return (to - from).sqrMagnitude;
+        }
+
+        public static float DistanceTo(this Vector3 from, Vector3 to)
+        {
+            return (to - from).magnitude;
+        }
+
         public static Vector2 Rotate(this Vector2 v, float degrees)
         {
             var sin = Mathf.Sin(degrees * Mathf.Deg2Rad);

@@ -1,6 +1,6 @@
 ﻿using SystemBase.StateMachineBase;
 using Systems;
-using Systems.GameState.Messages;
+using GameState.Messages;
 using UniRx;
 
 namespace GameState.States

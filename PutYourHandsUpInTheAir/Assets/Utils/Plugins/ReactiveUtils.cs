@@ -1,4 +1,5 @@
 using System;
+using SystemBase;
 using UniRx;
 using UnityEngine;
 
@@ -96,6 +97,26 @@ namespace Utils.Plugins
 
         #endregion Logging
 
+        #region Timing
+        /// <summary>Intercepts a minimum interval between consecutive elements of an
+        /// observable sequence.</summary>
+        public static IObservable<T> WithInterval<T>(this IObservable<T> source,
+            TimeSpan interval, IScheduler scheduler = null)
+        {
+            return source
+                .Scan((Observable.Return(0L), (IObservable<T>)null), (state, x) =>
+                {
+                    var (previousTimer, _) = state;
+                    var timer = (scheduler != null ? Observable.Timer(interval, scheduler)
+                        : Observable.Timer(interval)).PublishLast();
+                    var delayed = previousTimer.Select(_ => x).Finally(() => timer.Connect());
+                    return (timer, delayed);
+                })
+                .Select(e => e.Item2)
+                .Concat();
+        }
+        #endregion
+        
         #region Actions
 
         /// <summary>
@@ -118,6 +139,18 @@ namespace Utils.Plugins
                     onDispose();
                 });
             });
+        }
+
+        public static T AddToLifecycleOf<T>(this T disposable, GameComponent gameComponent)
+            where T:IDisposable
+        {
+            if (gameComponent != null)
+            {
+                return gameComponent.AddDisposablele(disposable);
+            }
+            disposable.Dispose();
+            return disposable;
+
         }
 
         public static void DoNothing<T>(T _)
@@ -259,5 +292,6 @@ namespace Utils.Plugins
         }
 
         #endregion Filter
+
     }
 }

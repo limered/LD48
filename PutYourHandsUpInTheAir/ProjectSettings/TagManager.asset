@@ -3,15 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - tourist
+  - levelBorder
+  - bus
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Floor
   - Water
   - UI
-  - 
+  - Tourist
   - 
   - 
   - 
@@ -40,4 +43,25 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: PlantsBackground
+    uniqueID: 922045375
+    locked: 0
+  - name: Tourist
+    uniqueID: 1459146929
+    locked: 0
+  - name: Plants
+    uniqueID: 3160717675
+    locked: 0
+  - name: Animal
+    uniqueID: 2164011707
+    locked: 0
+  - name: PlantsForeground
+    uniqueID: 3406360979
+    locked: 0
+  - name: Cursor
+    uniqueID: 4193263039
+    locked: 0
+  - name: FadeOut
+    uniqueID: 4123652943
     locked: 0

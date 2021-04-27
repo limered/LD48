@@ -1,7 +1,7 @@
 ﻿using GameState.States;
 using SystemBase;
 using SystemBase.StateMachineBase;
-using Systems.GameState.Messages;
+using GameState.Messages;
 using StrongSystems.Audio.Helper;
 using UniRx;
 using UnityEngine;
@@ -24,11 +24,12 @@ namespace Systems
             Init();
 
             MessageBroker.Default.Publish(new GameMsgFinishedLoading());
+            MessageBroker.Default.Publish(new GameMsgStart());
         }
 
         private void Start()
         {
-            //MessageBroker.Default.Publish(new GameMsgStart());
+           // MessageBroker.Default.Publish(new GameMsgStart());
             QualitySettings.vSyncCount = 1;
             Application.targetFrameRate = 60;
         }
