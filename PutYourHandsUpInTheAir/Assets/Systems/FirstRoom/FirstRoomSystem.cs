@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Mime;
 using SystemBase;
 using Systems.Distractions;
 using Systems.Tourist;
@@ -9,7 +8,7 @@ using Utils.Plugins;
 namespace Systems.FirstRoom
 {
     [GameSystem]
-    public class FirstRooSystem : GameSystem<FirstRoomComponent, TigerDistractionTouristComponent>
+    public class FirstRoomSystem : GameSystem<FirstRoomComponent, TigerDistractionTouristComponent>
     {
         private readonly ReactiveProperty<FirstRoomComponent> _firstRoomComponent = new ReactiveProperty<FirstRoomComponent>();
 
