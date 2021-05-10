@@ -17,7 +17,7 @@ namespace Systems.Tourist
     {
         public override void Register(TouristBrainComponent component)
         {
-            var movement = component.GetComponent<MovementComponent>();
+            var movement = component.GetComponent<TwoDeeMovementComponent>();
 
             component.States.CurrentState
                 // .LogOnNext(state => $"{component.touristName}: {state}")
@@ -84,7 +84,7 @@ namespace Systems.Tourist
         }
 
         private void GoingToIdlePosition(GoingBackToIdle state, TouristBrainComponent tourist,
-            MovementComponent movement)
+            TwoDeeMovementComponent movement)
         {
             SystemUpdate()
                 .Select(_ => state.IdlePosition - (Vector2) tourist.transform.position)
@@ -107,7 +107,7 @@ namespace Systems.Tourist
                 .AddTo(state);
         }
 
-        private void Idle(Idle state, TouristBrainComponent tourist, MovementComponent movement)
+        private void Idle(Idle state, TouristBrainComponent tourist, TwoDeeMovementComponent movement)
         {
             movement.Direction.Value = Vector2.zero;
 
@@ -137,7 +137,7 @@ namespace Systems.Tourist
         }
 
         private void GoingToAttraction(GoingToAttraction attraction, TouristBrainComponent tourist,
-            MovementComponent movement)
+            TwoDeeMovementComponent movement)
         {
             SystemUpdate()
                 .Select(_ => attraction.AttractionPosition - (Vector2) tourist.transform.position)
@@ -158,7 +158,7 @@ namespace Systems.Tourist
                 .AddTo(attraction);
         }
 
-        private void Interacting(Interacting interacting, TouristBrainComponent tourist, MovementComponent movement)
+        private void Interacting(Interacting interacting, TouristBrainComponent tourist, TwoDeeMovementComponent movement)
         {
             movement.Direction.Value = Vector2.zero; 
         }

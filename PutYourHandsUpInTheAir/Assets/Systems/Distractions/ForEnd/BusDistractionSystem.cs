@@ -40,7 +40,7 @@ namespace Systems.Distractions.ForEnd
                     AddBussDistractionToAllPeople(tourists, bus.GetComponentInParent<DistractionComponent>());
                     bus.leftScene = true;
                     bus.transform.position = bus.StartPosititon;
-                    var movementComp = bus.GetComponent<MovementComponent>();
+                    var movementComp = bus.GetComponent<TwoDeeMovementComponent>();
                     movementComp.Direction.Value = Vector2.zero;
                 }).AddTo(bus);
 
@@ -57,7 +57,7 @@ namespace Systems.Distractions.ForEnd
         private void SpawnBus(BusComponent bus)
         {
             bus.enteredScene = true;
-            var movementComp = bus.GetComponent<MovementComponent>();
+            var movementComp = bus.GetComponent<TwoDeeMovementComponent>();
             movementComp.Direction.Value = bus.StartPosititon - (Vector2)bus.transform.position;
         }
 
@@ -99,7 +99,7 @@ namespace Systems.Distractions.ForEnd
 
             var bus = GameObject.FindGameObjectWithTag("bus");
             var busComponent = bus.GetComponent<BusComponent>();
-            var movementComponent = bus.GetComponent<MovementComponent>();
+            var movementComponent = bus.GetComponent<TwoDeeMovementComponent>();
             touristBrain.transform.parent = bus.transform;
 
             if (component.LastDistractionProgressTime <= 0)

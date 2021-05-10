@@ -8,9 +8,9 @@ using Utils;
 namespace Systems.Movement
 {
     [GameSystem]
-    public class MovementSystem : GameSystem<MovementComponent>
+    public class TwoDeeMovementSystem : GameSystem<TwoDeeMovementComponent>
     {
-        public override void Register(MovementComponent component)
+        public override void Register(TwoDeeMovementComponent component)
         {
             component.FixedUpdateAsObservable()
                 .Select(_ => component)
@@ -30,12 +30,12 @@ namespace Systems.Movement
             body.freezeRotation = true;
         }
 
-        private static void FixCollider(MovementComponent component)
+        private static void FixCollider(TwoDeeMovementComponent component)
         {
             component.Collider.transform.localPosition = Vector3.zero;
         }
 
-        private static void ApplyAnimationToObject(MovementComponent component)
+        private static void ApplyAnimationToObject(TwoDeeMovementComponent component)
         {
             var positionChange = component.Velocity * Time.fixedDeltaTime;
             component.transform.position = new Vector3(
@@ -44,7 +44,7 @@ namespace Systems.Movement
                 0.1f);
         }
 
-        private static void Animate(MovementComponent component)
+        private static void Animate(TwoDeeMovementComponent component)
         {
             var futureVel = component.Velocity + component.Acceleration * Time.fixedDeltaTime;
             var speed = component.Velocity.magnitude;
@@ -58,18 +58,18 @@ namespace Systems.Movement
             }
         }
 
-        private static void ApplyFriction(MovementComponent component)
+        private static void ApplyFriction(TwoDeeMovementComponent component)
         {
             var backFriction = component.Velocity * -component.Friction;
             component.Velocity = component.Velocity + backFriction * Time.fixedDeltaTime;
         }
 
-        private static void ApplyDirection(MovementComponent component)
+        private static void ApplyDirection(TwoDeeMovementComponent component)
         {
             component.Acceleration = component.Direction.Value * component.Speed;
         }
 
-        private void CalculateMovement(MovementComponent component)
+        private void CalculateMovement(TwoDeeMovementComponent component)
         {
             if (IoC.Game.GameStateContext.CurrentState.Value is Running)
             {
@@ -82,7 +82,7 @@ namespace Systems.Movement
             }
         }
 
-        private static void StopRigidbodyMovement(MovementComponent component)
+        private static void StopRigidbodyMovement(TwoDeeMovementComponent component)
         {
             var body = component.GetComponent<Rigidbody>();
             body.angularVelocity = Vector3.zero;

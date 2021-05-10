@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Systems.Movement
 {
-    [RequireComponent(typeof(MovementComponent))]
+    [RequireComponent(typeof(TwoDeeMovementComponent))]
     public class RunWobbleComponent : GameComponent
     {
         public float wobbleInterval = 0.02f;

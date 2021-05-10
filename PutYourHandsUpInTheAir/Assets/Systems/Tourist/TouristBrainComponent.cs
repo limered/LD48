@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Systems.Tourist
 {
-    [RequireComponent(typeof(MovementComponent))]
+    [RequireComponent(typeof(TwoDeeMovementComponent))]
     public class TouristBrainComponent : GameComponent
     {
         public StringReactiveProperty touristName = new StringReactiveProperty();

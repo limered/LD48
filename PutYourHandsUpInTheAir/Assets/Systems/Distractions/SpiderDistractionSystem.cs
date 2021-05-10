@@ -59,7 +59,7 @@ namespace Systems.Distractions
 
         private static void DoStuff(SpiderDistractionTouristComponent component)
         {
-            var movement = component.GetComponent<MovementComponent>();
+            var movement = component.GetComponent<TwoDeeMovementComponent>();
             if (!component.IsPoisoned)
             {
                 component.RandomPoisonedPosition = movement.transform.position;

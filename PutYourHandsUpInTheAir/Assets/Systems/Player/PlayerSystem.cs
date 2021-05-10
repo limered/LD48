@@ -10,16 +10,16 @@ using Object = UnityEngine.Object;
 
 namespace Systems.Player
 {
-    [GameSystem(typeof(MovementSystem))]
-    public class PlayerSystem : GameSystem<PlayerComponent, MovementComponent, PlayerSpawnerComponent>
+    [GameSystem(typeof(TwoDeeMovementSystem))]
+    public class PlayerSystem : GameSystem<PlayerComponent, TwoDeeMovementComponent, PlayerSpawnerComponent>
     {
         public override void Register(PlayerComponent component)
         {
-            component.GetComponent<MovementComponent>().Direction
+            component.GetComponent<TwoDeeMovementComponent>().Direction
                 .Subscribe(dir => component.IsMoving.Value = dir.magnitude > 0);
         }
 
-        public override void Register(MovementComponent component)
+        public override void Register(TwoDeeMovementComponent component)
         {
             component.UpdateAsObservable()
                 .Select(_ => component)
@@ -28,7 +28,7 @@ namespace Systems.Player
                 .AddTo(component);
         }
 
-        private static void ControlPlayer(MovementComponent comp)
+        private static void ControlPlayer(TwoDeeMovementComponent comp)
         {
             var floorLayer = LayerMask.NameToLayer("Floor");
             var touristLayer = LayerMask.NameToLayer("Tourist");
