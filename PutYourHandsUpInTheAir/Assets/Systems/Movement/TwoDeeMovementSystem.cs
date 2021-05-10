@@ -45,19 +45,21 @@ namespace Systems.Movement
                 component.transform.position.x + positionChange.x,
                 component.transform.position.y + positionChange.y,
                 0.1f);
+
+            component.CurrentVelocity = component.Velocity.magnitude;
         }
 
         private static void Animate(TwoDeeMovementComponent component)
         {
             var futureVel = component.Velocity + component.Acceleration * Time.fixedDeltaTime;
-            var speed = component.Velocity.magnitude;
-            if (speed < component.MaxSpeed)
+            var speed = futureVel.magnitude;
+            if (speed < component.VelocityCutoff)
             {
                 component.Velocity = futureVel;
             }
             else
             {
-                component.Velocity = component.Velocity.normalized * component.MaxSpeed;
+                component.Velocity = component.Velocity.normalized * component.VelocityCutoff;
             }
         }
 

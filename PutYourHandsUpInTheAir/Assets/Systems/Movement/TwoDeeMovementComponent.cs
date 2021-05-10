@@ -1,5 +1,4 @@
-﻿using System;
-using SystemBase;
+﻿using SystemBase;
 using UniRx;
 using UnityEngine;
 
@@ -10,13 +9,20 @@ namespace Systems.Movement
     {
         public float Speed;
         public float Friction;
-        public float MaxSpeed;
-        public Collider Collider;
-        
-        public BoolReactiveProperty IsMoving = new BoolReactiveProperty();
+
+        [Range(0f, 1f)]
+        public float SlipInverse;
+
+        public float VelocityCutoff;
+
         public Vector2ReactiveProperty Direction = new Vector2ReactiveProperty(Vector2.zero);
+
+        public float CurrentVelocity;
+        public BoolReactiveProperty IsMoving = new BoolReactiveProperty();
         public Vector2 Velocity { get; set; }
         public Vector2 Acceleration { get; set; }
 
+        // not used
+        public Collider Collider { get; set; }
     }
 }
