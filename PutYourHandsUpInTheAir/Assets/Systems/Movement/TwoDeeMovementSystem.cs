@@ -18,6 +18,9 @@ namespace Systems.Movement
                 .AddTo(component);
 
             ResetRigidbody(component);
+
+            component.Direction
+                .Subscribe(dir => component.IsMoving.Value = dir.magnitude > 0);
         }
 
         private static void ResetRigidbody(Component comp)
@@ -61,7 +64,7 @@ namespace Systems.Movement
         private static void ApplyFriction(TwoDeeMovementComponent component)
         {
             var backFriction = component.Velocity * -component.Friction;
-            component.Velocity = component.Velocity + backFriction * Time.fixedDeltaTime;
+            component.Velocity += backFriction * Time.fixedDeltaTime;
         }
 
         private static void ApplyDirection(TwoDeeMovementComponent component)
@@ -71,15 +74,14 @@ namespace Systems.Movement
 
         private void CalculateMovement(TwoDeeMovementComponent component)
         {
-            if (IoC.Game.GameStateContext.CurrentState.Value is Running)
-            {
-                StopRigidbodyMovement(component);
-                ApplyDirection(component);
-                ApplyFriction(component);
-                Animate(component);
-                ApplyAnimationToObject(component);
-                if (component.Collider) FixCollider(component);
-            }
+            if (!(IoC.Game.GameStateContext.CurrentState.Value is Running)) return;
+
+            StopRigidbodyMovement(component);
+            ApplyDirection(component);
+            ApplyFriction(component);
+            Animate(component);
+            ApplyAnimationToObject(component);
+            if (component.Collider) FixCollider(component);
         }
 
         private static void StopRigidbodyMovement(TwoDeeMovementComponent component)

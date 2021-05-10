@@ -1,29 +1,19 @@
-﻿using System;
-using SystemBase;
+﻿using SystemBase;
 using Systems.Movement;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Utils.Unity;
-using Object = UnityEngine.Object;
 
 namespace Systems.Player
 {
     [GameSystem(typeof(TwoDeeMovementSystem))]
-    public class PlayerSystem : GameSystem<PlayerComponent, TwoDeeMovementComponent, PlayerSpawnerComponent>
+    public class PlayerSystem : GameSystem<PlayerComponent>
     {
         public override void Register(PlayerComponent component)
         {
-            component.GetComponent<TwoDeeMovementComponent>().Direction
-                .Subscribe(dir => component.IsMoving.Value = dir.magnitude > 0);
-        }
-
-        public override void Register(TwoDeeMovementComponent component)
-        {
             component.UpdateAsObservable()
-                .Select(_ => component)
-                .Where(movementComponent => movementComponent.GetComponent<PlayerComponent>())
+                .Select(_ => component.GetComponent<TwoDeeMovementComponent>())
                 .Subscribe(ControlPlayer)
                 .AddTo(component);
         }
@@ -51,13 +41,6 @@ namespace Systems.Player
                 player.TargetedTourist.Value = null;
                 player.TargetVector = new Vector3(hit.point.x, hit.point.y);
             }
-        }
-
-        public override void Register(PlayerSpawnerComponent component)
-        {
-            MessageBroker.Default.Receive<ActPlayerRespawn>()
-                .Subscribe(respawn =>
-                    Object.Instantiate(component.PlayerPrefab, component.transform.position, Quaternion.identity));
         }
     }
 }
