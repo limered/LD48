@@ -25,6 +25,7 @@ namespace Systems
 
             MessageBroker.Default.Publish(new GameMsgFinishedLoading());
             MessageBroker.Default.Publish(new GameMsgStart());
+            UnityEngine.Cursor.visible = true;
         }
 
         private void Start()
