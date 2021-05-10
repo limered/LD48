@@ -23,12 +23,12 @@ namespace Systems.Cursor
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out _, Mathf.Infinity, 1 << touristLayer))
             {
-                UnityEngine.Cursor.visible = false;
+                //UnityEngine.Cursor.visible = false;
                 SetCustomCursor(component, component.interactionCursor);
             }
             else if (Physics.Raycast(ray, out _, Mathf.Infinity, 1 << floorLayer))
             {
-                UnityEngine.Cursor.visible = false;
+                //UnityEngine.Cursor.visible = false;
                 SetCustomCursor(component, component.moveCursor);
             }
             else

@@ -96,8 +96,9 @@ namespace Systems.Distractions
 
             if (comp.LastDistractionProgressTime <= 0)
             {
+                var touristComp = comp.GetComponent<TouristBrainComponent>();
                 comp.DistractionProgress.Value = 1;
-                comp.GetComponent<TouristBrainComponent>()
+                touristComp
                     .States
                     .GoToState(new Dead());
                 Object.Destroy(comp);
