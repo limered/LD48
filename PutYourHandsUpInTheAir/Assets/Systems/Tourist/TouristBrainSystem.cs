@@ -56,7 +56,11 @@ namespace Systems.Tourist
                     }
                     else if (state is Dead)
                     {
-                        MessageBroker.Default.Publish(new ShowDeadPersonAction { TouristName = component.touristName.Value, TouristFaceIndex = component.headPartIndex.Value });
+                        MessageBroker.Default.Publish(new ShowDeadPersonAction { 
+                            TouristName = component.touristName.Value,
+                            TouristFaceIndex = component.headPartIndex.Value,
+                            DistractionIndex = 0
+                        });
 
                         movement.Direction.Value = Vector2.zero;
                         if (component.GetComponent<Collider>()) Object.Destroy(component.GetComponent<Collider>());

@@ -20,11 +20,15 @@ public class UISystem : GameSystem<UIComponent>
             {
                 ResetTime();
                 var text = component.Message.Text;
-                var face = component.Message.Image;
-
                 text.text = msg.TouristName + " died.";
+
                 var faces = component.GetComponentInParent<TouristConfigComponent>().topParts;
+                var face = component.Message.Image;
                 face.sprite = faces[msg.TouristFaceIndex];
+
+                var distractions = component.Message.Distractions;
+                var distraction = component.Message.Distraction;
+                distraction.sprite = distractions[msg.DistractionIndex];
 
                 if(!showing)
                 {
