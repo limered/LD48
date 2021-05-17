@@ -5,11 +5,13 @@ using SystemBase;
 using Systems.Tourist;
 using UniRx;
 using UniRx.Triggers;
+using UnityEngine;
 
 [GameSystem]
 public class UISystem : GameSystem<UIComponent>
 {
-    private float sec = 80f;
+    private float sec = 120f;
+    private bool showing = false;
 
     public override void Register(UIComponent component)
     {
@@ -24,7 +26,10 @@ public class UISystem : GameSystem<UIComponent>
                 var faces = component.GetComponentInParent<TouristConfigComponent>().topParts;
                 face.sprite = faces[msg.TouristFaceIndex];
 
-                component.Message.gameObject.SetActive(true);
+                if(!showing)
+                {
+                    ShowMessage(component.Message.gameObject, true);
+                }
 
             })
             .AddTo(component);
@@ -36,7 +41,7 @@ public class UISystem : GameSystem<UIComponent>
                 sec--;
             } else
             {
-                component.Message.gameObject.SetActive(false);
+                ShowMessage(component.Message.gameObject, false);
                 ResetTime();
             }
         });
@@ -45,5 +50,14 @@ public class UISystem : GameSystem<UIComponent>
     private void ResetTime()
     {
         sec = 80f;
+    }
+
+    private void ShowMessage(GameObject gameObject, bool show)
+    {
+        showing = show;
+        Animator animator = gameObject.GetComponent<Animator>();
+        animator.SetBool("show", show);
+
+        //gameObject.SetActive(show);
     }
 }
