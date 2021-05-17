@@ -48,9 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2909348b3da48c98e70ab10fdb4337c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsMoving:
-    value: 0
-  TargetedTourist: {fileID: 0}
+  TargetedTourist:
+    value: {fileID: 0}
+  LastTargetedTourist:
+    value: {fileID: 0}
   TargetVector: {x: 0, y: 0, z: 0}
   TouristOnlyMode: 0
 --- !u!65 &5653544716545335072
@@ -94,12 +95,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8d9ba2a31c4cff9534124ec21a1a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 50
-  Friction: 10
-  MaxSpeed: 20
-  Collider: {fileID: 0}
+  Speed: 54.80226
+  Friction: 27.711018
+  FrictionPercent: 0.50565463
+  VelocityCutoff: 100
   Direction:
     value: {x: 0, y: 0}
+  CurrentVelocity: 0
+  IsMoving:
+    value: 0
 --- !u!114 &3371024126051985215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +190,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1459146929
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 4595b282cc0220a44bdb234ba1c635ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -10,8 +10,8 @@ namespace Systems.Movement
         public float Speed;
         public float Friction;
 
-        [Range(0f, 1f)]
-        public float SlipInverse;
+        
+        public float FrictionPercent;
 
         public float VelocityCutoff;
 
@@ -24,5 +24,8 @@ namespace Systems.Movement
 
         // not used
         public Collider Collider { get; set; }
+
+        
+        
     }
 }
