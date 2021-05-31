@@ -1,8 +1,9 @@
-using UnityEngine;
-
-public class ShowDeadPersonAction
+namespace Systems.GameMessages.Messages
 {
-    public string TouristName { get; set; }
-    public int TouristFaceIndex { get; set; }
-    public int DistractionIndex { get; set; }
+    public class ShowDeadPersonAction
+    {
+        public string TouristName { get; set; }
+        public int TouristFaceIndex { get; set; }
+        public int DistractionIndex { get; set; }
+    }
 }

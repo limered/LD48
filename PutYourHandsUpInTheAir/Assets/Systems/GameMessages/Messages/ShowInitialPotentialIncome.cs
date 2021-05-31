@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ShowInitialPotentialIncome
+namespace Systems.GameMessages.Messages
 {
-    public int InitialPotentialIncome { get; set; }
+    public class ShowInitialPotentialIncome
+    {
+        public int InitialPotentialIncome { get; set; }
+    }
 }

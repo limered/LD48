@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ReducePotentialIncome
+namespace Systems.GameMessages.Messages
 {
-    public int IncomeVanished { get; set; }
+    public class ReducePotentialIncome
+    {
+        public int IncomeVanished { get; set; }
+    }
 }

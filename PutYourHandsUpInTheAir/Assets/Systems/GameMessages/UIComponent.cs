@@ -1,9 +1,10 @@
 using SystemBase;
-using UnityEngine;
-using UnityEngine.UI;
 
-public class UIComponent : GameComponent
+namespace Systems.GameMessages
 {
-    public AlertComponent Message;
-    public PotentialIncomeComponent PotentialIncome;
+    public class UIComponent : GameComponent
+    {
+        public AlertComponent Message;
+        public PotentialIncomeComponent PotentialIncome;
+    }
 }

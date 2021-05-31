@@ -10,6 +10,7 @@ using Utils.Plugins;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 using Systems.Distractions;
+using Systems.GameMessages.Messages;
 
 namespace Systems.Tourist
 {
