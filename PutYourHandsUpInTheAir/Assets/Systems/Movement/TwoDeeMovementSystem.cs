@@ -40,38 +40,37 @@ namespace Systems.Movement
 
         private static void ApplyAnimationToObject(TwoDeeMovementComponent component)
         {
-            var positionChange = component.Velocity * Time.fixedDeltaTime;
+            var positionChange = component.BodyData.Velocity * Time.fixedDeltaTime;
             component.transform.position = new Vector3(
                 component.transform.position.x + positionChange.x,
                 component.transform.position.y + positionChange.y,
                 0.1f);
 
-            component.CurrentVelocity = component.Velocity.magnitude;
+            component.CurrentVelocity = component.BodyData.Velocity.magnitude;
         }
 
         private static void Animate(TwoDeeMovementComponent component)
         {
-            var futureVel = component.Velocity + component.Acceleration * Time.fixedDeltaTime;
-            var speed = futureVel.magnitude;
-            if (speed < component.VelocityCutoff)
+            var futureVel = component.BodyData.Velocity + component.BodyData.Acceleration * Time.fixedDeltaTime;
+            var speed = futureVel.sqrMagnitude;
+            if (speed < component.MaxVelocity * component.MaxVelocity)
             {
-                component.Velocity = futureVel;
+                component.BodyData.Velocity = futureVel;
             }
             else
             {
-                component.Velocity = component.Velocity.normalized * component.VelocityCutoff;
+                component.BodyData.Velocity = component.BodyData.Velocity.normalized * component.MaxVelocity;
             }
         }
 
         private static void ApplyFriction(TwoDeeMovementComponent component)
         {
-            var backFriction = component.Velocity * -component.Friction;
-            component.Velocity += backFriction * Time.fixedDeltaTime;
+            component.BodyData.Velocity *= 1 - component.Drag;
         }
 
         private static void ApplyDirection(TwoDeeMovementComponent component)
         {
-            component.Acceleration = component.Direction.Value * component.Speed;
+            component.BodyData.Acceleration = component.Direction.Value * component.Speed;
         }
 
         private void CalculateMovement(TwoDeeMovementComponent component)

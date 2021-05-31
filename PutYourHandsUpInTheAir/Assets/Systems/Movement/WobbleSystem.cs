@@ -18,7 +18,7 @@ namespace Systems.Movement
                 .Select(_ => Time.time - startTime)
                 .Select(time =>
                 {
-                    var a = Mathf.Sin(time / component.wobbleInterval) * movement.Velocity.magnitude *
+                    var a = Mathf.Sin(time / component.wobbleInterval) * movement.BodyData.Velocity.magnitude *
                         component.wobbleFactor;
 
                     return Mathf.Abs(a) + a;

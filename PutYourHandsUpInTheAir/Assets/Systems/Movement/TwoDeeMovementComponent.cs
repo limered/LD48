@@ -8,24 +8,26 @@ namespace Systems.Movement
     public class TwoDeeMovementComponent : GameComponent
     {
         public float Speed;
-        public float Friction;
 
-        
-        public float FrictionPercent;
-
-        public float VelocityCutoff;
+        [Range(0.0f, 1.0f)]
+        public float Drag;
+        public float MaxVelocity;
 
         public Vector2ReactiveProperty Direction = new Vector2ReactiveProperty(Vector2.zero);
 
         public float CurrentVelocity;
+        public BodyData BodyData;
         public BoolReactiveProperty IsMoving = new BoolReactiveProperty();
-        public Vector2 Velocity { get; set; }
-        public Vector2 Acceleration { get; set; }
+        
 
         // not used
         public Collider Collider { get; set; }
+        
+    }
 
-        
-        
+    public struct BodyData
+    {
+        public Vector2 Velocity;
+        public Vector2 Acceleration;
     }
 }

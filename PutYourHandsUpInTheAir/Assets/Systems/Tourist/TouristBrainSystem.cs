@@ -66,7 +66,7 @@ namespace Systems.Tourist
                             {
                                 movement.Direction.Value =
                                     (walkOut.Target.position - component.transform.position).normalized;
-                                movement.VelocityCutoff = component.normalSpeed;
+                                movement.MaxVelocity = component.normalSpeed;
                             })
                             .AddToLifecycleOf(component);
                     }
@@ -125,7 +125,7 @@ namespace Systems.Tourist
                     }
                     else
                     {
-                        movement.VelocityCutoff = tourist.normalSpeed;
+                        movement.MaxVelocity = tourist.normalSpeed;
                         movement.Direction.Value = delta.normalized;
                     }
                 })
@@ -154,7 +154,7 @@ namespace Systems.Tourist
                         movement.Direction.Value = delta.normalized;
                     }
 
-                    movement.VelocityCutoff = tourist.idleSpeed;
+                    movement.MaxVelocity = tourist.idleSpeed;
                 })
                 .AddTo(state);
 
@@ -177,7 +177,7 @@ namespace Systems.Tourist
                     {
                         movement.Direction.Value =
                             (attraction.AttractionPosition - (Vector2) tourist.transform.position).normalized;
-                        movement.VelocityCutoff = tourist.attractedSpeed;
+                        movement.MaxVelocity = tourist.attractedSpeed;
                     }
                 })
                 .AddTo(attraction);
