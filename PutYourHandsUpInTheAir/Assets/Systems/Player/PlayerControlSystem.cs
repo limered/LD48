@@ -17,6 +17,7 @@ namespace Systems.Player
         {
             component.UpdateAsObservable()
                 .Select(_ => (movement: component.GetComponent<TwoDeeMovementComponent>(), player: component))
+                .Where(_ => IsLeftMouseClicked())
                 .Subscribe(ControlPlayer)
                 .AddTo(component);
         }
@@ -31,19 +32,29 @@ namespace Systems.Player
 
         private void SetPlayerTargetOnClick(PlayerComponent player)
         {
-            if (!Input.GetMouseButtonDown((int) MouseButton.LeftMouse)) return;
-
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out _, Mathf.Infinity, 1 << distractionLayer)) return;
-            if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, 1 << floorLayer)) return;
+            if (!HasClickedOnGround(out var hit)) return;
 
             player.TargetedDistraction.Value = null;
             player.TargetVector = new Vector3(hit.point.x, hit.point.y);
         }
 
+        private bool HasClickedOnGround(out RaycastHit hit)
+        {
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << distractionLayer)) return false;
+            return Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << floorLayer);
+        }
+
+        private static bool IsLeftMouseClicked()
+        {
+            return Input.GetMouseButtonDown((int)MouseButton.LeftMouse);
+        }
+
         private static void SetPlayerDirection(TwoDeeMovementComponent movement, PlayerComponent player)
         {
-            movement.Direction.Value = (player.TargetVector - movement.transform.position).normalized;
+            movement.Direction.Value = player.TargetedDistraction.Value 
+                ? (player.TargetedDistraction.Value.transform.position - movement.transform.position).normalized 
+                : (player.TargetVector - movement.transform.position).normalized;
         }
     }
 }

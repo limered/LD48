@@ -20,21 +20,21 @@ namespace Systems.Cursor
 
         private void UpdateCursorIcon(CursorComponent component, int floorLayer, int touristLayer)
         {
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out _, Mathf.Infinity, 1 << touristLayer))
-            {
-                //UnityEngine.Cursor.visible = false;
-                SetCustomCursor(component, component.interactionCursor);
-            }
-            else if (Physics.Raycast(ray, out _, Mathf.Infinity, 1 << floorLayer))
-            {
-                //UnityEngine.Cursor.visible = false;
-                SetCustomCursor(component, component.moveCursor);
-            }
-            else
-            {
-                SetCustomCursor(component, component.defaultCursor);
-            }
+            //var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //if (Physics.Raycast(ray, out _, Mathf.Infinity, 1 << touristLayer))
+            //{
+            //    //UnityEngine.Cursor.visible = false;
+            //    SetCustomCursor(component, component.interactionCursor);
+            //}
+            //else if (Physics.Raycast(ray, out _, Mathf.Infinity, 1 << floorLayer))
+            //{
+            //    //UnityEngine.Cursor.visible = false;
+            //    SetCustomCursor(component, component.moveCursor);
+            //}
+            //else
+            //{
+            //    SetCustomCursor(component, component.defaultCursor);
+            //}
         }
 
         private static void SetCustomCursor(CursorComponent component, Sprite spriteRendererSprite)

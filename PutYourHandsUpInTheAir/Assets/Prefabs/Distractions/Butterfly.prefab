@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2674991841311685199}
   - component: {fileID: 2674991841311685192}
   - component: {fileID: 2674991841311685193}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: InteractionPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2674991841686138922}
   - component: {fileID: 2674991841686138917}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Sprite Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 2674991842247269090}
   - component: {fileID: 2674991842247269091}
   - component: {fileID: 242096486341353295}
+  - component: {fileID: -6574964830011763644}
   m_Layer: 7
   m_Name: Butterfly
   m_TagString: Untagged
@@ -236,3 +237,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &-6574964830011763644
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2674991842247269088}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
