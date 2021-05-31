@@ -17,7 +17,6 @@ namespace Systems.Tourist
     [GameSystem]
     public class TouristBrainSystem : GameSystem<TouristBrainComponent>
     {
-
         public override void Register(TouristBrainComponent component)
         {
             var movement = component.GetComponent<TwoDeeMovementComponent>();
@@ -27,53 +26,48 @@ namespace Systems.Tourist
                 .Do(state => component.debugCurrentState = $"{state}")
                 .Subscribe(state =>
                 {
-                    if (state is GoingIntoLevel) //TODO: do we need this state?
+                    switch (state)
                     {
-                        //this prevents a deadlock when setting the state directly
-                        Observable.Timer(TimeSpan.FromSeconds(0))
-                            .Subscribe(_ =>
-                                component.States.GoToState(
-                                    new GoingBackToIdle(Random.insideUnitCircle /*<- gather around this point*/)))
-                            .AddTo(state);
-                    }
-                    else if (state is GoingBackToIdle goingIdle)
-                    {
-                        GoingToIdlePosition(goingIdle, component, movement);
-                    }
-                    else if (state is Idle idle)
-                    {
-                        Idle(idle, component, movement);
-                    }
-                    else if (state is PickingInterest)
-                    {
-                        //TODO: show some kind of thinking process (DistractionControlSystem)
-                    }
-                    else if (state is GoingToAttraction attraction)
-                    {
-                        GoingToAttraction(attraction, component, movement);
-                    }
-                    else if (state is Interacting interacting)
-                    {
-                        Interacting(interacting, component, movement);
-                    }
-                    else if (state is Dead dead)
-                    {
-                        PersonDies(component, movement, dead);
-                    }
-                    else if (state is WalkingOutOfLevel walkOut)
-                    {
-                        SystemUpdate()
-                            .Subscribe(_ =>
-                            {
-                                movement.Direction.Value =
-                                    (walkOut.Target.position - component.transform.position).normalized;
-                                movement.MaxVelocity = component.normalSpeed;
-                            })
-                            .AddToLifecycleOf(component);
-                    }
-                    else if (state is WalkedOut)
-                    {
-                        movement.Direction.Value = Vector2.zero;
+                        //TODO: do we need this state?
+                        case GoingIntoLevel _:
+                            //this prevents a deadlock when setting the state directly
+                            Observable.Timer(TimeSpan.FromSeconds(0))
+                                .Subscribe(_ =>
+                                    component.States.GoToState(
+                                        new GoingBackToIdle(Random.insideUnitCircle /*<- gather around this point*/)))
+                                .AddTo(state);
+                            break;
+                        case GoingBackToIdle goingIdle:
+                            GoingToIdlePosition(goingIdle, component, movement);
+                            break;
+                        case Idle idle:
+                            Idle(idle, component, movement);
+                            break;
+                        case PickingInterest _:
+                            //TODO: show some kind of thinking process (DistractionControlSystem)
+                            break;
+                        case GoingToAttraction attraction:
+                            GoingToAttraction(attraction, component, movement);
+                            break;
+                        case Interacting interacting:
+                            Interacting(movement);
+                            break;
+                        case Dead dead:
+                            PersonDies(component, movement, dead);
+                            break;
+                        case WalkingOutOfLevel walkOut:
+                            SystemUpdate()
+                                .Subscribe(_ =>
+                                {
+                                    movement.Direction.Value =
+                                        (walkOut.Target.position - component.transform.position).normalized;
+                                    movement.MaxVelocity = component.normalSpeed;
+                                })
+                                .AddToLifecycleOf(component);
+                            break;
+                        case WalkedOut _:
+                            movement.Direction.Value = Vector2.zero;
+                            break;
                     }
                 })
                 .AddToLifecycleOf(component);
@@ -105,13 +99,9 @@ namespace Systems.Tourist
 
         private int GetDistractionIndex(DistractedTouristComponent distraction)
         {
-            if(distraction is TigerDistractionTouristComponent)
-            {
-                return 0;
-            } else
-            {
-                return 1;
-            }
+            return distraction is TigerDistractionTouristComponent
+                ? 0 
+                : 1;
         }
 
         private void GoingToIdlePosition(GoingBackToIdle state, TouristBrainComponent tourist,
@@ -192,9 +182,9 @@ namespace Systems.Tourist
             return delta.magnitude < 0.1f;
         }
 
-        private void Interacting(Interacting interacting, TouristBrainComponent tourist, TwoDeeMovementComponent movement)
+        private void Interacting(TwoDeeMovementComponent movement)
         {
-            movement.Direction.Value = Vector2.zero; 
+            movement.Direction.Value = Vector2.zero;
         }
     }
 }
