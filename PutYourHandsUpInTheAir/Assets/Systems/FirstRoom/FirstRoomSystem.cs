@@ -26,9 +26,10 @@ namespace Systems.FirstRoom
 
         private void TigerDistractionTriggered(FirstRoomComponent firstRoom, TigerDistractionTouristComponent component)
         {
-            var touristName = component.GetComponent<TouristBrainComponent>().touristName.Value;
+            var touristBrain = component.GetComponent<TouristBrainComponent>();
+            if (!touristBrain) return;
 
-            var touristText = "Hey! " + touristName + " is going to the Tiger! \n Please click on them to save their life!";
+            var touristText = "Hey! " + touristBrain.touristName.Value + " is going to the Tiger! \n Please click on them to save their life!";
 
             if (!firstRoom || !firstRoom.TouristNameText || !firstRoom.FirstRoomTextElement) return;
 
