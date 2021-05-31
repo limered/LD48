@@ -1,3 +1,4 @@
+using StrongSystems.Audio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ public class UISystem : GameSystem<UIComponent>
             {
                 ResetTime();
                 PrepareMessage(msg, component);
-                //TODO play sound
+                "man-dying".Play();
 
                 if (!showing)
                 {

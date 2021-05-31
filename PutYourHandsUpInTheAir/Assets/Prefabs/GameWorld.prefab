@@ -654,6 +654,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volume:
     value: 1
+--- !u!114 &1870428909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556277570840141683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc230bb4099941f49832cf1ca1a0ee31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxPitchChange: 0.25
+  Sounds:
+  - Name: man-dying
+    File: {fileID: 8300000, guid: c2a7f13e114420144a48b68d5f35abb2, type: 3}
+    Volume: 0.5
 --- !u!1 &4066499535153139370
 GameObject:
   m_ObjectHideFlags: 0
