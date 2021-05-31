@@ -172,21 +172,24 @@ namespace Systems.Tourist
         {
             SystemUpdate()
                 .Select(_ => attraction.AttractionPosition - (Vector2) tourist.transform.position)
-                .Do(delta => tourist.debugTargetDistance = delta)
                 .Subscribe(delta =>
                 {
-                    if (delta.magnitude < 0.1f)
+                    if (TouristReachedDistraction(delta))
                     {
                         tourist.States.GoToState(new Interacting());
                     }
                     else
                     {
-                        movement.Direction.Value =
+                        movement.Direction.Value = 
                             (attraction.AttractionPosition - (Vector2) tourist.transform.position).normalized;
-                        movement.MaxVelocity = tourist.attractedSpeed;
                     }
                 })
                 .AddTo(attraction);
+        }
+
+        private static bool TouristReachedDistraction(Vector2 delta)
+        {
+            return delta.magnitude < 0.1f;
         }
 
         private void Interacting(Interacting interacting, TouristBrainComponent tourist, TwoDeeMovementComponent movement)
