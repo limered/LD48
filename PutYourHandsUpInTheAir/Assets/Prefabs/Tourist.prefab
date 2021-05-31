@@ -236,12 +236,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8d9ba2a31c4cff9534124ec21a1a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
-  Friction: 9
-  MaxSpeed: 10
-  Collider: {fileID: 0}
+  Speed: 15
+  Drag: 0.2
+  MaxVelocity: 5
   Direction:
     value: {x: 0, y: 0}
+  CurrentVelocity: 0
+  IsMoving:
+    value: 0
 --- !u!114 &2666235342249832513
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -95,9 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8d9ba2a31c4cff9534124ec21a1a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 20
+  Speed: 40
   Drag: 0.2
-  MaxVelocity: 4
+  MaxVelocity: 5
   Direction:
     value: {x: 0, y: 0}
   CurrentVelocity: 0
