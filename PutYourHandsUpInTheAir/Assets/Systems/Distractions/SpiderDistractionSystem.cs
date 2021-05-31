@@ -23,10 +23,6 @@ namespace Systems.Distractions
                 .Where(state => state is Interacting)
                 .Subscribe(_ => StartInteracting(component))
                 .AddToLifecycleOf(component);
-
-            WaitOn<PlayerComponent>()
-                .Subscribe(player => StartPlayerCollisionTracking(component, player))
-                .AddToLifecycleOf(component);
         }
 
         public override void Register(PlayerComponent component)
@@ -105,72 +101,6 @@ namespace Systems.Distractions
             }
 
             comp.DistractionProgress.Value = 1 - comp.LastDistractionProgressTime / comp.MaxProgressTime;
-        }
-
-        private void StartPlayerCollisionTracking(
-            SpiderDistractionTouristComponent component,
-            PlayerComponent player)
-        {
-            player.OnTriggerEnterAsObservable()
-                .Subscribe(coll => CollideWithPlayer(coll, player))
-                .AddToLifecycleOf(component);
-
-            player.OnTriggerStayAsObservable()
-                .Subscribe(coll => DuringTouristCollision(coll, player))
-                .AddToLifecycleOf(component);
-
-            player.OnTriggerExitAsObservable()
-                .Subscribe(coll => StopCollideWithPlayer(coll, player))
-                .AddToLifecycleOf(component);
-        }
-
-        private void DuringTouristCollision(Collider coll, PlayerComponent player)
-        {
-            var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
-            if (tourist && player.TargetedTourist.Value == tourist)
-            {
-                var distractionComponent = coll.gameObject.GetComponent<SpiderDistractionTouristComponent>();
-                if (distractionComponent && tourist.States.CurrentState.Value is Idle)
-                {
-                    Object.Destroy(distractionComponent);
-                }
-            }
-        }
-
-        private void StopCollideWithPlayer(Collider coll, PlayerComponent player)
-        {
-            var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
-            if (tourist && player.LastTargetedTourist.Value == tourist)
-            {
-                var distractionComponent = coll.gameObject.GetComponent<SpiderDistractionTouristComponent>();
-                if (distractionComponent)
-                {
-                    distractionComponent.LastDistractionProgressTime =
-                        distractionComponent.CreatedFrom.DistractionInteractionDuration;
-                    
-
-                    tourist.States
-                        .GoToState(new GoingToAttraction(distractionComponent.InteractionPosition.position));
-                }
-            }
-        }
-
-        private void CollideWithPlayer(Collider coll, PlayerComponent player)
-        {
-            var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
-            if (tourist && player.TargetedTourist.Value == tourist)
-            {
-                var distractionComponent = coll.gameObject.GetComponent<SpiderDistractionTouristComponent>();
-                if(distractionComponent)
-                {
-                    distractionComponent.LastDistractionProgressTime =
-                        distractionComponent.CreatedFrom.DistractionInteractionDuration;
-                    distractionComponent.IsPoisoned = false;
-                }
-
-                tourist.States
-                    .GoToState(new GoingBackToIdle(Random.insideUnitCircle));
-            }
         }
     }
 }

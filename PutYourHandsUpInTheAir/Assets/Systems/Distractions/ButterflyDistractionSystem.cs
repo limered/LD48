@@ -37,7 +37,7 @@ namespace Systems.Distractions
         private void CollideWithPlayer(Collider coll, PlayerComponent player)
         {
             var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
-            if (!tourist || tourist != player.TargetedTourist.Value) return;
+            if (!tourist || tourist != player.TargetedDistraction.Value) return;
 
             var comp = coll.gameObject.GetComponent<ButterflyDistractionTouristComponent>();
             if (!comp) return;

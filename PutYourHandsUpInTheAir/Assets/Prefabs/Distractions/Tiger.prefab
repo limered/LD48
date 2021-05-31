@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8734673974713739203}
   - component: {fileID: 3257159449082316658}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 483120590796660008}
   - component: {fileID: 8526498891585982528}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 3522987383678255674}
   - component: {fileID: 8271672438599053521}
   - component: {fileID: 1908313174189743954}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tiger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 4283641651090035869}
   - component: {fileID: 4283641651090035870}
   - component: {fileID: 5142182168065768450}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InteractionPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 4283641651274584563}
   - component: {fileID: 4970646949504973045}
   - component: {fileID: 8400456709816555532}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}

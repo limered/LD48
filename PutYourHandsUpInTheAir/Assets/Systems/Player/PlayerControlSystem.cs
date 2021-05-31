@@ -11,7 +11,7 @@ namespace Systems.Player
     public class PlayerControlSystem : GameSystem<PlayerComponent>
     {
         private readonly int floorLayer = LayerMask.NameToLayer("Floor");
-        private readonly int touristLayer = LayerMask.NameToLayer("Tourist");
+        private readonly int distractionLayer = LayerMask.NameToLayer("Distraction");
 
         public override void Register(PlayerComponent component)
         {
@@ -34,11 +34,10 @@ namespace Systems.Player
             if (!Input.GetMouseButtonDown((int) MouseButton.LeftMouse)) return;
 
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out _, Mathf.Infinity, 1 << touristLayer)) return;
+            if (Physics.Raycast(ray, out _, Mathf.Infinity, 1 << distractionLayer)) return;
             if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, 1 << floorLayer)) return;
 
-            player.LastTargetedTourist.Value = player.TargetedTourist.Value;
-            player.TargetedTourist.Value = null;
+            player.TargetedDistraction.Value = null;
             player.TargetVector = new Vector3(hit.point.x, hit.point.y);
         }
 

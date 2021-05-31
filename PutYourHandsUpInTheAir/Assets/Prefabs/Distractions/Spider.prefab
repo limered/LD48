@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3055464623861607795}
   - component: {fileID: 8048848716581535762}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftFrontLegs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2130955589
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d5e9880297b80a546873eb3aba7f2fed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2565240342813357406}
   - component: {fileID: 7531152482435539215}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightBackLegs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2130955589
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e1f53e28c3d696548b913c0060f2d7d4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 1916653266101724130}
   - component: {fileID: 1916653266101724131}
   - component: {fileID: 27776580971232864}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1916653267243960973}
   - component: {fileID: 1916653267243960970}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InteractionPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1916653267556470943}
   - component: {fileID: 1916653267556470942}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2130955589
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 37cccdbc7d912b2408b685a238bab49e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -373,7 +373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3814971699506157443}
   - component: {fileID: 7930323221549741955}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightFrontLegs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,7 +433,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2130955589
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 4b0d6f23ac900fd4db8a74876bad1120, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -456,7 +456,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9056653084919709183}
   - component: {fileID: 3789848713242970660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftBackLegs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,7 +516,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2130955589
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 6320e5b57c7373e48862c28071cf6d9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
