@@ -61,12 +61,11 @@ namespace Systems.Tourist
                                 {
                                     movement.Direction.Value =
                                         (walkOut.Target.position - component.transform.position).normalized;
-                                    movement.MaxVelocity = component.normalSpeed;
                                 })
                                 .AddToLifecycleOf(component);
                             break;
                         case WalkedOut _:
-                            movement.Direction.Value = Vector2.zero;
+                            movement.Stop();
                             break;
                     }
                 })
@@ -87,7 +86,7 @@ namespace Systems.Tourist
                 IncomeVanished = 100
             });
 
-            movement.Direction.Value = Vector2.zero;
+            movement.Stop();
             if (component.GetComponent<Collider>()) Object.Destroy(component.GetComponent<Collider>());
             var body = component.GetComponent<TouristBodyComponent>();
             if (body)
@@ -121,7 +120,6 @@ namespace Systems.Tourist
                     }
                     else
                     {
-                        movement.MaxVelocity = tourist.normalSpeed;
                         movement.Direction.Value = delta.normalized;
                     }
                 })
@@ -138,7 +136,7 @@ namespace Systems.Tourist
                     var stop = Random.value * 10;
                     if (stop < 6)
                     {
-                        movement.Direction.Value = Vector2.zero;
+                        movement.SlowStop();
                     }
                     else
                     {
@@ -149,12 +147,8 @@ namespace Systems.Tourist
                         var delta = movement.Direction.Value + rndMovement;
                         movement.Direction.Value = delta.normalized;
                     }
-
-                    movement.MaxVelocity = tourist.idleSpeed;
                 })
                 .AddTo(state);
-
-            // TODO: talking to each other 
         }
 
         private void GoingToAttraction(GoingToAttraction attraction, TouristBrainComponent tourist,
@@ -184,7 +178,7 @@ namespace Systems.Tourist
 
         private void Interacting(TwoDeeMovementComponent movement)
         {
-            movement.Direction.Value = Vector2.zero;
+            movement.SlowStop();
         }
     }
 }

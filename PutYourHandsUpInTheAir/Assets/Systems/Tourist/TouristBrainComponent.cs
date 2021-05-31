@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using SystemBase;
 using SystemBase.StateMachineBase;
 using Systems.Movement;
@@ -16,9 +14,6 @@ namespace Systems.Tourist
         public IntReactiveProperty headPartIndex = new IntReactiveProperty();
         public IntReactiveProperty bodyPartIndex = new IntReactiveProperty();
         public float idleMinTimeWithoutMovementInSeconds = 3f;
-        public float idleSpeed = 1f;
-        public float normalSpeed = 1f;
-        public float attractedSpeed = 1f;
         public string debugCurrentState;
         public Vector2 debugTargetDistance;
 
