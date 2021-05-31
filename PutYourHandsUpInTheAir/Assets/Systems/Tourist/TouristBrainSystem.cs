@@ -87,6 +87,11 @@ namespace Systems.Tourist
                 DistractionIndex = GetDistractionIndex(dead.Distraction)
             });
 
+            MessageBroker.Default.Publish(new ReducePotentialIncome
+            {
+                IncomeVanished = 100
+            });
+
             movement.Direction.Value = Vector2.zero;
             if (component.GetComponent<Collider>()) Object.Destroy(component.GetComponent<Collider>());
             var body = component.GetComponent<TouristBodyComponent>();

@@ -63,6 +63,11 @@ namespace Systems.Tourist
                                 _tourists = GenerateTourists(config, room);
                                 _touristDumps = _tourists
                                     .Select(t => new TouristDump(t.GetComponent<TouristBrainComponent>())).ToArray();
+                                
+                                MessageBroker.Default.Publish(new ShowInitialPotentialIncome
+                                {
+                                    InitialPotentialIncome = _touristDumps.Length * 100
+                                });
                             }
                             else //level 2 -> END
                             {

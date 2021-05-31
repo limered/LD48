@@ -1,3 +1,4 @@
+using GameState.Messages;
 using StrongSystems.Audio;
 using System;
 using System.Collections;
@@ -16,6 +17,24 @@ public class UISystem : GameSystem<UIComponent>
 
     public override void Register(UIComponent component)
     {
+        component.PotentialIncome.IncomeVanished.gameObject.SetActive(false);
+
+        MessageBroker.Default.Receive<ShowInitialPotentialIncome>()
+            .Subscribe(msg =>
+            {
+                PreparePotentialIncome(msg, component);
+
+            })
+            .AddTo(component);
+
+        MessageBroker.Default.Receive<ReducePotentialIncome>()
+            .Subscribe(msg =>
+            {
+                PreparePotentialIncome(msg, component);
+
+            })
+            .AddTo(component);
+
         MessageBroker.Default.Receive<ShowDeadPersonAction>()
             .Subscribe(msg =>
             {
@@ -47,6 +66,36 @@ public class UISystem : GameSystem<UIComponent>
     private void ResetTime()
     {
         sec = 80f;
+    }
+
+    private void PreparePotentialIncome(ShowInitialPotentialIncome msg, UIComponent component)
+    {
+        var income = component.PotentialIncome.PotentialIncomeAmount;
+        income.text = msg.InitialPotentialIncome.ToString();
+
+    }
+
+    private void PreparePotentialIncome(ReducePotentialIncome msg, UIComponent component)
+    {
+        var potentialIncome = component.PotentialIncome;
+        var incomeAmount = Int32.Parse(potentialIncome.PotentialIncomeAmount.text);
+        potentialIncome.PotentialIncomeAmount.text = (incomeAmount - msg.IncomeVanished).ToString();
+        var incomeVanished = potentialIncome.IncomeVanished;
+        incomeVanished.text = "-" + msg.IncomeVanished.ToString();
+        incomeVanished.gameObject.SetActive(true);
+
+        component.UpdateAsObservable().Subscribe(_ =>
+        {
+            if (sec > 0)
+            {
+                sec--;
+            }
+            else
+            {
+                incomeVanished.gameObject.SetActive(false);
+                ResetTime();
+            }
+        });
     }
 
     private void PrepareMessage(ShowDeadPersonAction msg, UIComponent component)
