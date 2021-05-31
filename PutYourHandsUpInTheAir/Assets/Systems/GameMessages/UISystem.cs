@@ -27,7 +27,7 @@ namespace Systems.GameMessages
                 })
                 .AddTo(component);
 
-            MessageBroker.Default.Receive<ReducePotentialIncome>()
+            MessageBroker.Default.Receive<ReducePotentialIncomeAction>()
                 .Subscribe(msg =>
                 {
                     PreparePotentialIncome(msg, component);
@@ -35,7 +35,7 @@ namespace Systems.GameMessages
                 })
                 .AddTo(component);
 
-            MessageBroker.Default.Receive<ShowDeadPersonAction>()
+            MessageBroker.Default.Receive<ShowDeadPersonMessageAction>()
                 .Subscribe(msg =>
                 {
                     ResetTime();
@@ -75,7 +75,7 @@ namespace Systems.GameMessages
 
         }
 
-        private void PreparePotentialIncome(ReducePotentialIncome msg, UIComponent component)
+        private void PreparePotentialIncome(ReducePotentialIncomeAction msg, UIComponent component)
         {
             var potentialIncome = component.PotentialIncome;
             var incomeAmount = Int32.Parse(potentialIncome.PotentialIncomeAmount.text);
@@ -98,7 +98,7 @@ namespace Systems.GameMessages
             });
         }
 
-        private void PrepareMessage(ShowDeadPersonAction msg, UIComponent component)
+        private void PrepareMessage(ShowDeadPersonMessageAction msg, UIComponent component)
         {
             var text = component.Message.Text;
             text.text = msg.TouristName + " died.";

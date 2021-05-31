@@ -81,14 +81,14 @@ namespace Systems.Tourist
 
         private void PersonDies(TouristBrainComponent component, TwoDeeMovementComponent movement, Dead dead)
         {
-            MessageBroker.Default.Publish(new ShowDeadPersonAction
+            MessageBroker.Default.Publish(new ShowDeadPersonMessageAction
             {
                 TouristName = component.touristName.Value,
                 TouristFaceIndex = component.headPartIndex.Value,
                 DistractionIndex = GetDistractionIndex(dead.Distraction)
             });
 
-            MessageBroker.Default.Publish(new ReducePotentialIncome
+            MessageBroker.Default.Publish(new ReducePotentialIncomeAction
             {
                 IncomeVanished = 100
             });
