@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.735849, g: 0.17702027, b: 0.17702027, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -474,7 +474,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5bd864e45c89464d8e308d27d148bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PotentialIncome: {fileID: 662756625}
+  PotentialIncomeAmount: {fileID: 662756625}
+  IncomeVanished: {fileID: 292380676}
 --- !u!1 &937162845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,7 +1173,7 @@ MonoBehaviour:
   CurrentLevel:
     value: {fileID: 0}
   PlayTestMode: 1
-  PlayTestRoomPrefab: {fileID: 4568844813494698965, guid: 3bc7daa961f63d9448d5140dc17926da, type: 3}
+  PlayTestRoomPrefab: {fileID: 3720444366163030855, guid: b6dde5f2c8d081944a3788a5104457cd, type: 3}
 --- !u!1 &8027897109170926794
 GameObject:
   m_ObjectHideFlags: 0

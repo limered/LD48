@@ -180,28 +180,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8996e6e3fcc8a78429a10095ab70f24f, type: 3}
---- !u!114 &292380676 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 292380676, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
-  m_PrefabInstance: {fileID: 4066499535776541335}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &662756625 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 662756625, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
-  m_PrefabInstance: {fileID: 4066499535776541335}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4066499535776541335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -209,22 +187,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 292380676, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
-      propertyPath: m_Color.b
-      value: 0.17702027
-      objectReference: {fileID: 0}
-    - target: {fileID: 292380676, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
-      propertyPath: m_Color.g
-      value: 0.17702027
-      objectReference: {fileID: 0}
-    - target: {fileID: 292380676, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
-      propertyPath: m_Color.r
-      value: 0.735849
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
-      propertyPath: PlayTestRoomPrefab
-      value: 
-      objectReference: {fileID: 3720444366163030855, guid: b6dde5f2c8d081944a3788a5104457cd, type: 3}
     - target: {fileID: 4066499535153139368, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -273,13 +235,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameWorld
       objectReference: {fileID: 0}
-    - target: {fileID: 8651552534392384716, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
-      propertyPath: IncomeVanished
-      value: 
-      objectReference: {fileID: 292380676}
-    - target: {fileID: 8651552534392384716, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
-      propertyPath: PotentialIncomeAmount
-      value: 
-      objectReference: {fileID: 662756625}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
