@@ -19,18 +19,10 @@ public class UISystem : GameSystem<UIComponent>
             .Subscribe(msg =>
             {
                 ResetTime();
-                var text = component.Message.Text;
-                text.text = msg.TouristName + " died.";
+                PrepareMessage(msg, component);
+                //TODO play sound
 
-                var faces = component.GetComponentInParent<TouristConfigComponent>().topParts;
-                var face = component.Message.Image;
-                face.sprite = faces[msg.TouristFaceIndex];
-
-                var distractions = component.Message.Distractions;
-                var distraction = component.Message.Distraction;
-                distraction.sprite = distractions[msg.DistractionIndex];
-
-                if(!showing)
+                if (!showing)
                 {
                     ShowMessage(component.Message.gameObject, true);
                 }
@@ -56,12 +48,24 @@ public class UISystem : GameSystem<UIComponent>
         sec = 80f;
     }
 
+    private void PrepareMessage(ShowDeadPersonAction msg, UIComponent component)
+    {
+        var text = component.Message.Text;
+        text.text = msg.TouristName + " died.";
+
+        var faces = component.GetComponentInParent<TouristConfigComponent>().topParts;
+        var face = component.Message.Image;
+        face.sprite = faces[msg.TouristFaceIndex];
+
+        var distractions = component.Message.Distractions;
+        var distraction = component.Message.Distraction;
+        distraction.sprite = distractions[msg.DistractionIndex];
+    }
+
     private void ShowMessage(GameObject gameObject, bool show)
     {
         showing = show;
         Animator animator = gameObject.GetComponent<Animator>();
         animator.SetBool("show", show);
-
-        //gameObject.SetActive(show);
     }
 }
