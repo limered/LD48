@@ -19,13 +19,13 @@ namespace Systems.Player.TouristInteraction
             _currentPlayer.Value = player;
 
             SystemUpdate(player)
-                .Where(_ => IsLeftMouseClicked())
                 .Subscribe(CheckDistractionForClick)
                 .AddToLifecycleOf(player);
         }
 
         private void CheckDistractionForClick(PlayerComponent player)
         {
+            if (!IsLeftMouseClicked()) return;
             if (!HasClickedOnDistraction(out var hit)) return;
 
             var distraction = hit.transform.GetComponent<DistractionComponent>();

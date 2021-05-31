@@ -17,7 +17,6 @@ namespace Systems.Player
         {
             component.UpdateAsObservable()
                 .Select(_ => (movement: component.GetComponent<TwoDeeMovementComponent>(), player: component))
-                .Where(_ => IsLeftMouseClicked())
                 .Subscribe(ControlPlayer)
                 .AddTo(component);
         }
@@ -32,6 +31,7 @@ namespace Systems.Player
 
         private void SetPlayerTargetOnClick(PlayerComponent player)
         {
+            if (!IsLeftMouseClicked()) return;
             if (!HasClickedOnGround(out var hit)) return;
 
             player.TargetedDistraction.Value = null;
@@ -52,6 +52,8 @@ namespace Systems.Player
 
         private static void SetPlayerDirection(TwoDeeMovementComponent movement, PlayerComponent player)
         {
+
+
             movement.Direction.Value = player.TargetedDistraction.Value 
                 ? (player.TargetedDistraction.Value.transform.position - movement.transform.position).normalized 
                 : (player.TargetVector - movement.transform.position).normalized;
