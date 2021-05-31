@@ -116,7 +116,7 @@ namespace Systems.Distractions
                 comp.DistractionProgress.Value = 1;
                 comp.GetComponent<TouristBrainComponent>()
                     .States
-                    .GoToState(new Dead());
+                    .GoToState(new Dead(comp));
                 Object.Destroy(comp);
             }
 

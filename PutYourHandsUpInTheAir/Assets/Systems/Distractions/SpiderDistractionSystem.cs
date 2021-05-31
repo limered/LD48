@@ -100,7 +100,7 @@ namespace Systems.Distractions
                 comp.DistractionProgress.Value = 1;
                 touristComp
                     .States
-                    .GoToState(new Dead());
+                    .GoToState(new Dead(comp));
                 Object.Destroy(comp);
             }
 

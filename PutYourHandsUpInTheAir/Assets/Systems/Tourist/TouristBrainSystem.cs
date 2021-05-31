@@ -9,6 +9,7 @@ using UnityEngine;
 using Utils.Plugins;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
+using Systems.Distractions;
 
 namespace Systems.Tourist
 {
@@ -54,22 +55,9 @@ namespace Systems.Tourist
                     {
                         Interacting(interacting, component, movement);
                     }
-                    else if (state is Dead)
+                    else if (state is Dead dead)
                     {
-                        MessageBroker.Default.Publish(new ShowDeadPersonAction { 
-                            TouristName = component.touristName.Value,
-                            TouristFaceIndex = component.headPartIndex.Value,
-                            DistractionIndex = 0
-                        });
-
-                        movement.Direction.Value = Vector2.zero;
-                        if (component.GetComponent<Collider>()) Object.Destroy(component.GetComponent<Collider>());
-                        var body = component.GetComponent<TouristBodyComponent>();
-                        if (body)
-                        {
-                            body.blood.SetActive(true);
-                            body.livingBody.transform.Rotate(new Vector3(0, 0, 1), 360 * Random.value);
-                        }
+                        PersonDies(component, movement, dead);
                     }
                     else if (state is WalkingOutOfLevel walkOut)
                     {
@@ -88,6 +76,36 @@ namespace Systems.Tourist
                     }
                 })
                 .AddToLifecycleOf(component);
+        }
+
+        private void PersonDies(TouristBrainComponent component, TwoDeeMovementComponent movement, Dead dead)
+        {
+            MessageBroker.Default.Publish(new ShowDeadPersonAction
+            {
+                TouristName = component.touristName.Value,
+                TouristFaceIndex = component.headPartIndex.Value,
+                DistractionIndex = GetDistractionIndex(dead.Distraction)
+            });
+
+            movement.Direction.Value = Vector2.zero;
+            if (component.GetComponent<Collider>()) Object.Destroy(component.GetComponent<Collider>());
+            var body = component.GetComponent<TouristBodyComponent>();
+            if (body)
+            {
+                body.blood.SetActive(true);
+                body.livingBody.transform.Rotate(new Vector3(0, 0, 1), 360 * Random.value);
+            }
+        }
+
+        private int GetDistractionIndex(DistractedTouristComponent distraction)
+        {
+            if(distraction is TigerDistractionTouristComponent)
+            {
+                return 0;
+            } else
+            {
+                return 1;
+            }
         }
 
         private void GoingToIdlePosition(GoingBackToIdle state, TouristBrainComponent tourist,
