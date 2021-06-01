@@ -9,6 +9,10 @@ namespace Systems.Distractions2.DistractionStrategies
         private const float MaxDistractionDuration = 3.0f;
         private float LastDistractionProgressTime = MaxDistractionDuration;
 
+        public void Init()
+        {
+        }
+
         public DistractionOutcome Update(DistractableComponent distractable)
         {
             var touristBrain = distractable.GetComponent<TouristBrainComponent>();

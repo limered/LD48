@@ -25,6 +25,7 @@ namespace Systems.Distractions2
             {
                 component.DistractionProgress.Value = 0;
                 component.ActiveDistraction = CreateDistraction(type);
+                component.ActiveDistraction.Init();
                 component.DistractionUpdateObservable = SystemFixedUpdate(component)
                     .Subscribe(UpdateDistraction());
             };
