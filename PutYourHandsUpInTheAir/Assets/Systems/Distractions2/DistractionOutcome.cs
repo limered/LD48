@@ -4,6 +4,7 @@
     {
         Waiting,
         Alive,
-        Dead
+        Dead,
+        Debuffed,
     }
 }

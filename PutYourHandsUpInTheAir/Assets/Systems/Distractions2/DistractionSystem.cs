@@ -47,6 +47,8 @@ namespace Systems.Distractions2
                         tourist.States.GoToState(new Dead(distractable.DistractionType.Value));
                         StopTouristDistraction(distractable);
                         break;
+                    case DistractionOutcome.Debuffed:
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
