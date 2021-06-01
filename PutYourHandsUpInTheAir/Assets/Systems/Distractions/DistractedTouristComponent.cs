@@ -9,7 +9,7 @@ namespace Systems.Distractions
     public class DistractedTouristComponent : GameComponent
     {
         public FloatReactiveProperty DistractionProgress = new FloatReactiveProperty(0);
-        public DistractionComponent CreatedFrom;
+        public DistractionOriginComponent CreatedFrom;
         public DistractionType CurrentDistractionType => CreatedFrom.DistractionType;
         public Color ProgressColor => CreatedFrom.DistractionProgressColor;
         public float MaxProgressTime => CreatedFrom.DistractionInteractionDuration;

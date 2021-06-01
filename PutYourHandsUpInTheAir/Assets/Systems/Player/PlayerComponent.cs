@@ -10,7 +10,7 @@ namespace Systems.Player
     [RequireComponent(typeof(TwoDeeMovementComponent))]
     public class PlayerComponent : GameComponent
     {
-        public ReactiveProperty<DistractionComponent> TargetedDistraction = new ReactiveProperty<DistractionComponent>();
+        public ReactiveProperty<DistractionOriginComponent> TargetedDistraction = new ReactiveProperty<DistractionOriginComponent>();
         public Vector3 TargetVector;
     }
 }

@@ -28,7 +28,7 @@ namespace Systems.Player.TouristInteraction
             if (!IsLeftMouseClicked()) return;
             if (!HasClickedOnDistraction(out var hit)) return;
 
-            var distraction = hit.transform.GetComponent<DistractionComponent>();
+            var distraction = hit.transform.GetComponent<DistractionOriginComponent>();
             if (!distraction) return;
 
             player.TargetedDistraction.Value = distraction;

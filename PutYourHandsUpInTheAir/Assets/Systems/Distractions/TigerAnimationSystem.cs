@@ -11,26 +11,26 @@ using UnityEngine;
 using Utils.Plugins;
 
 [GameSystem]
-public class TigerAnimationSystem : GameSystem<DistractionComponent>
+public class TigerAnimationSystem : GameSystem<DistractionOriginComponent>
 {
-    public override void Register(DistractionComponent component)
+    public override void Register(DistractionOriginComponent originComponent)
     {
-        component.InteractionCollider
+        originComponent.InteractionCollider
             .OnTriggerEnterAsObservable()
-            .Where(_ => component.GetComponent<TigerAnimationComponent>().CurrentState == TigerState.Sleeping)
-            .Subscribe(collider => StartWakeUpAnimation(collider, component))
-            .AddToLifecycleOf(component);
+            .Where(_ => originComponent.GetComponent<TigerAnimationComponent>().CurrentState == TigerState.Sleeping)
+            .Subscribe(collider => StartWakeUpAnimation(collider, originComponent))
+            .AddToLifecycleOf(originComponent);
     }
 
-    private void StartWakeUpAnimation(Collider collider, DistractionComponent component)
+    private void StartWakeUpAnimation(Collider collider, DistractionOriginComponent originComponent)
     {
         var collidingObject = collider.gameObject;
         if (collidingObject.CompareTag("tourist"))
         {
-            var tigerComponent = component.GetComponent<TigerAnimationComponent>();
+            var tigerComponent = originComponent.GetComponent<TigerAnimationComponent>();
             tigerComponent.CurrentState = TigerState.Awake;
 
-            var animator = component.GetComponent<Animator>();
+            var animator = originComponent.GetComponent<Animator>();
 
             animator.Play("TigerWakingUp_Head");
             animator.Play("TigerBody_Idle");
@@ -39,19 +39,19 @@ public class TigerAnimationSystem : GameSystem<DistractionComponent>
             collidingObject.GetComponent<TouristBrainComponent>().States.CurrentState
             .Subscribe(state =>
             {
-                HandleAnimationForState(component, collider, state);
+                HandleAnimationForState(originComponent, collider, state);
             })
-            .AddToLifecycleOf(component);
+            .AddToLifecycleOf(originComponent);
         }
     }
 
-    private void HandleAnimationForState(DistractionComponent component, Collider collider, SystemBase.StateMachineBase.BaseState<TouristBrainComponent> state)
+    private void HandleAnimationForState(DistractionOriginComponent originComponent, Collider collider, SystemBase.StateMachineBase.BaseState<TouristBrainComponent> state)
     {
         var collidingObject = collider.gameObject;
         if (collidingObject.CompareTag("tourist"))
         {
-            var animator = component.GetComponent<Animator>();
-            var tigerComponent = component.GetComponent<TigerAnimationComponent>();
+            var animator = originComponent.GetComponent<Animator>();
+            var tigerComponent = originComponent.GetComponent<TigerAnimationComponent>();
             
             if (state is Dead)
             {

@@ -37,7 +37,7 @@ namespace Systems.Distractions.ForEnd
                     {
                         return;
                     }
-                    AddBussDistractionToAllPeople(tourists, bus.GetComponentInParent<DistractionComponent>());
+                    AddBussDistractionToAllPeople(tourists, bus.GetComponentInParent<DistractionOriginComponent>());
                     bus.leftScene = true;
                     bus.transform.position = bus.StartPosititon;
                     var movementComp = bus.GetComponent<TwoDeeMovementComponent>();
@@ -61,16 +61,16 @@ namespace Systems.Distractions.ForEnd
             movementComp.Direction.Value = bus.StartPosititon - (Vector2)bus.transform.position;
         }
 
-        private void AddBussDistractionToAllPeople(GameObject[] tourists, DistractionComponent distraction)
+        private void AddBussDistractionToAllPeople(GameObject[] tourists, DistractionOriginComponent distractionOrigin)
         {
             foreach (var tourist in tourists.Select(t => t.GetComponent<TouristBrainComponent>()))
             {
                 tourist.States.GoToState(new PickingInterest());
 
                 var busComp = tourist.AddComponent<BusDistractionTouristComponent>();
-                busComp.BusStopPosition = distraction.GetComponent<BusComponent>().StartPosititon;
-                busComp.CreatedFrom = distraction;
-                busComp.LastDistractionProgressTime = distraction.DistractionInteractionDuration;
+                busComp.BusStopPosition = distractionOrigin.GetComponent<BusComponent>().StartPosititon;
+                busComp.CreatedFrom = distractionOrigin;
+                busComp.LastDistractionProgressTime = distractionOrigin.DistractionInteractionDuration;
             }
         }
 

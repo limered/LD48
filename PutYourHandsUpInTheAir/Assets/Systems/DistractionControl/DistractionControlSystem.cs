@@ -16,7 +16,7 @@ using Random = UnityEngine.Random;
 namespace Systems.DistractionControl
 {
     [GameSystem]
-    public class DistractionControlSystem : GameSystem<DistractionControlConfig, DistractionComponent, RoomComponent>
+    public class DistractionControlSystem : GameSystem<DistractionControlConfig, DistractionOriginComponent, RoomComponent>
     {
         private readonly RandomTouristFinder _randomTouristFinder = new RandomTouristFinder();
         private readonly ReactiveProperty<RoomComponent> _currentRoom = new ReactiveProperty<RoomComponent>();
@@ -32,11 +32,11 @@ namespace Systems.DistractionControl
                 .AddTo(component);
         }
 
-        public override void Register(DistractionComponent component)
+        public override void Register(DistractionOriginComponent originComponent)
         {
             WaitOn<DistractionControlConfig>()
-                .Subscribe(config => RegisterComponentToTrigger(component, config))
-                .AddTo(component);
+                .Subscribe(config => RegisterComponentToTrigger(originComponent, config))
+                .AddTo(originComponent);
         }
 
         public override void Register(RoomComponent component)
@@ -47,7 +47,7 @@ namespace Systems.DistractionControl
         private void TriggerDistractions(DistractionControlConfig component)
         {
             Queue<TouristBrainComponent> tourists = _randomTouristFinder.FindTouristsWithoutDistraction();
-            List<DistractionComponent> distractionComponents = component
+            List<DistractionOriginComponent> distractionComponents = component
                 .DistractionComponents
                 .Where(c => !c.HasFired)
                 .ToList();
@@ -62,43 +62,43 @@ namespace Systems.DistractionControl
             }
         }
 
-        private void RegisterComponentToTrigger(DistractionComponent component, DistractionControlConfig config)
+        private void RegisterComponentToTrigger(DistractionOriginComponent originComponent, DistractionControlConfig config)
         {
-            config.DistractionComponents.Add(component);
+            config.DistractionComponents.Add(originComponent);
         }
 
-        private void AddDistractionToRandomStranger(DistractionComponent component, TouristBrainComponent brain)
+        private void AddDistractionToRandomStranger(DistractionOriginComponent originComponent, TouristBrainComponent brain)
         {
-            if (!brain || !component) return;
+            if (!brain || !originComponent) return;
             
             brain.States.GoToState(new PickingInterest());
 
-            switch (component.DistractionType)
+            switch (originComponent.DistractionType)
             {
                 case DistractionType.Tiger:
                     var comp = brain.AddComponent<TigerDistractionTouristComponent>();
-                    comp.CreatedFrom = component;
-                    comp.LastDistractionProgressTime = component.DistractionInteractionDuration;
+                    comp.CreatedFrom = originComponent;
+                    comp.LastDistractionProgressTime = originComponent.DistractionInteractionDuration;
                     return;
                 case DistractionType.Butterfly:
                     var butterflyComp = brain.AddComponent<ButterflyDistractionTouristComponent>();
-                    butterflyComp.CreatedFrom = component;
-                    butterflyComp.LastDistractionProgressTime = component.DistractionInteractionDuration;
+                    butterflyComp.CreatedFrom = originComponent;
+                    butterflyComp.LastDistractionProgressTime = originComponent.DistractionInteractionDuration;
                     return;
                 case DistractionType.Spider:
                     var spiderComp = brain.AddComponent<SpiderDistractionTouristComponent>();
-                    spiderComp.CreatedFrom = component;
-                    spiderComp.LastDistractionProgressTime = component.DistractionInteractionDuration;
+                    spiderComp.CreatedFrom = originComponent;
+                    spiderComp.LastDistractionProgressTime = originComponent.DistractionInteractionDuration;
                     return;
                 case DistractionType.Money:
                     var moneyComp = brain.AddComponent<MoneyDistractionTouristComponent>();
-                    moneyComp.CreatedFrom = component;
-                    moneyComp.LastDistractionProgressTime = component.DistractionInteractionDuration;
+                    moneyComp.CreatedFrom = originComponent;
+                    moneyComp.LastDistractionProgressTime = originComponent.DistractionInteractionDuration;
                     return;
                 case DistractionType.Bus:
                     var busComp = brain.AddComponent<BusDistractionTouristComponent>();
-                    busComp.CreatedFrom = component;
-                    busComp.LastDistractionProgressTime = component.DistractionInteractionDuration;
+                    busComp.CreatedFrom = originComponent;
+                    busComp.LastDistractionProgressTime = originComponent.DistractionInteractionDuration;
                     return;
                 default:
                     throw new ArgumentOutOfRangeException();

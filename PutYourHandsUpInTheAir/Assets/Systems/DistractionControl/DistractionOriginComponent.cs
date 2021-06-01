@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Systems.DistractionControl
 {
-    public class DistractionComponent : GameComponent
+    public class DistractionOriginComponent : GameComponent
     {
         public DistractionType DistractionType;
         public float DistractionInteractionDuration;
