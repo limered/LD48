@@ -9,7 +9,7 @@ namespace Systems.Distractions2
         public ReactiveProperty<DistractionType> DistractionType = 
             new ReactiveProperty<DistractionType>(Distractions2.DistractionType.None);
 
-        public IDIstraction ActiveDistraction;
+        public IDistraction ActiveDistraction;
         public FloatReactiveProperty DistractionProgress = new FloatReactiveProperty(0);
         public IDisposable DistractionUpdateObservable { get; set; }
     }

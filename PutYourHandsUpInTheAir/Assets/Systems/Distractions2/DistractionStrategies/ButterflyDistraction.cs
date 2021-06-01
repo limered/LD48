@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Systems.Distractions2.DistractionStrategies
 {
-    public class ButterflyDistraction : IDIstraction
+    public class ButterflyDistraction : IDistraction
     {
         private const float MaxDistractionDuration = 3.0f;
         private float LastDistractionProgressTime = MaxDistractionDuration;

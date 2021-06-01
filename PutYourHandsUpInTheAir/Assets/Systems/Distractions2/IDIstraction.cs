@@ -1,7 +1,7 @@
 ﻿
 namespace Systems.Distractions2
 {
-    public interface IDIstraction
+    public interface IDistraction
     {
         DistractionOutcome Update(DistractableComponent distractable);
     }

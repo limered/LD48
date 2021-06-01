@@ -62,7 +62,7 @@ namespace Systems.Distractions2
             distractable.DistractionUpdateObservable = null;
         }
 
-        private IDIstraction CreateDistraction(DistractionType type)
+        private IDistraction CreateDistraction(DistractionType type)
         {
             switch (type)
             {

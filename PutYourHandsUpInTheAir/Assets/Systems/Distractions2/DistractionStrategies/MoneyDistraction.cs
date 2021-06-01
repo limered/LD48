@@ -1,6 +1,6 @@
 ﻿namespace Systems.Distractions2.DistractionStrategies
 {
-    public class MoneyDistraction : IDIstraction
+    public class MoneyDistraction : IDistraction
     {
         public DistractionOutcome Update(DistractableComponent distractable)
         {

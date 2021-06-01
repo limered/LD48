@@ -1,6 +1,6 @@
 ﻿namespace Systems.Distractions2.DistractionStrategies
 {
-    public class NoneDistraction : IDIstraction
+    public class NoneDistraction : IDistraction
     {
         public DistractionOutcome Update(DistractableComponent distractable)
         {

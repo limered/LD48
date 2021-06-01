@@ -194,7 +194,7 @@ PrefabInstance:
     - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: PlayTestRoomPrefab
       value: 
-      objectReference: {fileID: 5408368314644630373, guid: 39e44fd60caf62a4684da84db97a78c6, type: 3}
+      objectReference: {fileID: 7721235312565522134, guid: bdff130fc9e69664aa0013184a389520, type: 3}
     - target: {fileID: 4066499535153139368, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: m_RootOrder
       value: 1
