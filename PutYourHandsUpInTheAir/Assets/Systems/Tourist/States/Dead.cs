@@ -1,17 +1,16 @@
 using SystemBase.StateMachineBase;
-using Systems.Distractions;
-using UnityEngine;
+using Systems.Distractions2;
 
 namespace Systems.Tourist.States
 {
     [NextValidStates(/*none, you are dead...*/)]
     public class Dead : BaseState<TouristBrainComponent>
     {
-        public DistractedTouristComponent Distraction;
+        public DistractionType KilledByDistractionType;
 
-        public Dead(DistractedTouristComponent distraction)
+        public Dead(DistractionType killedByDistractionType)
         {
-            Distraction = distraction;
+            KilledByDistractionType = killedByDistractionType;
         }
         public override void Enter(StateContext<TouristBrainComponent> context)
         {

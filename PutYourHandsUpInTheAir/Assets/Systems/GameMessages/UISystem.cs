@@ -1,5 +1,6 @@
 using System;
 using SystemBase;
+using Systems.Distractions2;
 using Systems.GameMessages.Messages;
 using Systems.Tourist;
 using StrongSystems.Audio;
@@ -109,7 +110,23 @@ namespace Systems.GameMessages
 
             var distractions = component.Message.Distractions;
             var distraction = component.Message.Distraction;
-            distraction.sprite = distractions[msg.DistractionIndex];
+            distraction.sprite = distractions[MapDistractionTypeTiIndex(msg.DistractionType)];
+        }
+
+        private int MapDistractionTypeTiIndex(DistractionType type)
+        {
+            return type switch
+            {
+                DistractionType.None => 0,
+                DistractionType.Tiger => 0,
+                DistractionType.Butterfly => 0,
+                DistractionType.Camera => 0,
+                DistractionType.Spider => 1,
+                DistractionType.Swamp => 0,
+                DistractionType.Money => 0,
+                DistractionType.Bus => 0,
+                _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+            };
         }
 
         private void ShowMessage(GameObject gameObject, bool show)

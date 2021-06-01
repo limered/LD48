@@ -22,7 +22,7 @@ namespace Systems.Distractions2.DistractionStrategies
                 LastDistractionProgressTime -= Time.fixedDeltaTime;
                 if (LastDistractionProgressTime <= 0)
                 {
-                    touristBrain.States.GoToState(new GoingBackToIdle(Vector2.zero));
+                    touristBrain.States.GoToState(new GoingBackToIdle());
                     return DistractionOutcome.Alive;
                 }
             }

@@ -34,7 +34,7 @@ namespace Systems.Tourist
                             Observable.Timer(TimeSpan.FromSeconds(0))
                                 .Subscribe(_ =>
                                     component.States.GoToState(
-                                        new GoingBackToIdle(Random.insideUnitCircle /*<- gather around this point*/)))
+                                        new GoingBackToIdle(Random.insideUnitCircle)))
                                 .AddTo(state);
                             break;
                         case GoingBackToIdle goingIdle:
@@ -78,7 +78,7 @@ namespace Systems.Tourist
             {
                 TouristName = component.touristName.Value,
                 TouristFaceIndex = component.headPartIndex.Value,
-                DistractionIndex = GetDistractionIndex(dead.Distraction)
+                DistractionType = dead.KilledByDistractionType,
             });
 
             MessageBroker.Default.Publish(new ReducePotentialIncomeAction
@@ -107,16 +107,16 @@ namespace Systems.Tourist
             TwoDeeMovementComponent movement)
         {
             SystemUpdate()
-                .Select(_ => state.IdlePosition - (Vector2) tourist.transform.position)
+                .Select(_ => state.GatherPosition - (Vector2) tourist.transform.position)
                 .Subscribe(delta =>
                 {
-                    if (state.IdlePosition != Vector2.zero && delta.magnitude < 0.1f) //magic epsilon distance
+                    if (state.GatherPosition != Vector2.zero && delta.magnitude < 0.1f) //magic epsilon distance
                     {
-                        tourist.States.GoToState(new Idle(state.IdlePosition));
+                        tourist.States.GoToState(new Idle(state.GatherPosition));
                     }
-                    else if (state.IdlePosition == Vector2.zero && delta.magnitude < 1.3f) //magic distance around center that I define as idle-zone
+                    else if (state.GatherPosition == Vector2.zero && delta.magnitude < 1.3f) //magic distance around center that I define as idle-zone
                     {
-                        tourist.States.GoToState(new Idle(state.IdlePosition));
+                        tourist.States.GoToState(new Idle(state.GatherPosition));
                     }
                     else
                     {

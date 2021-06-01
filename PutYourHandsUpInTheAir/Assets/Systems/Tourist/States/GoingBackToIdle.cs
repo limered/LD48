@@ -6,12 +6,13 @@ namespace Systems.Tourist.States
     [NextValidStates(typeof(Idle), typeof(WalkingOutOfLevel), typeof(GoingToAttraction))]
     public class GoingBackToIdle : BaseState<TouristBrainComponent>
     {
-        /// They will try to gather around that point
-        public Vector2 IdlePosition { get; }
+        public Vector2 GatherPosition { get; } = Vector2.zero;
 
-        public GoingBackToIdle(Vector2 idlePosition)
+        public GoingBackToIdle() {}
+
+        public GoingBackToIdle(Vector2 gatherPosition)
         {
-            IdlePosition = idlePosition;
+            GatherPosition = gatherPosition;
         }
         
         public override void Enter(StateContext<TouristBrainComponent> context)
@@ -21,7 +22,7 @@ namespace Systems.Tourist.States
 
         public override string ToString()
         {
-            return $"GoingBackToIdle({IdlePosition})";
+            return $"GoingBackToIdle({GatherPosition})";
         }
     }
 }

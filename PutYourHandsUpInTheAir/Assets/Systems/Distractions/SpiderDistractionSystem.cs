@@ -1,4 +1,5 @@
 ﻿using SystemBase;
+using Systems.Distractions2;
 using Systems.Movement;
 using Systems.Player;
 using Systems.Tourist;
@@ -96,7 +97,7 @@ namespace Systems.Distractions
                 comp.DistractionProgress.Value = 1;
                 touristComp
                     .States
-                    .GoToState(new Dead(comp));
+                    .GoToState(new Dead(DistractionType.Spider));
                 Object.Destroy(comp);
             }
 
