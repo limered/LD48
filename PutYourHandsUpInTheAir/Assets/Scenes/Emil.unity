@@ -187,6 +187,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 946981598, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 946981598, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: PlayTestMode
       value: 1
