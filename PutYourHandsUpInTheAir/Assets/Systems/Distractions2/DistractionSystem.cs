@@ -1,6 +1,5 @@
 ﻿using System;
 using SystemBase;
-using Systems.Distractions;
 using Systems.Distractions2.DistractionStrategies;
 using Systems.Tourist;
 using Systems.Tourist.States;
@@ -65,27 +64,18 @@ namespace Systems.Distractions2
 
         private IDistraction CreateDistraction(DistractionType type)
         {
-            switch (type)
+            return type switch
             {
-                case DistractionType.None:
-                    break;
-                case DistractionType.Tiger:
-                    return new TigerDistraction();
-                case DistractionType.Butterfly:
-                    return new ButterflyDistraction();
-                case DistractionType.Spider:
-                    return new SpiderDistraction();
-                case DistractionType.Money:
-                    return new MoneyDistraction();
-                case DistractionType.Bus:
-                    return new BusDistraction();
-                case DistractionType.Swamp:
-                case DistractionType.Camera:
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
-            }
-
-            return new NoneDistraction();
+                DistractionType.None => (IDistraction) new NoneDistraction(),
+                DistractionType.Tiger => new TigerDistraction(),
+                DistractionType.Butterfly => new ButterflyDistraction(),
+                DistractionType.Spider => new SpiderDistraction(),
+                DistractionType.Money => new MoneyDistraction(),
+                DistractionType.Bus => new BusDistraction(),
+                DistractionType.Swamp => throw new ArgumentOutOfRangeException(nameof(type), type, "Not implemented yet"),
+                DistractionType.Camera => throw new ArgumentOutOfRangeException(nameof(type), type, "Not implemented"),
+                _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+            };
         }
     }
 }
