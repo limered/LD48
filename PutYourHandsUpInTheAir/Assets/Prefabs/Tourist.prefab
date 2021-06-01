@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 3355293365520363688}
   - component: {fileID: 5748114545316010564}
   - component: {fileID: 1771741449184892251}
+  - component: {fileID: 8996821111172734936}
   m_Layer: 6
   m_Name: Tourist
   m_TagString: tourist
@@ -264,9 +265,6 @@ MonoBehaviour:
   bodyPartIndex:
     value: 0
   idleMinTimeWithoutMovementInSeconds: 0.3
-  idleSpeed: 10
-  normalSpeed: 10
-  attractedSpeed: 10
   debugCurrentState: 
   debugTargetDistance: {x: 0, y: 0}
 --- !u!114 &3492671645544282497
@@ -328,6 +326,22 @@ CapsuleCollider:
   m_Height: 1.63
   m_Direction: 1
   m_Center: {x: -0.04, y: 0.4, z: 0}
+--- !u!114 &8996821111172734936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666235342249832527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2951ab7e14f5b649b0d357297ec9269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DistractionType:
+    value: 0
+  DistractionProgress:
+    value: 0
 --- !u!1 &2933896038715736185
 GameObject:
   m_ObjectHideFlags: 0

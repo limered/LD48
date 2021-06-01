@@ -1,4 +1,5 @@
 ﻿using SystemBase;
+using Systems.Distractions2;
 using UnityEngine;
 
 namespace Systems.DistractionControl

@@ -6,6 +6,7 @@ using Systems.Distractions;
 using Systems.DistractionControl;
 using Systems.Tourist.States;
 using SystemBase.StateMachineBase;
+using Systems.Distractions2;
 
 [GameSystem]
 public class BubbleSystem : GameSystem<TouristBrainComponent>

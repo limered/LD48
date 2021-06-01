@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SystemBase;
 using Systems.Distractions;
+using Systems.Distractions2;
 using Systems.Room;
 using Systems.Tourist;
 using Systems.Tourist.States;
@@ -14,18 +15,6 @@ using Random = UnityEngine.Random;
 
 namespace Systems.DistractionControl
 {
-    public enum DistractionType
-    {
-        None,
-        Tiger,
-        Butterfly,
-        Camera,
-        Spider,
-        Swamp,
-        Money,
-        Bus
-    }
-
     [GameSystem]
     public class DistractionControlSystem : GameSystem<DistractionControlConfig, DistractionComponent, RoomComponent>
     {
