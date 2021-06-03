@@ -61,6 +61,9 @@ namespace Systems.Room
 
             room.State.GoToState(new RoomWalkOut());
             MessageBroker.Default
+                .Publish(new RoomTimerEndedAction{WalkOutPosition = room.SpawnOutPosition.transform });
+
+            MessageBroker.Default
                 .Receive<RoomAllTouristsLeft>()
                 .Subscribe(_ => room.State.GoToState(new RoomDestroy()))
                 .AddToLifecycleOf(room);
