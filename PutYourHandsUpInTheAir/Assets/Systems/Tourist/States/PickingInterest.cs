@@ -40,8 +40,6 @@ namespace Systems.Tourist.States
             if (nearestDistraction)
             {
                 context.GoToState(new GoingToAttraction(nearestDistraction));
-                context.Owner.GetComponent<DistractableComponent>().DistractionType.Value =
-                    nearestDistraction.DistractionType;
             }
             else
             {

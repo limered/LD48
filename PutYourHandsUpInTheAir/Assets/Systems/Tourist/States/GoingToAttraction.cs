@@ -1,5 +1,6 @@
 using SystemBase.StateMachineBase;
 using Systems.DistractionControl;
+using Systems.Distractions2;
 using Systems.Movement;
 using UniRx;
 using UniRx.Triggers;
@@ -18,6 +19,9 @@ namespace Systems.Tourist.States
         }
         public override void Enter(StateContext<TouristBrainComponent> context)
         {
+            context.Owner.GetComponent<DistractableComponent>().DistractionType.Value =
+                Distraction.DistractionType;
+
             var movement = context.Owner.GetComponent<TwoDeeMovementComponent>();
             context.Owner.UpdateAsObservable()
                 .Subscribe(_ => GoToDistraction(context, movement))
@@ -31,7 +35,7 @@ namespace Systems.Tourist.States
             var distanceVec = distractionPosition - touristPosition;
             if (distanceVec.sqrMagnitude < 0.1f)
             {
-                context.GoToState(new Interacting());
+                context.GoToState(new Interacting(Distraction));
             }
             else
             {

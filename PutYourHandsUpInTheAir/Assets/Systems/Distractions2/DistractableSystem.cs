@@ -8,7 +8,7 @@ using UniRx;
 namespace Systems.Distractions2
 {
     [GameSystem]
-    public class DistractionSystem : GameSystem<DistractableComponent>
+    public class DistractableSystem : GameSystem<DistractableComponent>
     {
         public override void Register(DistractableComponent component)
         {
