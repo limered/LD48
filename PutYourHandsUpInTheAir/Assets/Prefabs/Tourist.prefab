@@ -267,6 +267,10 @@ MonoBehaviour:
   idleMinTimeWithoutMovementInSeconds: 0.3
   debugCurrentState: 
   debugTargetDistance: {x: 0, y: 0}
+  StoprInterestPropability: 0.01
+  IntrerestPropability: 0.005
+  DistractionSearchRange: 1
+  DistractionSearchRangeIncrement: 0.01
 --- !u!114 &3492671645544282497
 MonoBehaviour:
   m_ObjectHideFlags: 0

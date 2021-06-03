@@ -11,6 +11,7 @@ using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 using Systems.Distractions;
 using Systems.GameMessages.Messages;
+using Systems.Room.Events;
 
 namespace Systems.Tourist
 {
@@ -19,6 +20,11 @@ namespace Systems.Tourist
     {
         public override void Register(TouristBrainComponent component)
         {
+            MessageBroker.Default.Receive<RoomTimerEndedAction>()
+                .Subscribe(msg => component.States.GoToState(new WalkingOutOfLevel(msg.WalkOutPosition)))
+                .AddTo(component);
+
+
             var movement = component.GetComponent<TwoDeeMovementComponent>();
 
             component.States.CurrentState
@@ -28,24 +34,6 @@ namespace Systems.Tourist
                 {
                     switch (state)
                     {
-                        //TODO: do we need this state?
-                        case GoingIntoLevel _:
-                            //this prevents a deadlock when setting the state directly
-                            Observable.Timer(TimeSpan.FromSeconds(0))
-                                .Subscribe(_ =>
-                                    component.States.GoToState(
-                                        new GoingBackToIdle(Random.insideUnitCircle)))
-                                .AddTo(state);
-                            break;
-                        case GoingBackToIdle goingIdle:
-                            GoingToIdlePosition(goingIdle, component, movement);
-                            break;
-                        case Idle idle:
-                            Idle(idle, component, movement);
-                            break;
-                        case PickingInterest _:
-                            //TODO: show some kind of thinking process (DistractionControlSystem)
-                            break;
                         case GoingToAttraction attraction:
                             GoingToAttraction(attraction, component, movement);
                             break;
@@ -96,13 +84,6 @@ namespace Systems.Tourist
             }
         }
 
-        private int GetDistractionIndex(DistractedTouristComponent distraction)
-        {
-            return distraction is TigerDistractionTouristComponent
-                ? 0 
-                : 1;
-        }
-
         private void GoingToIdlePosition(GoingBackToIdle state, TouristBrainComponent tourist,
             TwoDeeMovementComponent movement)
         {
@@ -112,39 +93,14 @@ namespace Systems.Tourist
                 {
                     if (state.GatherPosition != Vector2.zero && delta.magnitude < 0.1f) //magic epsilon distance
                     {
-                        tourist.States.GoToState(new Idle(state.GatherPosition));
+                        tourist.States.GoToState(new Idle(state.GatherPosition, tourist));
                     }
                     else if (state.GatherPosition == Vector2.zero && delta.magnitude < 1.3f) //magic distance around center that I define as idle-zone
                     {
-                        tourist.States.GoToState(new Idle(state.GatherPosition));
+                        tourist.States.GoToState(new Idle(state.GatherPosition, tourist));
                     }
                     else
                     {
-                        movement.Direction.Value = delta.normalized;
-                    }
-                })
-                .AddTo(state);
-        }
-
-        private void Idle(Idle state, TouristBrainComponent tourist, TwoDeeMovementComponent movement)
-        {
-            movement.Direction.Value = Vector2.zero;
-
-            Observable.Interval(TimeSpan.FromSeconds(tourist.idleMinTimeWithoutMovementInSeconds))
-                .Subscribe(_ =>
-                {
-                    var stop = Random.value * 10;
-                    if (stop < 6)
-                    {
-                        movement.SlowStop();
-                    }
-                    else
-                    {
-                        var pos = state.IdlePosition + Random.insideUnitCircle;
-                        var rndMovement = (pos - (Vector2) movement.transform.position)
-                            .Rotate(Random.Range(-90, 90))
-                            .normalized;
-                        var delta = movement.Direction.Value + rndMovement;
                         movement.Direction.Value = delta.normalized;
                     }
                 })
@@ -155,7 +111,7 @@ namespace Systems.Tourist
             TwoDeeMovementComponent movement)
         {
             SystemUpdate()
-                .Select(_ => attraction.AttractionPosition - (Vector2) tourist.transform.position)
+                .Select(_ => (Vector2) attraction.AttractionPosition.position - (Vector2) tourist.transform.position)
                 .Subscribe(delta =>
                 {
                     if (TouristReachedDistraction(delta))
@@ -165,7 +121,7 @@ namespace Systems.Tourist
                     else
                     {
                         movement.Direction.Value = 
-                            (attraction.AttractionPosition - (Vector2) tourist.transform.position).normalized;
+                            ((Vector2) attraction.AttractionPosition.position - (Vector2) tourist.transform.position).normalized;
                     }
                 })
                 .AddTo(attraction);

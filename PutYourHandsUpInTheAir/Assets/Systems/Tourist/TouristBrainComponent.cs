@@ -20,6 +20,10 @@ namespace Systems.Tourist
         public StateContext<TouristBrainComponent> States { get; } = new StateContext<TouristBrainComponent>();
 
         public bool HasPaid { get; set; }
+        public float StoprInterestPropability = 0.3f;
+        public float IntrerestPropability = 0.3f;
+        public float DistractionSearchRange = 2f;
+        public float DistractionSearchRangeIncrement = 0.1f;
     }
 
     public static class TouristNames

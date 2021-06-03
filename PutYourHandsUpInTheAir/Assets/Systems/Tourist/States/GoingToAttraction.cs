@@ -6,9 +6,9 @@ namespace Systems.Tourist.States
     [NextValidStates(typeof(Interacting), typeof(GoingBackToIdle), typeof(WalkingOutOfLevel))]
     public class GoingToAttraction : BaseState<TouristBrainComponent>
     {
-        public Vector2 AttractionPosition { get; }
+        public Transform AttractionPosition { get; }
 
-        public GoingToAttraction(Vector2 attractionPosition)
+        public GoingToAttraction(Transform attractionPosition)
         {
             AttractionPosition = attractionPosition;
         }
