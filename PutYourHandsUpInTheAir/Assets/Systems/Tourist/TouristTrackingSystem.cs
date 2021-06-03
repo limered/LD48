@@ -202,17 +202,17 @@ namespace Systems.Tourist
         {
             SystemUpdate()
                 .Where(_ => RoomIsInWalkInState(room))
-                .Where(_ => AllTouristsAreInIdle())
+                .Where(_ => AllTouristsWalkedIn())
                 .First()
                 .Subscribe(_ => StartRoom())
                 .AddToLifecycleOf(room);
         }
 
-        private bool AllTouristsAreInIdle()
+        private bool AllTouristsWalkedIn()
         {
             return _tourists != null &&
                    _tourists.Where(x => x != null)
-                       .All(t => t.GetComponent<TouristBrainComponent>().StateContext.CurrentState.Value is Idle);
+                       .All(t => !(t.GetComponent<TouristBrainComponent>().StateContext.CurrentState.Value is GoingIntoLevel));
         }
 
         private void StartRoom()
