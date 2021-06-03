@@ -18,8 +18,8 @@ namespace Systems.Distractions.ForEnd
         {
             Object.Destroy(component.GetComponent<IsNearPlayerComponent>());
             var touristBrain = component.GetComponent<TouristBrainComponent>();
-            touristBrain.States.GoToState(new GoingToAttraction(touristBrain.transform));
-            touristBrain.States.GoToState(new Interacting());
+            //touristBrain.StateContext.GoToState(new GoingToAttraction(touristBrain.transform));
+            //touristBrain.StateContext.GoToState(new Interacting());
             component.CreatedFrom.HasFired = component.CreatedFrom.FireOnce;
 
             component.LastDistractionProgressTime = component.CreatedFrom.DistractionInteractionDuration;
@@ -49,8 +49,8 @@ namespace Systems.Distractions.ForEnd
             //var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
             //if (!tourist) return;
             
-            //tourist.States.GoToState(new GoingBackToIdle(tourist.transform.position));
-            //tourist.States.GoToState(new Idle(tourist.transform.position, tourist));
+            //tourist.StateContext.GoToState(new GoingBackToIdle(tourist.transform.position));
+            //tourist.StateContext.GoToState(new Idle(tourist.transform.position, tourist));
             //tourist.HasPaid = true;
         }
     }

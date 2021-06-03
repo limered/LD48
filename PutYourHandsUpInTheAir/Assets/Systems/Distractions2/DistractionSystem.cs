@@ -44,7 +44,7 @@ namespace Systems.Distractions2
                         break;
                     case DistractionOutcome.Dead:
                         var tourist = distractable.GetComponent<TouristBrainComponent>();
-                        tourist.States.GoToState(new Dead(distractable.DistractionType.Value));
+                        tourist.StateContext.GoToState(new Dead(distractable.DistractionType.Value));
                         StopTouristDistraction(distractable);
                         break;
                     case DistractionOutcome.Debuffed:

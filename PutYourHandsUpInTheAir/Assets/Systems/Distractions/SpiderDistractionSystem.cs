@@ -19,8 +19,8 @@ namespace Systems.Distractions
         public override void Register(SpiderDistractionTouristComponent component)
         {
             var touristBrain = component.GetComponent<TouristBrainComponent>();
-            touristBrain.States.GoToState(new GoingToAttraction(component.InteractionPosition));
-            touristBrain.States.CurrentState
+            //touristBrain.StateContext.GoToState(new GoingToAttraction(component.InteractionPosition));
+            touristBrain.StateContext.CurrentState
                 .Where(state => state is Interacting)
                 .Subscribe(_ => StartInteracting(component))
                 .AddToLifecycleOf(component);
@@ -37,19 +37,19 @@ namespace Systems.Distractions
             component.PoisoningProgressTime = poisoningTime;
             component.UpdateAsObservable()
                 .Where(_ => component && !component.IsPoisoned)
-                .Where(_ => component.GetComponent<TouristBrainComponent>().States.CurrentState.Value is Interacting)
+                .Where(_ => component.GetComponent<TouristBrainComponent>().StateContext.CurrentState.Value is Interacting)
                 .Subscribe(_ => UpdatePoisoningTimer(component, poisoningTime))
                 .AddToLifecycleOf(component);
 
             component.UpdateAsObservable()
                 .Where(_ => component && component.IsPoisoned)
-                .Where(_ => component.GetComponent<TouristBrainComponent>().States.CurrentState.Value is Interacting)
+                .Where(_ => component.GetComponent<TouristBrainComponent>().StateContext.CurrentState.Value is Interacting)
                 .Subscribe(_ => UpdatePoisonedTimer(component))
                 .AddToLifecycleOf(component);
 
             SystemUpdate()
                 .Where(_ => component)
-                .Where(_ => component.GetComponent<TouristBrainComponent>().States.CurrentState.Value is Interacting)
+                .Where(_ => component.GetComponent<TouristBrainComponent>().StateContext.CurrentState.Value is Interacting)
                 .Subscribe(_ => DoStuff(component))
                 .AddToLifecycleOf(component);
         }
@@ -96,7 +96,7 @@ namespace Systems.Distractions
                 var touristComp = comp.GetComponent<TouristBrainComponent>();
                 comp.DistractionProgress.Value = 1;
                 touristComp
-                    .States
+                    .StateContext
                     .GoToState(new Dead(DistractionType.Spider));
                 Object.Destroy(comp);
             }

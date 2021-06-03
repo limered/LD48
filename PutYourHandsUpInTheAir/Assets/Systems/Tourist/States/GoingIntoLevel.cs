@@ -9,19 +9,17 @@ namespace Systems.Tourist.States
     [NextValidStates(typeof(Idle))]
     public class GoingIntoLevel : BaseState<TouristBrainComponent>
     {
-        private readonly TouristBrainComponent _tourist;
         private readonly Vector2 _center;
 
-        public GoingIntoLevel(TouristBrainComponent tourist)
+        public GoingIntoLevel()
         {
-            _tourist = tourist;
             _center = Random.insideUnitCircle;
         }
 
         public override void Enter(StateContext<TouristBrainComponent> context)
         {
-            var movement = _tourist.GetComponent<TwoDeeMovementComponent>();
-            _tourist.UpdateAsObservable()
+            var movement = context.Owner.GetComponent<TwoDeeMovementComponent>();
+            context.Owner.UpdateAsObservable()
                 .Subscribe(_ => MoveTouristToCenter(movement, context))
                 .AddTo(this);
         }
@@ -33,7 +31,7 @@ namespace Systems.Tourist.States
             if (distance.sqrMagnitude < 1.3f)
             {
                 movement.SlowStop();
-                context.GoToState(new Idle(_center, _tourist));
+                context.GoToState(new Idle(_center));
             }
             else
             {

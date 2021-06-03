@@ -14,18 +14,16 @@ namespace Systems.Tourist.States
     public class Idle : BaseState<TouristBrainComponent>
     {
         private readonly Vector2 _idlePosition;
-        private readonly TouristBrainComponent _tourist;
 
-        public Idle(Vector2 idlePosition, TouristBrainComponent tourist)
+        public Idle(Vector2 idlePosition)
         {
             _idlePosition = idlePosition;
-            _tourist = tourist;
         }
 
         public override void Enter(StateContext<TouristBrainComponent> context)
         {
-            var movement = _tourist.GetComponent<TwoDeeMovementComponent>();
-            _tourist.UpdateAsObservable()
+            var movement = context.Owner.GetComponent<TwoDeeMovementComponent>();
+            context.Owner.UpdateAsObservable()
                 .Subscribe(_ =>
                 {
                     MoveAround(movement);
@@ -37,9 +35,9 @@ namespace Systems.Tourist.States
         private void StartPickingUpInterest(StateContext<TouristBrainComponent> context)
         {
             var start = Random.value;
-            if (start < _tourist.IntrerestPropability)
+            if (start < context.Owner.IntrerestPropability)
             {
-                context.GoToState(new PickingInterest(_tourist));
+                context.GoToState(new PickingInterest());
             }
         }
 

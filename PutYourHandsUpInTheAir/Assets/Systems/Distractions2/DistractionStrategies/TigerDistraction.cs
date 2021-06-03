@@ -17,7 +17,7 @@ namespace Systems.Distractions2.DistractionStrategies
         {
             var touristBrain = distractable.GetComponent<TouristBrainComponent>();
 
-            if (touristBrain.States.CurrentState.Value is Interacting)
+            if (touristBrain.StateContext.CurrentState.Value is Interacting)
             {
                 LastDistractionProgressTime -= Time.fixedDeltaTime;
                 if (LastDistractionProgressTime <= 0)

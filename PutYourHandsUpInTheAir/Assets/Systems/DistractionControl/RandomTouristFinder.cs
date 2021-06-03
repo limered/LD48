@@ -17,7 +17,7 @@ namespace Systems.DistractionControl
             GameObject.FindGameObjectsWithTag("tourist")
                 .Select(t => t.GetComponent<TouristBrainComponent>())
                 .Where(brain => !brain.GetComponent<IsNearPlayerComponent>())
-                .Where(brain => brain.States.CurrentState.Value is Idle)
+                .Where(brain => brain.StateContext.CurrentState.Value is Idle)
                 .ToList()
                 .Randomize()
                 .ForEach(t => queuedRandoms.Enqueue(t));

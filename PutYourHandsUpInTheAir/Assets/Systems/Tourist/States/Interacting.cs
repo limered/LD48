@@ -1,4 +1,5 @@
 using SystemBase.StateMachineBase;
+using Systems.Movement;
 
 namespace Systems.Tourist.States
 {
@@ -7,7 +8,7 @@ namespace Systems.Tourist.States
     {
         public override void Enter(StateContext<TouristBrainComponent> context)
         {
-            
+            context.Owner.GetComponent<TwoDeeMovementComponent>().SlowStop();
         }
     }
 }

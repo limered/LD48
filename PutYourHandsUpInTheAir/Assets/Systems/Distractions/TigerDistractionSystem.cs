@@ -11,8 +11,8 @@ namespace Systems.Distractions
     {
         public override void Register(TigerDistractionTouristComponent component)
         {
-            var touristBrain = component.GetComponent<TouristBrainComponent>();
-            touristBrain.States.GoToState(new GoingToAttraction(component.InteractionPosition));
+            //var touristBrain = component.GetComponent<TouristBrainComponent>();
+            //touristBrain.StateContext.GoToState(new GoingToAttraction(component));
 
             var distractable = component.GetComponent<DistractableComponent>();
             distractable.DistractionType.Value = DistractionType.Tiger;

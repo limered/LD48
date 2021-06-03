@@ -10,10 +10,16 @@ namespace SystemBase.StateMachineBase
             AfterStateChange = new ReactiveCommand<BaseState<T>>();
         }
 
+        public StateContext(T component)
+        {
+            BeforeStateChange = new ReactiveCommand<BaseState<T>>();
+            AfterStateChange = new ReactiveCommand<BaseState<T>>();
+            Owner = component;
+        }
+
+        public T Owner { get; }
         public ReactiveCommand<BaseState<T>> AfterStateChange { get; }
-
         public ReactiveCommand<BaseState<T>> BeforeStateChange { get; }
-
         public ReactiveProperty<BaseState<T>> CurrentState { get; private set; }
 
         public bool GoToState(BaseState<T> state)

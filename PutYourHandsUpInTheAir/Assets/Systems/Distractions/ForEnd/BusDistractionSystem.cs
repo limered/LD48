@@ -65,7 +65,7 @@ namespace Systems.Distractions.ForEnd
         {
             foreach (var tourist in tourists.Select(t => t.GetComponent<TouristBrainComponent>()))
             {
-                //tourist.States.GoToState(new PickingInterest());
+                //tourist.StateContext.GoToState(new PickingInterest());
 
                 var busComp = tourist.AddComponent<BusDistractionTouristComponent>();
                 busComp.BusStopPosition = distractionOrigin.GetComponent<BusComponent>().StartPosititon;
@@ -78,8 +78,8 @@ namespace Systems.Distractions.ForEnd
         {
             var touristBrain = component.GetComponent<TouristBrainComponent>();
         
-            //touristBrain.States.GoToState(new GoingToAttraction(component.BusStopPosition));
-            touristBrain.States.CurrentState
+            //touristBrain.StateContext.GoToState(new GoingToAttraction(component.BusStopPosition));
+            touristBrain.StateContext.CurrentState
                 .Where(state => state is Interacting)
                 .Subscribe(_ => StartInteracting(component, touristBrain))
                 .AddToLifecycleOf(component);

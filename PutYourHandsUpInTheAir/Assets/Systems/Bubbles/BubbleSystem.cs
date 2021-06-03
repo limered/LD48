@@ -1,10 +1,10 @@
 using UnityEngine;
 using UniRx;
-using SystemBase;
 using Systems.Tourist;
 using Systems.Tourist.States;
 using SystemBase.StateMachineBase;
 using Systems.Distractions2;
+using SystemBase;
 
 [GameSystem]
 public class BubbleSystem : GameSystem<TouristBrainComponent>
@@ -13,7 +13,7 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
     {
         var bubbleComponent = touristBrainComponent.GetComponentInChildren<BubbleComponent>();
 
-        touristBrainComponent.States.CurrentState
+        touristBrainComponent.StateContext.CurrentState
             .Subscribe(state =>
             {
                 HandleTouristState(touristBrainComponent, bubbleComponent, state);

@@ -2,31 +2,27 @@
 using SystemBase.StateMachineBase;
 using Systems.DistractionControl;
 using Systems.Distractions2;
-using Systems.Movement;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
-using Utils;
 
 namespace Systems.Tourist.States
 {
     [NextValidStates(typeof(GoingToAttraction), typeof(GoingBackToIdle), typeof(WalkingOutOfLevel))]
     public class PickingInterest : BaseState<TouristBrainComponent>
     {
-        private readonly TouristBrainComponent _tourist;
         private readonly DistractionFinder _distractionFinder;
         private float _distractionSearchRange;
 
-        public PickingInterest(TouristBrainComponent tourist)
+        public PickingInterest()
         {
-            _tourist = tourist;
-            _distractionSearchRange = _tourist.DistractionSearchRange;
             _distractionFinder = new DistractionFinder();
         }
 
         public override void Enter(StateContext<TouristBrainComponent> context)
         {
-            _tourist.UpdateAsObservable()
+            _distractionSearchRange = context.Owner.DistractionSearchRange;
+            context.Owner.UpdateAsObservable()
                 .Subscribe(_ => PickInterestOrLeaveIt(context))
                 .AddTo(this);
         }
@@ -34,22 +30,22 @@ namespace Systems.Tourist.States
         private void PickInterestOrLeaveIt(StateContext<TouristBrainComponent> context)
         {
             var stop = Random.value;
-            if (stop < _tourist.StoprInterestPropability)
+            if (stop < context.Owner.StoprInterestPropability)
             {
-                context.GoToState(new GoingBackToIdle(Random.insideUnitCircle, _tourist));
+                context.GoToState(new GoingBackToIdle(Random.insideUnitCircle));
             }
 
             var nearestDistraction = _distractionFinder
-                .FindNearestDistraction(_tourist.transform, _distractionSearchRange);
+                .FindNearestDistraction(context.Owner.transform, _distractionSearchRange);
             if (nearestDistraction)
             {
-                context.GoToState(new GoingToAttraction(nearestDistraction.InteractionPosition));
-                _tourist.GetComponent<DistractableComponent>().DistractionType.Value =
+                context.GoToState(new GoingToAttraction(nearestDistraction));
+                context.Owner.GetComponent<DistractableComponent>().DistractionType.Value =
                     nearestDistraction.DistractionType;
             }
             else
             {
-                _distractionSearchRange += _tourist.DistractionSearchRangeIncrement;
+                _distractionSearchRange += context.Owner.DistractionSearchRangeIncrement;
             }
         }
     }

@@ -36,7 +36,7 @@ public class TigerAnimationSystem : GameSystem<DistractionOriginComponent>
             animator.Play("TigerBody_Idle");
             animator.Play("TigerWakingUp_Tail");
 
-            collidingObject.GetComponent<TouristBrainComponent>().States.CurrentState
+            collidingObject.GetComponent<TouristBrainComponent>().StateContext.CurrentState
             .Subscribe(state =>
             {
                 HandleAnimationForState(originComponent, collider, state);

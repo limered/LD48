@@ -1,4 +1,8 @@
 using SystemBase.StateMachineBase;
+using Systems.DistractionControl;
+using Systems.Movement;
+using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 
 namespace Systems.Tourist.States
@@ -6,15 +10,33 @@ namespace Systems.Tourist.States
     [NextValidStates(typeof(Interacting), typeof(GoingBackToIdle), typeof(WalkingOutOfLevel))]
     public class GoingToAttraction : BaseState<TouristBrainComponent>
     {
-        public Transform AttractionPosition { get; }
+        public DistractionOriginComponent Distraction { get; }
 
-        public GoingToAttraction(Transform attractionPosition)
+        public GoingToAttraction(DistractionOriginComponent distraction)
         {
-            AttractionPosition = attractionPosition;
+            Distraction = distraction;
         }
         public override void Enter(StateContext<TouristBrainComponent> context)
         {
-            
+            var movement = context.Owner.GetComponent<TwoDeeMovementComponent>();
+            context.Owner.UpdateAsObservable()
+                .Subscribe(_ => GoToDistraction(context, movement))
+                .AddTo(this);
+        }
+
+        private void GoToDistraction(StateContext<TouristBrainComponent> context, TwoDeeMovementComponent movement)
+        {
+            var distractionPosition = Distraction.InteractionPosition.transform.position;
+            var touristPosition = context.Owner.transform.position;
+            var distanceVec = distractionPosition - touristPosition;
+            if (distanceVec.sqrMagnitude < 0.1f)
+            {
+                context.GoToState(new Interacting());
+            }
+            else
+            {
+                movement.Direction.Value = distanceVec.normalized;
+            }
         }
     }
 }
