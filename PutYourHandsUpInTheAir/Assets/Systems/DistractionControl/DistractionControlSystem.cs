@@ -71,7 +71,7 @@ namespace Systems.DistractionControl
         {
             if (!brain || !originComponent) return;
             
-            brain.States.GoToState(new PickingInterest());
+            //brain.States.GoToState(new PickingInterest());
 
             switch (originComponent.DistractionType)
             {

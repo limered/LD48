@@ -18,7 +18,7 @@ namespace Systems.Distractions.ForEnd
         {
             Object.Destroy(component.GetComponent<IsNearPlayerComponent>());
             var touristBrain = component.GetComponent<TouristBrainComponent>();
-            touristBrain.States.GoToState(new GoingToAttraction(touristBrain.transform.position));
+            touristBrain.States.GoToState(new GoingToAttraction(touristBrain.transform));
             touristBrain.States.GoToState(new Interacting());
             component.CreatedFrom.HasFired = component.CreatedFrom.FireOnce;
 
@@ -45,13 +45,13 @@ namespace Systems.Distractions.ForEnd
 
         private void CollideWithPlayer(Collider coll)
         {
-            Object.Destroy(coll.gameObject.GetComponent<MoneyDistractionTouristComponent>());
-            var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
-            if (!tourist) return;
+            //Object.Destroy(coll.gameObject.GetComponent<MoneyDistractionTouristComponent>());
+            //var tourist = coll.gameObject.GetComponent<TouristBrainComponent>();
+            //if (!tourist) return;
             
-            tourist.States.GoToState(new GoingBackToIdle(tourist.transform.position));
-            tourist.States.GoToState(new Idle(tourist.transform.position));
-            tourist.HasPaid = true;
+            //tourist.States.GoToState(new GoingBackToIdle(tourist.transform.position));
+            //tourist.States.GoToState(new Idle(tourist.transform.position, tourist));
+            //tourist.HasPaid = true;
         }
     }
 }

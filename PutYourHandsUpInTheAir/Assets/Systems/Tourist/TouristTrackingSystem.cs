@@ -241,7 +241,7 @@ namespace Systems.Tourist
                     var brain = objectInstance.GetComponent<TouristBrainComponent>();
                     brain.tag = "tourist";
                     tourist.Apply(brain);
-                    brain.States.Start(new GoingIntoLevel());
+                    brain.States.Start(new GoingIntoLevel(brain));
 
                     return objectInstance;
                 })
@@ -263,7 +263,7 @@ namespace Systems.Tourist
                 var brain = objectInstance.GetComponent<TouristBrainComponent>();
                 brain.tag = "tourist";
                 tourist.Apply(brain);
-                brain.States.Start(new GoingIntoLevel());
+                //brain.States.Start(new GoingIntoLevel());
 
                 return objectInstance;
             }).ToArray();
