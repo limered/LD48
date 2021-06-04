@@ -1,6 +1,7 @@
 ﻿using System;
 using SystemBase;
 using Systems.Distractions;
+using Systems.Distractions2;
 using Systems.Tourist;
 using UniRx;
 using Utils.Plugins;
@@ -8,7 +9,7 @@ using Utils.Plugins;
 namespace Systems.FirstRoom
 {
     [GameSystem]
-    public class FirstRoomSystem : GameSystem<FirstRoomComponent, TigerDistractionTouristComponent>
+    public class FirstRoomSystem : GameSystem<FirstRoomComponent, DistractableComponent>
     {
         private readonly ReactiveProperty<FirstRoomComponent> _firstRoomComponent = new ReactiveProperty<FirstRoomComponent>();
 
@@ -17,14 +18,16 @@ namespace Systems.FirstRoom
             _firstRoomComponent.Value = component;
         }
 
-        public override void Register(TigerDistractionTouristComponent component)
+        public override void Register(DistractableComponent component)
         {
-            _firstRoomComponent.WhereNotNull()
-                .Subscribe(first => TigerDistractionTriggered(first, component))
+            component.DistractionType
+                .Where(_ => _firstRoomComponent.Value != null)
+                .Where(type => type == DistractionType.Tiger)
+                .Subscribe(_ => TigerDistractionTriggered(_firstRoomComponent.Value, component))
                 .AddTo(component);
         }
 
-        private void TigerDistractionTriggered(FirstRoomComponent firstRoom, TigerDistractionTouristComponent component)
+        private void TigerDistractionTriggered(FirstRoomComponent firstRoom, DistractableComponent component)
         {
             var touristBrain = component.GetComponent<TouristBrainComponent>();
             if (!touristBrain) return;
