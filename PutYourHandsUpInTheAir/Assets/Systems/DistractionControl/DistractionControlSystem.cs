@@ -70,26 +70,9 @@ namespace Systems.DistractionControl
         private void AddDistractionToRandomStranger(DistractionOriginComponent originComponent, TouristBrainComponent brain)
         {
             if (!brain || !originComponent) return;
-            
-            //brain.StateContext.GoToState(new PickingInterest());
 
             switch (originComponent.DistractionType)
             {
-                case DistractionType.Tiger:
-                    var comp = brain.AddComponent<TigerDistractionTouristComponent>();
-                    comp.CreatedFrom = originComponent;
-                    comp.LastDistractionProgressTime = originComponent.DistractionInteractionDuration;
-                    return;
-                case DistractionType.Butterfly:
-                    var butterflyComp = brain.AddComponent<ButterflyDistractionTouristComponent>();
-                    butterflyComp.CreatedFrom = originComponent;
-                    butterflyComp.LastDistractionProgressTime = originComponent.DistractionInteractionDuration;
-                    return;
-                case DistractionType.Spider:
-                    var spiderComp = brain.AddComponent<SpiderDistractionTouristComponent>();
-                    spiderComp.CreatedFrom = originComponent;
-                    spiderComp.LastDistractionProgressTime = originComponent.DistractionInteractionDuration;
-                    return;
                 case DistractionType.Money:
                     var moneyComp = brain.AddComponent<MoneyDistractionTouristComponent>();
                     moneyComp.CreatedFrom = originComponent;
@@ -100,8 +83,6 @@ namespace Systems.DistractionControl
                     busComp.CreatedFrom = originComponent;
                     busComp.LastDistractionProgressTime = originComponent.DistractionInteractionDuration;
                     return;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
     }
