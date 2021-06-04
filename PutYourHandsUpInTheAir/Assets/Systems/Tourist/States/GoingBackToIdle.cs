@@ -9,19 +9,24 @@ namespace Systems.Tourist.States
     [NextValidStates(typeof(Idle), typeof(WalkingOutOfLevel))]
     public class GoingBackToIdle : BaseState<TouristBrainComponent>
     {
-        public Vector2 GatherPosition { get; }
-
         public GoingBackToIdle(Vector2 gatherPosition)
         {
             GatherPosition = gatherPosition;
         }
-        
+
+        public Vector2 GatherPosition { get; }
+
         public override void Enter(StateContext<TouristBrainComponent> context)
         {
             var movement = context.Owner.GetComponent<TwoDeeMovementComponent>();
             context.Owner.UpdateAsObservable()
                 .Subscribe(_ => MoveTouristToCenter(movement, context))
                 .AddTo(this);
+        }
+
+        public override string ToString()
+        {
+            return $"GoingBackToIdle({GatherPosition})";
         }
 
         private void MoveTouristToCenter(TwoDeeMovementComponent movement, StateContext<TouristBrainComponent> context)
@@ -37,11 +42,6 @@ namespace Systems.Tourist.States
             {
                 movement.Direction.Value = distance.normalized;
             }
-        }
-
-        public override string ToString()
-        {
-            return $"GoingBackToIdle({GatherPosition})";
         }
     }
 }

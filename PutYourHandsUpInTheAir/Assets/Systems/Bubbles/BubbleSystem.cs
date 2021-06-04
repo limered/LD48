@@ -23,14 +23,12 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
 
     private void HandleTouristState(TouristBrainComponent touristBrainComponent, BubbleComponent bubbleComponent, BaseState<TouristBrainComponent> state)
     {
-        Debug.Log(state);
-
         switch (state)
         {
             case PickingInterest _:
                 ShowPickingInterest(bubbleComponent);
                 break;
-            case GoingToAttraction _:
+            case GoingToDistraction _:
             case GoingBackToIdle _:
                 ShowDistractionBubble(bubbleComponent, touristBrainComponent);
                 break;
@@ -59,8 +57,6 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
         var distractionType = distracted.DistractionType.Value;
         var spriteRenderer = bubbleComponent.gameObject.GetComponent<SpriteRenderer>();
         ShowBubble(bubbleComponent, true);
-
-        Debug.Log(distractionType);
 
         switch (distractionType)
         {

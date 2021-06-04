@@ -18,7 +18,7 @@ namespace Systems.Distractions.ForEnd
         {
             Object.Destroy(component.GetComponent<IsNearPlayerComponent>());
             var touristBrain = component.GetComponent<TouristBrainComponent>();
-            //touristBrain.StateContext.GoToState(new GoingToAttraction(touristBrain.transform));
+            //touristBrain.StateContext.GoToState(new GoingToDistraction(touristBrain.transform));
             //touristBrain.StateContext.GoToState(new Interacting());
             component.CreatedFrom.HasFired = component.CreatedFrom.FireOnce;
 

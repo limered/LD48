@@ -4,6 +4,7 @@ using Systems.Distractions2.DistractionStrategies;
 using Systems.Tourist;
 using Systems.Tourist.States;
 using UniRx;
+using Random = UnityEngine.Random;
 
 namespace Systems.Distractions2
 {
@@ -23,8 +24,8 @@ namespace Systems.Distractions2
             return type =>
             {
                 component.DistractionProgress.Value = 0;
-                component.ActiveDistraction = CreateDistraction(type);
-                component.ActiveDistraction.Init();
+                component.ActiveDistractionStrategy = CreateDistraction(type);
+                component.ActiveDistractionStrategy.Init(component);
                 component.DistractionUpdateObservable = SystemFixedUpdate(component)
                     .Subscribe(UpdateDistraction());
             };
@@ -34,16 +35,17 @@ namespace Systems.Distractions2
         {
             return distractable =>
             {
-                var outcome = distractable.ActiveDistraction.Update(distractable);
+                var tourist = distractable.GetComponent<TouristBrainComponent>();
+                var outcome = distractable.ActiveDistractionStrategy.Update(distractable);
                 switch (outcome)
                 {
                     case DistractionOutcome.Waiting:
                         break;
                     case DistractionOutcome.Alive:
+                        tourist.StateContext.GoToState(new GoingBackToIdle(Random.insideUnitCircle));
                         StopTouristDistraction(distractable);
                         break;
                     case DistractionOutcome.Dead:
-                        var tourist = distractable.GetComponent<TouristBrainComponent>();
                         tourist.StateContext.GoToState(new Dead(distractable.DistractionType.Value));
                         StopTouristDistraction(distractable);
                         break;
@@ -59,9 +61,10 @@ namespace Systems.Distractions2
         {
             distractable.DistractionType.Value = DistractionType.None;
             distractable.DistractionProgress.Value = 1;
-            distractable.ActiveDistraction = new NoneDistraction();
+            distractable.ActiveDistractionStrategy = new NoneDistraction();
             distractable.DistractionUpdateObservable.Dispose();
             distractable.DistractionUpdateObservable = null;
+            distractable.Origin = null;
         }
 
         private IDistraction CreateDistraction(DistractionType type)

@@ -4,23 +4,24 @@ using Systems.Distractions2;
 using Systems.Movement;
 using UniRx;
 using UniRx.Triggers;
-using UnityEngine;
 
 namespace Systems.Tourist.States
 {
     [NextValidStates(typeof(Interacting), typeof(GoingBackToIdle), typeof(WalkingOutOfLevel))]
-    public class GoingToAttraction : BaseState<TouristBrainComponent>
+    public class GoingToDistraction : BaseState<TouristBrainComponent>
     {
-        public DistractionOriginComponent Distraction { get; }
-
-        public GoingToAttraction(DistractionOriginComponent distraction)
+        public GoingToDistraction(DistractionOriginComponent distraction)
         {
             Distraction = distraction;
         }
+
+        public DistractionOriginComponent Distraction { get; }
+
         public override void Enter(StateContext<TouristBrainComponent> context)
         {
-            context.Owner.GetComponent<DistractableComponent>().DistractionType.Value =
-                Distraction.DistractionType;
+            var distractable = context.Owner.GetComponent<DistractableComponent>();
+            distractable.Origin = Distraction;
+            distractable.DistractionType.Value = Distraction.DistractionType;
 
             var movement = context.Owner.GetComponent<TwoDeeMovementComponent>();
             context.Owner.UpdateAsObservable()
@@ -35,7 +36,7 @@ namespace Systems.Tourist.States
             var distanceVec = distractionPosition - touristPosition;
             if (distanceVec.sqrMagnitude < 0.1f)
             {
-                context.GoToState(new Interacting(Distraction));
+                context.GoToState(new Interacting());
             }
             else
             {

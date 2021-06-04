@@ -1,5 +1,6 @@
 ﻿using SystemBase;
 using Systems.Distractions2;
+using UniRx;
 using UnityEngine;
 
 namespace Systems.DistractionControl
@@ -14,5 +15,7 @@ namespace Systems.DistractionControl
         public bool FireOnce = false;
 
         public bool HasFired { get; set; }
+
+        public ReactiveCommand DistractionStopped = new ReactiveCommand();
     }
 }

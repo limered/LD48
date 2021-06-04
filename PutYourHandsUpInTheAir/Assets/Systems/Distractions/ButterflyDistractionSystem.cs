@@ -12,7 +12,7 @@ namespace Systems.Distractions
         public override void Register(ButterflyDistractionTouristComponent component)
         {
             //var touristBrain = component.GetComponent<TouristBrainComponent>();
-            //touristBrain.StateContext.GoToState(new GoingToAttraction(component.InteractionPosition));
+            //touristBrain.StateContext.GoToState(new GoingToDistraction(component.InteractionPosition));
 
             var distractable = component.GetComponent<DistractableComponent>();
             distractable.DistractionType.Value = DistractionType.Butterfly;

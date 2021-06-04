@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Systems.Tourist.States
 {
-    [NextValidStates(typeof(GoingToAttraction), typeof(GoingBackToIdle), typeof(WalkingOutOfLevel))]
+    [NextValidStates(typeof(GoingToDistraction), typeof(GoingBackToIdle), typeof(WalkingOutOfLevel))]
     public class PickingInterest : BaseState<TouristBrainComponent>
     {
         private readonly DistractionFinder _distractionFinder;
@@ -39,7 +39,7 @@ namespace Systems.Tourist.States
                 .FindNearestDistraction(context.Owner.transform, _distractionSearchRange);
             if (nearestDistraction)
             {
-                context.GoToState(new GoingToAttraction(nearestDistraction));
+                context.GoToState(new GoingToDistraction(nearestDistraction));
             }
             else
             {

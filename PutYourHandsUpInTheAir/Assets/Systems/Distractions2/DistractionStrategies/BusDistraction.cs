@@ -2,7 +2,7 @@
 {
     public class BusDistraction : IDistraction
     {
-        public void Init()
+        public void Init(DistractableComponent distractable)
         {
         }
 

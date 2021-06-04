@@ -78,7 +78,7 @@ namespace Systems.Distractions.ForEnd
         {
             var touristBrain = component.GetComponent<TouristBrainComponent>();
         
-            //touristBrain.StateContext.GoToState(new GoingToAttraction(component.BusStopPosition));
+            //touristBrain.StateContext.GoToState(new GoingToDistraction(component.BusStopPosition));
             touristBrain.StateContext.CurrentState
                 .Where(state => state is Interacting)
                 .Subscribe(_ => StartInteracting(component, touristBrain))

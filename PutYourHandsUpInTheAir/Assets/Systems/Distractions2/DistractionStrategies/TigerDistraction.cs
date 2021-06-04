@@ -1,4 +1,5 @@
-﻿using Systems.Tourist;
+﻿using SystemBase.StateMachineBase;
+using Systems.Tourist;
 using Systems.Tourist.States;
 using UnityEngine;
 
@@ -6,11 +7,13 @@ namespace Systems.Distractions2.DistractionStrategies
 {
     public class TigerDistraction : IDistraction
     {
-        private const float MaxDistractionDuration = 3.0f;
-        private float LastDistractionProgressTime = MaxDistractionDuration;
+        private float MaxDistractionDuration = 3.0f;
+        private float LastDistractionProgressTime = 3.0f;
 
-        public void Init()
+        public void Init(DistractableComponent distractable)
         {
+            MaxDistractionDuration = distractable.Origin.DistractionInteractionDuration;
+            LastDistractionProgressTime = MaxDistractionDuration;
         }
 
         public DistractionOutcome Update(DistractableComponent distractable)

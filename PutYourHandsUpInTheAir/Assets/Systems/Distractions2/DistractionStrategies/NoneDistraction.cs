@@ -2,7 +2,7 @@
 {
     public class NoneDistraction : IDistraction
     {
-        public void Init()
+        public void Init(DistractableComponent distractable)
         {
         }
 

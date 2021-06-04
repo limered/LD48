@@ -2,7 +2,7 @@
 {
     public class SpiderDistraction : IDistraction
     {
-        public void Init()
+        public void Init(DistractableComponent distractable)
         {
         }
 

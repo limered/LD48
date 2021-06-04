@@ -2,7 +2,7 @@
 {
     public class MoneyDistraction : IDistraction
     {
-        public void Init()
+        public void Init(DistractableComponent distractable)
         {
         }
 
