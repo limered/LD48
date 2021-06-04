@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using SystemBase;
+using Systems.Distractions2;
 using UniRx;
 
 namespace Systems.DistractionControl

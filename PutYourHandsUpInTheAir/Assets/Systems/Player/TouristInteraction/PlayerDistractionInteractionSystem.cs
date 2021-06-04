@@ -1,6 +1,7 @@
 ﻿using System;
 using SystemBase;
 using Systems.DistractionControl;
+using Systems.Distractions2;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UIElements;

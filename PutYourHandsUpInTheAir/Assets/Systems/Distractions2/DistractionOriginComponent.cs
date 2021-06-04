@@ -1,9 +1,9 @@
 ﻿using SystemBase;
-using Systems.Distractions2;
+using SystemBase.StateMachineBase;
 using UniRx;
 using UnityEngine;
 
-namespace Systems.DistractionControl
+namespace Systems.Distractions2
 {
     public class DistractionOriginComponent : GameComponent
     {
@@ -17,5 +17,11 @@ namespace Systems.DistractionControl
         public bool HasFired { get; set; }
 
         public ReactiveCommand DistractionStopped = new ReactiveCommand();
+        public StateContext<DistractionOriginComponent> StateContext;
+
+        private void Awake()
+        {
+            StateContext = new StateContext<DistractionOriginComponent>(this);
+        }
     }
 }
