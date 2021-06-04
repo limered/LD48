@@ -8,12 +8,14 @@ namespace SystemBase.StateMachineBase
         {
             BeforeStateChange = new ReactiveCommand<BaseState<T>>();
             AfterStateChange = new ReactiveCommand<BaseState<T>>();
+            CurrentState = new ReactiveProperty<BaseState<T>>(null);
         }
 
         public StateContext(T component)
         {
             BeforeStateChange = new ReactiveCommand<BaseState<T>>();
             AfterStateChange = new ReactiveCommand<BaseState<T>>();
+            CurrentState = new ReactiveProperty<BaseState<T>>(null);
             Owner = component;
         }
 
@@ -42,7 +44,7 @@ namespace SystemBase.StateMachineBase
 
         public void Start(BaseState<T> initialState)
         {
-            CurrentState = new ReactiveProperty<BaseState<T>>(initialState);
+            CurrentState.Value = initialState;
             CurrentState.Value.Enter(this);
         }
     }
