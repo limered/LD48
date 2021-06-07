@@ -73,7 +73,6 @@ namespace Systems.GameMessages
         {
             var income = component.PotentialIncome.PotentialIncomeAmount;
             income.text = msg.InitialPotentialIncome.ToString();
-
         }
 
         private void PreparePotentialIncome(ReducePotentialIncomeAction msg, UIComponent component)
@@ -84,6 +83,9 @@ namespace Systems.GameMessages
             var incomeVanished = potentialIncome.IncomeVanished;
             incomeVanished.text = "-" + msg.IncomeVanished.ToString();
             incomeVanished.gameObject.SetActive(true);
+
+            Animator animator = potentialIncome.GetComponent<Animator>();
+            animator.SetBool("show", true);
 
             component.UpdateAsObservable().Subscribe(_ =>
             {
