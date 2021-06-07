@@ -222,9 +222,8 @@ MonoBehaviour:
   DistractionType: 1
   DistractionInteractionDuration: 2
   DistractionProgressColor: {r: 0.95686275, g: 0.45882353, b: 0.23921569, a: 1}
-  InteractionPosition: {fileID: 4283641651090035856}
-  InteractionCollider: {fileID: 5142182168065768450}
-  FireOnce: 0
+  TouristInteractionCollider: {fileID: 579460783325641837}
+  PlayerInteractionCollider: {fileID: 579460783325641837}
 --- !u!95 &6340294627035379458
 Animator:
   serializedVersion: 3
@@ -443,7 +442,7 @@ GameObject:
   - component: {fileID: 4283641651090035856}
   - component: {fileID: 4283641651090035869}
   - component: {fileID: 4283641651090035870}
-  - component: {fileID: 5142182168065768450}
+  - component: {fileID: 579460783325641837}
   m_Layer: 7
   m_Name: InteractionPosition
   m_TagString: Untagged
@@ -459,7 +458,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4283641651090035857}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.78, y: -1.19, z: 0}
+  m_LocalPosition: {x: 0.037, y: -0.013, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4283641650618369389}
@@ -515,8 +514,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5142182168065768450
-SphereCollider:
+--- !u!136 &579460783325641837
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -525,8 +524,9 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
+  m_Height: 1.5
+  m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4283641651274584564
 GameObject:

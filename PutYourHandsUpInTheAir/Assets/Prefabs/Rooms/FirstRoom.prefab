@@ -368,19 +368,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4283641650618369390, guid: 7393130da9248594898a065006020760, type: 3}
       propertyPath: DistractionInteractionDuration
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4283641650618369391, guid: 7393130da9248594898a065006020760, type: 3}
       propertyPath: m_Name
       value: Tiger
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283641651090035856, guid: 7393130da9248594898a065006020760, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283641651090035856, guid: 7393130da9248594898a065006020760, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.98
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7393130da9248594898a065006020760, type: 3}
@@ -1297,7 +1289,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstRoom
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 616607745, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
 --- !u!4 &7721235312565522135 stripped
 Transform:
