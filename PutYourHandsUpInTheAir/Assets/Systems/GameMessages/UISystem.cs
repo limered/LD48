@@ -32,7 +32,7 @@ namespace Systems.GameMessages
                 .Subscribe(msg =>
                 {
                     PreparePotentialIncome(msg, component);
-
+                    "coin-drop".Play();
                 })
                 .AddTo(component);
 
@@ -95,6 +95,7 @@ namespace Systems.GameMessages
                 }
                 else
                 {
+                    animator.SetBool("show", false);
                     incomeVanished.gameObject.SetActive(false);
                     ResetTime();
                 }

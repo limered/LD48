@@ -1099,6 +1099,9 @@ MonoBehaviour:
   - Name: man-dying
     File: {fileID: 8300000, guid: c2a7f13e114420144a48b68d5f35abb2, type: 3}
     Volume: 0.5
+  - Name: coin-drop
+    File: {fileID: 8300000, guid: dd9ef0a70bfcf744db5ec97e81b8940e, type: 3}
+    Volume: 0.5
 --- !u!1 &4066499535153139370
 GameObject:
   m_ObjectHideFlags: 0
