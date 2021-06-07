@@ -8,7 +8,7 @@ namespace Systems.DistractionManagement
     {
         public DistractionType DistractionType;
         public GameObject WaitPosition;
-        public GameObject HidePosition;
+        public GameObject DespawnPosition;
 
         public float TimeBetweenSpawnsInSec;
     }

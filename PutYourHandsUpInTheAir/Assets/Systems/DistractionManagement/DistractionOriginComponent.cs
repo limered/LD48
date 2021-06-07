@@ -1,9 +1,10 @@
 ﻿using SystemBase;
 using SystemBase.StateMachineBase;
+using Systems.Distractions;
 using UniRx;
 using UnityEngine;
 
-namespace Systems.Distractions
+namespace Systems.DistractionManagement
 {
     public class DistractionOriginComponent : GameComponent
     {

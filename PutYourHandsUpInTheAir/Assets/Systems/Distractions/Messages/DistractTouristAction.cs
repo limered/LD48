@@ -1,4 +1,5 @@
-﻿using Systems.Tourist;
+﻿using Systems.DistractionManagement;
+using Systems.Tourist;
 
 namespace Systems.Distractions.Messages
 {
