@@ -4,6 +4,7 @@ using Systems.Distractions2.DistractionStrategies;
 using Systems.Tourist;
 using Systems.Tourist.States;
 using UniRx;
+using UniRx.Triggers;
 using Random = UnityEngine.Random;
 
 namespace Systems.Distractions2
@@ -28,6 +29,9 @@ namespace Systems.Distractions2
                 component.ActiveDistractionStrategy.Init(component);
                 component.DistractionUpdateObservable = SystemFixedUpdate(component)
                     .Subscribe(UpdateDistraction());
+                component.OnDestroyAsObservable()
+                    .Subscribe(_ => component.DistractionUpdateObservable.Dispose())
+                    .AddTo(component);
             };
         }
 
