@@ -17,6 +17,9 @@ namespace Systems.DistractionManagement
 
         public override void Register(DistractionSpawnerComponent component)
         {
+            component.GetComponent<MeshRenderer>().enabled = false;
+            component.WaitPosition.GetComponent<MeshRenderer>().enabled = false;
+
             _prefabs.WhereNotNull()
                 .Subscribe(_ => Observable.Interval(TimeSpan.FromSeconds(component.TimeBetweenSpawnsInSec))
                     .Subscribe(SpawnDistraction(component))

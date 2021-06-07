@@ -1,11 +1,16 @@
-﻿using SystemBase.StateMachineBase;
+﻿using System;
+using SystemBase.StateMachineBase;
 using Systems.DistractionManagement;
+using Systems.Movement;
+using UniRx;
+using UniRx.Triggers;
 
 namespace Systems.Distractions.States
 {
+    [NextValidStates(typeof(DistractionStateWaiting), typeof(DistractionStateAborted))]
     public class DistractionStateWalkingIn : BaseState<DistractionOriginComponent>
     {
-        private DistractionSpawnerComponent _spawner;
+        private readonly DistractionSpawnerComponent _spawner;
         public DistractionStateWalkingIn(DistractionSpawnerComponent component)
         {
             _spawner = component;
@@ -13,7 +18,27 @@ namespace Systems.Distractions.States
 
         public override void Enter(StateContext<DistractionOriginComponent> context)
         {
-            throw new System.NotImplementedException();
+            context.Owner.UpdateAsObservable()
+                .Subscribe(MoveToWaitPosition(context))
+                .AddTo(this);
+        }
+
+        private Action<Unit> MoveToWaitPosition(StateContext<DistractionOriginComponent> context)
+        {
+            return _ =>
+            {
+                var waitPosition = _spawner.WaitPosition.transform.position;
+                var currentPosition = context.Owner.transform.position;
+                var direction = waitPosition - currentPosition;
+                if (direction.magnitude < 0.5f)
+                {
+                    context.GoToState(new DistractionStateWaiting(_spawner));
+                }
+                else
+                {
+                    context.Owner.GetComponent<TwoDeeMovementComponent>().Direction.Value = direction.normalized;
+                }
+            };
         }
     }
 }
