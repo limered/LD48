@@ -31,8 +31,9 @@ namespace Systems.Tourist.States
 
         private void GoToDistraction(StateContext<TouristBrainComponent> context, TwoDeeMovementComponent movement)
         {
-            var distractionPosition = Distraction.InteractionPosition.transform.position;
             var touristPosition = context.Owner.transform.position;
+            var distractionPosition = Distraction.TouristInteractionCollider.ClosestPointOnBounds(touristPosition);
+            
             var distanceVec = distractionPosition - touristPosition;
             if (distanceVec.sqrMagnitude < 0.1f)
             {

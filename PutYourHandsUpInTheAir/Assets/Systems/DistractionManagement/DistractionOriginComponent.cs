@@ -11,14 +11,12 @@ namespace Systems.DistractionManagement
         public DistractionType DistractionType;
         public float DistractionInteractionDuration;
         public Color DistractionProgressColor;
-        public Transform InteractionPosition;
-        public SphereCollider InteractionCollider;
-        public bool FireOnce = false;
 
-        public bool HasFired { get; set; }
-
-        public ReactiveCommand DistractionStopped = new ReactiveCommand();
+        public ReactiveCommand DistractionAborted = new ReactiveCommand();
         public StateContext<DistractionOriginComponent> StateContext;
+
+        public Collider TouristInteractionCollider;
+        public Collider PlayerInteractionCollider;
 
         private void Awake()
         {

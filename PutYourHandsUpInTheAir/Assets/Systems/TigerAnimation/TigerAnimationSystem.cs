@@ -13,7 +13,7 @@ public class TigerAnimationSystem : GameSystem<DistractionOriginComponent>
 {
     public override void Register(DistractionOriginComponent originComponent)
     {
-        originComponent.InteractionCollider
+        originComponent.TouristInteractionCollider
             .OnTriggerEnterAsObservable()
             .Where(_ => originComponent.GetComponent<TigerAnimationComponent>().CurrentState == TigerState.Sleeping)
             .Subscribe(collider => StartWakeUpAnimation(collider, originComponent))
