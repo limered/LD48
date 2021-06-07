@@ -1,8 +1,5 @@
 using SystemBase.StateMachineBase;
-using Systems.DistractionControl;
 using Systems.Movement;
-using UniRx;
-using UnityEngine;
 
 namespace Systems.Tourist.States
 {

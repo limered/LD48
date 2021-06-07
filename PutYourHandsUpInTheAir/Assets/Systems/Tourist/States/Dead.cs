@@ -1,5 +1,5 @@
 using SystemBase.StateMachineBase;
-using Systems.Distractions2;
+using Systems.Distractions;
 using Systems.GameMessages.Messages;
 using Systems.Movement;
 using UniRx;

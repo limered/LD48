@@ -1,6 +1,6 @@
 using System;
 using SystemBase;
-using Systems.Distractions2;
+using Systems.Distractions;
 using Systems.GameMessages.Messages;
 using Systems.Tourist;
 using StrongSystems.Audio;

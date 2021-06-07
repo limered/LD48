@@ -1,6 +1,5 @@
 using SystemBase.StateMachineBase;
-using Systems.DistractionControl;
-using Systems.Distractions2;
+using Systems.Distractions;
 using Systems.Movement;
 using UniRx;
 using UniRx.Triggers;

@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using SystemBase.StateMachineBase;
-using Systems.DistractionControl;
-using Systems.Distractions2;
+using Systems.Distractions;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -56,7 +55,7 @@ namespace Systems.Tourist.States
                 .OrderBy(component => (component.transform.position - transform.position).sqrMagnitude)
                 .FirstOrDefault();
 
-            if (nearest != null 
+            if (nearest != null
                 && (nearest.transform.position - transform.position).sqrMagnitude < distance * distance)
             {
                 return nearest;

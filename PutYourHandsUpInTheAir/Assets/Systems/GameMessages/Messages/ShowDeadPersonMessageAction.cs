@@ -1,4 +1,4 @@
-using Systems.Distractions2;
+using Systems.Distractions;
 
 namespace Systems.GameMessages.Messages
 {

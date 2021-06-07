@@ -1,7 +1,6 @@
 ﻿using System;
 using SystemBase;
 using Systems.Distractions;
-using Systems.Distractions2;
 using Systems.Tourist;
 using UniRx;
 using Utils.Plugins;

@@ -3,8 +3,8 @@ using UniRx;
 using Systems.Tourist;
 using Systems.Tourist.States;
 using SystemBase.StateMachineBase;
-using Systems.Distractions2;
 using SystemBase;
+using Systems.Distractions;
 
 [GameSystem]
 public class BubbleSystem : GameSystem<TouristBrainComponent>
