@@ -13,7 +13,7 @@ namespace Systems.Player
         {
             component.State.Start(new PlayerStateIdle());
 
-            component.State.CurrentState.Subscribe(Debug.Log).AddTo(component);
+            //component.State.CurrentState.Subscribe(Debug.Log).AddTo(component);
         }
     }
 }
