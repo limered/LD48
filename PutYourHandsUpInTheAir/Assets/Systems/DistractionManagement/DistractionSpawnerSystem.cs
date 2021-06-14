@@ -1,7 +1,6 @@
 ﻿using System;
 using SystemBase;
 using SystemBase.StateMachineBase;
-using Systems.Distractions;
 using Systems.Distractions.States;
 using UniRx;
 using UnityEngine;

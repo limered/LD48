@@ -52,8 +52,6 @@ namespace Systems.Player
 
         private static void SetPlayerDirection(TwoDeeMovementComponent movement, PlayerComponent player)
         {
-
-
             movement.Direction.Value = player.TargetedDistraction.Value 
                 ? (player.TargetedDistraction.Value.transform.position - movement.transform.position).normalized 
                 : (player.TargetVector - movement.transform.position).normalized;
