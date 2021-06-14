@@ -1,7 +1,9 @@
 ﻿using System;
 using SystemBase;
 using SystemBase.StateMachineBase;
+using Systems.Distractions.Messages;
 using Systems.Distractions.States;
+using Systems.Room.Events;
 using UniRx;
 using UnityEngine;
 using Utils.Plugins;
@@ -36,6 +38,10 @@ namespace Systems.DistractionManagement
                 var distractionOrigin = distraction.GetComponent<DistractionOriginComponent>();
                 distractionOrigin.StateContext = new StateContext<DistractionOriginComponent>(distractionOrigin);
                 distractionOrigin.StateContext.Start(new DistractionStateWalkingIn(component));
+
+                MessageBroker.Default.Receive<RoomTimerEndedAction>()
+                    .Subscribe(_msg => MessageBroker.Default.Publish(new AbortDistractionAction(distractionOrigin)))
+                    .AddTo(distraction);
             };
         }
 
