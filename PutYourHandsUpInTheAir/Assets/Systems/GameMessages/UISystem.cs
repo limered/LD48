@@ -7,6 +7,7 @@ using StrongSystems.Audio;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Systems.GameMessages
 {
@@ -14,7 +15,6 @@ namespace Systems.GameMessages
     public class UISystem : GameSystem<UIComponent>
     {
         private float deathMessageSec = 120f;
-        private float vanishMoneySec = 120f;
         private bool showing = false;
 
         public override void Register(UIComponent component)
@@ -31,7 +31,6 @@ namespace Systems.GameMessages
             MessageBroker.Default.Receive<ReducePotentialIncomeAction>()
                 .Subscribe(msg =>
                 {
-                    vanishMoneySec = 80f;
                     PreparePotentialIncomeVanished(msg, component);
                 })
                 .AddTo(component);
@@ -124,8 +123,7 @@ namespace Systems.GameMessages
                 potentialIncome.transform
             );
             
-            //TODO incomeVanished.GetComponent<Text>() = "-" + text;
-            vanishMoneySec = 80f;
+            incomeVanished.GetComponent<Text>().text = "-" + text;
         }
     }
 }
