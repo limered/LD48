@@ -19,7 +19,6 @@ namespace Systems.GameMessages
 
         public override void Register(UIComponent component)
         {
-            component.PotentialIncome.IncomeVanished.gameObject.SetActive(false);
 
             MessageBroker.Default.Receive<ShowInitialPotentialIncome>()
                 .Subscribe(msg =>
@@ -62,20 +61,6 @@ namespace Systems.GameMessages
                     ShowDeathMessage(component.Message.gameObject, false);
                 }
             });
-
-            component.PotentialIncome.UpdateAsObservable().Subscribe(_ =>
-            {
-                var potentialIncome = component.PotentialIncome;
-                
-                if (deathMessageSec > 0)
-                {
-                    deathMessageSec--;
-                }
-                else
-                {
-                    ShowVanishMoney(potentialIncome, potentialIncome.IncomeVanished.gameObject, false);
-                }
-            });
         }
 
         private void PreparePotentialIncome(ShowInitialPotentialIncome msg, UIComponent component)
@@ -90,9 +75,8 @@ namespace Systems.GameMessages
             var potentialIncome = component.PotentialIncome;
             var incomeAmount = Int32.Parse(potentialIncome.PotentialIncomeAmount.text);
             potentialIncome.PotentialIncomeAmount.text = (incomeAmount - msg.IncomeVanished).ToString();
-            var incomeVanished = potentialIncome.IncomeVanished;
-            incomeVanished.text = "-" + msg.IncomeVanished.ToString();
-            ShowVanishMoney(potentialIncome, incomeVanished.gameObject, true);
+            
+            CreateMoneyVanished(potentialIncome, msg.IncomeVanished.ToString());
         }
 
         private void PrepareMessage(ShowDeadPersonMessageAction msg, UIComponent component)
@@ -133,10 +117,14 @@ namespace Systems.GameMessages
             deathMessageSec = 80f;
         }
 
-        private void ShowVanishMoney(PotentialIncomeComponent potentialIncome, GameObject incomeVanished, bool show) {
-            Animator animator = potentialIncome.GetComponent<Animator>();
-            animator.SetBool("show", show);
-            incomeVanished.SetActive(false);
+        private void CreateMoneyVanished(PotentialIncomeComponent potentialIncome, String text) {
+            var incomeVanished = GameObject.Instantiate(potentialIncome.VanishedIncome,
+                new Vector3(0, -17, 0),
+                Quaternion.identity,
+                potentialIncome.transform
+            );
+            
+            //TODO incomeVanished.GetComponent<Text>() = "-" + text;
             vanishMoneySec = 80f;
         }
     }

@@ -6,6 +6,6 @@ namespace Systems.GameMessages
     public class PotentialIncomeComponent : MonoBehaviour
     {
         public Text PotentialIncomeAmount;
-        public Text IncomeVanished;
+        public GameObject VanishedIncome;
     }
 }
