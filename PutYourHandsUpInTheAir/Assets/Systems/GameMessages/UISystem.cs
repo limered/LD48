@@ -13,7 +13,8 @@ namespace Systems.GameMessages
     [GameSystem]
     public class UISystem : GameSystem<UIComponent>
     {
-        private float sec = 120f;
+        private float deathMessageSec = 120f;
+        private float vanishMoneySec = 120f;
         private bool showing = false;
 
         public override void Register(UIComponent component)
@@ -31,21 +32,21 @@ namespace Systems.GameMessages
             MessageBroker.Default.Receive<ReducePotentialIncomeAction>()
                 .Subscribe(msg =>
                 {
-                    PreparePotentialIncome(msg, component);
-                    "coin-drop".Play();
+                    vanishMoneySec = 80f;
+                    PreparePotentialIncomeVanished(msg, component);
                 })
                 .AddTo(component);
 
             MessageBroker.Default.Receive<ShowDeadPersonMessageAction>()
                 .Subscribe(msg =>
                 {
-                    ResetTime();
+                    deathMessageSec = 80f;
                     PrepareMessage(msg, component);
                     "man-dying".Play();
 
                     if (!showing)
                     {
-                        ShowMessage(component.Message.gameObject, true);
+                        ShowDeathMessage(component.Message.gameObject, true);
                     }
 
                 })
@@ -53,20 +54,28 @@ namespace Systems.GameMessages
 
             component.UpdateAsObservable().Subscribe(_ =>
             {
-                if(sec > 0)
+                if(deathMessageSec > 0)
                 {
-                    sec--;
+                    deathMessageSec--;
                 } else
                 {
-                    ShowMessage(component.Message.gameObject, false);
-                    ResetTime();
+                    ShowDeathMessage(component.Message.gameObject, false);
                 }
             });
-        }
 
-        private void ResetTime()
-        {
-            sec = 80f;
+            component.PotentialIncome.UpdateAsObservable().Subscribe(_ =>
+            {
+                var potentialIncome = component.PotentialIncome;
+                
+                if (deathMessageSec > 0)
+                {
+                    deathMessageSec--;
+                }
+                else
+                {
+                    ShowVanishMoney(potentialIncome, potentialIncome.IncomeVanished.gameObject, false);
+                }
+            });
         }
 
         private void PreparePotentialIncome(ShowInitialPotentialIncome msg, UIComponent component)
@@ -75,31 +84,15 @@ namespace Systems.GameMessages
             income.text = msg.InitialPotentialIncome.ToString();
         }
 
-        private void PreparePotentialIncome(ReducePotentialIncomeAction msg, UIComponent component)
+        private void PreparePotentialIncomeVanished(ReducePotentialIncomeAction msg, UIComponent component)
         {
+            "coin-drop".Play();
             var potentialIncome = component.PotentialIncome;
             var incomeAmount = Int32.Parse(potentialIncome.PotentialIncomeAmount.text);
             potentialIncome.PotentialIncomeAmount.text = (incomeAmount - msg.IncomeVanished).ToString();
             var incomeVanished = potentialIncome.IncomeVanished;
             incomeVanished.text = "-" + msg.IncomeVanished.ToString();
-            incomeVanished.gameObject.SetActive(true);
-
-            Animator animator = potentialIncome.GetComponent<Animator>();
-            animator.SetBool("show", true);
-
-            component.UpdateAsObservable().Subscribe(_ =>
-            {
-                if (sec > 0)
-                {
-                    sec--;
-                }
-                else
-                {
-                    animator.SetBool("show", false);
-                    incomeVanished.gameObject.SetActive(false);
-                    ResetTime();
-                }
-            });
+            ShowVanishMoney(potentialIncome, incomeVanished.gameObject, true);
         }
 
         private void PrepareMessage(ShowDeadPersonMessageAction msg, UIComponent component)
@@ -132,11 +125,19 @@ namespace Systems.GameMessages
             };
         }
 
-        private void ShowMessage(GameObject gameObject, bool show)
+        private void ShowDeathMessage(GameObject gameObject, bool show)
         {
             showing = show;
             Animator animator = gameObject.GetComponent<Animator>();
             animator.SetBool("show", show);
+            deathMessageSec = 80f;
+        }
+
+        private void ShowVanishMoney(PotentialIncomeComponent potentialIncome, GameObject incomeVanished, bool show) {
+            Animator animator = potentialIncome.GetComponent<Animator>();
+            animator.SetBool("show", show);
+            incomeVanished.SetActive(false);
+            vanishMoneySec = 80f;
         }
     }
 }
