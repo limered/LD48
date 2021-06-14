@@ -48,12 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2909348b3da48c98e70ab10fdb4337c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetedTourist:
-    value: {fileID: 0}
-  LastTargetedTourist:
+  DistractionHittingDistance: 1
+  DistractionHittingDuration: 0.5
+  TargetedDistraction:
     value: {fileID: 0}
   TargetVector: {x: 0, y: 0, z: 0}
-  TouristOnlyMode: 0
 --- !u!65 &5653544716545335072
 BoxCollider:
   m_ObjectHideFlags: 0

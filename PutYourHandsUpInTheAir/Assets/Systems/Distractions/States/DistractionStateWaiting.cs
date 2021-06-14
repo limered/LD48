@@ -16,7 +16,6 @@ namespace Systems.Distractions.States
 
         public override void Enter(StateContext<DistractionOriginComponent> context)
         {
-            Debug.Log("Wait");
             context.Owner.GetComponent<TwoDeeMovementComponent>().Stop();
         }
     }
