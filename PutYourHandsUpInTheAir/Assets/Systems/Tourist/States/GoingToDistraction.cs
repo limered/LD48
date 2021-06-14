@@ -1,9 +1,11 @@
 using SystemBase.StateMachineBase;
 using Systems.DistractionManagement;
 using Systems.Distractions;
+using Systems.Distractions.States;
 using Systems.Movement;
 using UniRx;
 using UniRx.Triggers;
+using UnityEngine;
 
 namespace Systems.Tourist.States
 {
@@ -27,6 +29,10 @@ namespace Systems.Tourist.States
             context.Owner.UpdateAsObservable()
                 .Subscribe(_ => GoToDistraction(context, movement))
                 .AddTo(this);
+
+            Distraction.StateContext.CurrentState.Where(state => state is DistractionStateAborted)
+                .Subscribe(_ => context.GoToState(new GoingBackToIdle(Random.insideUnitCircle)))
+                .AddTo(this);
         }
 
         private void GoToDistraction(StateContext<TouristBrainComponent> context, TwoDeeMovementComponent movement)
@@ -37,7 +43,7 @@ namespace Systems.Tourist.States
             var distanceVec = distractionPosition - touristPosition;
             if (distanceVec.sqrMagnitude < 0.1f)
             {
-                context.GoToState(new Interacting());
+                context.GoToState(new Interacting(Distraction));
             }
             else
             {

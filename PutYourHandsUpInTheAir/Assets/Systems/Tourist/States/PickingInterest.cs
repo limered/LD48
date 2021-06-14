@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using SystemBase.StateMachineBase;
 using Systems.DistractionManagement;
-using Systems.Distractions;
+using Systems.Distractions.States;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -53,6 +53,7 @@ namespace Systems.Tourist.States
         public DistractionOriginComponent FindNearestDistraction(Transform transform, float distance)
         {
             var nearest = Object.FindObjectsOfType<DistractionOriginComponent>()
+                .Where(comp => !(comp.StateContext.CurrentState.Value is DistractionStateAborted))
                 .OrderBy(component => (component.transform.position - transform.position).sqrMagnitude)
                 .FirstOrDefault();
 
