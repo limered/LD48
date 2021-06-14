@@ -1,6 +1,7 @@
 ﻿using System;
 using SystemBase.StateMachineBase;
 using Systems.DistractionManagement;
+using Systems.Distractions.Messages;
 using Systems.Movement;
 using UniRx;
 using UniRx.Triggers;
@@ -21,6 +22,11 @@ namespace Systems.Distractions.States
             context.Owner.UpdateAsObservable()
                 .Subscribe(MoveToWaitPosition(context))
                 .AddTo(this);
+
+            MessageBroker.Default.Receive<AbortDistractionAction>()
+                .Where(msg => msg.Distraction == context.Owner)
+                .Subscribe(_ => context.GoToState(new DistractionStateAborted(_spawner)))
+                .AddTo(this);
         }
 
         private Action<Unit> MoveToWaitPosition(StateContext<DistractionOriginComponent> context)
@@ -30,7 +36,7 @@ namespace Systems.Distractions.States
                 var waitPosition = _spawner.WaitPosition.transform.position;
                 var currentPosition = context.Owner.transform.position;
                 var direction = waitPosition - currentPosition;
-                if (direction.magnitude < 0.5f)
+                if (direction.magnitude < 0.1f)
                 {
                     context.GoToState(new DistractionStateWaiting(_spawner));
                 }

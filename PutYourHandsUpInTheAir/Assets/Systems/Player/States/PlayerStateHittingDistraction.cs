@@ -1,5 +1,6 @@
 ﻿using SystemBase.StateMachineBase;
 using Systems.DistractionManagement;
+using Systems.Distractions.Messages;
 using Systems.Movement;
 using UniRx;
 using UniRx.Triggers;
@@ -42,7 +43,7 @@ namespace Systems.Player.States
             }
             else if (TimeLeftToHit < 0.1)
             {
-                // Hit Message
+                MessageBroker.Default.Publish(new AbortDistractionAction(_distraction));
             }
         }
 

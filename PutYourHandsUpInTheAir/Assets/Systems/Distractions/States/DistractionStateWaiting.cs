@@ -1,13 +1,15 @@
 ﻿using SystemBase.StateMachineBase;
 using Systems.DistractionManagement;
+using Systems.Distractions.Messages;
 using Systems.Movement;
-using UnityEngine;
+using UniRx;
 
 namespace Systems.Distractions.States
 {
+    [NextValidStates(typeof(DistractionStateAborted))]
     public class DistractionStateWaiting : BaseState<DistractionOriginComponent>
     {
-        private DistractionSpawnerComponent _spawner;
+        private readonly DistractionSpawnerComponent _spawner;
 
         public DistractionStateWaiting(DistractionSpawnerComponent spawner)
         {
@@ -17,6 +19,11 @@ namespace Systems.Distractions.States
         public override void Enter(StateContext<DistractionOriginComponent> context)
         {
             context.Owner.GetComponent<TwoDeeMovementComponent>().Stop();
+
+            MessageBroker.Default.Receive<AbortDistractionAction>()
+                .Where(msg => msg.Distraction == context.Owner)
+                .Subscribe(_ => context.GoToState(new DistractionStateAborted(_spawner)))
+                .AddTo(this);
         }
     }
 }
