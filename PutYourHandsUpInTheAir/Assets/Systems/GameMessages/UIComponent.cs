@@ -1,4 +1,5 @@
 using SystemBase;
+using UnityEngine;
 
 namespace Systems.GameMessages
 {
@@ -6,5 +7,7 @@ namespace Systems.GameMessages
     {
         public AlertComponent Message;
         public PotentialIncomeComponent PotentialIncome;
+        public GameObject EverybodyDiesMessage;
+        public GameObject HelpMessage;
     }
 }

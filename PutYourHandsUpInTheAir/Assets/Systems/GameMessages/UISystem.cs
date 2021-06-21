@@ -8,6 +8,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
+using Systems.Room.Events;
 
 namespace Systems.GameMessages
 {
@@ -16,6 +17,7 @@ namespace Systems.GameMessages
     {
         private float deathMessageSec = 120f;
         private bool showing = false;
+        private float _animationTime = 5;
 
         public override void Register(UIComponent component)
         {
@@ -60,6 +62,10 @@ namespace Systems.GameMessages
                     ShowDeathMessage(component.Message.gameObject, false);
                 }
             });
+
+            MessageBroker.Default
+                .Receive<RoomEverybodyDied>()
+                .Subscribe(_ => ShowRestartMessage(component));
         }
 
         private void PreparePotentialIncome(ShowInitialPotentialIncome msg, UIComponent component)
@@ -124,6 +130,15 @@ namespace Systems.GameMessages
             );
             
             incomeVanished.GetComponent<Text>().text = "-" + text;
+        }
+
+        private void ShowRestartMessage(UIComponent component)
+        {
+            Observable.Timer(TimeSpan.FromSeconds(_animationTime))
+                .Subscribe(_ =>
+                {
+                    component.EverybodyDiesMessage.SetActive(true);
+                });
         }
     }
 }

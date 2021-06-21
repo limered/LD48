@@ -31,7 +31,7 @@ namespace Systems.FirstRoom
             var touristBrain = component.GetComponent<TouristBrainComponent>();
             if (!touristBrain) return;
 
-            var touristText = "Hey! " + touristBrain.touristName.Value + " is going to the Tiger! \n Please click on them to save their life!";
+            var touristText = "Hey! " + touristBrain.touristName.Value + " is going to the Tiger! \n Please click on the tiger to save their life!";
 
             if (!firstRoom || !firstRoom.TouristNameText || !firstRoom.FirstRoomTextElement) return;
 
