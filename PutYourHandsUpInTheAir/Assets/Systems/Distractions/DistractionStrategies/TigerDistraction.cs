@@ -4,6 +4,8 @@ using Systems.Tourist;
 using Systems.Tourist.States;
 using UniRx;
 using UnityEngine;
+using Systems.GameMessages.Messages;
+using Systems.DistractionManagement;
 
 namespace Systems.Distractions.DistractionStrategies
 {
@@ -40,6 +42,12 @@ namespace Systems.Distractions.DistractionStrategies
                 if (_lastDistractionProgressTime <= 0)
                 {
                     _abortedDisposable.Dispose();
+
+                    MessageBroker.Default.Publish(new DistractionOutcomeDeadAction
+                    {
+                        Origin = distractable.Origin,
+                    });
+
                     return DistractionOutcome.Dead;
                 }
             }
