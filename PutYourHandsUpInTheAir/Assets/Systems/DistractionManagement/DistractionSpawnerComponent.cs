@@ -11,5 +11,7 @@ namespace Systems.DistractionManagement
         public GameObject DespawnPosition;
 
         public float TimeBetweenSpawnsInSec;
+        public float WaitTimebeforeRespawn = 2.0f;
+        public DistractionOriginComponent CurrentDistraction;
     }
 }

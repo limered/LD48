@@ -5,6 +5,7 @@ using Systems.Distractions.Messages;
 using Systems.Distractions.States;
 using Systems.Room.Events;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using Utils.Plugins;
 using Object = UnityEngine.Object;
@@ -33,11 +34,24 @@ namespace Systems.DistractionManagement
         {
             return _ =>
             {
+                if (component.CurrentDistraction)
+                {
+                    return;
+                }
+
                 var prefab = _prefabs.Value.GetPrefab(component.DistractionType);
                 var distraction = Object.Instantiate(prefab, component.transform.position, Quaternion.identity, component.transform);
                 var distractionOrigin = distraction.GetComponent<DistractionOriginComponent>();
                 distractionOrigin.StateContext = new StateContext<DistractionOriginComponent>(distractionOrigin);
                 distractionOrigin.StateContext.Start(new DistractionStateWalkingIn(component));
+                distractionOrigin.StateContext.CurrentState
+                    .Where(state => state is DistractionStateAborted)
+                    .Subscribe(_ => Observable
+                        .Timer(TimeSpan.FromSeconds(component.WaitTimebeforeRespawn))
+                        .Subscribe(_ => { component.CurrentDistraction = null; }))
+                    .AddTo(distractionOrigin);
+
+                component.CurrentDistraction = distractionOrigin;
 
                 MessageBroker.Default.Receive<RoomTimerEndedAction>()
                     .Subscribe(_msg => MessageBroker.Default.Publish(new AbortDistractionAction(distractionOrigin)))
