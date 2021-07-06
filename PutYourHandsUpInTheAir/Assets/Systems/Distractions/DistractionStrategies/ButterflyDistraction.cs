@@ -39,7 +39,6 @@ namespace Systems.Distractions.DistractionStrategies
                 _lastDistractionProgressTime -= Time.fixedDeltaTime;
                 if (_lastDistractionProgressTime <= 0)
                 {
-                    touristBrain.StateContext.GoToState(new GoingBackToIdle(Random.insideUnitCircle));
                     return DistractionOutcome.Alive;
                 }
             }
