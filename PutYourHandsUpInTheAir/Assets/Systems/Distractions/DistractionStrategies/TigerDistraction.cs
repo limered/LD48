@@ -5,7 +5,6 @@ using Systems.Tourist.States;
 using UniRx;
 using UnityEngine;
 using Systems.GameMessages.Messages;
-using Systems.DistractionManagement;
 
 namespace Systems.Distractions.DistractionStrategies
 {

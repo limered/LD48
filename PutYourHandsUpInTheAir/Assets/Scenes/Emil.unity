@@ -243,6 +243,18 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1525889923, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: Distractions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1525889923, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: Distractions.Array.data[1].Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1525889923, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: Distractions.Array.data[1].Prefab
+      value: 
+      objectReference: {fileID: 2674991842247269088, guid: 48d20792e845a194489682b40d32fcaa, type: 3}
     - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: FirstLevel
       value: 
@@ -255,6 +267,10 @@ PrefabInstance:
       propertyPath: MaxLevelCount
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
+      propertyPath: PlayTestRoomPrefab
+      value: 
+      objectReference: {fileID: 5408368314644630373, guid: 39e44fd60caf62a4684da84db97a78c6, type: 3}
     - target: {fileID: 4066499535153139368, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: m_RootOrder
       value: 1

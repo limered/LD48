@@ -97,9 +97,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DistractionType: 1
-  WaitPosition: {fileID: 8110374303135568811}
+  WaitArea: {fileID: 8110374303135568811}
   DespawnPosition: {fileID: 6221722773264684069}
   TimeBetweenSpawnsInSec: 2
+  WaitTimebeforeRespawn: 2
+  CurrentDistraction: {fileID: 0}
 --- !u!1 &8110374303135568811
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +114,7 @@ GameObject:
   - component: {fileID: 6886043029514364084}
   - component: {fileID: 5150695076905924133}
   m_Layer: 0
-  m_Name: WaitPosition
+  m_Name: WaitArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
