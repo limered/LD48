@@ -1,4 +1,5 @@
 ﻿using System;
+using Systems.Distractions.Messages;
 using Systems.Distractions.States;
 using Systems.Tourist;
 using Systems.Tourist.States;
@@ -39,6 +40,7 @@ namespace Systems.Distractions.DistractionStrategies
                 _lastDistractionProgressTime -= Time.fixedDeltaTime;
                 if (_lastDistractionProgressTime <= 0)
                 {
+                    MessageBroker.Default.Publish(new AbortDistractionAction(distractable.Origin));
                     return DistractionOutcome.Alive;
                 }
             }
