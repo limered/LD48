@@ -1,72 +1,75 @@
 using SystemBase;
 using Systems.DistractionManagement;
 using Systems.Distractions;
-using Systems.Tourist;
-using Systems.Tourist.States;
+using Systems.GameMessages.Messages;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using Utils.Plugins;
-using Systems.GameMessages.Messages;
 
-[GameSystem]
-public class TigerAnimationSystem : GameSystem<DistractionOriginComponent>
+namespace Systems.TigerAnimation
 {
-
-    public override void Register(DistractionOriginComponent originComponent)
+    [GameSystem]
+    public class TigerAnimationSystem : GameSystem<DistractionOriginComponent>
     {
-        originComponent.TouristInteractionCollider
-            .OnTriggerEnterAsObservable()
-            .Where(_ => originComponent.GetComponent<TigerAnimationComponent>().CurrentState == TigerState.Sleeping)
-            .Subscribe(collider => StartWakeUpAnimation(collider, originComponent))
-            .AddToLifecycleOf(originComponent);
 
-        MessageBroker.Default.Receive<DistractionOutcomeDeadAction>()
-            .Subscribe(msg =>
-            {
-                if (originComponent == msg.Origin)
-                {
-                    Kill(originComponent);
-                }
-            })
-            .AddTo(originComponent);
-    }
-
-    private void StartWakeUpAnimation(Collider collider, DistractionOriginComponent originComponent)
-    {
-        var collidingObject = collider.gameObject;
-        if (collidingObject.CompareTag("tourist"))
+        public override void Register(DistractionOriginComponent originComponent)
         {
-            var tigerComponent = originComponent.GetComponent<TigerAnimationComponent>();
-            tigerComponent.CurrentState = TigerState.Awake;
+            if (originComponent.DistractionType != DistractionType.Tiger) return;
 
-            var animator = originComponent.GetComponent<Animator>();
+            originComponent.TouristInteractionCollider
+                .OnTriggerEnterAsObservable()
+                .Where(_ => originComponent.GetComponent<TigerAnimationComponent>().CurrentState == TigerState.Sleeping)
+                .Subscribe(collider => StartWakeUpAnimation(collider, originComponent))
+                .AddToLifecycleOf(originComponent);
 
-            animator.Play("TigerWakingUp_Head");
-            animator.Play("TigerBody_Idle");
-            animator.Play("TigerWakingUp_Tail");
+            MessageBroker.Default.Receive<DistractionOutcomeDeadAction>()
+                .Subscribe(msg =>
+                {
+                    if (originComponent == msg.Origin)
+                    {
+                        Kill(originComponent);
+                    }
+                })
+                .AddTo(originComponent);
         }
-    }
 
-    private void Kill(DistractionOriginComponent originComponent)
-    {
-        var animator = originComponent.GetComponent<Animator>();
-        var tigerComponent = originComponent.GetComponent<TigerAnimationComponent>();
+        private void StartWakeUpAnimation(Collider collider, DistractionOriginComponent originComponent)
+        {
+            var collidingObject = collider.gameObject;
+            if (collidingObject.CompareTag("tourist"))
+            {
+                var tigerComponent = originComponent.GetComponent<TigerAnimationComponent>();
+                tigerComponent.CurrentState = TigerState.Awake;
 
-        tigerComponent.CurrentState = TigerState.Kill;
-        animator.Play("TigerAttack_Head");
-        animator.Play("TigerAttack_Body");
-        animator.Play("TigerAttack_Tail");
-        tigerComponent.GetComponent<AudioSource>().Play();
-    }
+                var animator = originComponent.GetComponent<Animator>();
 
-    private void GoBackToSleep(DistractionOriginComponent originComponent)
-    {
-        var animator = originComponent.GetComponent<Animator>();
-        var tigerComponent = originComponent.GetComponent<TigerAnimationComponent>();
-        tigerComponent.CurrentState = TigerState.Sleeping;
-        animator.Play("TigerFallingAsleep_Head");
-        animator.Play("TigerBody_Idle");
-        animator.Play("TigerTail_Idle");
+                animator.Play("TigerWakingUp_Head");
+                animator.Play("TigerBody_Idle");
+                animator.Play("TigerWakingUp_Tail");
+            }
+        }
+
+        private void Kill(DistractionOriginComponent originComponent)
+        {
+            var animator = originComponent.GetComponent<Animator>();
+            var tigerComponent = originComponent.GetComponent<TigerAnimationComponent>();
+
+            tigerComponent.CurrentState = TigerState.Kill;
+            animator.Play("TigerAttack_Head");
+            animator.Play("TigerAttack_Body");
+            animator.Play("TigerAttack_Tail");
+            tigerComponent.GetComponent<AudioSource>().Play();
+        }
+
+        private void GoBackToSleep(DistractionOriginComponent originComponent)
+        {
+            var animator = originComponent.GetComponent<Animator>();
+            var tigerComponent = originComponent.GetComponent<TigerAnimationComponent>();
+            tigerComponent.CurrentState = TigerState.Sleeping;
+            animator.Play("TigerFallingAsleep_Head");
+            animator.Play("TigerBody_Idle");
+            animator.Play("TigerTail_Idle");
+        }
     }
 }
