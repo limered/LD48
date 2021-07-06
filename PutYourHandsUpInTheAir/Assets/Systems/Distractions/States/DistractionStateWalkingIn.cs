@@ -5,6 +5,7 @@ using Systems.Distractions.Messages;
 using Systems.Movement;
 using UniRx;
 using UniRx.Triggers;
+using UnityEngine;
 
 namespace Systems.Distractions.States
 {
@@ -33,10 +34,10 @@ namespace Systems.Distractions.States
         {
             return _ =>
             {
-                var waitPosition = _spawner.WaitPosition.transform.position;
+                var waitPosition = _spawner.WaitPosition;
                 var currentPosition = context.Owner.transform.position;
                 var direction = waitPosition - currentPosition;
-                if (direction.magnitude < 0.1f)
+                if (direction.magnitude < 0.2f)
                 {
                     context.GoToState(new DistractionStateWaiting(_spawner));
                 }
