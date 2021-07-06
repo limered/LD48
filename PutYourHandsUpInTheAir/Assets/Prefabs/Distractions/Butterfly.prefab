@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 3382818413805904904}
   - component: {fileID: 3087589812231124495}
   - component: {fileID: -8436692879832071198}
+  - component: {fileID: 5592645285142970916}
   m_Layer: 7
   m_Name: Butterfly
   m_TagString: Untagged
@@ -252,3 +253,16 @@ MonoBehaviour:
   wobbleFactor: 0.1
   wobbleTarget: {fileID: 2674991841686138923}
   wobbleAxis: {x: 0, y: 1, z: 0}
+--- !u!135 &5592645285142970916
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2674991842247269088}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0, z: 0}
