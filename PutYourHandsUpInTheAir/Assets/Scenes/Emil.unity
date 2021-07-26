@@ -270,7 +270,7 @@ PrefabInstance:
     - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: PlayTestRoomPrefab
       value: 
-      objectReference: {fileID: 5408368314644630373, guid: 39e44fd60caf62a4684da84db97a78c6, type: 3}
+      objectReference: {fileID: 3875406599220642518, guid: 6faf977ad7b28b8458546c08d892b0b3, type: 3}
     - target: {fileID: 4066499535153139368, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: m_RootOrder
       value: 1

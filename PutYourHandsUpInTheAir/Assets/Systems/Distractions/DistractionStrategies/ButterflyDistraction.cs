@@ -5,7 +5,6 @@ using Systems.Tourist;
 using Systems.Tourist.States;
 using UniRx;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Systems.Distractions.DistractionStrategies
 {
