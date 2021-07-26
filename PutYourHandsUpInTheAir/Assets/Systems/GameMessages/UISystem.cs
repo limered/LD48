@@ -9,6 +9,7 @@ using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
 using Systems.Room.Events;
+using Object = UnityEngine.Object;
 
 namespace Systems.GameMessages
 {
@@ -16,7 +17,7 @@ namespace Systems.GameMessages
     public class UISystem : GameSystem<UIComponent>
     {
         private float deathMessageSec = 120f;
-        private bool showing = false;
+        private bool showing;
         private float _animationTime = 5;
 
         public override void Register(UIComponent component)
@@ -95,10 +96,10 @@ namespace Systems.GameMessages
 
             var distractions = component.Message.Distractions;
             var distraction = component.Message.Distraction;
-            distraction.sprite = distractions[MapDistractionTypeTiIndex(msg.DistractionType)];
+            distraction.sprite = distractions[MapDistractionTypeToIndex(msg.DistractionType)];
         }
 
-        private int MapDistractionTypeTiIndex(DistractionType type)
+        private int MapDistractionTypeToIndex(DistractionType type)
         {
             return type switch
             {
@@ -108,8 +109,6 @@ namespace Systems.GameMessages
                 DistractionType.Camera => 0,
                 DistractionType.Spider => 1,
                 DistractionType.Swamp => 0,
-                DistractionType.Money => 0,
-                DistractionType.Bus => 0,
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
         }
@@ -123,7 +122,7 @@ namespace Systems.GameMessages
         }
 
         private void CreateMoneyVanished(PotentialIncomeComponent potentialIncome, String text) {
-            var incomeVanished = GameObject.Instantiate(potentialIncome.VanishedIncome,
+            var incomeVanished = Object.Instantiate(potentialIncome.VanishedIncome,
                 new Vector3(0, -17, 0),
                 Quaternion.identity,
                 potentialIncome.transform

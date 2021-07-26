@@ -76,8 +76,6 @@ namespace Systems.Distractions
                 DistractionType.Tiger => new TigerDistraction(),
                 DistractionType.Butterfly => new ButterflyDistraction(),
                 DistractionType.Spider => new SpiderDistraction(),
-                DistractionType.Money => new MoneyDistraction(),
-                DistractionType.Bus => new BusDistraction(),
                 DistractionType.Swamp => throw new ArgumentOutOfRangeException(nameof(type), type, "Not implemented yet"),
                 DistractionType.Camera => throw new ArgumentOutOfRangeException(nameof(type), type, "Not implemented"),
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)

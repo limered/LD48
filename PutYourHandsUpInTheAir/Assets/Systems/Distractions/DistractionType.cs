@@ -8,7 +8,5 @@
         Camera,
         Spider,
         Swamp,
-        Money,
-        Bus
     }
 }
