@@ -1,5 +1,4 @@
 ﻿using SystemBase;
-using Systems.FirstRoom;
 using Systems.Room.Events;
 using UniRx;
 
@@ -8,7 +7,6 @@ namespace Systems.LastRoom
     public class LastRoomSystem : GameSystem<LastRoomComponent>
     {
         private readonly ReactiveProperty<LastRoomComponent> _roomComponent = new ReactiveProperty<LastRoomComponent>();
-
 
         public override void Register(LastRoomComponent room)
         {

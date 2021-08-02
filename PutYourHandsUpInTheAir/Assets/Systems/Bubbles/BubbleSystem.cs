@@ -66,17 +66,11 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
             case DistractionType.Butterfly:
                 spriteRenderer.sprite = bubbleComponent.Bubbles[3];
                 break;
-            case DistractionType.Bus:
-                spriteRenderer.sprite = bubbleComponent.Bubbles[4];
-                break;
             case DistractionType.Spider:
                 spriteRenderer.sprite = bubbleComponent.Bubbles[5];
                 break;
             case DistractionType.Swamp:
                 spriteRenderer.sprite = bubbleComponent.Bubbles[6];
-                break;
-            case DistractionType.Money:
-                spriteRenderer.sprite = bubbleComponent.Bubbles[7];
                 break;
             default:
                 ShowBubble(bubbleComponent, false);
