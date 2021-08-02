@@ -1,6 +1,7 @@
 using SystemBase.StateMachineBase;
 using Systems.Distractions;
 using Systems.GameMessages.Messages;
+using Systems.LastRoom;
 using Systems.Movement;
 using UniRx;
 using UnityEngine;
@@ -25,9 +26,10 @@ namespace Systems.Tourist.States
                 DistractionType = KilledByDistractionType,
             });
 
+            var moneyGiver = context.Owner.GetComponent<MoneyGiverComponent>();
             MessageBroker.Default.Publish(new ReducePotentialIncomeAction
             {
-                IncomeVanished = 100
+                IncomeVanished = moneyGiver.Amount,
             });
 
             context.Owner.GetComponent<TwoDeeMovementComponent>().Stop();

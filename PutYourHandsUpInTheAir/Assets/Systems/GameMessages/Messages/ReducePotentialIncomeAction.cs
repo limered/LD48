@@ -2,6 +2,6 @@ namespace Systems.GameMessages.Messages
 {
     public class ReducePotentialIncomeAction
     {
-        public int IncomeVanished { get; set; }
+        public float IncomeVanished { get; set; }
     }
 }

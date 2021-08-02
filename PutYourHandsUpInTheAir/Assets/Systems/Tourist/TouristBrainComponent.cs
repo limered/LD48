@@ -19,7 +19,6 @@ namespace Systems.Tourist
 
         public StateContext<TouristBrainComponent> StateContext { get; set; }
 
-        public bool HasPaid { get; set; }
         public float StoprInterestPropability = 0.3f;
         public float IntrerestPropability = 0.3f;
         public float DistractionSearchRange = 2f;
