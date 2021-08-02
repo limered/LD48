@@ -62,12 +62,8 @@ namespace Systems.Tourist
                                 Debug.Log("RoomWalkIn - first level");
                                 _tourists = GenerateTourists(config, room);
                                 _touristDumps = _tourists
-                                    .Select(t => new TouristDump(t.GetComponent<TouristBrainComponent>())).ToArray();
-                                
-                                MessageBroker.Default.Publish(new ShowInitialPotentialIncome
-                                {
-                                    InitialPotentialIncome = _touristDumps.Length * 100
-                                });
+                                    .Select(t => new TouristDump(t.GetComponent<TouristBrainComponent>()))
+                                    .ToArray();
                             }
                             else //level 2 -> END
                             {
