@@ -4,6 +4,7 @@ using UniRx;
 
 namespace Systems.LastRoom
 {
+    [GameSystem]
     public class LastRoomSystem : GameSystem<LastRoomComponent>
     {
         private readonly ReactiveProperty<LastRoomComponent> _roomComponent = new ReactiveProperty<LastRoomComponent>();
@@ -13,12 +14,13 @@ namespace Systems.LastRoom
             _roomComponent.Value = room;
 
             MessageBroker.Default.Receive<RoomAllTouristsEntered>()
-                .Subscribe()
+                .Subscribe(SendAllTouristInLastRoomMessage)
                 .AddTo(room);
         }
-    }
 
-    public class LastRoomComponent : GameComponent
-    {
+        private void SendAllTouristInLastRoomMessage(RoomAllTouristsEntered obj)
+        {
+            MessageBroker.Default.Publish(new AllTouristEnteredLastRoomMessage());
+        }
     }
 }
