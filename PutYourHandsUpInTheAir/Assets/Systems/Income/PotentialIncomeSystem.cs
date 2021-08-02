@@ -8,19 +8,21 @@ using UnityEngine;
 namespace Systems.Income
 {
     [GameSystem]
-    public class PotentialIncomeSystem : GameSystem<PotentialIncomeMemoryComponent>
+    public class PotentialIncomeSystem : GameSystem<PotentialIncomeComponent>
     {
-        public override void Register(PotentialIncomeMemoryComponent component)
+        public override void Register(PotentialIncomeComponent component)
         {
             SystemUpdate(component)
                 .Subscribe(CheckState)
                 .AddTo(component);
+
+            // TODO update UI
         }
 
-        private void CheckState(PotentialIncomeMemoryComponent obj)
+        private void CheckState(PotentialIncomeComponent potentialIncome)
         {
             IEnumerable<MoneyGiverComponent> tourists = FindAllTourists();
-            obj.CurrentPotentialIncome.Value = tourists.Select(component => component.Amount).Sum();
+            potentialIncome.CurrentPotentialIncome.Value = tourists.Select(component => component.Amount).Sum();
         }
 
         private IEnumerable<MoneyGiverComponent> FindAllTourists()
