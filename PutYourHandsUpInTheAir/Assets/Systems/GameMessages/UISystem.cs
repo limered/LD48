@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using SystemBase;
 using Systems.Distractions;
 using Systems.GameMessages.Messages;
@@ -10,6 +11,8 @@ using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
 using Systems.Room.Events;
+using Unity.VisualScripting;
+using ColorUtility = UnityEngine.ColorUtility;
 using Object = UnityEngine.Object;
 
 namespace Systems.GameMessages
@@ -78,12 +81,9 @@ namespace Systems.GameMessages
 
         private void PreparePotentialIncomeVanished(ReducePotentialIncomeAction msg, UIComponent component)
         {
-            "coin-drop".Play();
-            var potentialIncome = component.PotentialIncome;
-            var incomeAmount = Int32.Parse(potentialIncome.PotentialIncomeAmount.text);
-            potentialIncome.PotentialIncomeAmount.text = (incomeAmount - msg.IncomeVanished).ToString();
             
-            CreateMoneyVanished(potentialIncome, msg.IncomeVanished.ToString());
+            var potentialIncome = component.PotentialIncome;
+            CreateMoneyVanished(potentialIncome, msg.IncomeVanished);
         }
 
         private void PrepareMessage(ShowDeadPersonMessageAction msg, UIComponent component)
@@ -122,14 +122,29 @@ namespace Systems.GameMessages
             deathMessageSec = 80f;
         }
 
-        private void CreateMoneyVanished(PotentialIncomeComponent potentialIncome, String text) {
+        private void CreateMoneyVanished(PotentialIncomeComponent potentialIncome, float change)
+        {
+            var colorText = "#BC2D2DFF";
+            if (change >= 0)
+            {
+                colorText = "#00FF00FF";
+            }
+            else
+            {
+                "coin-drop".Play();
+            }
+
+            if (!ColorUtility.TryParseHtmlString(colorText, out var color)) return;
+
             var incomeVanished = Object.Instantiate(potentialIncome.VanishedIncome,
                 new Vector3(0, -17, 0),
                 Quaternion.identity,
                 potentialIncome.transform
             );
             
-            incomeVanished.GetComponent<Text>().text = "-" + text;
+            var text = incomeVanished.GetComponent<Text>();
+            text.text = "-" + change;
+            text.color = color;
         }
 
         private void ShowRestartMessage(UIComponent component)

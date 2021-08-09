@@ -26,12 +26,6 @@ namespace Systems.Tourist.States
                 DistractionType = KilledByDistractionType,
             });
 
-            var moneyGiver = context.Owner.GetComponent<MoneyGiverComponent>();
-            MessageBroker.Default.Publish(new ReducePotentialIncomeAction
-            {
-                IncomeVanished = moneyGiver.Amount,
-            });
-
             context.Owner.GetComponent<TwoDeeMovementComponent>().Stop();
 
             if (context.Owner.GetComponent<Collider>()) Object.Destroy(context.Owner.GetComponent<Collider>());
