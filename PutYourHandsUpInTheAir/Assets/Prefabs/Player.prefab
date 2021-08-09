@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5653544716545335073}
   - component: {fileID: 5653544716545335102}
   - component: {fileID: 3371024126051985215}
+  - component: {fileID: -4215962431280480623}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -118,6 +119,18 @@ MonoBehaviour:
   wobbleFactor: 0.02
   wobbleTarget: {fileID: 7545983908340790373}
   wobbleAxis: {x: 0, y: 1, z: 0}
+--- !u!114 &-4215962431280480623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5653544716545335098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5550007f4d96146b620a95fd627a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7545983908340790373
 GameObject:
   m_ObjectHideFlags: 0

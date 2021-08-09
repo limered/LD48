@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655510066789697925}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.138, y: 0.195, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.229, y: 0.195, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4283641650618369389}
   m_RootOrder: 0
@@ -108,8 +108,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3882478996947914710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.494, y: -0.199, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.495, y: -0.199, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4283641650618369389}
   m_RootOrder: 2
@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: -7055565586825411604}
   - component: {fileID: 4585774391401676164}
   - component: {fileID: 5424314522877400357}
+  - component: {fileID: 1731385309943099933}
   m_Layer: 7
   m_Name: Tiger
   m_TagString: Untagged
@@ -469,6 +470,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.25, y: 0.64, z: 1}
   m_Center: {x: 0, y: 0.04, z: 0}
+--- !u!114 &1731385309943099933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283641650618369391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5550007f4d96146b620a95fd627a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4283641651090035857
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,7 +606,7 @@ Transform:
   m_GameObject: {fileID: 4283641651274584564}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4283641650618369389}
   m_RootOrder: 1
