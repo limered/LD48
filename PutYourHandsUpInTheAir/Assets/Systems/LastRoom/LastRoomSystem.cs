@@ -1,4 +1,5 @@
-﻿using SystemBase;
+﻿using System;
+using SystemBase;
 using Systems.Room.Events;
 using UniRx;
 
@@ -14,6 +15,7 @@ namespace Systems.LastRoom
             _roomComponent.Value = room;
 
             MessageBroker.Default.Receive<RoomAllTouristsEntered>()
+                .Delay(TimeSpan.FromSeconds(2f))
                 .Subscribe(SendAllTouristInLastRoomMessage)
                 .AddTo(room);
         }
