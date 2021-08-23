@@ -1,16 +1,14 @@
-﻿using SystemBase.StateMachineBase;
+﻿using Assets.Utils.Math;
+using SystemBase.StateMachineBase;
+using Systems.LastRoom;
 using Systems.Movement;
-using Systems.Room.Events;
-using Assets.Utils.Math;
 using UniRx;
 using UniRx.Triggers;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 namespace Systems.Tourist.States
 {
-    [NextValidStates(typeof(PickingInterest), typeof(WalkingOutOfLevel),
-        /*just for testing*/typeof(Dead) /*just for testing*/)]
+    [NextValidStates(typeof(PickingInterest), typeof(WalkingOutOfLevel), typeof(Paying))]
     public class Idle : BaseState<TouristBrainComponent>
     {
         private readonly Vector2 _idlePosition;
@@ -23,6 +21,7 @@ namespace Systems.Tourist.States
         public override void Enter(StateContext<TouristBrainComponent> context)
         {
             var movement = context.Owner.GetComponent<TwoDeeMovementComponent>();
+
             context.Owner.UpdateAsObservable()
                 .Subscribe(_ =>
                 {
@@ -30,6 +29,15 @@ namespace Systems.Tourist.States
                     StartPickingUpInterest(context);
                 })
                 .AddTo(this);
+
+            MessageBroker.Default.Receive<AllTouristEnteredLastRoomMessage>()
+                .Subscribe(_ => context.GoToState(new Paying()))
+                .AddTo(this);
+        }
+
+        public override string ToString()
+        {
+            return $"{nameof(Idle)}({_idlePosition})";
         }
 
         private void StartPickingUpInterest(StateContext<TouristBrainComponent> context)
@@ -57,11 +65,6 @@ namespace Systems.Tourist.States
                 var delta = movement.Direction.Value + rndMovement;
                 movement.Direction.Value = delta.normalized;
             }
-        }
-
-        public override string ToString()
-        {
-            return $"{nameof(Idle)}({_idlePosition})";
         }
     }
 }
