@@ -1,11 +1,13 @@
 using SystemBase;
-using Systems.DistractionManagement;
 using Systems.Distractions;
 using Systems.GameMessages.Messages;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using Utils.Plugins;
+using SystemBase.StateMachineBase;
+using Systems.DistractionManagement;
+using Systems.Distractions.States;
 
 namespace Systems.TigerAnimation
 {
@@ -32,6 +34,30 @@ namespace Systems.TigerAnimation
                     }
                 })
                 .AddTo(originComponent);
+
+            originComponent.StateContext.CurrentState
+            .Subscribe(state =>
+            {
+                HandleTigerState(originComponent, state);
+            })
+            .AddTo(originComponent);
+        }
+
+        private void HandleTigerState(DistractionOriginComponent originComponent, BaseState<DistractionOriginComponent> state)
+        {
+            switch (state)
+            {
+                case DistractionStateWalkingIn _:
+                case DistractionStateAborted _:
+                    Walk(originComponent);
+                    break;
+                case DistractionStateWaiting _:
+                    GoBackToSleep(originComponent);
+                    break;
+                default:
+                    GoBackToSleep(originComponent);
+                    break;
+            }
         }
 
         private void StartWakeUpAnimation(Collider collider, DistractionOriginComponent originComponent)
@@ -70,6 +96,14 @@ namespace Systems.TigerAnimation
             animator.Play("TigerFallingAsleep_Head");
             animator.Play("TigerBody_Idle");
             animator.Play("TigerTail_Idle");
+        }
+
+        private void Walk(DistractionOriginComponent originComponent)
+        {
+            var animator = originComponent.GetComponent<Animator>();
+            var tigerComponent = originComponent.GetComponent<TigerAnimationComponent>();
+            tigerComponent.CurrentState = TigerState.Walking;
+            animator.Play("TigerWalking");
         }
     }
 }

@@ -12,5 +12,6 @@ public enum TigerState
 {
     Sleeping,
     Awake,
+    Walking,
     Kill
 }
