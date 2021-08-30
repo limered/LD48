@@ -326,7 +326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3735034271173043881, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
       propertyPath: MaxTimeInRoom
-      value: 2000
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5907574603959349326, guid: c2f966b04f8eb6941b88a314363496a3, type: 3}
       propertyPath: m_RootOrder

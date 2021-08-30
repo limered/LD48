@@ -261,11 +261,11 @@ PrefabInstance:
       objectReference: {fileID: 7721235312565522134, guid: bdff130fc9e69664aa0013184a389520, type: 3}
     - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: PlayTestMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: MaxLevelCount
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1700291646, guid: 8a2cfda002c55144f93c42d38aaf1369, type: 3}
       propertyPath: PlayTestRoomPrefab
