@@ -38,10 +38,20 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
             case Dead _:
                 ShowDeathBubble(bubbleComponent);
                 break;
+            case Paying _:
+                ShowPayingBubble(bubbleComponent);
+                break;
             default:
                 ShowBubble(bubbleComponent, false);
                 break;
         }
+    }
+
+    private void ShowPayingBubble(BubbleComponent bubbleComponent)
+    {
+        var spriteRenderer = bubbleComponent.gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = bubbleComponent.Bubbles[7];
+        ShowBubble(bubbleComponent, true);
     }
 
     private void ShowPickingInterest(BubbleComponent component)
@@ -56,21 +66,24 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
         var distracted = touristBrainComponent.GetComponent<DistractableComponent>();
         var distractionType = distracted.DistractionType.Value;
         var spriteRenderer = bubbleComponent.gameObject.GetComponent<SpriteRenderer>();
-        ShowBubble(bubbleComponent, true);
-
+        
         switch (distractionType)
         {
             case DistractionType.Tiger:
                 spriteRenderer.sprite = bubbleComponent.Bubbles[2];
+                ShowBubble(bubbleComponent, true);
                 break;
             case DistractionType.Butterfly:
                 spriteRenderer.sprite = bubbleComponent.Bubbles[3];
+                ShowBubble(bubbleComponent, true);
                 break;
             case DistractionType.Spider:
                 spriteRenderer.sprite = bubbleComponent.Bubbles[5];
+                ShowBubble(bubbleComponent, true);
                 break;
             case DistractionType.Swamp:
                 spriteRenderer.sprite = bubbleComponent.Bubbles[6];
+                ShowBubble(bubbleComponent, true);
                 break;
             default:
                 ShowBubble(bubbleComponent, false);
@@ -82,6 +95,7 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
     {
         var spriteRenderer = component.gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = component.Bubbles[1];
+        ShowBubble(component, true);
     }
 
     private void ShowBubble(BubbleComponent component, bool show)

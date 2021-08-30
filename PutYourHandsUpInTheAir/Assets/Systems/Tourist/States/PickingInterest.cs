@@ -1,14 +1,19 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using SystemBase.StateMachineBase;
 using Systems.DistractionManagement;
 using Systems.Distractions.States;
+using Systems.LastRoom;
+using Systems.Movement;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace Systems.Tourist.States
 {
-    [NextValidStates(typeof(GoingToDistraction), typeof(GoingBackToIdle), typeof(WalkingOutOfLevel))]
+    [NextValidStates(typeof(GoingToDistraction), typeof(GoingBackToIdle), typeof(WalkingOutOfLevel), typeof(Paying))]
     public class PickingInterest : BaseState<TouristBrainComponent>
     {
         private readonly DistractionFinder _distractionFinder;
@@ -25,6 +30,15 @@ namespace Systems.Tourist.States
             context.Owner.UpdateAsObservable()
                 .Subscribe(_ => PickInterestOrLeaveIt(context))
                 .AddTo(this);
+
+            MessageBroker.Default.Receive<AllTouristEnteredLastRoomMessage>()
+                .Subscribe(GoToPayingState(context))
+                .AddTo(this);
+        }
+
+        private static Action<AllTouristEnteredLastRoomMessage> GoToPayingState(StateContext<TouristBrainComponent> context)
+        {
+            return _ => context.GoToState(new Paying());
         }
 
         private void PickInterestOrLeaveIt(StateContext<TouristBrainComponent> context)

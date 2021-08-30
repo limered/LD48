@@ -15,7 +15,7 @@ namespace Systems.LastRoom
             _roomComponent.Value = room;
 
             MessageBroker.Default.Receive<RoomAllTouristsEntered>()
-                .Delay(TimeSpan.FromSeconds(2f))
+                .Delay(TimeSpan.FromSeconds(1f))
                 .Subscribe(SendAllTouristInLastRoomMessage)
                 .AddTo(room);
         }
