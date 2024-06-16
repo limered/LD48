@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cn8vhtr4voa7g"]
+
+[ext_resource type="Texture2D" uid="uid://c7kkxndvain23" path="res://Graphics/Tourist/head-1.png" id="1_86e4r"]
+[ext_resource type="Script" path="res://Tourist/Tourist.cs" id="1_e2vdg"]
+[ext_resource type="Script" path="res://Physics/MovementNode2D.cs" id="2_5touj"]
+[ext_resource type="Texture2D" uid="uid://6t00ks8ijtji" path="res://Graphics/Tourist/body-1.png" id="2_gqply"]
+
+[node name="Tourist" type="Node2D"]
+script = ExtResource("1_e2vdg")
+_idleSpeed = 200.0
+_speed = 50.0
+
+[node name="Movement2D" type="Node" parent="."]
+script = ExtResource("2_5touj")
+_speed = 5000.0
+_damping = 0.95
+_maxSpeed = 2000.0
+
+[node name="head" type="Sprite2D" parent="."]
+position = Vector2(-5, -260)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_86e4r")
+
+[node name="Body" type="Sprite2D" parent="."]
+position = Vector2(0, -110)
+texture = ExtResource("2_gqply")
+
+[node name="IdleTime" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="IdleTime" to="." method="OnIdleTimeTimeout"]

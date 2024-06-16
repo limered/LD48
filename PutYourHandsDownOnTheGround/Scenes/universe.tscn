@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqtyldf3e0n8d"]
+
+[ext_resource type="PackedScene" uid="uid://cn8vhtr4voa7g" path="res://Scenes/tourist.tscn" id="1_rvijl"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Tourist" parent="." instance=ExtResource("1_rvijl")]
+position = Vector2(1, 116)
+
+[node name="Camera2D" type="Camera2D" parent="."]
