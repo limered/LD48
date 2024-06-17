@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://cn8vhtr4voa7g"]
+[gd_scene load_steps=6 format=3 uid="uid://cn8vhtr4voa7g"]
 
 [ext_resource type="Texture2D" uid="uid://c7kkxndvain23" path="res://Graphics/Tourist/head-1.png" id="1_86e4r"]
 [ext_resource type="Script" path="res://Tourist/TouristNode.cs" id="1_a1psb"]
 [ext_resource type="Script" path="res://Physics/MovementNode2D.cs" id="2_5touj"]
 [ext_resource type="Texture2D" uid="uid://6t00ks8ijtji" path="res://Graphics/Tourist/body-1.png" id="2_gqply"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lnbs"]
+size = Vector2(131, 330)
 
 [node name="Tourist" type="Node2D"]
 script = ExtResource("1_a1psb")
@@ -26,4 +29,11 @@ texture = ExtResource("2_gqply")
 [node name="IdleTime" type="Timer" parent="."]
 autostart = true
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-4.5, -151)
+shape = SubResource("RectangleShape2D_0lnbs")
+
 [connection signal="timeout" from="IdleTime" to="." method="OnIdleTimeTimeout"]
+[connection signal="input_event" from="Area2D" to="." method="OnArea2dInputEvent"]

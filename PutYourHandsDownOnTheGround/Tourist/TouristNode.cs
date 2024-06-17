@@ -7,10 +7,9 @@ namespace IsThisATiger2.Empty.Tourist;
 
 public partial class TouristNode : Node2D
 {
-    [Export] private TouristConfiguration _images; 
-    
     private TouristState _currentState = TouristState.Idle;
     private Vector2 _goToPosition;
+    [Export] private TouristConfiguration _images;
     private MovementNode2D _movement;
     private RandomNumberGenerator _rnd;
 
@@ -66,6 +65,14 @@ public partial class TouristNode : Node2D
             var rndMovement = (pos - Position).Rotated(_rnd.RandfRange(-90, 90)).Normalized();
             var delta = _movement.Direction + rndMovement;
             _movement.Direction = delta.Normalized();
+        }
+    }
+
+    private void OnArea2dInputEvent(Node viewport, InputEvent @event, int shapeIdx)
+    {
+        if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left, Pressed: true })
+        {
+            GetNode<EventBus>("/root/EventBus").Emit(new TouristClickedEvent { Tourist = this });
         }
     }
 }
