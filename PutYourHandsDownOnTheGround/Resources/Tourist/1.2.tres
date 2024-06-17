@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://bcro5wbqe0gle"]
+
+[ext_resource type="Texture2D" uid="uid://ddhyhj6a228re" path="res://Graphics/Tourist/body-2.png" id="1_6vubq"]
+[ext_resource type="Texture2D" uid="uid://c7kkxndvain23" path="res://Graphics/Tourist/head-1.png" id="2_n3pp2"]
+[ext_resource type="Script" path="res://Tourist/TouristConfiguration.cs" id="3_t2a2r"]
+
+[resource]
+script = ExtResource("3_t2a2r")
+Head = ExtResource("2_n3pp2")
+Body = ExtResource("1_6vubq")
+IdleSpeed = 5000.0
+MaxIdleSpeed = 500.0

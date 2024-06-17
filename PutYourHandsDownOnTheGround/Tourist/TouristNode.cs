@@ -5,8 +5,10 @@ using IsThisATiger2.Empty.Utils;
 
 namespace IsThisATiger2.Empty.Tourist;
 
-public partial class Tourist : Node2D
+public partial class TouristNode : Node2D
 {
+    [Export] private TouristConfiguration _images; 
+    
     private TouristState _currentState = TouristState.Idle;
     private Vector2 _goToPosition;
     private MovementNode2D _movement;
@@ -16,6 +18,8 @@ public partial class Tourist : Node2D
     {
         _rnd = new RandomNumberGenerator();
         _movement = GetNode<MovementNode2D>("Movement2D");
+        GetNode<Sprite2D>("head").Texture = _images.Head;
+        GetNode<Sprite2D>("Body").Texture = _images.Body;
     }
 
     public override void _Process(double delta)
