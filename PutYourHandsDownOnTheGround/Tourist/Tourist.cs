@@ -7,18 +7,15 @@ namespace IsThisATiger2.Empty.Tourist;
 
 public partial class Tourist : Node2D
 {
-    private MovementNode2D _body;
-
     private TouristState _currentState = TouristState.Idle;
     private Vector2 _goToPosition;
-    [Export] private float _idleSpeed;
+    private MovementNode2D _movement;
     private RandomNumberGenerator _rnd;
-    [Export] private float _speed;
 
     public override void _Ready()
     {
         _rnd = new RandomNumberGenerator();
-        _body = GetNode<MovementNode2D>("Movement2D");
+        _movement = GetNode<MovementNode2D>("Movement2D");
     }
 
     public override void _Process(double delta)
@@ -56,15 +53,15 @@ public partial class Tourist : Node2D
         if (stop < 0.1)
         {
             // Stop
-            _body.Direction = Vector2.Zero;
+            _movement.Direction = Vector2.Zero;
         }
         else
         {
             // Move
             var pos = _goToPosition + _rnd.RandomPointOnUnitRadius();
             var rndMovement = (pos - Position).Rotated(_rnd.RandfRange(-90, 90)).Normalized();
-            var delta = _body.Direction + rndMovement;
-            _body.Direction = delta.Normalized();
+            var delta = _movement.Direction + rndMovement;
+            _movement.Direction = delta.Normalized();
         }
     }
 }

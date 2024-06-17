@@ -7,8 +7,6 @@
 
 [node name="Tourist" type="Node2D"]
 script = ExtResource("1_e2vdg")
-_idleSpeed = 200.0
-_speed = 50.0
 
 [node name="Movement2D" type="Node" parent="."]
 script = ExtResource("2_5touj")

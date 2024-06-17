@@ -6,5 +6,7 @@
 
 [node name="Tourist" parent="." instance=ExtResource("1_rvijl")]
 position = Vector2(1, 116)
+scale = Vector2(0.3, 0.3)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+editor_draw_limits = true

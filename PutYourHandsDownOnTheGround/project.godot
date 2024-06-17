@@ -15,6 +15,11 @@ run/main_scene="res://Scenes/universe.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=675
+window/size/viewport_height=900
+
 [dotnet]
 
 project/assembly_name="IsThisATiger2.0"
