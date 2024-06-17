@@ -1,12 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqtyldf3e0n8d"]
+[gd_scene load_steps=4 format=3 uid="uid://bqtyldf3e0n8d"]
 
 [ext_resource type="PackedScene" uid="uid://cn8vhtr4voa7g" path="res://Scenes/tourist.tscn" id="1_rvijl"]
+[ext_resource type="Resource" uid="uid://bilwcl4e34ysu" path="res://Resources/Tourist/3.1.tres" id="2_al3rw"]
+[ext_resource type="PackedScene" uid="uid://dc1nde2s41a34" path="res://Scenes/Hero.tscn" id="3_sqqph"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Tourist" parent="." instance=ExtResource("1_rvijl")]
 position = Vector2(1, 116)
 scale = Vector2(0.3, 0.3)
+_images = ExtResource("2_al3rw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 editor_draw_limits = true
+
+[node name="Hero" parent="." instance=ExtResource("3_sqqph")]
+position = Vector2(-41, 115)

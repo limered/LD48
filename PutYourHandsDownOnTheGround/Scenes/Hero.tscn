@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc1nde2s41a34"]
+
+[ext_resource type="Script" path="res://Hero/HeroNode.cs" id="1_brmtt"]
+[ext_resource type="Script" path="res://Physics/MovementNode2D.cs" id="1_j2cce"]
+[ext_resource type="Texture2D" uid="uid://bc4rfif8lxsv5" path="res://Graphics/davi.png" id="3_2w1k8"]
+
+[node name="Hero" type="Node2D"]
+script = ExtResource("1_brmtt")
+
+[node name="Movement" type="Node" parent="."]
+script = ExtResource("1_j2cce")
+_speed = 5000.0
+_damping = 0.95
+_maxSpeed = 1000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -45)
+texture = ExtResource("3_2w1k8")
