@@ -27,8 +27,12 @@ public partial class HeroNode : Node2D
     public override void _Process(double delta)
     {
         var targetVec = _targetedTourist?.Position ?? _targetVector;
-        if (targetVec.DistanceTo(Position) < 0.001) _movement.Direction = Vector2.Zero;
-        _movement.Direction = Position.DirectionTo(targetVec);
+        if (targetVec.DistanceTo(Position) < 2)
+        {
+            _movement.Stop();
+            return;
+        }
+        _movement.AddForce(Position.DirectionTo(targetVec) * 10000);
     }
 
     public override void _Input(InputEvent @event)

@@ -10,8 +10,9 @@ script = ExtResource("1_brmtt")
 [node name="Movement" type="Node" parent="."]
 script = ExtResource("1_j2cce")
 _speed = 10000.0
-_damping = 0.95
+_damping = 0.05
 _maxSpeed = 5000.0
+_mass = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -45)

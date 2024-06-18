@@ -12,7 +12,7 @@ config_version=5
 
 config/name="IsThisATiger2.0"
 run/main_scene="res://Scenes/universe.tscn"
-config/features=PackedStringArray("4.2", "C#", "Mobile")
+config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]

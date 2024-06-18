@@ -8,10 +8,13 @@ namespace IsThisATiger2.Empty.Tourist;
 public partial class TouristNode : Node2D
 {
     private TouristState _currentState = TouristState.Idle;
-    private Vector2 _goToPosition;
+    private Vector2 _anchor;
     [Export] private TouristConfiguration _images;
     private MovementNode2D _movement;
     private RandomNumberGenerator _rnd;
+
+    private Vector2 _idlePosition;
+    private float _idleRadius = 100;
 
     public override void _Ready()
     {
@@ -26,6 +29,7 @@ public partial class TouristNode : Node2D
         switch (_currentState)
         {
             case TouristState.Idle:
+                GoToIdlePosition();
                 break;
             case TouristState.PickingInterest:
                 break;
@@ -48,23 +52,29 @@ public partial class TouristNode : Node2D
         }
     }
 
+    private void GoToIdlePosition()
+    {
+        if(Position.DistanceTo(_idlePosition) < 2)
+        {
+            _movement.Stop();
+            return;
+        }
+        var goToDirection = (_idlePosition - Position).Normalized();
+        _movement.AddForce(goToDirection * 5000);
+    }
+
     private void OnIdleTimeTimeout()
     {
         if (_currentState != TouristState.Idle) return;
 
-        var stop = _rnd.Randf();
-        if (stop < 0.1)
+        var needsToStop = _rnd.RandfRange(0, 1) < 0.6;
+        if (needsToStop)
         {
-            // Stop
-            _movement.Direction = Vector2.Zero;
+            _idlePosition = Position;
         }
         else
         {
-            // Move
-            var pos = _goToPosition + _rnd.RandomPointOnUnitRadius();
-            var rndMovement = (pos - Position).Rotated(_rnd.RandfRange(-90, 90)).Normalized();
-            var delta = _movement.Direction + rndMovement;
-            _movement.Direction = delta.Normalized();
+            _idlePosition = _anchor + _rnd.RandomPointOnUnitRadius() * _idleRadius;
         }
     }
 

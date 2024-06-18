@@ -4,15 +4,20 @@ namespace IsThisATiger2.Empty.Physics;
 
 public partial class MovementNode2D : Node
 {
-    [Export] private float _speed;
     [Export(PropertyHint.Range, "0, 1.0")] private float _damping;
     [Export] private float _maxSpeed;
+    [Export] private float _mass;
 
-    public Vector2 Direction { get; set; }
+    private Vector2 _forces;
 
     private Vector2 _acceleration;
     private Vector2 _velocity;
     private Node2D _parent;
+
+    public void AddForce(Vector2 force)
+    {
+        _forces += force;
+    }
 
     public override void _Ready()
     {
@@ -21,14 +26,21 @@ public partial class MovementNode2D : Node
 
     public override void _Process(double delta)
     {
-        // apply direction (force)
-        _acceleration += Direction * _speed;
-        
-        // apply damping
-        var tempVelocity = _velocity + _acceleration * (float)delta;
-        _parent.Position = (tempVelocity + _velocity) * 0.5f * (float)delta;
-        _velocity = tempVelocity * _damping;
+        _acceleration = _forces * _mass;
+        _forces = Vector2.Zero;
 
-        _velocity = _velocity.LimitLength(_maxSpeed);
+        _parent.Position += _velocity * (float)delta;
+        _velocity = _acceleration * (float)delta;
+
+        _velocity *= 1f - _damping;
+        if(_maxSpeed > -1)
+        {
+            _velocity = _velocity.LimitLength(_maxSpeed);
+        }
+    }
+
+    public void Stop()
+    {
+        _velocity = Vector2.Zero;
     }
 }

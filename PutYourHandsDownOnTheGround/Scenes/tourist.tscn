@@ -14,8 +14,9 @@ script = ExtResource("1_a1psb")
 [node name="Movement2D" type="Node" parent="."]
 script = ExtResource("2_5touj")
 _speed = 5000.0
-_damping = 0.95
+_damping = 0.05
 _maxSpeed = 2000.0
+_mass = 1.0
 
 [node name="head" type="Sprite2D" parent="."]
 position = Vector2(-5, -260)
@@ -27,6 +28,7 @@ position = Vector2(0, -110)
 texture = ExtResource("2_gqply")
 
 [node name="IdleTime" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="."]
