@@ -15,6 +15,7 @@ public partial class TouristNode : Node2D
 
     private Vector2 _idlePosition;
     private float _idleRadius = 100;
+    [Export] private float _idleSpeed;
 
     public override void _Ready()
     {

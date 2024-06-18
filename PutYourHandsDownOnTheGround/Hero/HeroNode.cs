@@ -7,6 +7,8 @@ namespace IsThisATiger2.Empty.Hero;
 
 public partial class HeroNode : Node2D
 {
+    [Export] private float _movementSpeed;
+    
     private MovementNode2D _movement;
     private Node2D _targetedTourist;
     private Vector2 _targetVector;
@@ -32,7 +34,7 @@ public partial class HeroNode : Node2D
             _movement.Stop();
             return;
         }
-        _movement.AddForce(Position.DirectionTo(targetVec) * 10000);
+        _movement.AddForce(Position.DirectionTo(targetVec) * _movementSpeed);
     }
 
     public override void _Input(InputEvent @event)
