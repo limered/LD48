@@ -61,7 +61,7 @@ public partial class TouristNode : Node2D
             return;
         }
         var goToDirection = (_idlePosition - Position).Normalized();
-        _movement.AddForce(goToDirection * 5000);
+        _movement.AddForce(goToDirection * _idleSpeed);
     }
 
     private void OnIdleTimeTimeout()
