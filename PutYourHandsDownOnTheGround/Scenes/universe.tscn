@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bqtyldf3e0n8d"]
 
-[ext_resource type="Script" path="res://Distraction/DistractionManager.cs" id="1_om15a"]
+[ext_resource type="Script" path="res://Distraction/DistractionLogic.cs" id="1_om15a"]
 [ext_resource type="PackedScene" uid="uid://cn8vhtr4voa7g" path="res://Scenes/tourist.tscn" id="1_rvijl"]
 [ext_resource type="Resource" uid="uid://bilwcl4e34ysu" path="res://Resources/Tourist/3.1.tres" id="2_al3rw"]
 [ext_resource type="PackedScene" uid="uid://dc1nde2s41a34" path="res://Scenes/Hero.tscn" id="3_sqqph"]
@@ -26,3 +26,4 @@ position = Vector2(-41, 115)
 
 [node name="Butterfly" parent="." instance=ExtResource("5_s4hm8")]
 position = Vector2(136, -119)
+_distractionDuration = 2.0

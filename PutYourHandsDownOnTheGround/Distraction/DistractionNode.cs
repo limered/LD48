@@ -4,7 +4,7 @@ namespace IsThisATiger2.Empty.Distraction;
 
 public partial class DistractionNode : Node
 {
-	[Export] private float _distractionDuration;
+	[Export] public float _distractionDuration;
 
 	public override void _Ready()
 	{

@@ -3,7 +3,7 @@ using IsThisATiger2.Empty.Tourist;
 
 namespace IsThisATiger2.Empty.Distraction;
 
-public partial class DistractionManager : Node
+public partial class DistractionLogic : Node
 {
 	[Export] private DistractionNode[] _distractions;
 	[Export] private TouristNode[] _tourists;
@@ -23,10 +23,11 @@ public partial class DistractionManager : Node
 			var distraction = _distractions[0];
 
 			var scene = GD.Load<PackedScene>("res://Scenes/ThinkingBubble.tscn");
-			var instantiated = scene.Instantiate();
-			tourist.AddChild(instantiated);
+			var distractedTourist = scene.Instantiate<DistractedTourist>();
+			distractedTourist.DistractionWaitTime = distraction._distractionDuration;
+			tourist.AddChild(distractedTourist);
 			
-			_timer = 10;
+			_timer = 1000;
 		}
 	}
 }
