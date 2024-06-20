@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkj6rth0u7g4c"]
+
+[ext_resource type="Script" path="res://Distraction/DistractedTourist.cs" id="1_qd6sw"]
+[ext_resource type="Texture2D" uid="uid://crrlaty5hm2r5" path="res://Graphics/Bubbles/buttefly.png" id="1_wgxkb"]
+
+[node name="ThinkingBubble" type="Node2D"]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_qd6sw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -530)
+texture = ExtResource("1_wgxkb")
+
+[node name="DistractionWaitTime" type="Timer" parent="."]
+one_shot = true

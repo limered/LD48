@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjk73g4u3enh"]
+[gd_scene load_steps=5 format=3 uid="uid://cjk73g4u3enh"]
 
 [ext_resource type="Texture2D" uid="uid://dc5xehht2k0e0" path="res://Graphics/Distractions/butteflyBody.png" id="1_agmfo"]
+[ext_resource type="Script" path="res://Distraction/DistractionNode.cs" id="1_ukadx"]
 
 [sub_resource type="Animation" id="Animation_hxucb"]
 resource_name = "flutter"
@@ -12,8 +13,8 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(0.406126, 1, 3.605),
+"times": PackedFloat32Array(0, 0.8, 1),
+"transitions": PackedFloat32Array(20, 0.2, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(0.2, 1), Vector2(1, 1)]
 }
@@ -24,10 +25,10 @@ tracks/1/path = NodePath(".:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0001, 0.5, 1),
-"transitions": PackedFloat32Array(16.0766, 1, 0.710492, 1),
+"times": PackedFloat32Array(0, 0.8, 1),
+"transitions": PackedFloat32Array(1, 0.2, 1),
 "update": 0,
-"values": [Vector2(0, -30), Vector2(0, 0), Vector2(0, -30), Vector2(0, 0)]
+"values": [Vector2(0, -30), Vector2(0, 0), Vector2(0, -30)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7aj6x"]
@@ -36,10 +37,11 @@ _data = {
 }
 
 [node name="Butterfly" type="Node2D"]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_ukadx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -11.5947)
-scale = Vector2(0.592848, 1)
+position = Vector2(0, -25.5084)
 texture = ExtResource("1_agmfo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
