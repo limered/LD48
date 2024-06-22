@@ -36,12 +36,12 @@ _data = {
 "flutter": SubResource("Animation_hxucb")
 }
 
-[node name="Butterfly" type="Node2D"]
+[node name="Butterfly" type="Node2D" groups=["distraction"]]
 scale = Vector2(0.2, 0.2)
 script = ExtResource("1_ukadx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -25.5084)
+position = Vector2(0, -28.7638)
 texture = ExtResource("1_agmfo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]

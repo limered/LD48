@@ -2,9 +2,10 @@ using Godot;
 
 namespace IsThisATiger2.Empty.Distraction;
 
-public partial class DistractionNode : Node
+public partial class DistractionNode : Node2D
 {
-	[Export] public float _distractionDuration;
+	[Export] public float DistractionDuration;
+	public PackedScene Bubble => GD.Load<PackedScene>("res://Scenes/ThinkingBubble.tscn");
 
 	public override void _Ready()
 	{
