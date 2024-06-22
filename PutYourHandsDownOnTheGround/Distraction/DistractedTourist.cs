@@ -15,12 +15,13 @@ public partial class DistractedTourist : Node2D
     
     public override void _Ready()
     {
-        _timeLeft = DistractionWaitTime;
         _image = GetNode<Sprite2D>("Sprite2D");
     }
 
     public void Start()
     {
+        if (_isRunning) return;
+        _timeLeft = DistractionWaitTime;
         _isRunning = true;
     }
 

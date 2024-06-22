@@ -20,3 +20,4 @@ position = Vector2(-41, 115)
 
 [node name="Butterfly" parent="." instance=ExtResource("5_s4hm8")]
 position = Vector2(136, -119)
+DistractionDuration = 2.0
