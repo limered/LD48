@@ -55,7 +55,7 @@ public partial class TouristNode : Node2D
                 break;
             case TouristState.ToAttraction:
                 GoToAttraction();
-                if(Position.DistanceTo(_currentDistraction.Position) < 50)
+                if(Position.DistanceTo(_currentDistraction.Position) < GameStatics.DistractionDistance)
                 {
                     _currentState = TouristState.Interacting;
                 }
@@ -90,7 +90,7 @@ public partial class TouristNode : Node2D
     {
         _timeSinceLastInterest += dt;
         return _currentState == TouristState.Idle && 
-               _rnd.Randf() < 0.1 &&
+               _rnd.Randf() < GameStatics.InterestPickingProbability &&
                _timeSinceLastInterest > GameStatics.TimeBetweenInterests;
     }
 
