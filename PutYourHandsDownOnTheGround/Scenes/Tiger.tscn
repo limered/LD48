@@ -1,15 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://o1dpkera54d7"]
+[gd_scene load_steps=7 format=3 uid="uid://o1dpkera54d7"]
 
 [ext_resource type="Script" path="res://Distraction/DistractionNode.cs" id="1_xrvlr"]
 [ext_resource type="Texture2D" uid="uid://cd7umg4p5jlvj" path="res://Graphics/Bubbles/tiger.png" id="2_xuydb"]
-[ext_resource type="Texture2D" uid="uid://bxlgpveg4jbc" path="res://Graphics/Distractions/tigerBody.png" id="3_o5ohe"]
+[ext_resource type="Texture2D" uid="uid://pf64nwn3tpg0" path="res://Graphics/Distractions/tigerBodyWithoutHeadTail.png" id="3_xxorr"]
+[ext_resource type="Texture2D" uid="uid://cjcwgshv2bs00" path="res://Graphics/Distractions/tigerBodyWithSleepingEyes.png" id="4_f4qik"]
 
-[sub_resource type="Animation" id="Animation_2doc7"]
+[sub_resource type="Animation" id="Animation_hu8yg"]
 resource_name = "sleep"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-80, -33.3333), Vector2(-80, -42.723), Vector2(-80, -33.333)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ssn83"]
 _data = {
-"sleep": SubResource("Animation_2doc7")
+"sleep": SubResource("Animation_hu8yg")
 }
 
 [node name="Tiger" type="Node2D"]
@@ -21,10 +36,16 @@ WaitingTimeBubble = ExtResource("2_xuydb")
 IsDeadly = true
 BubbleColor = Color(1, 0, 0, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_o5ohe")
+[node name="Body" type="Sprite2D" parent="."]
+texture = ExtResource("3_xxorr")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+[node name="SleepingHead" type="Sprite2D" parent="."]
+position = Vector2(-80, -33.3333)
+texture = ExtResource("4_f4qik")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SleepingHead"]
 libraries = {
 "": SubResource("AnimationLibrary_ssn83")
 }
+
+[node name="WakeHead" type="Sprite2D" parent="."]
