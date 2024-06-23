@@ -10,7 +10,7 @@ size = Vector2(131, 330)
 
 [node name="Tourist" type="Node2D"]
 script = ExtResource("1_a1psb")
-_idleSpeed = 5000.0
+IdleSpeed = 5000.0
 
 [node name="Movement2D" type="Node" parent="."]
 script = ExtResource("2_5touj")

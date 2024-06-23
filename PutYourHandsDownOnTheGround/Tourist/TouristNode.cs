@@ -8,46 +8,53 @@ namespace IsThisATiger2.Empty.Tourist;
 
 public partial class TouristNode : Node2D
 {
+    private const float IdleRadius = 100;
     private Vector2 _anchor;
-    [Export] private TouristState _currentState = TouristState.Idle;
-
-    private Vector2 _idlePosition;
-    private float _idleRadius = 100;
-    [Export] private float _idleSpeed;
-    [Export] private TouristConfiguration _images;
-    private MovementNode2D _movement;
-    private RandomNumberGenerator _rnd;
-    private double _timeSinceLastInterest;
-
+    private PackedScene _bubble = GD.Load<PackedScene>("res://Scenes/ThinkingBubble.tscn");
     private DistractionNode _currentDistraction;
     private DistractedTourist _distractedTourist;
+    private Vector2 _idlePosition;
+    private MovementNode2D _movement;
+    private RandomNumberGenerator _rnd;
+    private Texture2D _skullImage = GD.Load<Texture2D>("res://Graphics/Bubbles/scull.png");
+    private double _timeSinceLastInterest;
+
+    [Export] public TouristState CurrentState = TouristState.Idle;
+    [Export] public float IdleSpeed;
+    [Export] public TouristConfiguration Images;
 
     public override void _Ready()
     {
         _rnd = new RandomNumberGenerator();
         _movement = GetNode<MovementNode2D>("Movement2D");
-        GetNode<Sprite2D>("head").Texture = _images.Head;
-        GetNode<Sprite2D>("Body").Texture = _images.Body;
+        GetNode<Sprite2D>("head").Texture = Images.Head;
+        GetNode<Sprite2D>("Body").Texture = Images.Body;
     }
 
     public override void _Process(double delta)
     {
-        switch (_currentState)
+        switch (CurrentState)
         {
             case TouristState.Idle:
                 GoToIdlePosition();
                 if (ShouldPickInterest(delta))
                 {
                     PickInterest();
-                    _currentState = TouristState.ToAttraction;
+                    CurrentState = TouristState.ToAttraction;
                 }
+
                 break;
             case TouristState.PickingInterest:
                 // unused
                 break;
             case TouristState.Interacting:
                 _movement.Stop();
-                _distractedTourist.Start();
+                _distractedTourist.Start(() =>
+                {
+                    CurrentState = _currentDistraction.isDeadly ? 
+                        TouristState.Dead : TouristState.ToIdle;
+                });
+                
                 break;
             case TouristState.ToIdle:
                 break;
@@ -55,16 +62,15 @@ public partial class TouristNode : Node2D
                 break;
             case TouristState.ToAttraction:
                 GoToAttraction();
-                if(Position.DistanceTo(_currentDistraction.Position) < GameStatics.DistractionDistance)
-                {
-                    _currentState = TouristState.Interacting;
-                }
+                if (Position.DistanceTo(_currentDistraction.Position) < GameStatics.DistractionDistance)
+                    CurrentState = TouristState.Interacting;
                 break;
             case TouristState.ToIdleBack:
                 break;
             case TouristState.ToExit:
                 break;
             case TouristState.Dead:
+                _distractedTourist.SetImage(_skullImage);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -74,22 +80,25 @@ public partial class TouristNode : Node2D
     private void GoToAttraction()
     {
         var goToDirection = (_currentDistraction.Position - Position).Normalized();
-        _movement.AddForce(goToDirection * _idleSpeed);
+        _movement.AddForce(goToDirection * IdleSpeed);
     }
 
     private void PickInterest()
     {
         _currentDistraction = GetNode<DistractionCollection>("/root/DistractionCollection")
             .RandomDistraction(_rnd);
-        _distractedTourist = (DistractedTourist) _currentDistraction.Bubble.Instantiate();
+
+        _distractedTourist = (DistractedTourist)_bubble.Instantiate();
+        _distractedTourist.SetImage(_currentDistraction.WaitingTimeBubble);
         _distractedTourist.DistractionWaitTime = _currentDistraction.DistractionDuration;
+
         AddChild(_distractedTourist);
     }
 
     private bool ShouldPickInterest(double dt)
     {
         _timeSinceLastInterest += dt;
-        return _currentState == TouristState.Idle && 
+        return CurrentState == TouristState.Idle &&
                _rnd.Randf() < GameStatics.InterestPickingProbability &&
                _timeSinceLastInterest > GameStatics.TimeBetweenInterests;
     }
@@ -103,18 +112,18 @@ public partial class TouristNode : Node2D
         }
 
         var goToDirection = (_idlePosition - Position).Normalized();
-        _movement.AddForce(goToDirection * _idleSpeed);
+        _movement.AddForce(goToDirection * IdleSpeed);
     }
 
     private void OnIdleTimeTimeout()
     {
-        if (_currentState != TouristState.Idle) return;
+        if (CurrentState != TouristState.Idle) return;
 
         var needsToStop = _rnd.RandfRange(0, 1) < 0.6;
         if (needsToStop)
             _idlePosition = Position;
         else
-            _idlePosition = _anchor + _rnd.RandomPointOnUnitRadius() * _idleRadius;
+            _idlePosition = _anchor + _rnd.RandomPointOnUnitRadius() * IdleRadius;
     }
 
     private void OnArea2dInputEvent(Node viewport, InputEvent @event, int shapeIdx)

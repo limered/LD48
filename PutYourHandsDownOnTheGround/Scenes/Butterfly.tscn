@@ -46,8 +46,8 @@ KillAnimation = "flutter"
 WaitingTimeBubble = ExtResource("2_otco0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -12.5383)
-scale = Vector2(0.999984, 1)
+position = Vector2(0, -5.23328)
+scale = Vector2(0.9827, 1)
 texture = ExtResource("1_agmfo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]

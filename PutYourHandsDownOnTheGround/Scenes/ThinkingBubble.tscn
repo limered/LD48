@@ -10,6 +10,3 @@ script = ExtResource("1_qd6sw")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -530)
 texture = ExtResource("1_wgxkb")
-
-[node name="DistractionWaitTime" type="Timer" parent="."]
-one_shot = true
