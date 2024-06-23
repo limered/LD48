@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjk73g4u3enh"]
+[gd_scene load_steps=6 format=3 uid="uid://cjk73g4u3enh"]
 
 [ext_resource type="Texture2D" uid="uid://dc5xehht2k0e0" path="res://Graphics/Distractions/butteflyBody.png" id="1_agmfo"]
 [ext_resource type="Script" path="res://Distraction/DistractionNode.cs" id="1_ukadx"]
+[ext_resource type="Texture2D" uid="uid://crrlaty5hm2r5" path="res://Graphics/Bubbles/buttefly.png" id="2_otco0"]
 
 [sub_resource type="Animation" id="Animation_hxucb"]
 resource_name = "flutter"
@@ -40,9 +41,13 @@ _data = {
 scale = Vector2(0.2, 0.2)
 script = ExtResource("1_ukadx")
 DistractionDuration = 2.0
+IdleAnimation = "flutter"
+KillAnimation = "flutter"
+WaitingTimeBubble = ExtResource("2_otco0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -22.2605)
+position = Vector2(0, -12.5383)
+scale = Vector2(0.999984, 1)
 texture = ExtResource("1_agmfo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
