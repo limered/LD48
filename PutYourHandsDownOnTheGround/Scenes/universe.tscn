@@ -20,6 +20,17 @@ editor_draw_limits = true
 position = Vector2(-41, 115)
 
 [node name="Butterfly" parent="." instance=ExtResource("4_c2e7n")]
-position = Vector2(163, -140)
+position = Vector2(-228, -245)
 SpecialBubble = ExtResource("5_6h25m")
-isDeadly = true
+
+[node name="Butterfly2" parent="." instance=ExtResource("4_c2e7n")]
+position = Vector2(255, -251)
+SpecialBubble = ExtResource("5_6h25m")
+
+[node name="Butterfly3" parent="." instance=ExtResource("4_c2e7n")]
+position = Vector2(229, 300)
+SpecialBubble = ExtResource("5_6h25m")
+
+[node name="Butterfly4" parent="." instance=ExtResource("4_c2e7n")]
+position = Vector2(-204, 323)
+SpecialBubble = ExtResource("5_6h25m")

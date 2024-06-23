@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using IsThisATiger2.Empty.Distraction;
+using IsThisATiger2.Empty.Hero;
 using IsThisATiger2.Empty.Physics;
 using IsThisATiger2.Empty.Utils;
 
@@ -29,6 +30,10 @@ public partial class TouristNode : Node2D
         _movement = GetNode<MovementNode2D>("Movement2D");
         GetNode<Sprite2D>("head").Texture = Images.Head;
         GetNode<Sprite2D>("Body").Texture = Images.Body;
+            
+        var area2d = GetNode<Area2D>("Area2D");
+        area2d.AreaEntered += OnArea2dBodyEntered;
+        area2d.AreaExited += OnArea2dBodyExited;
     }
 
     public override void _Process(double delta)
@@ -42,7 +47,6 @@ public partial class TouristNode : Node2D
                     PickInterest();
                     CurrentState = TouristState.ToAttraction;
                 }
-
                 break;
             case TouristState.PickingInterest:
                 // unused
@@ -54,10 +58,20 @@ public partial class TouristNode : Node2D
                     CurrentState = _currentDistraction.isDeadly ? 
                         TouristState.Dead : TouristState.ToIdle;
                 });
-                
                 break;
             case TouristState.ToIdle:
+            {
+                var reached = GoToIdlePosition();
+                if (reached)
+                {
+                    _timeSinceLastInterest = 0;
+                    _distractedTourist.Free();
+                    _currentDistraction = null;
+                    _distractedTourist = null;
+                    CurrentState = TouristState.Idle;
+                }
                 break;
+            }
             case TouristState.ToLevel:
                 break;
             case TouristState.ToAttraction:
@@ -65,8 +79,20 @@ public partial class TouristNode : Node2D
                 if (Position.DistanceTo(_currentDistraction.Position) < GameStatics.DistractionDistance)
                     CurrentState = TouristState.Interacting;
                 break;
-            case TouristState.ToIdleBack:
+            case TouristState.ToIdleWithPlayer:
+            {
+                var reached = GoToIdlePosition();
+                if (reached)
+                {
+                    _timeSinceLastInterest = 0;
+                    _distractedTourist.Free();
+                    _currentDistraction = null;
+                    _distractedTourist = null;
+                    CurrentState = TouristState.Idle;
+                }
+
                 break;
+            }
             case TouristState.ToExit:
                 break;
             case TouristState.Dead:
@@ -100,19 +126,20 @@ public partial class TouristNode : Node2D
         _timeSinceLastInterest += dt;
         return CurrentState == TouristState.Idle &&
                _rnd.Randf() < GameStatics.InterestPickingProbability &&
-               _timeSinceLastInterest > GameStatics.TimeBetweenInterests;
+               _timeSinceLastInterest > GameStatics.InterestCooldown;
     }
 
-    private void GoToIdlePosition()
+    private bool GoToIdlePosition()
     {
         if (Position.DistanceTo(_idlePosition) < 2)
         {
             _movement.Stop();
-            return;
+            return true;
         }
 
         var goToDirection = (_idlePosition - Position).Normalized();
         _movement.AddForce(goToDirection * IdleSpeed);
+        return false;
     }
 
     private void OnIdleTimeTimeout()
@@ -130,5 +157,25 @@ public partial class TouristNode : Node2D
     {
         if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left, Pressed: true })
             GetNode<EventBus>("/root/EventBus").Emit(new TouristClickedEvent { Tourist = this });
+    }
+
+    private void OnArea2dBodyEntered(Node2D other)
+    {
+        if (other.Owner is HeroNode hero && 
+            hero.TargetsThisTourist(this) &&
+            CurrentState is TouristState.ToAttraction or TouristState.Interacting)
+        {
+            _distractedTourist.Abort();
+            CurrentState = TouristState.ToIdleWithPlayer;
+        }
+    }
+    
+    private void OnArea2dBodyExited(Node2D other)
+    {
+        if (other.Owner is HeroNode && 
+            CurrentState is TouristState.ToIdleWithPlayer)
+        {
+            CurrentState = TouristState.ToAttraction;
+        }
     }
 }

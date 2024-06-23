@@ -52,4 +52,9 @@ public partial class HeroNode : Node2D
             }
         }
     }
+
+    public bool TargetsThisTourist(TouristNode t)
+    {
+        return t == _targetedTourist;
+    }
 }

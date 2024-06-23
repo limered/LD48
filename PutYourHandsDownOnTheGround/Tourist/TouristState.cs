@@ -8,7 +8,7 @@ public enum TouristState
     ToIdle,
     ToLevel,
     ToAttraction,
-    ToIdleBack,
+    ToIdleWithPlayer,
     ToExit,
     Dead
 }

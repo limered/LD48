@@ -5,8 +5,9 @@
 [ext_resource type="Script" path="res://Physics/MovementNode2D.cs" id="2_5touj"]
 [ext_resource type="Texture2D" uid="uid://6t00ks8ijtji" path="res://Graphics/Tourist/body-1.png" id="2_gqply"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lnbs"]
-size = Vector2(131, 330)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w3pyi"]
+radius = 60.5
+height = 326.0
 
 [node name="Tourist" type="Node2D"]
 script = ExtResource("1_a1psb")
@@ -34,7 +35,7 @@ autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-4.5, -151)
-shape = SubResource("RectangleShape2D_0lnbs")
+shape = SubResource("CapsuleShape2D_w3pyi")
 
 [connection signal="timeout" from="IdleTime" to="." method="OnIdleTimeTimeout"]
 [connection signal="input_event" from="Area2D" to="." method="OnArea2dInputEvent"]
