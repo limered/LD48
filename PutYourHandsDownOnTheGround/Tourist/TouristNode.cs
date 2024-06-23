@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Godot;
 using IsThisATiger2.Empty.Distraction;
 using IsThisATiger2.Empty.Hero;
@@ -19,6 +20,7 @@ public partial class TouristNode : Node2D
     private RandomNumberGenerator _rnd;
     private Texture2D _skullImage = GD.Load<Texture2D>("res://Graphics/Bubbles/scull.png");
     private double _timeSinceLastInterest;
+    private Area2D _area2d;
 
     [Export] public TouristState CurrentState = TouristState.Idle;
     [Export] public float IdleSpeed;
@@ -31,9 +33,9 @@ public partial class TouristNode : Node2D
         GetNode<Sprite2D>("head").Texture = Images.Head;
         GetNode<Sprite2D>("Body").Texture = Images.Body;
 
-        var area2d = GetNode<Area2D>("Area2D");
-        area2d.AreaEntered += OnArea2dBodyEntered;
-        area2d.AreaExited += OnArea2dBodyExited;
+        _area2d = GetNode<Area2D>("Area2D");
+        _area2d.AreaEntered += OnArea2dBodyEntered;
+        _area2d.AreaExited += OnArea2dBodyExited;
     }
 
     public override void _Process(double delta)
@@ -127,7 +129,8 @@ public partial class TouristNode : Node2D
         _timeSinceLastInterest += dt;
         return CurrentState == TouristState.Idle &&
                _rnd.Randf() < GameStatics.InterestPickingProbability &&
-               _timeSinceLastInterest > GameStatics.InterestCooldown;
+               _timeSinceLastInterest > GameStatics.InterestCooldown &&
+               !_area2d.GetOverlappingAreas().Any(a => a.Owner is HeroNode);
     }
 
     private bool GoToIdlePosition()
