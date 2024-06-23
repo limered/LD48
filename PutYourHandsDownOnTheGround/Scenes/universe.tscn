@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqtyldf3e0n8d"]
+[gd_scene load_steps=7 format=3 uid="uid://bqtyldf3e0n8d"]
 
 [ext_resource type="PackedScene" uid="uid://cn8vhtr4voa7g" path="res://Scenes/tourist.tscn" id="1_rvijl"]
 [ext_resource type="Resource" uid="uid://oa7l6dux8j5r" path="res://Resources/Tourist/1.1.tres" id="2_ccvoa"]
 [ext_resource type="PackedScene" uid="uid://dc1nde2s41a34" path="res://Scenes/Hero.tscn" id="3_sqqph"]
 [ext_resource type="PackedScene" uid="uid://cjk73g4u3enh" path="res://Scenes/Butterfly.tscn" id="4_c2e7n"]
 [ext_resource type="Texture2D" uid="uid://crrlaty5hm2r5" path="res://Graphics/Bubbles/buttefly.png" id="5_6h25m"]
+[ext_resource type="PackedScene" uid="uid://o1dpkera54d7" path="res://Scenes/Tiger.tscn" id="6_vuf1x"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -31,6 +32,5 @@ SpecialBubble = ExtResource("5_6h25m")
 position = Vector2(229, 300)
 SpecialBubble = ExtResource("5_6h25m")
 
-[node name="Butterfly4" parent="." instance=ExtResource("4_c2e7n")]
-position = Vector2(-204, 323)
-SpecialBubble = ExtResource("5_6h25m")
+[node name="Tiger" parent="." instance=ExtResource("6_vuf1x")]
+position = Vector2(-149, 288)

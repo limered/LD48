@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://o1dpkera54d7"]
+
+[ext_resource type="Script" path="res://Distraction/DistractionNode.cs" id="1_xrvlr"]
+[ext_resource type="Texture2D" uid="uid://cd7umg4p5jlvj" path="res://Graphics/Bubbles/tiger.png" id="2_xuydb"]
+[ext_resource type="Texture2D" uid="uid://bxlgpveg4jbc" path="res://Graphics/Distractions/tigerBody.png" id="3_o5ohe"]
+
+[sub_resource type="Animation" id="Animation_2doc7"]
+resource_name = "sleep"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ssn83"]
+_data = {
+"sleep": SubResource("Animation_2doc7")
+}
+
+[node name="Tiger" type="Node2D"]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_xrvlr")
+DistractionDuration = 3.0
+IdleAnimation = "sleep"
+WaitingTimeBubble = ExtResource("2_xuydb")
+IsDeadly = true
+BubbleColor = Color(1, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_o5ohe")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_ssn83")
+}
