@@ -6,6 +6,7 @@ public partial class DistractionNode : Node2D
 {
 	[Export] public float DistractionDuration;
 	[Export] public string IdleAnimation;
+	[Export] public string WakeAnimation;
 	[Export] public string KillAnimation;
 	[Export] public Texture2D WaitingTimeBubble;
 	[Export] public Texture2D SpecialBubble;
