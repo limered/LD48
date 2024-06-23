@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cn8vhtr4voa7g" path="res://Scenes/tourist.tscn" id="1_rvijl"]
 [ext_resource type="Resource" uid="uid://bilwcl4e34ysu" path="res://Resources/Tourist/3.1.tres" id="2_al3rw"]
 [ext_resource type="PackedScene" uid="uid://dc1nde2s41a34" path="res://Scenes/Hero.tscn" id="3_sqqph"]
-[ext_resource type="PackedScene" uid="uid://cjk73g4u3enh" path="res://Scenes/Butterfly.tscn" id="5_s4hm8"]
+[ext_resource type="PackedScene" uid="uid://cjk73g4u3enh" path="res://Scenes/Butterfly.tscn" id="4_c2e7n"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -18,6 +18,5 @@ editor_draw_limits = true
 [node name="Hero" parent="." instance=ExtResource("3_sqqph")]
 position = Vector2(-41, 115)
 
-[node name="Butterfly" parent="." instance=ExtResource("5_s4hm8")]
-position = Vector2(136, -119)
-DistractionDuration = 2.0
+[node name="Butterfly" parent="." instance=ExtResource("4_c2e7n")]
+position = Vector2(163, -140)

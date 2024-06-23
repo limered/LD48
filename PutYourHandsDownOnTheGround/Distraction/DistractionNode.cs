@@ -9,7 +9,9 @@ public partial class DistractionNode : Node2D
 
 	public override void _Ready()
 	{
-		GetNode<AnimationPlayer>("Sprite2D/AnimationPlayer").Play("flutter");
+		GetNode<DistractionCollection>("/root/DistractionCollection").Add(this);
+		GetNode<AnimationPlayer>("Sprite2D/AnimationPlayer")
+			.Play("flutter");
 	}
 
 	public override void _Process(double delta)

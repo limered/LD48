@@ -1,22 +1,24 @@
-using System.Linq;
+using System.Collections.Generic;
 using Godot;
 
 namespace IsThisATiger2.Empty.Distraction;
 
 public partial class DistractionCollection : Node
 {
-    [Export] private DistractionNode[] _distractions;
+    private List<DistractionNode> _distractions;
 
     public override void _Ready()
     {
-        _distractions = GetTree()
-            .GetNodesInGroup("distraction")
-            .Cast<DistractionNode>()
-            .ToArray();
+        _distractions = new List<DistractionNode>();
     }
 
+    public void Add(DistractionNode node)
+    {
+        _distractions.Add(node);
+    }
+    
     public DistractionNode RandomDistraction(RandomNumberGenerator rnd)
     {
-        return _distractions[rnd.RandiRange(0, _distractions.Length-1)];
+        return _distractions[rnd.RandiRange(0, _distractions.Count-1)];
     }
 }
