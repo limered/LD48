@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5653544716545335073}
   - component: {fileID: 5653544716545335102}
   - component: {fileID: 3371024126051985215}
+  - component: {fileID: -4215962431280480623}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,11 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2909348b3da48c98e70ab10fdb4337c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsMoving:
-    value: 0
-  TargetedTourist: {fileID: 0}
+  DistractionHittingDistance: 1
+  DistractionHittingDuration: 0.5
+  TargetedDistraction:
+    value: {fileID: 0}
   TargetVector: {x: 0, y: 0, z: 0}
-  TouristOnlyMode: 0
 --- !u!65 &5653544716545335072
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -94,12 +95,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8d9ba2a31c4cff9534124ec21a1a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 50
-  Friction: 10
-  MaxSpeed: 20
-  Collider: {fileID: 0}
+  Speed: 40
+  Drag: 0.2
+  MaxVelocity: 5
   Direction:
     value: {x: 0, y: 0}
+  CurrentVelocity: 0
+  IsMoving:
+    value: 0
 --- !u!114 &3371024126051985215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +119,18 @@ MonoBehaviour:
   wobbleFactor: 0.02
   wobbleTarget: {fileID: 7545983908340790373}
   wobbleAxis: {x: 0, y: 1, z: 0}
+--- !u!114 &-4215962431280480623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5653544716545335098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5550007f4d96146b620a95fd627a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7545983908340790373
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +201,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1459146929
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 4595b282cc0220a44bdb234ba1c635ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

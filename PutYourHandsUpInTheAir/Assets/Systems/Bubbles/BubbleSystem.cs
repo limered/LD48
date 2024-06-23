@@ -1,11 +1,10 @@
 using UnityEngine;
 using UniRx;
-using SystemBase;
 using Systems.Tourist;
-using Systems.Distractions;
-using Systems.DistractionControl;
 using Systems.Tourist.States;
 using SystemBase.StateMachineBase;
+using SystemBase;
+using Systems.Distractions;
 
 [GameSystem]
 public class BubbleSystem : GameSystem<TouristBrainComponent>
@@ -14,7 +13,7 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
     {
         var bubbleComponent = touristBrainComponent.GetComponentInChildren<BubbleComponent>();
 
-        touristBrainComponent.States.CurrentState
+        touristBrainComponent.StateContext.CurrentState
             .Subscribe(state =>
             {
                 HandleTouristState(touristBrainComponent, bubbleComponent, state);
@@ -24,27 +23,35 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
 
     private void HandleTouristState(TouristBrainComponent touristBrainComponent, BubbleComponent bubbleComponent, BaseState<TouristBrainComponent> state)
     {
-        if (state is PickingInterest)
+        switch (state)
         {
-            ShowPickingInterest(bubbleComponent);
+            case PickingInterest _:
+                ShowPickingInterest(bubbleComponent);
+                break;
+            case GoingToDistraction _:
+            case GoingBackToIdle _:
+                ShowDistractionBubble(bubbleComponent, touristBrainComponent);
+                break;
+            case Interacting _:
+                ShowDistractionProgress(bubbleComponent, touristBrainComponent);
+                break;
+            case Dead _:
+                ShowDeathBubble(bubbleComponent);
+                break;
+            case Paying _:
+                ShowPayingBubble(bubbleComponent);
+                break;
+            default:
+                ShowBubble(bubbleComponent, false);
+                break;
         }
-        else if (state is GoingToAttraction 
-                 || state is GoingBackToIdle)
-        {
-            ShowDistractionBubble(bubbleComponent, touristBrainComponent);
-        }
-        else if (state is Interacting)
-        {
-            ShowDistractionProgress(bubbleComponent, touristBrainComponent);
-        }
-        else if (state is Dead)
-        {
-            ShowDeathBubble(bubbleComponent);
-        }
-        else
-        {
-            ShowBubble(bubbleComponent, false);
-        }
+    }
+
+    private void ShowPayingBubble(BubbleComponent bubbleComponent)
+    {
+        var spriteRenderer = bubbleComponent.gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = bubbleComponent.Bubbles[7];
+        ShowBubble(bubbleComponent, true);
     }
 
     private void ShowPickingInterest(BubbleComponent component)
@@ -56,32 +63,31 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
 
     private void ShowDistractionBubble(BubbleComponent bubbleComponent, TouristBrainComponent touristBrainComponent)
     {
-        var distracted = touristBrainComponent.GetComponent<DistractedTouristComponent>();
-        if (!distracted) return;
-        var distractionType = distracted.CurrentDistractionType;
+        var distracted = touristBrainComponent.GetComponent<DistractableComponent>();
+        var distractionType = distracted.DistractionType.Value;
         var spriteRenderer = bubbleComponent.gameObject.GetComponent<SpriteRenderer>();
-        ShowBubble(bubbleComponent, true);
-
-        if (distractionType is DistractionType.Tiger)
+        
+        switch (distractionType)
         {
-            spriteRenderer.sprite = bubbleComponent.Bubbles[2];
-        } else if (distractionType is DistractionType.Butterfly) {
-            spriteRenderer.sprite = bubbleComponent.Bubbles[3];
-        } else if (distractionType is DistractionType.Bus)
-        {
-            spriteRenderer.sprite = bubbleComponent.Bubbles[4];
-        } else if (distractionType is DistractionType.Spider)
-        {
-            spriteRenderer.sprite = bubbleComponent.Bubbles[5];
-        } else if (distractionType is DistractionType.Swamp)
-        {
-            spriteRenderer.sprite = bubbleComponent.Bubbles[6];
-        } else if (distractionType is DistractionType.Money)
-        {
-            spriteRenderer.sprite = bubbleComponent.Bubbles[7];
-        } else
-        {
-            ShowBubble(bubbleComponent, false);
+            case DistractionType.Tiger:
+                spriteRenderer.sprite = bubbleComponent.Bubbles[2];
+                ShowBubble(bubbleComponent, true);
+                break;
+            case DistractionType.Butterfly:
+                spriteRenderer.sprite = bubbleComponent.Bubbles[3];
+                ShowBubble(bubbleComponent, true);
+                break;
+            case DistractionType.Spider:
+                spriteRenderer.sprite = bubbleComponent.Bubbles[5];
+                ShowBubble(bubbleComponent, true);
+                break;
+            case DistractionType.Swamp:
+                spriteRenderer.sprite = bubbleComponent.Bubbles[6];
+                ShowBubble(bubbleComponent, true);
+                break;
+            default:
+                ShowBubble(bubbleComponent, false);
+                break;
         }
     }
 
@@ -89,6 +95,7 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
     {
         var spriteRenderer = component.gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = component.Bubbles[1];
+        ShowBubble(component, true);
     }
 
     private void ShowBubble(BubbleComponent component, bool show)
@@ -104,8 +111,8 @@ public class BubbleSystem : GameSystem<TouristBrainComponent>
     private void ShowDistractionProgress(BubbleComponent bubbleComponent, TouristBrainComponent touristBrainComponent)
     {
         var spriteRenderer = bubbleComponent.gameObject.GetComponent<SpriteRenderer>();
-        var distractedTourist = touristBrainComponent.GetComponent<DistractedTouristComponent>();
-        var activatedColor = distractedTourist.ProgressColor;
+        var distractedTourist = touristBrainComponent.GetComponent<DistractableComponent>();
+        var activatedColor = Color.red;
         distractedTourist.DistractionProgress.Subscribe( progress => {
             spriteRenderer.color = Color32.Lerp(Color.white, activatedColor, progress);
         });

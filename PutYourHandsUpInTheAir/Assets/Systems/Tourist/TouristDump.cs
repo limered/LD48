@@ -20,7 +20,7 @@ namespace Systems.Tourist
         public TouristDump(TouristBrainComponent brain)
         {
             Name = brain.touristName.Value;
-            IsAlive = !(brain.States.CurrentState.Value is Dead);
+            IsAlive = !(brain.StateContext.CurrentState.Value is Dead);
             HeadPartIndex = brain.headPartIndex.Value;
             BodyPartIndex = brain.bodyPartIndex.Value;
             SocialDistancingRadius = brain.socialDistanceCollider != null ? brain.socialDistanceCollider.radius : 0.5f;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using SystemBase;
 using SystemBase.StateMachineBase;
 using Systems.Movement;
@@ -8,7 +6,7 @@ using UnityEngine;
 
 namespace Systems.Tourist
 {
-    [RequireComponent(typeof(MovementComponent))]
+    [RequireComponent(typeof(TwoDeeMovementComponent))]
     public class TouristBrainComponent : GameComponent
     {
         public StringReactiveProperty touristName = new StringReactiveProperty();
@@ -16,15 +14,22 @@ namespace Systems.Tourist
         public IntReactiveProperty headPartIndex = new IntReactiveProperty();
         public IntReactiveProperty bodyPartIndex = new IntReactiveProperty();
         public float idleMinTimeWithoutMovementInSeconds = 3f;
-        public float idleSpeed = 1f;
-        public float normalSpeed = 1f;
-        public float attractedSpeed = 1f;
         public string debugCurrentState;
         public Vector2 debugTargetDistance;
 
-        public StateContext<TouristBrainComponent> States { get; } = new StateContext<TouristBrainComponent>();
+        public StateContext<TouristBrainComponent> StateContext { get; set; }
 
-        public bool HasPaid { get; set; }
+        public float StoprInterestPropability = 0.3f;
+        public float IntrerestPropability = 0.3f;
+        public float DistractionSearchRange = 2f;
+        public float DistractionSearchRangeIncrement = 0.1f;
+
+        protected override void OverwriteStart()
+        {
+            base.OverwriteStart();
+            if (StateContext != null) return;
+            StateContext = new StateContext<TouristBrainComponent>(this);
+        }
     }
 
     public static class TouristNames

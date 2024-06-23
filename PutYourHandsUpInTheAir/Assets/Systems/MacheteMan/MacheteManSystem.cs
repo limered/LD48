@@ -36,7 +36,7 @@ namespace Systems.MacheteMan
                         component.particles.gameObject.SetActive(false);
                         component.TargetPosition = roomComponent.SpawnOutPosition.transform.position;
                         LeaveRoom(component, roomComponent,
-                            component.GetComponent<MovementComponent>());
+                            component.GetComponent<TwoDeeMovementComponent>());
                     }).AddTo(component);
             });
 
@@ -57,7 +57,7 @@ namespace Systems.MacheteMan
 
                     SystemUpdate().Where(_ => component.State.CurrentState.Value is MacheteManPrepare)
                         .Subscribe(_ => MoveToRoomBlock(component,
-                            component.GetComponent<MovementComponent>())).AddTo(component);
+                            component.GetComponent<TwoDeeMovementComponent>())).AddTo(component);
                 })
                 .AddTo(component);
         }
@@ -67,7 +67,7 @@ namespace Systems.MacheteMan
             RegisterWaitable(component);
         }
 
-        private static void LeaveRoom(MacheteManComponent macheteManComponent, RoomComponent roomComponent, MovementComponent movementComponent)
+        private static void LeaveRoom(MacheteManComponent macheteManComponent, RoomComponent roomComponent, TwoDeeMovementComponent movementComponent)
         {
             var direction = macheteManComponent.TargetPosition - (Vector2)movementComponent.transform.position;
             if (direction.sqrMagnitude < 0.01)
@@ -81,7 +81,7 @@ namespace Systems.MacheteMan
         }
 
         private static void MoveToRoomBlock(MacheteManComponent macheteManComponent,
-            MovementComponent movementComponent)
+            TwoDeeMovementComponent movementComponent)
         {
             var direction = macheteManComponent.TargetPosition - (Vector2) movementComponent.transform.position;
             if (direction.sqrMagnitude < 0.01)

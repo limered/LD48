@@ -1,18 +1,25 @@
 ﻿using SystemBase;
-using Systems.Tourist;
+using SystemBase.StateMachineBase;
+using Systems.DistractionManagement;
+using Systems.Movement;
 using UniRx;
 using UnityEngine;
 
 namespace Systems.Player
 {
+    [RequireComponent(typeof(TwoDeeMovementComponent))]
     public class PlayerComponent : GameComponent
     {
-        public BoolReactiveProperty IsMoving;
-        public ReactiveProperty<TouristBrainComponent> TargetedTourist = new ReactiveProperty<TouristBrainComponent>();
-        public ReactiveProperty<TouristBrainComponent> LastTargetedTourist = new ReactiveProperty<TouristBrainComponent>();
+        public float DistractionHittingDistance = 0.5f;
+        public float DistractionHittingDuration = 0.5f;
+        public ReactiveProperty<DistractionOriginComponent> TargetedDistraction = new ReactiveProperty<DistractionOriginComponent>();
         public Vector3 TargetVector;
 
-        public bool TouristOnlyMode;
-        public bool TouristClicked { get; set; }
+        public StateContext<PlayerComponent> State;
+
+        private void Awake()
+        {
+            State = new StateContext<PlayerComponent>(this);
+        }
     }
 }

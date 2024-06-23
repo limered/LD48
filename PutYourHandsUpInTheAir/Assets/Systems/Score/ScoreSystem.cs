@@ -3,9 +3,7 @@ using System.Linq;
 using SystemBase;
 using Systems.Score.Messages;
 using Systems.Tourist;
-using GameState.Messages;
 using UniRx;
-using UnityEngine;
 using UnityEngine.UI;
 using Utils.Plugins;
 using Object = UnityEngine.Object;
@@ -53,13 +51,9 @@ namespace Systems.Score
                 .AddToLifecycleOf(component);
         }
 
-
         public override void Register(ScoreTouristHeadsComponent component)
         {
             var score = component.GetComponent<ScoreComponent>();
-            var rect = component.GetComponent<RectTransform>();
-            var grid = component.GetComponent<GridLayoutGroup>();
-
             score.touristStats
                 .Where(x => x != null && x.Length > 0)
                 .Select(x => x.ToObservable())

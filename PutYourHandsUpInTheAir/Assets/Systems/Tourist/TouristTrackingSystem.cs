@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using SystemBase;
 using SystemBase.StateMachineBase;
+using Systems.GameMessages.Messages;
 using Systems.Room;
 using Systems.Room.Events;
 using Systems.Score.Messages;
 using Systems.Tourist.States;
-using GameState.Messages;
 using GameState.States;
 using UniRx;
 using UniRx.Triggers;
@@ -62,7 +62,8 @@ namespace Systems.Tourist
                                 Debug.Log("RoomWalkIn - first level");
                                 _tourists = GenerateTourists(config, room);
                                 _touristDumps = _tourists
-                                    .Select(t => new TouristDump(t.GetComponent<TouristBrainComponent>())).ToArray();
+                                    .Select(t => new TouristDump(t.GetComponent<TouristBrainComponent>()))
+                                    .ToArray();
                             }
                             else //level 2 -> END
                             {
@@ -91,7 +92,7 @@ namespace Systems.Tourist
             foreach (var tourist in _tourists.Where(t => t != null))
             {
                 tourist.GetComponent<TouristBrainComponent>()
-                    .States
+                    .StateContext
                     .GoToState(new WalkingOutOfLevel(room.SpawnOutPosition.transform));
             }
 
@@ -102,7 +103,7 @@ namespace Systems.Tourist
                 .SelectWhereNotNull(c => c.gameObject.GetComponent<TouristBrainComponent>())
                 .Subscribe(brain =>
                 {
-                    brain.States.GoToState(new WalkedOut());
+                    brain.StateContext.GoToState(new WalkedOut());
                     
                     for (int i = 0; i < _tourists.Length; i++)
                     {
@@ -124,7 +125,7 @@ namespace Systems.Tourist
         private void CheckForRoomFinish()
         {
             if (_tourists.Where(x => x != null)
-                .Select(x => x.GetComponent<TouristBrainComponent>().States.CurrentState.Value)
+                .Select(x => x.GetComponent<TouristBrainComponent>().StateContext.CurrentState.Value)
                 .All(state => state is WalkedOut || state is Dead)
             )
             {
@@ -148,7 +149,7 @@ namespace Systems.Tourist
             var body = component.GetComponent<TouristBodyComponent>();
 
             //=== Collect dead Tourists ====
-            component.States.CurrentState.Where(state => state is Dead)
+            component.StateContext.CurrentState.Where(state => state is Dead)
                 .Subscribe(_ =>
                 {
                     for (int i = 0; i < _tourists.Length; i++)
@@ -197,17 +198,17 @@ namespace Systems.Tourist
         {
             SystemUpdate()
                 .Where(_ => RoomIsInWalkInState(room))
-                .Where(_ => AllTouristsAreInIdle())
+                .Where(_ => AllTouristsWalkedIn())
                 .First()
                 .Subscribe(_ => StartRoom())
                 .AddToLifecycleOf(room);
         }
 
-        private bool AllTouristsAreInIdle()
+        private bool AllTouristsWalkedIn()
         {
             return _tourists != null &&
                    _tourists.Where(x => x != null)
-                       .All(t => t.GetComponent<TouristBrainComponent>().States.CurrentState.Value is Idle);
+                       .All(t => !(t.GetComponent<TouristBrainComponent>().StateContext.CurrentState.Value is GoingIntoLevel));
         }
 
         private void StartRoom()
@@ -235,7 +236,8 @@ namespace Systems.Tourist
                     var brain = objectInstance.GetComponent<TouristBrainComponent>();
                     brain.tag = "tourist";
                     tourist.Apply(brain);
-                    brain.States.Start(new GoingIntoLevel());
+                    brain.StateContext = new StateContext<TouristBrainComponent>(brain);
+                    brain.StateContext.Start(new GoingIntoLevel());
 
                     return objectInstance;
                 })
@@ -257,7 +259,8 @@ namespace Systems.Tourist
                 var brain = objectInstance.GetComponent<TouristBrainComponent>();
                 brain.tag = "tourist";
                 tourist.Apply(brain);
-                brain.States.Start(new GoingIntoLevel());
+                brain.StateContext = new StateContext<TouristBrainComponent>(brain);
+                brain.StateContext.Start(new GoingIntoLevel());
 
                 return objectInstance;
             }).ToArray();

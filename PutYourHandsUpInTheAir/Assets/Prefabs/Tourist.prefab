@@ -184,6 +184,9 @@ GameObject:
   - component: {fileID: 3355293365520363688}
   - component: {fileID: 5748114545316010564}
   - component: {fileID: 1771741449184892251}
+  - component: {fileID: 8996821111172734936}
+  - component: {fileID: 3858887025692188481}
+  - component: {fileID: 5186215934931236917}
   m_Layer: 6
   m_Name: Tourist
   m_TagString: tourist
@@ -236,12 +239,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8d9ba2a31c4cff9534124ec21a1a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
-  Friction: 9
-  MaxSpeed: 10
-  Collider: {fileID: 0}
+  Speed: 15
+  Drag: 0.2
+  MaxVelocity: 5
   Direction:
     value: {x: 0, y: 0}
+  CurrentVelocity: 0
+  IsMoving:
+    value: 0
 --- !u!114 &2666235342249832513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,11 +267,12 @@ MonoBehaviour:
   bodyPartIndex:
     value: 0
   idleMinTimeWithoutMovementInSeconds: 0.3
-  idleSpeed: 10
-  normalSpeed: 10
-  attractedSpeed: 10
   debugCurrentState: 
   debugTargetDistance: {x: 0, y: 0}
+  StoprInterestPropability: 0.01
+  IntrerestPropability: 0.005
+  DistractionSearchRange: 1
+  DistractionSearchRangeIncrement: 0.01
 --- !u!114 &3492671645544282497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +332,51 @@ CapsuleCollider:
   m_Height: 1.63
   m_Direction: 1
   m_Center: {x: -0.04, y: 0.4, z: 0}
+--- !u!114 &8996821111172734936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666235342249832527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2951ab7e14f5b649b0d357297ec9269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DistractionType:
+    value: 0
+  Origin: {fileID: 0}
+  DistractionProgress:
+    value: 0
+--- !u!114 &3858887025692188481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666235342249832527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 291a94350c0b48d4193ea9cd447faff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Amount: 100
+  WantsToPay: 0
+  HasPaid: 0
+--- !u!114 &5186215934931236917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666235342249832527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5550007f4d96146b620a95fd627a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimationDelay: 200
 --- !u!1 &2933896038715736185
 GameObject:
   m_ObjectHideFlags: 0

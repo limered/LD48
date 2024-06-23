@@ -12,6 +12,7 @@ namespace SystemBase
     {
         public List<IDisposable> ComponentDisposables = new List<IDisposable>();
         public virtual IGameSystem System { get; set; }
+
         public void RegisterToGame()
         {
             IoC.Resolve<Game>().RegisterComponent(this);
@@ -46,7 +47,9 @@ namespace SystemBase
             OverwriteStart();
         }
 
-        protected virtual void OverwriteStart() { }
+        protected virtual void OverwriteStart()
+        {
+        }
 
         protected void OnDestroy()
         {
@@ -57,6 +60,7 @@ namespace SystemBase
     public class SemanticGameComponent<TGameComponent> : GameComponent where TGameComponent : IGameComponent
     {
         public TGameComponent dependency;
+
         public TGameComponent Dependency
         {
             get => dependency != null ? dependency : GetComponent<TGameComponent>();

@@ -11,14 +11,14 @@ namespace Systems.Movement
     {
         public override void Register(RunWobbleComponent component)
         {
-            var movement = component.GetComponent<MovementComponent>();
+            var movement = component.GetComponent<TwoDeeMovementComponent>();
             var startTime = Time.time - Random.value * 10000;
 
             SystemUpdate()
                 .Select(_ => Time.time - startTime)
                 .Select(time =>
                 {
-                    var a = Mathf.Sin(time / component.wobbleInterval) * movement.Velocity.magnitude *
+                    var a = Mathf.Sin(time / component.wobbleInterval) * movement.BodyData.Velocity.magnitude *
                         component.wobbleFactor;
 
                     return Mathf.Abs(a) + a;
