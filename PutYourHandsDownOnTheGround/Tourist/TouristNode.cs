@@ -30,7 +30,7 @@ public partial class TouristNode : Node2D
         _movement = GetNode<MovementNode2D>("Movement2D");
         GetNode<Sprite2D>("head").Texture = Images.Head;
         GetNode<Sprite2D>("Body").Texture = Images.Body;
-            
+
         var area2d = GetNode<Area2D>("Area2D");
         area2d.AreaEntered += OnArea2dBodyEntered;
         area2d.AreaExited += OnArea2dBodyExited;
@@ -47,17 +47,16 @@ public partial class TouristNode : Node2D
                     PickInterest();
                     CurrentState = TouristState.ToAttraction;
                 }
+
                 break;
             case TouristState.PickingInterest:
                 // unused
                 break;
             case TouristState.Interacting:
                 _movement.Stop();
-                _distractedTourist.Start(() =>
-                {
-                    CurrentState = _currentDistraction.isDeadly ? 
-                        TouristState.Dead : TouristState.ToIdle;
-                });
+                _distractedTourist.Start(
+                    () => { CurrentState = _currentDistraction.IsDeadly ? TouristState.Dead : TouristState.ToIdle; },
+                    _currentDistraction.BubbleColor);
                 break;
             case TouristState.ToIdle:
             {
@@ -70,6 +69,7 @@ public partial class TouristNode : Node2D
                     _distractedTourist = null;
                     CurrentState = TouristState.Idle;
                 }
+
                 break;
             }
             case TouristState.ToLevel:
@@ -97,6 +97,7 @@ public partial class TouristNode : Node2D
                 break;
             case TouristState.Dead:
                 _distractedTourist.SetImage(_skullImage);
+                // show blood
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -161,21 +162,18 @@ public partial class TouristNode : Node2D
 
     private void OnArea2dBodyEntered(Node2D other)
     {
-        if (other.Owner is HeroNode hero && 
-            hero.TargetsThisTourist(this) &&
-            CurrentState is TouristState.ToAttraction or TouristState.Interacting)
-        {
-            _distractedTourist.Abort();
-            CurrentState = TouristState.ToIdleWithPlayer;
-        }
+        if (other.Owner is not HeroNode hero ||
+            !hero.TargetsThisTourist(this) ||
+            CurrentState is not (TouristState.ToAttraction or TouristState.Interacting)) return;
+
+        _distractedTourist.Abort();
+        CurrentState = TouristState.ToIdleWithPlayer;
     }
-    
+
     private void OnArea2dBodyExited(Node2D other)
     {
-        if (other.Owner is HeroNode && 
+        if (other.Owner is HeroNode &&
             CurrentState is TouristState.ToIdleWithPlayer)
-        {
             CurrentState = TouristState.ToAttraction;
-        }
     }
 }
