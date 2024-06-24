@@ -2,7 +2,7 @@ name: "godot-ci export"
 on: push
 
 env:
-  GODOT_VERSION: 4.2.2
+  GODOT_VERSION: 4.2.1
   EXPORT_NAME: is-this-a-tiger
   PROJECT_PATH: PutYourHandsDownOnTheGround
 
@@ -11,7 +11,7 @@ jobs:
     name: Windows Export
     runs-on: ubuntu-20.04  # Use 22.04 with godot 4
     container:
-      image: barichello/godot-ci:mono-4.2.2
+      image: barichello/godot-ci:mono-4.2.1
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,7 +28,6 @@ jobs:
         run: |
           mkdir -v -p build/windows
           cd $PROJECT_PATH
-          godot --headless --build-solutions --quit
           godot --headless --verbose --export-release "Windows Desktop" ../build/windows/$EXPORT_NAME.exe
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -40,7 +39,7 @@ jobs:
     name: Linux Export
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:mono-4.2.2
+      image: barichello/godot-ci:mono-4.2.1
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -57,7 +56,6 @@ jobs:
         run: |
           mkdir -v -p build/linux
           cd $PROJECT_PATH
-          godot --headless --build-solutions --quit
           godot --headless --verbose --export-release "Linux/X11" ../build/linux/$EXPORT_NAME.x86_64
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
