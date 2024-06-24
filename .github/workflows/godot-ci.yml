@@ -24,7 +24,7 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable.mono ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
-          cd ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          cd ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
           ls -l
       - name: Windows Build
         run: |
