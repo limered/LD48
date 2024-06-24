@@ -1,0 +1,16 @@
+res://Scenes/Butterfly.tscn
+res://Scenes/universe.tscn
+res://Scenes/tourist.tscn
+res://Scenes/Hero.tscn
+res://Scenes/ThinkingBubble.tscn
+res://Distraction/Distraction.cs
+res://Hero/HeroNode.cs
+res://Tourist/TouristConfiguration.cs
+res://Distraction/DistractionCollection.cs
+res://Utils/EventBus.cs
+res://Distraction/DistractedTourist.cs
+res://Distraction/DistractionNode.cs
+res://Distraction/DistractionConfiguration.cs
+res://Physics/MovementNode2D.cs
+res://Tourist/TouristNode.cs
+res://Scenes/Tiger.tscn
