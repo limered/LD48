@@ -1,7 +1,7 @@
 name: Build Godot Project
 
 on:
-  push: {}
+  push
 
 jobs:
   Godot: 
@@ -9,17 +9,17 @@ jobs:
     strategy:
       matrix:
         platform: [windows]
-      steps:
-        - name: Checkout
-          uses: actions/checkout@2
-        - name: Build
-          id: build
-          uses: manleydev/build-godot-action@v1.4.1
-          with:
-            name: example
-            preset: ${{ matrix.platform }}
-        - name: Upload Artifact
-          uses: actions/upload-artifact@v2
-          with:
-            name: Client - ${{ matrix.platform }}
-            path: ${{ github.workspace }}/${{ steps.build.outputs.build }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@2
+      - name: Build
+        id: build
+        uses: manleydev/build-godot-action@v1.4.1
+        with:
+          name: example
+          preset: ${{ matrix.platform }}
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Client - ${{ matrix.platform }}
+          path: ${{ github.workspace }}/${{ steps.build.outputs.build }}
