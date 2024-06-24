@@ -30,6 +30,10 @@ window/handheld/orientation=1
 
 project/assembly_name="IsThisATiger2.0"
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [rendering]
 
 renderer/rendering_method="mobile"
