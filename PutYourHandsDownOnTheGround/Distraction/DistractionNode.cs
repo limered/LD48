@@ -12,12 +12,34 @@ public partial class DistractionNode : Node2D
 	[Export] public Texture2D SpecialBubble;
 	[Export] public bool IsDeadly;
 	[Export] public Color BubbleColor;
+	private AnimationPlayer _player;
 
 	public override void _Ready()
 	{
 		DistractionCollection.Add(this);
-		var player = GetNode<AnimationPlayer>("Sprite2D/AnimationPlayer");
-		player.SpeedScale = (float)GD.RandRange(0.85, 1.15);
-		player.Play(IdleAnimation);
+		_player = GetNode<AnimationPlayer>("Sprite2D/AnimationPlayer");
+		_player.SpeedScale = (float)GD.RandRange(0.85, 1.15);
+		_player.Play(IdleAnimation);
+
+		var area = GetNode<Area2D>("Area2D");
+		area.AreaEntered += WakeUp;
+		area.AreaExited += Sleep;
+	}
+
+	private void Sleep(Area2D area)
+	{
+		_player.PlayBackwards(WakeAnimation);
+		_player.Play(IdleAnimation, 1D);
+	}
+
+	private void WakeUp(Area2D area)
+	{
+		_player.Play(WakeAnimation);
+	}
+
+	public void Kill()
+	{
+		_player.Play(KillAnimation);
+		_player.Play(IdleAnimation, 0.1D);
 	}
 }

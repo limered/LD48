@@ -45,7 +45,6 @@ public partial class DistractedTourist : Node2D
         {
             _onDistractionTimeUp();
             _isRunning = false;
-            return;
         }
         var redShift = (float)(_timeLeft / DistractionWaitTime);
         _image.Modulate = Colors.White.Lerp(_targetColor, 1f - redShift);

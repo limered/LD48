@@ -12,6 +12,7 @@ public partial class TouristNode : Node2D
 {
     private const float IdleRadius = 100;
     private Vector2 _anchor;
+    private Area2D _area2d;
     private PackedScene _bubble = GD.Load<PackedScene>("res://Scenes/ThinkingBubble.tscn");
     private DistractionNode _currentDistraction;
     private DistractedTourist _distractedTourist;
@@ -20,7 +21,6 @@ public partial class TouristNode : Node2D
     private RandomNumberGenerator _rnd;
     private Texture2D _skullImage = GD.Load<Texture2D>("res://Graphics/Bubbles/scull.png");
     private double _timeSinceLastInterest;
-    private Area2D _area2d;
 
     [Export] public TouristState CurrentState = TouristState.Idle;
     [Export] public float IdleSpeed;
@@ -57,7 +57,18 @@ public partial class TouristNode : Node2D
             case TouristState.Interacting:
                 _movement.Stop();
                 _distractedTourist.Start(
-                    () => { CurrentState = _currentDistraction.IsDeadly ? TouristState.Dead : TouristState.ToIdle; },
+                    () =>
+                    {
+                        if (_currentDistraction.IsDeadly)
+                        {
+                            _currentDistraction.Kill();
+                            CurrentState = TouristState.Dead;
+                        }
+                        else
+                        {
+                            CurrentState = TouristState.ToIdle;
+                        }
+                    },
                     _currentDistraction.BubbleColor);
                 break;
             case TouristState.ToIdle:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://o1dpkera54d7"]
+[gd_scene load_steps=13 format=3 uid="uid://o1dpkera54d7"]
 
 [ext_resource type="Script" path="res://Distraction/DistractionNode.cs" id="1_xrvlr"]
 [ext_resource type="Texture2D" uid="uid://cd7umg4p5jlvj" path="res://Graphics/Bubbles/tiger.png" id="2_xuydb"]
@@ -13,7 +13,7 @@ resource_name = "attack"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Body:visible")
+tracks/0/path = NodePath("../Sprite2D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -94,10 +94,58 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2, 4),
+"times": PackedFloat32Array(0, 1.5, 4),
 "transitions": PackedFloat32Array(0.637281, 0.5, 1),
 "update": 0,
-"values": [Vector2(-80, -33.3333), Vector2(-80, -42), Vector2(-80, -33.333)]
+"values": [Vector2(-50, -33.333), Vector2(-50, -42), Vector2(-50, -33.333)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../WakeHead:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Jumping:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Sprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_sebqe"]
@@ -112,7 +160,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0.3, 1),
 "transitions": PackedFloat32Array(0.138696, 1),
 "update": 0,
-"values": [Vector2(-80, -42), Vector2(-46.6667, -73.3333)]
+"values": [Vector2(-50, -42), Vector2(-46.6667, -73.3333)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -138,6 +186,30 @@ tracks/2/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Jumping:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Sprite2D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ssn83"]
 _data = {
@@ -145,6 +217,9 @@ _data = {
 "sleep": SubResource("Animation_hu8yg"),
 "wake": SubResource("Animation_sebqe")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wi8lo"]
+radius = 330.471
 
 [node name="Tiger" type="Node2D"]
 scale = Vector2(0.3, 0.3)
@@ -157,21 +232,22 @@ WaitingTimeBubble = ExtResource("2_xuydb")
 IsDeadly = true
 BubbleColor = Color(1, 0, 0, 1)
 
-[node name="Body" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_xxorr")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-80, -33.4477)
-texture = ExtResource("4_f4qik")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+root_node = NodePath("../../HeadSleep")
 libraries = {
 "": SubResource("AnimationLibrary_ssn83")
 }
 
-[node name="WakeHead" type="Sprite2D" parent="."]
+[node name="HeadSleep" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-80, -42)
+position = Vector2(-50, -33.333)
+texture = ExtResource("4_f4qik")
+
+[node name="WakeHead" type="Sprite2D" parent="."]
+position = Vector2(-46, -73)
 texture = ExtResource("5_038ce")
 
 [node name="Jumping" type="Sprite2D" parent="."]
@@ -185,3 +261,8 @@ offset = Vector2(-143.449, -145.986)
 position = Vector2(44.9316, -176.379)
 rotation = -0.09638
 texture = ExtResource("7_c6ep7")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_wi8lo")
