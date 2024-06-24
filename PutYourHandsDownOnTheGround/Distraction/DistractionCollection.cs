@@ -3,22 +3,17 @@ using Godot;
 
 namespace IsThisATiger2.Empty.Distraction;
 
-public partial class DistractionCollection : Node
+public static class DistractionCollection 
 {
-    private List<DistractionNode> _distractions;
+    private static readonly List<DistractionNode> Distractions = new();
 
-    public override void _Ready()
+    public static void Add(DistractionNode node)
     {
-        _distractions = new List<DistractionNode>();
-    }
-
-    public void Add(DistractionNode node)
-    {
-        _distractions.Add(node);
+        Distractions.Add(node);
     }
     
-    public DistractionNode RandomDistraction(RandomNumberGenerator rnd)
+    public static DistractionNode RandomDistraction(RandomNumberGenerator rnd)
     {
-        return _distractions[rnd.RandiRange(0, _distractions.Count-1)];
+        return Distractions[rnd.RandiRange(0, Distractions.Count-1)];
     }
 }

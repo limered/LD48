@@ -114,9 +114,7 @@ public partial class TouristNode : Node2D
 
     private void PickInterest()
     {
-        _currentDistraction = GetNode<DistractionCollection>("/root/DistractionCollection")
-            .RandomDistraction(_rnd);
-
+        _currentDistraction = DistractionCollection.RandomDistraction(_rnd);
         _distractedTourist = (DistractedTourist)_bubble.Instantiate();
         _distractedTourist.SetImage(_currentDistraction.WaitingTimeBubble);
         _distractedTourist.DistractionWaitTime = _currentDistraction.DistractionDuration;
@@ -160,7 +158,7 @@ public partial class TouristNode : Node2D
     private void OnArea2dInputEvent(Node viewport, InputEvent @event, int shapeIdx)
     {
         if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left, Pressed: true })
-            GetNode<EventBus>("/root/EventBus").Emit(new TouristClickedEvent { Tourist = this });
+            EventBus.Emit(new TouristClickedEvent { Tourist = this });
     }
 
     private void OnArea2dBodyEntered(Node2D other)

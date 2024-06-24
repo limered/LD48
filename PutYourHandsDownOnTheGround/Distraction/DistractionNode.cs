@@ -15,7 +15,7 @@ public partial class DistractionNode : Node2D
 
 	public override void _Ready()
 	{
-		GetNode<DistractionCollection>("/root/DistractionCollection").Add(this);
+		DistractionCollection.Add(this);
 		var player = GetNode<AnimationPlayer>("Sprite2D/AnimationPlayer");
 		player.SpeedScale = (float)GD.RandRange(0.85, 1.15);
 		player.Play(IdleAnimation);

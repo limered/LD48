@@ -1,35 +1,34 @@
 using System;
 using System.Collections.Generic;
-using Godot;
 
 namespace IsThisATiger2.Empty.Utils;
 
-public partial class EventBus : Node
+public static class EventBus
 {
-    private readonly Dictionary<Type, List<object>> _registrations = new(); 
+    private static readonly Dictionary<Type, List<object>> Registrations = new(); 
     
-    public void Register<T>(Action<T> action) where T : new()
+    public static void Register<T>(Action<T> action) where T : new()
     {
-        if (!_registrations.ContainsKey(typeof(T)))
+        if (!Registrations.ContainsKey(typeof(T)))
         {
-            _registrations.Add(typeof(T), new List<object>());    
+            Registrations.Add(typeof(T), new List<object>());    
         }
-        _registrations[typeof(T)].Add(action);
+        Registrations[typeof(T)].Add(action);
     }
     
-    public void Emit<T>(T emitted)
+    public static void Emit<T>(T emitted)
     {
-        if (!_registrations.ContainsKey(typeof(T))) return;
+        if (!Registrations.ContainsKey(typeof(T))) return;
         
-        foreach (Action<T> action in _registrations[typeof(T)])
+        foreach (Action<T> action in Registrations[typeof(T)])
         {
             action(emitted);
         }
     }
 
-    public void Deregister<T>(Action<T> action)
+    public static void Deregister<T>(Action<T> action)
     {
-        if (!_registrations.ContainsKey(typeof(T))) return;
-        _registrations[typeof(T)].Remove(action);
+        if (!Registrations.ContainsKey(typeof(T))) return;
+        Registrations[typeof(T)].Remove(action);
     }
 }

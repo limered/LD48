@@ -15,11 +15,6 @@ run/main_scene="res://Scenes/universe.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 
-[autoload]
-
-EventBus="*res://Utils/EventBus.cs"
-DistractionCollection="*res://Distraction/DistractionCollection.cs"
-
 [display]
 
 window/size/viewport_width=675

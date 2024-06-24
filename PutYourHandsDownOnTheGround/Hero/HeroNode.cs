@@ -17,7 +17,7 @@ public partial class HeroNode : Node2D
     public override void _Ready()
     {
         _movement = GetNode<MovementNode2D>("Movement");
-        GetNode<EventBus>("/root/EventBus").Register<TouristClickedEvent>(TrackTourist);
+        EventBus.Register<TouristClickedEvent>(TrackTourist);
     }
 
     private void TrackTourist(TouristClickedEvent obj)
