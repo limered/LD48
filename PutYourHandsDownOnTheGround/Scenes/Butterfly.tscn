@@ -48,8 +48,8 @@ WaitingTimeBubble = ExtResource("2_otco0")
 BubbleColor = Color(0, 0.6, 1, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -12.2266)
-scale = Vector2(0.999977, 1)
+position = Vector2(0, -5.29223)
+scale = Vector2(0.983506, 1)
 texture = ExtResource("1_agmfo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
