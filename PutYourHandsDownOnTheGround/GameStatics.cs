@@ -1,10 +1,12 @@
+using Godot;
+
 namespace IsThisATiger2.Empty;
 
 public static class GameStatics
 {
-    public const double InterestCooldown = 5;
+    public static readonly Vector2 InterestCooldown = new(5, 10);
     public const int DistractionDistance = 50;
-    public const float InterestPickingProbability = 0.1f;
+    public const float InterestPickingProbability = 0.01f;
 
     public const float HeroSpeed = 20000;
     public const float TouristIdleSpeed = 5000;

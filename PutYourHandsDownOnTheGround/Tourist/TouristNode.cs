@@ -137,7 +137,7 @@ public partial class TouristNode : Node2D
         _timeSinceLastInterest += dt;
         return CurrentState == TouristState.Idle &&
                _rnd.Randf() < GameStatics.InterestPickingProbability &&
-               _timeSinceLastInterest > GameStatics.InterestCooldown &&
+               _timeSinceLastInterest > _rnd.RandfRange(GameStatics.InterestCooldown.X, GameStatics.InterestCooldown.Y) &&
                !_area2d.GetOverlappingAreas().Any(a => a.Owner is HeroNode);
     }
 
