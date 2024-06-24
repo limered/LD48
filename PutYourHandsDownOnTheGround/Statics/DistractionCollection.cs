@@ -5,15 +5,20 @@ namespace IsThisATiger2.Empty.Distraction;
 
 public static class DistractionCollection 
 {
-    private static readonly List<DistractionNode> Distractions = new();
+    private static List<DistractionNode> _distractions = new();
 
     public static void Add(DistractionNode node)
     {
-        Distractions.Add(node);
+        _distractions.Add(node);
     }
     
     public static DistractionNode RandomDistraction(RandomNumberGenerator rnd)
     {
-        return Distractions[rnd.RandiRange(0, Distractions.Count-1)];
+        return _distractions[rnd.RandiRange(0, _distractions.Count-1)];
+    }
+
+    public static void Reset()
+    {
+        _distractions = new List<DistractionNode>();
     }
 }
