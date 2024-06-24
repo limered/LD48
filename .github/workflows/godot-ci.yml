@@ -28,6 +28,7 @@ jobs:
         run: |
           mkdir -v -p build/windows
           cd $PROJECT_PATH
+          godot --headless --build-solutions --quit
           godot --headless --verbose --export-release "Windows Desktop" ../build/windows/$EXPORT_NAME.exe
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -56,6 +57,7 @@ jobs:
         run: |
           mkdir -v -p build/linux
           cd $PROJECT_PATH
+          godot --headless --build-solutions --quit
           godot --headless --verbose --export-release "Linux/X11" ../build/linux/$EXPORT_NAME.x86_64
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
