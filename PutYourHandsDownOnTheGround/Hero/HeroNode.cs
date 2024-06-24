@@ -7,17 +7,18 @@ namespace IsThisATiger2.Empty.Hero;
 
 public partial class HeroNode : Node2D
 {
-    [Export] public float MovementSpeed = 10000;
-    
     private MovementNode2D _movement;
     private Node2D _targetedTourist;
     private Vector2 _targetVector;
     private bool _touristClicked;
+    private Sprite2D _body;
 
     public override void _Ready()
     {
-        _movement = GetNode<MovementNode2D>("Movement");
+        _movement = GetNode<MovementNode2D>("Movement2D");
         EventBus.Register<TouristClickedEvent>(TrackTourist);
+        
+        
     }
 
     private void TrackTourist(TouristClickedEvent obj)
@@ -34,7 +35,7 @@ public partial class HeroNode : Node2D
             _movement.Stop();
             return;
         }
-        _movement.AddForce(Position.DirectionTo(targetVec) * MovementSpeed);
+        _movement.AddForce(Position.DirectionTo(targetVec) * GameStatics.HeroSpeed);
     }
 
     public override void _Input(InputEvent @event)

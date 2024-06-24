@@ -23,15 +23,14 @@ public partial class TouristNode : Node2D
     private double _timeSinceLastInterest;
 
     [Export] public TouristState CurrentState = TouristState.Idle;
-    [Export] public float IdleSpeed;
     [Export] public TouristConfiguration Images;
 
     public override void _Ready()
     {
         _rnd = new RandomNumberGenerator();
         _movement = GetNode<MovementNode2D>("Movement2D");
-        GetNode<Sprite2D>("head").Texture = Images.Head;
-        GetNode<Sprite2D>("Body").Texture = Images.Body;
+        GetNode<Sprite2D>("SpriteContainer/head").Texture = Images.Head;
+        GetNode<Sprite2D>("SpriteContainer/Body").Texture = Images.Body;
 
         _area2d = GetNode<Area2D>("Area2D");
         _area2d.AreaEntered += OnArea2dBodyEntered;
@@ -120,7 +119,7 @@ public partial class TouristNode : Node2D
     private void GoToAttraction()
     {
         var goToDirection = (_currentDistraction.Position - Position).Normalized();
-        _movement.AddForce(goToDirection * IdleSpeed);
+        _movement.AddForce(goToDirection * GameStatics.TouristDistractionSpeed);
     }
 
     private void PickInterest()
@@ -151,7 +150,7 @@ public partial class TouristNode : Node2D
         }
 
         var goToDirection = (_idlePosition - Position).Normalized();
-        _movement.AddForce(goToDirection * IdleSpeed);
+        _movement.AddForce(goToDirection * GameStatics.TouristIdleSpeed);
         return false;
     }
 

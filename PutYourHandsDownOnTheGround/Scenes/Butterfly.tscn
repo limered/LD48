@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjk73g4u3enh"]
+[gd_scene load_steps=8 format=3 uid="uid://cjk73g4u3enh"]
 
 [ext_resource type="Texture2D" uid="uid://dc5xehht2k0e0" path="res://Graphics/Distractions/butteflyBody.png" id="1_agmfo"]
 [ext_resource type="Script" path="res://Distraction/DistractionNode.cs" id="1_ukadx"]
@@ -32,10 +32,42 @@ tracks/1/keys = {
 "values": [Vector2(0, -30), Vector2(0, 0), Vector2(0, -30)]
 }
 
+[sub_resource type="Animation" id="Animation_3wk7a"]
+resource_name = "flutter_2"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.8, 1),
+"transitions": PackedFloat32Array(20, 0.2, 1, 0.2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.2, 1), Vector2(1, 1), Vector2(0.2, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.8, 1),
+"transitions": PackedFloat32Array(1, 0.2, 1, 0.2, 1),
+"update": 0,
+"values": [Vector2(0, -30), Vector2(0, 0), Vector2(0, -30), Vector2(0, 0), Vector2(0, -30)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7aj6x"]
 _data = {
-"flutter": SubResource("Animation_hxucb")
+"flutter": SubResource("Animation_hxucb"),
+"flutter_2": SubResource("Animation_3wk7a")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0xkpt"]
+radius = 135.093
 
 [node name="Butterfly" type="Node2D" groups=["distraction"]]
 scale = Vector2(0.2, 0.2)
@@ -43,16 +75,21 @@ script = ExtResource("1_ukadx")
 DistractionDuration = 2.0
 IdleAnimation = "flutter"
 WakeAnimation = "flutter"
-KillAnimation = "flutter"
+KillAnimation = "flutter_2"
 WaitingTimeBubble = ExtResource("2_otco0")
 BubbleColor = Color(0, 0.6, 1, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -5.29223)
-scale = Vector2(0.983506, 1)
+position = Vector2(0, -30)
 texture = ExtResource("1_agmfo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_7aj6x")
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -25)
+shape = SubResource("CircleShape2D_0xkpt")

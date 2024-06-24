@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cn8vhtr4voa7g"]
+[gd_scene load_steps=8 format=3 uid="uid://cn8vhtr4voa7g"]
 
 [ext_resource type="Texture2D" uid="uid://c7kkxndvain23" path="res://Graphics/Tourist/head-1.png" id="1_86e4r"]
 [ext_resource type="Script" path="res://Tourist/TouristNode.cs" id="1_a1psb"]
 [ext_resource type="Script" path="res://Physics/MovementNode2D.cs" id="2_5touj"]
 [ext_resource type="Texture2D" uid="uid://6t00ks8ijtji" path="res://Graphics/Tourist/body-1.png" id="2_gqply"]
 [ext_resource type="Resource" uid="uid://oa7l6dux8j5r" path="res://Resources/Tourist/1.1.tres" id="2_nm8o8"]
+[ext_resource type="Script" path="res://Physics/JumpyRunningAnimation.cs" id="4_jx5yr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w3pyi"]
 radius = 60.5
@@ -12,21 +13,24 @@ height = 326.0
 
 [node name="Tourist" type="Node2D"]
 script = ExtResource("1_a1psb")
-IdleSpeed = 5000.0
 Images = ExtResource("2_nm8o8")
 
 [node name="Movement2D" type="Node" parent="."]
 script = ExtResource("2_5touj")
-_damping = 0.05
-_maxSpeed = 2000.0
-_mass = 1.0
+Damping = 0.05
+Mass = 1.0
+MaxSpeed = 5000.0
 
-[node name="head" type="Sprite2D" parent="."]
+[node name="SpriteContainer" type="Node2D" parent="." node_paths=PackedStringArray("Movement")]
+script = ExtResource("4_jx5yr")
+Movement = NodePath("../Movement2D")
+
+[node name="head" type="Sprite2D" parent="SpriteContainer"]
 position = Vector2(-5, -260)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_86e4r")
 
-[node name="Body" type="Sprite2D" parent="."]
+[node name="Body" type="Sprite2D" parent="SpriteContainer"]
 position = Vector2(0, -110)
 texture = ExtResource("2_gqply")
 

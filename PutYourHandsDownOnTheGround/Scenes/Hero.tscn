@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dc1nde2s41a34"]
+[gd_scene load_steps=6 format=3 uid="uid://dc1nde2s41a34"]
 
 [ext_resource type="Script" path="res://Hero/HeroNode.cs" id="1_brmtt"]
 [ext_resource type="Script" path="res://Physics/MovementNode2D.cs" id="1_j2cce"]
 [ext_resource type="Texture2D" uid="uid://bc4rfif8lxsv5" path="res://Graphics/davi.png" id="3_2w1k8"]
+[ext_resource type="Script" path="res://Physics/JumpyRunningAnimation.cs" id="3_p0bje"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h33qp"]
 radius = 23.0
@@ -11,13 +12,19 @@ height = 104.0
 [node name="Hero" type="Node2D"]
 script = ExtResource("1_brmtt")
 
-[node name="Movement" type="Node" parent="."]
+[node name="Movement2D" type="Node" parent="."]
 script = ExtResource("1_j2cce")
-_damping = 0.05
-_maxSpeed = 10000.0
-_mass = 1.0
+Damping = 0.05
+Mass = 1.0
+MaxSpeed = 15000.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Wobble" type="Node2D" parent="." node_paths=PackedStringArray("Movement")]
+script = ExtResource("3_p0bje")
+Movement = NodePath("../Movement2D")
+WobbleFactor = 0.02
+WobbleInterval = 0.02
+
+[node name="Sprite2D" type="Sprite2D" parent="Wobble"]
 position = Vector2(0, -45)
 texture = ExtResource("3_2w1k8")
 
