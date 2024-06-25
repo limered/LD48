@@ -234,7 +234,6 @@ IsDeadly = true
 BubbleColor = Color(1, 0, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 texture = ExtResource("3_xxorr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
@@ -249,11 +248,11 @@ position = Vector2(-50, -33.333)
 texture = ExtResource("4_f4qik")
 
 [node name="WakeHead" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(-46, -73)
 texture = ExtResource("5_038ce")
 
 [node name="Jumping" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(111.288, 38.3288)
 rotation = 0.349066
 texture = ExtResource("6_i6auk")
