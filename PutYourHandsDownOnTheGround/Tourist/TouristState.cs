@@ -10,5 +10,6 @@ public enum TouristState
     ToAttraction,
     ToIdleWithPlayer,
     ToExit,
-    Dead
+    Dead,
+    Poisoned
 }

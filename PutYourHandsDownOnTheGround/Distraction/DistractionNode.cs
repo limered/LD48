@@ -11,6 +11,7 @@ public partial class DistractionNode : Node2D
 	[Export] public Texture2D WaitingTimeBubble;
 	[Export] public Texture2D SpecialBubble;
 	[Export] public bool IsDeadly;
+	[Export] public bool IsSpider;
 	[Export] public Color BubbleColor;
 	private AnimationPlayer _player;
 

@@ -21,6 +21,7 @@ public partial class TouristNode : Node2D
     private RandomNumberGenerator _rnd;
     private Texture2D _skullImage = GD.Load<Texture2D>("res://Graphics/Bubbles/scull.png");
     private double _timeSinceLastInterest;
+    private double _timeToLivePoisoned;
 
     [Export] public TouristState CurrentState = TouristState.Idle;
     [Export] public TouristConfiguration Images;
@@ -58,7 +59,12 @@ public partial class TouristNode : Node2D
                 _distractedTourist.Start(
                     () =>
                     {
-                        if (_currentDistraction.IsDeadly)
+                        if (_currentDistraction.IsSpider)
+                        {
+                            _timeToLivePoisoned = _currentDistraction.DistractionDuration;
+                            CurrentState = TouristState.Poisoned;
+                        }
+                        else if (_currentDistraction.IsDeadly)
                         {
                             _currentDistraction.Kill();
                             CurrentState = TouristState.Dead;
@@ -110,6 +116,14 @@ public partial class TouristNode : Node2D
             case TouristState.Dead:
                 _distractedTourist.SetImage(_skullImage);
                 // show blood
+                break;
+            case TouristState.Poisoned:
+                GoToIdlePosition();
+                _timeToLivePoisoned -= delta;
+                if (_timeToLivePoisoned <= 0)
+                {
+                    CurrentState = TouristState.Dead;
+                }
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -168,17 +182,26 @@ public partial class TouristNode : Node2D
     private void OnArea2dInputEvent(Node viewport, InputEvent @event, int shapeIdx)
     {
         if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left, Pressed: true })
+        {
             EventBus.Emit(new TouristClickedEvent { Tourist = this });
+            if (_area2d.GetOverlappingAreas().Any(a => a.Owner is HeroNode) &&
+                CurrentState is (TouristState.ToAttraction or TouristState.Interacting or TouristState.Poisoned))
+            {
+                _distractedTourist.Abort();
+                CurrentState = TouristState.ToIdleWithPlayer;
+            }
+        }
     }
 
     private void OnArea2dBodyEntered(Node2D other)
     {
-        if (other.Owner is not HeroNode hero ||
-            !hero.TargetsThisTourist(this) ||
-            CurrentState is not (TouristState.ToAttraction or TouristState.Interacting)) return;
-
-        _distractedTourist.Abort();
-        CurrentState = TouristState.ToIdleWithPlayer;
+        if (other.Owner is HeroNode hero &&
+            hero.TargetsThisTourist(this) &&
+            CurrentState is TouristState.ToAttraction or TouristState.Interacting or TouristState.Poisoned)
+        {
+            _distractedTourist.Abort();
+            CurrentState = TouristState.ToIdleWithPlayer;
+        }
     }
 
     private void OnArea2dBodyExited(Node2D other)

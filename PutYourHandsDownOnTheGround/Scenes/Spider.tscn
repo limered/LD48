@@ -95,7 +95,7 @@ WakeAnimation = "nervous"
 KillAnimation = "attack"
 WaitingTimeBubble = ExtResource("2_uu1iq")
 SpecialBubble = ExtResource("2_uu1iq")
-IsDeadly = true
+IsSpider = true
 BubbleColor = Color(0, 1, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
