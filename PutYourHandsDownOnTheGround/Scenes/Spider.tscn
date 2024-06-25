@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://qi3ex8b6ture"]
+
+[ext_resource type="Texture2D" uid="uid://cgkjt5yw5e2i4" path="res://Graphics/Distractions/spiderBody.png" id="1_82po8"]
+[ext_resource type="Script" path="res://Distraction/DistractionNode.cs" id="1_gwhgs"]
+[ext_resource type="Texture2D" uid="uid://ck1r1t5precar" path="res://Graphics/Bubbles/spider.png" id="2_uu1iq"]
+
+[sub_resource type="Animation" id="Animation_xes20"]
+resource_name = "idle"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2, 2.5, 3.8),
+"transitions": PackedFloat32Array(0.420448, 2.73208, 0.420448, 2.63901),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-16, -10), Vector2(0, 0), Vector2(24, -14)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2, 2.5, 3.8),
+"transitions": PackedFloat32Array(0.420448, 2.73208, 0.420448, 2.63901),
+"update": 0,
+"values": [-0.117767, 0.0706623, -0.0913373, -0.250397]
+}
+
+[sub_resource type="Animation" id="Animation_435yr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(4.92458),
+"update": 0,
+"values": [Vector2(-34, -12)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_13vct"]
+_data = {
+"RESET": SubResource("Animation_435yr"),
+"idle": SubResource("Animation_xes20")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xyiy6"]
+radius = 320.0
+
+[node name="Spider" type="Node2D"]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_gwhgs")
+DistractionDuration = 4.0
+IdleAnimation = "idle"
+WakeAnimation = "idle"
+KillAnimation = "idle"
+WaitingTimeBubble = ExtResource("2_uu1iq")
+SpecialBubble = ExtResource("2_uu1iq")
+IsDeadly = true
+BubbleColor = Color(0, 1, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-34, -12)
+rotation = 0.0183723
+texture = ExtResource("1_82po8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_13vct")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_xyiy6")

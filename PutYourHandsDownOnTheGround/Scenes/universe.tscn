@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqtyldf3e0n8d"]
+[gd_scene load_steps=6 format=3 uid="uid://bqtyldf3e0n8d"]
 
 [ext_resource type="PackedScene" uid="uid://cn8vhtr4voa7g" path="res://Scenes/tourist.tscn" id="1_rvijl"]
 [ext_resource type="PackedScene" uid="uid://dc1nde2s41a34" path="res://Scenes/Hero.tscn" id="3_sqqph"]
 [ext_resource type="PackedScene" uid="uid://cjk73g4u3enh" path="res://Scenes/Butterfly.tscn" id="4_c2e7n"]
+[ext_resource type="PackedScene" uid="uid://qi3ex8b6ture" path="res://Scenes/Spider.tscn" id="5_taefx"]
 [ext_resource type="PackedScene" uid="uid://o1dpkera54d7" path="res://Scenes/Tiger.tscn" id="6_vuf1x"]
 
 [node name="Node2D" type="Node2D"]
@@ -36,3 +37,6 @@ position = Vector2(176, -92)
 
 [node name="Butterfly2" parent="." instance=ExtResource("4_c2e7n")]
 position = Vector2(-184, -93)
+
+[node name="Spider" parent="." instance=ExtResource("5_taefx")]
+position = Vector2(71, -227)
