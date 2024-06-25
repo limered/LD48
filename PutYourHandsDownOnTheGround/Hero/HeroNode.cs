@@ -17,8 +17,6 @@ public partial class HeroNode : Node2D
     {
         _movement = GetNode<MovementNode2D>("Movement2D");
         EventBus.Register<TouristClickedEvent>(TrackTourist);
-        
-        
     }
 
     private void TrackTourist(TouristClickedEvent obj)
