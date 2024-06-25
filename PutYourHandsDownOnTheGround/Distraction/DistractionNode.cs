@@ -40,6 +40,6 @@ public partial class DistractionNode : Node2D
 	public void Kill()
 	{
 		_player.Play(KillAnimation);
-		_player.Play(IdleAnimation, 0.1D);
+		_player.Play(IdleAnimation, 0.8D);
 	}
 }

@@ -10,6 +10,7 @@
 
 [sub_resource type="Animation" id="Animation_co7xo"]
 resource_name = "attack"
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -17,10 +18,10 @@ tracks/0/path = NodePath("../Sprite2D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [true, false, false]
+"values": [true, false, false, true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -29,7 +30,7 @@ tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, false]
@@ -41,10 +42,10 @@ tracks/2/path = NodePath("../WakeHead:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [true, false, false]
+"values": [true, false, false, true]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -53,7 +54,7 @@ tracks/3/path = NodePath("../WakeHead:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-46, -73), Vector2(-46, -73)]
@@ -65,10 +66,10 @@ tracks/4/path = NodePath("../Jumping:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.2, 1),
-"transitions": PackedFloat32Array(0.233259, 0.318639),
+"times": PackedFloat32Array(0.1, 0.7),
+"transitions": PackedFloat32Array(0.164939, 0.318639),
 "update": 0,
-"values": [-0.311496, 0.132286]
+"values": [0.349066, -0.349066]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -77,10 +78,10 @@ tracks/5/path = NodePath("../Jumping:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.2, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [false, true, true]
+"values": [false, true, true, false]
 }
 
 [sub_resource type="Animation" id="Animation_hu8yg"]
@@ -253,7 +254,7 @@ texture = ExtResource("5_038ce")
 [node name="Jumping" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(111.288, 38.3288)
-rotation = -0.311496
+rotation = 0.349066
 texture = ExtResource("6_i6auk")
 offset = Vector2(-143.449, -145.986)
 
