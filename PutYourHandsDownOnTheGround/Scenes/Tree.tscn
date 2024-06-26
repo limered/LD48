@@ -1,0 +1,10 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfuo8wux5ecuj"]
+
+[ext_resource type="Script" path="res://Plants/TreeNode.cs" id="1_w7dhy"]
+[ext_resource type="Texture2D" uid="uid://cg5qk3ni2qyu3" path="res://Plants/Graphics/tree01.png" id="2_nvv33"]
+[ext_resource type="Texture2D" uid="uid://ba8va1j0bnqjh" path="res://Plants/Graphics/tree02.png" id="3_4xls0"]
+[ext_resource type="Texture2D" uid="uid://bx0bwflcxjijq" path="res://Plants/Graphics/tree03.png" id="4_hsv65"]
+
+[node name="Tree" type="Sprite2D"]
+script = ExtResource("1_w7dhy")
+Trees = Array[Texture2D]([ExtResource("2_nvv33"), ExtResource("3_4xls0"), ExtResource("4_hsv65")])
