@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=3 uid="uid://bd1pdlscvjwm4"]
+
+[ext_resource type="Texture2D" uid="uid://b47hdo3oraa80" path="res://Graphics/Ground/boden-1.png" id="1_36uns"]
+[ext_resource type="Texture2D" uid="uid://nufunckw3mhj" path="res://Graphics/Ground/levelboundary.png" id="2_yscn4"]
+[ext_resource type="PackedScene" uid="uid://bfuo8wux5ecuj" path="res://Scenes/Tree.tscn" id="3_mcpjr"]
+[ext_resource type="Shader" path="res://Shader/Tree.gdshader" id="4_fbfy2"]
+[ext_resource type="Texture2D" uid="uid://chj63xuixkq8i" path="res://Graphics/Plants/tree03.png" id="4_vbqv4"]
+[ext_resource type="PackedScene" uid="uid://o1dpkera54d7" path="res://Scenes/Tiger.tscn" id="6_b74yy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_atvs5"]
+resource_local_to_scene = true
+shader = ExtResource("4_fbfy2")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.5
+shader_parameter/maxStrength = 0.1
+shader_parameter/strenghtScale = 100.0
+shader_parameter/interval = 5.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kpcpt"]
+resource_local_to_scene = true
+shader = ExtResource("4_fbfy2")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.5
+shader_parameter/maxStrength = 0.1
+shader_parameter/strenghtScale = 100.0
+shader_parameter/interval = 5.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3rtc6"]
+resource_local_to_scene = true
+shader = ExtResource("4_fbfy2")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.5
+shader_parameter/maxStrength = 0.1
+shader_parameter/strenghtScale = 100.0
+shader_parameter/interval = 5.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.5
+
+[node name="Room" type="Node2D"]
+
+[node name="Ground" type="Sprite2D" parent="."]
+position = Vector2(336, 452.625)
+scale = Vector2(0.769445, 0.942448)
+texture = ExtResource("1_36uns")
+
+[node name="BoundryRight" type="Sprite2D" parent="."]
+position = Vector2(629, 451)
+rotation = 1.5708
+scale = Vector2(0.453364, 0.45)
+texture = ExtResource("2_yscn4")
+
+[node name="BoundryLeft" type="Sprite2D" parent="."]
+position = Vector2(46.7492, 448.509)
+rotation = -1.5708
+scale = Vector2(0.451901, 0.451901)
+texture = ExtResource("2_yscn4")
+
+[node name="Trees" type="Node" parent="."]
+
+[node name="Tree" parent="Trees" instance=ExtResource("3_mcpjr")]
+material = SubResource("ShaderMaterial_atvs5")
+position = Vector2(75, 152)
+rotation = 0.561104
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree2" parent="Trees" instance=ExtResource("3_mcpjr")]
+material = SubResource("ShaderMaterial_kpcpt")
+position = Vector2(187, 918)
+rotation = 0.0210711
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_vbqv4")
+
+[node name="Tree3" parent="Trees" instance=ExtResource("3_mcpjr")]
+material = SubResource("ShaderMaterial_3rtc6")
+position = Vector2(617, 648)
+rotation = -0.384652
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_vbqv4")
+
+[node name="Grasses" type="Node" parent="."]
+
+[node name="Bushes" type="Node" parent="."]
+
+[node name="Distractions" type="Node" parent="."]
+
+[node name="Tiger" parent="Distractions" instance=ExtResource("6_b74yy")]
+position = Vector2(214, 186)
