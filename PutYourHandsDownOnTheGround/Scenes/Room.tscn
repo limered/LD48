@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://bd1pdlscvjwm4"]
+[gd_scene load_steps=12 format=3 uid="uid://bd1pdlscvjwm4"]
 
 [ext_resource type="Texture2D" uid="uid://b47hdo3oraa80" path="res://Graphics/Ground/boden-1.png" id="1_36uns"]
 [ext_resource type="Texture2D" uid="uid://nufunckw3mhj" path="res://Graphics/Ground/levelboundary.png" id="2_yscn4"]
 [ext_resource type="PackedScene" uid="uid://bfuo8wux5ecuj" path="res://Scenes/Tree.tscn" id="3_mcpjr"]
 [ext_resource type="Shader" path="res://Shader/Tree.gdshader" id="4_fbfy2"]
 [ext_resource type="Texture2D" uid="uid://chj63xuixkq8i" path="res://Graphics/Plants/tree03.png" id="4_vbqv4"]
+[ext_resource type="PackedScene" uid="uid://diu4prejhjtki" path="res://Scenes/Bush.tscn" id="6_4bsj3"]
 [ext_resource type="PackedScene" uid="uid://o1dpkera54d7" path="res://Scenes/Tiger.tscn" id="6_b74yy"]
+[ext_resource type="Texture2D" uid="uid://bc1gv04q7fp00" path="res://Graphics/Plants/bush03.png" id="7_ctd1t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_atvs5"]
 resource_local_to_scene = true
@@ -90,6 +92,32 @@ texture = ExtResource("4_vbqv4")
 [node name="Grasses" type="Node" parent="."]
 
 [node name="Bushes" type="Node" parent="."]
+
+[node name="Bush" parent="Bushes" instance=ExtResource("6_4bsj3")]
+position = Vector2(574.99, 677.617)
+rotation = -0.245039
+scale = Vector2(0.597866, 0.597866)
+
+[node name="Bush2" parent="Bushes" instance=ExtResource("6_4bsj3")]
+position = Vector2(515, 671)
+rotation = 0.235493
+scale = Vector2(0.467007, 0.517059)
+
+[node name="Bush3" parent="Bushes" instance=ExtResource("6_4bsj3")]
+position = Vector2(559, 623)
+rotation = 0.297189
+scale = Vector2(0.345358, 0.345358)
+
+[node name="Bush4" parent="Bushes" instance=ExtResource("6_4bsj3")]
+position = Vector2(86, 191)
+rotation = 0.3844
+scale = Vector2(0.339505, 0.339505)
+
+[node name="Bush5" parent="Bushes" instance=ExtResource("6_4bsj3")]
+position = Vector2(366, 767)
+rotation = 0.0502067
+scale = Vector2(0.36735, 0.36735)
+texture = ExtResource("7_ctd1t")
 
 [node name="Distractions" type="Node" parent="."]
 
