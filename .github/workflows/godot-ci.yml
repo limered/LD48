@@ -6,6 +6,7 @@ env:
   PROJECT_PATH: PutYourHandsDownOnTheGround
   ITCH_USERNAME: limered
   ITCH_GAME_ID: is-this-a-tiger-v2
+  ITCH_PROJECT: limered/is-this-a-tiger-v2
 
 jobs:
   export-windows:
@@ -55,13 +56,19 @@ jobs:
           godot --headless --export-release "Windows Desktop" "builds\${{ env.EXPORT_NAME }}.exe" --quit || exit 0
       
       - name: Upload to Itch
-        uses: KikimoraGames/itch-publish@v0.0.3
+        uses: robpc/itchio-upload-action@v1
         with:
-          butlerApiKey: ${{secrets.BUTLER_API_KEY}}
-          gameData: ./builds/${{ env.EXPORT_NAME }}.exe
-          itchUsername: ${{env.ITCH_USERNAME}}
-          itchGameId: ${{ env.ITCH_GAME_ID }}
-          buildChannel: windows
+          path: ${{ env.PROJECT_PATH }}/builds/${{ env.EXPORT_NAME }}.exe
+          project: ${{ env.ITCH_PROJECT }}
+          channel: windows
+          api-key: ${{ secrets.BUTLER_API_KEY }}
+#        uses: KikimoraGames/itch-publish@v0.0.3
+#        with:
+#          butlerApiKey: ${{secrets.BUTLER_API_KEY}}
+#          gameData: ./builds/${{ env.EXPORT_NAME }}.exe
+#          itchUsername: ${{env.ITCH_USERNAME}}
+#          itchGameId: ${{ env.ITCH_GAME_ID }}
+#          buildChannel: windows
 
 #      - name: Upload Artifact
 #        uses: actions/upload-artifact@v4
