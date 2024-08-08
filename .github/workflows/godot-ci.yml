@@ -56,7 +56,7 @@ jobs:
       
       - name: Upload to Itch
         uses: KikimoraGames/itch-publish@v0.0.3
-        width:
+        with:
           butlerApiKey: ${{secrets.BUTLER_API_KEY}}
           gameData: ./builds/${{ env.EXPORT_NAME }}.exe
           itchUsername: ${{env.ITCH_USERNAME}}
