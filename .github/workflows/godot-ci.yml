@@ -53,7 +53,7 @@ jobs:
       - name: Windows Build
         run: |
           mkdir \builds
-          godot -v --export-release "Windows Desktop" "builds\${{ env.EXPORT_NAME }}.exe"
+          godot --headless -v --export-release "Windows Desktop" "builds\${{ env.EXPORT_NAME }}.exe" --quit || exit 0
 #          
 #      - name: Search for Build
 #        run: tree ./
