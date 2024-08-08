@@ -43,7 +43,6 @@ jobs:
 
       - name: 🧑‍🔬 Generate .NET Bindings
         run: |
-          cd ${{ env.PROJECT_PATH }}
           godot --headless --build-solutions --quit || exit 0
 
       - name: 🦺 Build Projects
