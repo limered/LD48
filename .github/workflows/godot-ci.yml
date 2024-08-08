@@ -20,7 +20,7 @@ jobs:
           
       - name: 📦 Restore Dependencies
         run: |
-          cd PutYourHandsDownOnTheGround
+          cd ${{ env.PROJECT_PATH }}
           dotnet restore
 
       - name: 🤖 Setup Godot
@@ -43,10 +43,12 @@ jobs:
         run: godot --headless --build-solutions --quit || exit 0
 
       - name: 🦺 Build Projects
-        run: dotnet build
+        run: |
+          cd ${{ env.PROJECT_PATH }}
+          dotnet build
       
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows
-          path: build/
+          path: ${{ env.PROJECT_PATH }}\build\
