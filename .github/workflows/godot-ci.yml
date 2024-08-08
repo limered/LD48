@@ -51,9 +51,9 @@ jobs:
           
       - name: Windows Build
         run: |
-          New-Item ${{ env.PROJECT_PATH }}\build\windows -ItemType Directory -ea 0
+          New-Item ${{ env.PROJECT_PATH }}\builds -ItemType Directory -ea 0
           cd ${{ env.PROJECT_PATH }}
-          godot --headless --verbose --export-release "Windows Desktop"
+          godot --export-release "Windows Desktop" "build\${{ env.EXPORT_NAME }}.exe"
           
 #      - name: Search for Build
 #        run: tree ${{ env.PROJECT_PATH }}
