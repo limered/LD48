@@ -19,7 +19,9 @@ jobs:
         name: 💽 Setup .NET SDK
           
       - name: 📦 Restore Dependencies
-        run: dotnet restore
+        run: |
+          cd PutYourHandsDownOnTheGround
+          dotnet restore
 
       - name: 🤖 Setup Godot
         uses: chickensoft-games/setup-godot@v2.1.1
