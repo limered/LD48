@@ -4,6 +4,8 @@ env:
   GODOT_VERSION: 4.2.2
   EXPORT_NAME: is-this-a-tiger
   PROJECT_PATH: PutYourHandsDownOnTheGround
+  ITCH_USERNAME: limered
+  ITCH_GAME_ID: is-this-a-tiger-v2
 
 jobs:
   export-windows:
@@ -30,11 +32,8 @@ jobs:
         uses: chickensoft-games/setup-godot@v2.1.1
         with:
           # Version must include major, minor, and patch, and be >= 4.0.0
-          # Pre-release label is optional.
-          version: ${{ env.GODOT_VERSION }} # also valid: 4.0.0.rc1 or 4.0.0, etc
-          # Use .NET-enabled version of Godot (the default is also true).
+          version: ${{ env.GODOT_VERSION }}
           use-dotnet: true
-          # Include the Godot Export Templtes (the default is false).
           include-templates: true
 
       - name: 🔬 Verify Setup
@@ -53,14 +52,19 @@ jobs:
       - name: Windows Build
         run: |
           mkdir \builds
-          godot --headless -v --export-release "Windows Desktop" "builds\${{ env.EXPORT_NAME }}.exe" --quit || exit 0
-#          
-#      - name: Search for Build
-#        run: tree ./
-#      
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows
-          path: ${{ env.PROJECT_PATH }}\builds\
- 
+          godot --headless --export-release "Windows Desktop" "builds\${{ env.EXPORT_NAME }}.exe" --quit || exit 0
+      
+      - name: Upload to Itch
+        uses: KikimoraGames/itch-publish@v0.0.3
+        width:
+          butlerApiKey: ${{secrets.BUTLER_API_KEY}}
+          gameData: ./builds/${{ env.EXPORT_NAME }}.exe
+          itchUsername: ${{env.ITCH_USERNAME}}
+          itchGameId: ${{ env.ITCH_GAME_ID }}
+          buildChannel: windows
+
+#      - name: Upload Artifact
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: windows
+#          path: ${{ env.PROJECT_PATH }}\builds\${{ env.EXPORT_NAME }}.exe
