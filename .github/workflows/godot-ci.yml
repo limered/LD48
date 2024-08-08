@@ -59,10 +59,10 @@ jobs:
         uses: Ayowel/butler-to-itch@v1
         with:
           butler_key: ${{ secrets.BUTLER_API_KEY }}
-          itch_user: ${{env.ITCH_USERNAME}}
+          itch_user: ${{ env.ITCH_USERNAME }}
           itch_game: ${{ env.ITCH_GAME_ID }}
           files: |
-            ${{ PROJECT_PATH }}/builds/${{ env.EXPORT_NAME }}.exe
+            ${{ env.PROJECT_PATH }}/builds/${{ env.EXPORT_NAME }}.exe
 #        uses: KikimoraGames/itch-publish@v0.0.3
 #        with:
 #          butlerApiKey: ${{secrets.BUTLER_API_KEY}}
