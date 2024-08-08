@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://diu4prejhjtki"]
+
+[ext_resource type="Texture2D" uid="uid://c8hwqbfp7y7xw" path="res://Graphics/Plants/bush01.png" id="1_41mpw"]
+
+[node name="Node2D" type="Sprite2D"]
+texture = ExtResource("1_41mpw")
+offset = Vector2(0, -96.36)
