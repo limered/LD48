@@ -53,7 +53,7 @@ jobs:
         run: |
           New-Item ${{ env.PROJECT_PATH }}\build\windows -ItemType Directory -ea 0
           cd ${{ env.PROJECT_PATH }}
-          godot --headless --verbose --export-release "Windows Desktop" .\build\windows\${{ env.EXPORT_NAME }}.exe
+          godot --headless --verbose --export-release "Windows Desktop"
           
 #      - name: Search for Build
 #        run: tree ${{ env.PROJECT_PATH }}
@@ -62,5 +62,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: windows
-          path: ${{ env.PROJECT_PATH }}\build\windows
+          path: ${{ env.PROJECT_PATH }}\build\
  

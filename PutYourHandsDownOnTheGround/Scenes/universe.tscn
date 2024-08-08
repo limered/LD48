@@ -1,10 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqtyldf3e0n8d"]
+[gd_scene load_steps=8 format=3 uid="uid://bqtyldf3e0n8d"]
 
 [ext_resource type="PackedScene" uid="uid://cn8vhtr4voa7g" path="res://Scenes/tourist.tscn" id="1_rvijl"]
 [ext_resource type="PackedScene" uid="uid://dc1nde2s41a34" path="res://Scenes/Hero.tscn" id="3_sqqph"]
 [ext_resource type="PackedScene" uid="uid://bfuo8wux5ecuj" path="res://Scenes/Tree.tscn" id="5_480ei"]
 [ext_resource type="PackedScene" uid="uid://qi3ex8b6ture" path="res://Scenes/Spider.tscn" id="5_taefx"]
 [ext_resource type="PackedScene" uid="uid://o1dpkera54d7" path="res://Scenes/Tiger.tscn" id="6_vuf1x"]
+[ext_resource type="Shader" path="res://Shader/Tree.gdshader" id="6_xp0vb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7pdw"]
+resource_local_to_scene = true
+shader = ExtResource("6_xp0vb")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.5
+shader_parameter/maxStrength = 0.1
+shader_parameter/strenghtScale = 100.0
+shader_parameter/interval = 5.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
 
 [node name="Node2D" type="Node2D"]
 
@@ -44,4 +58,5 @@ position = Vector2(28, -106)
 rotation = 2.98353
 
 [node name="Tree" parent="." instance=ExtResource("5_480ei")]
+material = SubResource("ShaderMaterial_s7pdw")
 position = Vector2(203, -90)
