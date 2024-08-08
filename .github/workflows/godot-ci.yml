@@ -9,6 +9,9 @@ jobs:
   export-windows:
     name: Windows Export
     runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ${{ env.PROJECT_PATH }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,7 +23,6 @@ jobs:
           
       - name: 📦 Restore Dependencies
         run: |
-          cd ${{ env.PROJECT_PATH }}
           dotnet restore
 
       - name: 🤖 Setup Godot
@@ -46,17 +48,15 @@ jobs:
 
       - name: 🦺 Build Projects
         run: |
-          cd ${{ env.PROJECT_PATH }}
           dotnet build
           
       - name: Windows Build
         run: |
           New-Item ${{ env.PROJECT_PATH }}\builds -ItemType Directory
-          cd ${{ env.PROJECT_PATH }}
           godot --export-release "Windows Desktop" "builds\${{ env.EXPORT_NAME }}.exe"
           
-#      - name: Search for Build
-#        run: tree ${{ env.PROJECT_PATH }}
+      - name: Search for Build
+        run: tree ${{ env.PROJECT_PATH }}
       
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
