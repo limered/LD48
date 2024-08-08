@@ -49,18 +49,18 @@ jobs:
       - name: 🦺 Build Projects
         run: |
           dotnet build
-#          
-#      - name: Windows Build
-#        run: |
-#          New-Item "./builds" -ItemType Directory
-#          godot -v --export-release "Windows Desktop" "builds/${{ env.EXPORT_NAME }}.exe"
+
+      - name: Windows Build
+        run: |
+          mkdir \builds
+          godot -v --export-release "Windows Desktop" "builds\${{ env.EXPORT_NAME }}.exe"
 #          
 #      - name: Search for Build
 #        run: tree ./
 #      
-#      - name: Upload Artifact
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: windows
-#          path: ${{ env.PROJECT_PATH }}\builds\
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: ${{ env.PROJECT_PATH }}\builds\
  
