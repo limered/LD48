@@ -28,7 +28,7 @@ jobs:
         with:
           # Version must include major, minor, and patch, and be >= 4.0.0
           # Pre-release label is optional.
-          version: 4.2.2 # also valid: 4.0.0.rc1 or 4.0.0, etc
+          version: ${{ env.GODOT_VERSION }} # also valid: 4.0.0.rc1 or 4.0.0, etc
           # Use .NET-enabled version of Godot (the default is also true).
           use-dotnet: true
           # Include the Godot Export Templtes (the default is false).
@@ -40,18 +40,27 @@ jobs:
           godot --version
 
       - name: 🧑‍🔬 Generate .NET Bindings
-        run: godot --headless --build-solutions --quit || exit 0
+        run: |
+          cd ${{ env.PROJECT_PATH }}
+          godot --headless --build-solutions --quit || exit 0
 
       - name: 🦺 Build Projects
         run: |
           cd ${{ env.PROJECT_PATH }}
           dotnet build
           
-      - name: Search for Build
-        run: tree ${{ env.PROJECT_PATH }}
+      - name: Windows Build
+        run: |
+          mkdir -v -p build/windows
+          cd ${{ env.PROJECT_PATH }}
+          godot --headless --verbose --export-release "Windows Desktop" ../build/windows/${{ env.EXPORT_NAME }}.exe --quit || exit 0
+          
+#      - name: Search for Build
+#        run: tree ${{ env.PROJECT_PATH }}
       
-#      - name: Upload Artifact
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: windows
-#          path: ${{ env.PROJECT_PATH }}\build\
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: ${{ env.PROJECT_PATH }}\build\windows
+ 
