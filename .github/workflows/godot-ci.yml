@@ -53,7 +53,7 @@ jobs:
         run: |
           New-Item ${{ env.PROJECT_PATH }}\build\windows -ItemType Directory -ea 0
           cd ${{ env.PROJECT_PATH }}
-          godot --headless --verbose --export-release "Windows Desktop" .\build\windows\${{ env.EXPORT_NAME }}.exe --quit || exit 0
+          godot --headless --verbose --export-release "Windows Desktop" .\build\windows\${{ env.EXPORT_NAME }}.exe
           
 #      - name: Search for Build
 #        run: tree ${{ env.PROJECT_PATH }}
