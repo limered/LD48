@@ -39,11 +39,11 @@ jobs:
       - name: 🔬 Verify Setup
         run: |
           dotnet --version
-          $ "C:\Users\runneradmin\godot\Godot_v4.2.2-stable_mono_win64\Godot_v4.2.2-stable_mono_win64_console.exe" --version
+          "C:\Users\runneradmin\godot\Godot_v4.2.2-stable_mono_win64\Godot_v4.2.2-stable_mono_win64_console.exe" --version
 
       - name: 🧑‍🔬 Generate .NET Bindings
         run: |
-          $ "C:\Users\runneradmin\godot\Godot_v4.2.2-stable_mono_win64\Godot_v4.2.2-stable_mono_win64_console.exe" --headless --build-solutions --quit || exit 0
+          "C:\Users\runneradmin\godot\Godot_v4.2.2-stable_mono_win64\Godot_v4.2.2-stable_mono_win64_console.exe" --headless --build-solutions --quit || exit 0
 
       - name: 🦺 Build Projects
         run: |
@@ -52,7 +52,7 @@ jobs:
       - name: Windows Build
         run: |
           New-Item "./builds" -ItemType Directory
-          $ "C:\Users\runneradmin\godot\Godot_v4.2.2-stable_mono_win64\Godot_v4.2.2-stable_mono_win64_console.exe" -v --export-release "Windows Desktop" "builds/${{ env.EXPORT_NAME }}.exe"
+          "C:\Users\runneradmin\godot\Godot_v4.2.2-stable_mono_win64\Godot_v4.2.2-stable_mono_win64_console.exe" -v --export-release "Windows Desktop" "builds/${{ env.EXPORT_NAME }}.exe"
           
       - name: Search for Build
         run: tree ./
