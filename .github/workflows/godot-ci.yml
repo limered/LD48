@@ -64,7 +64,7 @@ jobs:
       - name: Windows Build
         run: |
           mkdir \builds
-          godot --headless --export-release "${{ matrix.template }} "builds\${{ matrix.name }}${{ matrix.extension }}" --quit || exit 0
+          godot --headless --export-release "${{ matrix.template }}" "builds\${{ matrix.name }}${{ matrix.extension }}" --quit || exit 0
       
 #      - name: Upload to Itch
 #        uses: Ayowel/butler-to-itch@v1
