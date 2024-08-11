@@ -34,13 +34,13 @@ jobs:
           lfs: true
 
       - uses: actions/setup-dotnet@v4
-        name: 💽 Setup .NET SDK
+        name: Setup .NET SDK
           
-      - name: 📦 Restore Dependencies
+      - name: Restore Dependencies
         run: |
           dotnet restore
 
-      - name: 🤖 Setup Godot
+      - name: Setup Godot
         uses: chickensoft-games/setup-godot@v2.1.1
         with:
           # Version must include major, minor, and patch, and be >= 4.0.0
@@ -48,29 +48,29 @@ jobs:
           use-dotnet: true
           include-templates: true
 
-      - name: 🔬 Verify Setup
+      - name: Verify Setup
         run: |
           dotnet --version
           godot --version
 
-      - name: 🧑‍🔬 Generate .NET Bindings
+      - name: Generate .NET Bindings
         run: |
           godot --headless --build-solutions --quit || exit 0
 
-      - name: 🦺 Build Projects
+      - name: Build Projects
         run: |
           dotnet build
 
-      - name: Windows Build
+      - name: ${{ matrix.template }} Build
         run: |
           mkdir \builds
           godot --headless --export-release "${{ matrix.template }}" "builds\${{ matrix.name }}${{ matrix.extension }}" --quit || exit 0
       
-#      - name: Upload to Itch
-#        uses: Ayowel/butler-to-itch@v1
-#        with:
-#          butler_key: ${{ secrets.BUTLER_API_KEY }}
-#          itch_user: ${{ env.ITCH_USERNAME }}
-#          itch_game: ${{ env.ITCH_GAME_ID }}
-#          files: |
-#            ${{ env.PROJECT_PATH }}/builds/${{ env.EXPORT_NAME }}.exe
+      - name: Upload to Itch
+        uses: Ayowel/butler-to-itch@v1
+        with:
+          butler_key: ${{ secrets.BUTLER_API_KEY }}
+          itch_user: ${{ env.ITCH_USERNAME }}
+          itch_game: ${{ env.ITCH_GAME_ID }}
+          files: |
+            ${{ env.PROJECT_PATH }}/builds/${{ matrix.name }}${{ matrix.extension }}
