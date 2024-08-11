@@ -43,7 +43,6 @@ jobs:
       - name: Setup Godot
         uses: chickensoft-games/setup-godot@v2.1.1
         with:
-          # Version must include major, minor, and patch, and be >= 4.0.0
           version: ${{ env.GODOT_VERSION }}
           use-dotnet: true
           include-templates: true
