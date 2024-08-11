@@ -2,7 +2,6 @@ name: "godot-ci export"
 on: push
 env:
   GODOT_VERSION: 4.2.2
-  EXPORT_NAME: is-this-a-tiger-v2-win
   PROJECT_PATH: PutYourHandsDownOnTheGround
   ITCH_USERNAME: limered
   ITCH_GAME_ID: is-this-a-tiger-v2
@@ -10,8 +9,20 @@ env:
 
 jobs:
   export-windows:
-    name: Windows Export
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        include:
+          - os: windows-latest
+            template: Windows
+            extension: .exe
+            name: is-this-a-tiger-v2-win
+          - os: ubuntu-latest
+            template: Linux
+            extension: .x86_64
+            name: is-this-a-tiger-v2-linux
+    name: Export ${{ matrix.template }}
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: ${{ env.PROJECT_PATH }}
@@ -53,13 +64,13 @@ jobs:
       - name: Windows Build
         run: |
           mkdir \builds
-          godot --headless --export-release "Windows Desktop" "builds\${{ env.EXPORT_NAME }}.exe" --quit || exit 0
+          godot --headless --export-release "${{ matrix.template }} "builds\${{ matrix.name }}${{ matrix.extension }}" --quit || exit 0
       
-      - name: Upload to Itch
-        uses: Ayowel/butler-to-itch@v1
-        with:
-          butler_key: ${{ secrets.BUTLER_API_KEY }}
-          itch_user: ${{ env.ITCH_USERNAME }}
-          itch_game: ${{ env.ITCH_GAME_ID }}
-          files: |
-            ${{ env.PROJECT_PATH }}/builds/${{ env.EXPORT_NAME }}.exe
+#      - name: Upload to Itch
+#        uses: Ayowel/butler-to-itch@v1
+#        with:
+#          butler_key: ${{ secrets.BUTLER_API_KEY }}
+#          itch_user: ${{ env.ITCH_USERNAME }}
+#          itch_game: ${{ env.ITCH_GAME_ID }}
+#          files: |
+#            ${{ env.PROJECT_PATH }}/builds/${{ env.EXPORT_NAME }}.exe
