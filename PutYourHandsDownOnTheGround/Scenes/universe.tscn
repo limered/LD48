@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://bqtyldf3e0n8d"]
 
-[ext_resource type="PackedScene" uid="uid://cn8vhtr4voa7g" path="res://Scenes/tourist.tscn" id="1_rvijl"]
 [ext_resource type="PackedScene" uid="uid://dc1nde2s41a34" path="res://Scenes/Hero.tscn" id="3_sqqph"]
 [ext_resource type="PackedScene" uid="uid://bfuo8wux5ecuj" path="res://Scenes/Tree.tscn" id="5_480ei"]
 [ext_resource type="PackedScene" uid="uid://qi3ex8b6ture" path="res://Scenes/Spider.tscn" id="5_taefx"]
+[ext_resource type="PackedScene" uid="uid://dfsw8ia7h8j78" path="res://Scenes/TouristSpawner.tscn" id="6_jicrn"]
 [ext_resource type="PackedScene" uid="uid://o1dpkera54d7" path="res://Scenes/Tiger.tscn" id="6_vuf1x"]
 [ext_resource type="Shader" path="res://Shader/Tree.gdshader" id="6_xp0vb"]
 
@@ -21,18 +21,6 @@ shader_parameter/heightOffset = 0.0
 shader_parameter/offset = 0.0
 
 [node name="Node2D" type="Node2D"]
-
-[node name="Tourist" parent="." instance=ExtResource("1_rvijl")]
-position = Vector2(1, 116)
-scale = Vector2(0.3, 0.3)
-
-[node name="Tourist2" parent="." instance=ExtResource("1_rvijl")]
-position = Vector2(-156, 112)
-scale = Vector2(0.3, 0.3)
-
-[node name="Tourist3" parent="." instance=ExtResource("1_rvijl")]
-position = Vector2(90, 103)
-scale = Vector2(0.3, 0.3)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 editor_draw_limits = true
@@ -60,3 +48,6 @@ rotation = 2.98353
 [node name="Tree" parent="." instance=ExtResource("5_480ei")]
 material = SubResource("ShaderMaterial_s7pdw")
 position = Vector2(203, -90)
+
+[node name="TouristGroup" parent="." instance=ExtResource("6_jicrn")]
+position = Vector2(-1, -340)

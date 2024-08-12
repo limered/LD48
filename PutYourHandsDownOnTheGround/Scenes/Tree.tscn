@@ -20,4 +20,3 @@ shader_parameter/offset = 0.0
 material = SubResource("ShaderMaterial_6pxmj")
 position = Vector2(-8, -225)
 texture = ExtResource("2_nvv33")
-offset = Vector2(0, -220)

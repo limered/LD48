@@ -11,4 +11,6 @@ public static class GameStatics
     public const float HeroSpeed = 20000;
     public const float TouristIdleSpeed = 5000;
     public const float TouristDistractionSpeed = 10000;
+
+    public const int TouristStartCount = 16;
 }

@@ -25,7 +25,7 @@ public partial class TouristNode : Node2D
 
     [Export] public TouristState CurrentState = TouristState.Idle;
     [Export] public TouristConfiguration Images;
-
+    
     public override void _Ready()
     {
         _rnd = new RandomNumberGenerator();
@@ -81,17 +81,20 @@ public partial class TouristNode : Node2D
                 var reached = GoToIdlePosition();
                 if (reached)
                 {
-                    _timeSinceLastInterest = 0;
-                    _distractedTourist.Free();
-                    _currentDistraction = null;
-                    _distractedTourist = null;
-                    CurrentState = TouristState.Idle;
+                    ResetToIdle();
                 }
 
                 break;
             }
             case TouristState.ToLevel:
+            {
+                var reached = GoToIdlePosition();
+                if (reached)
+                {
+                    ResetToIdle();
+                }
                 break;
+            }
             case TouristState.ToAttraction:
                 GoToAttraction();
                 if (Position.DistanceTo(_currentDistraction.Position) < GameStatics.DistractionDistance)
@@ -102,11 +105,7 @@ public partial class TouristNode : Node2D
                 var reached = GoToIdlePosition();
                 if (reached)
                 {
-                    _timeSinceLastInterest = 0;
-                    _distractedTourist.Free();
-                    _currentDistraction = null;
-                    _distractedTourist = null;
-                    CurrentState = TouristState.Idle;
+                    ResetToIdle();
                 }
 
                 break;
@@ -130,6 +129,22 @@ public partial class TouristNode : Node2D
         }
     }
 
+    public void LevelEntered(Vector2 startPosition, Vector2 idlePosition)
+    {
+        GlobalPosition = startPosition;
+        _idlePosition = idlePosition;
+        CurrentState = TouristState.ToLevel;
+    }
+    
+    private void ResetToIdle()
+    {
+        _timeSinceLastInterest = 0;
+        _distractedTourist?.Free();
+        _currentDistraction = null;
+        _distractedTourist = null;
+        CurrentState = TouristState.Idle;
+    }
+
     private void GoToAttraction()
     {
         var goToDirection = (_currentDistraction.Position - Position).Normalized();
@@ -140,6 +155,8 @@ public partial class TouristNode : Node2D
     {
         _currentDistraction = DistractionCollection.RandomDistraction(_rnd);
         _distractedTourist = (DistractedTourist)_bubble.Instantiate();
+        _distractedTourist.Position = new Vector2(0, -160);
+        _distractedTourist.Scale = new Vector2(0.7f, 0.7f);
         _distractedTourist.SetImage(_currentDistraction.WaitingTimeBubble);
         _distractedTourist.DistractionWaitTime = _currentDistraction.DistractionDuration;
 
