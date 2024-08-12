@@ -8,8 +8,8 @@
 [ext_resource type="Script" path="res://Physics/JumpyRunningAnimation.cs" id="4_jx5yr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w3pyi"]
-radius = 60.5
-height = 326.0
+radius = 25.0
+height = 116.0
 
 [node name="Tourist" type="Node2D"]
 script = ExtResource("1_a1psb")
@@ -26,12 +26,12 @@ script = ExtResource("4_jx5yr")
 Movement = NodePath("../Movement2D")
 
 [node name="head" type="Sprite2D" parent="SpriteContainer"]
-position = Vector2(-5, -260)
+position = Vector2(-2, -95)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_86e4r")
 
 [node name="Body" type="Sprite2D" parent="SpriteContainer"]
-position = Vector2(0, -110)
+position = Vector2(0, -40)
 texture = ExtResource("2_gqply")
 
 [node name="IdleTime" type="Timer" parent="."]
@@ -40,7 +40,7 @@ autostart = true
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-4.5, -151)
+position = Vector2(-1, -54)
 shape = SubResource("CapsuleShape2D_w3pyi")
 
 [connection signal="timeout" from="IdleTime" to="." method="OnIdleTimeTimeout"]

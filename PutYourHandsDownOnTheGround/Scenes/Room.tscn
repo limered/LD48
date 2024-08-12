@@ -1,11 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bd1pdlscvjwm4"]
+[gd_scene load_steps=12 format=3 uid="uid://o8fnadf5ugkg"]
 
 [ext_resource type="Texture2D" uid="uid://b47hdo3oraa80" path="res://Graphics/Ground/boden-1.png" id="1_36uns"]
 [ext_resource type="Texture2D" uid="uid://nufunckw3mhj" path="res://Graphics/Ground/levelboundary.png" id="2_yscn4"]
 [ext_resource type="PackedScene" uid="uid://bfuo8wux5ecuj" path="res://Scenes/Tree.tscn" id="3_mcpjr"]
 [ext_resource type="Shader" path="res://Shader/Tree.gdshader" id="4_fbfy2"]
 [ext_resource type="Texture2D" uid="uid://chj63xuixkq8i" path="res://Graphics/Plants/tree03.png" id="4_vbqv4"]
-[ext_resource type="PackedScene" uid="uid://diu4prejhjtki" path="res://Scenes/Bush.tscn" id="6_4bsj3"]
+[ext_resource type="PackedScene" path="res://Scenes/Bush.tscn" id="6_4bsj3"]
 [ext_resource type="PackedScene" uid="uid://o1dpkera54d7" path="res://Scenes/Tiger.tscn" id="6_b74yy"]
 [ext_resource type="Texture2D" uid="uid://bc1gv04q7fp00" path="res://Graphics/Plants/bush03.png" id="7_ctd1t"]
 
