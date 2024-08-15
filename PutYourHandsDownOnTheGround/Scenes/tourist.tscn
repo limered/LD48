@@ -3,15 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://c7kkxndvain23" path="res://Graphics/Tourist/head-1.png" id="1_86e4r"]
 [ext_resource type="Script" path="res://Tourist/TouristNode.cs" id="1_a1psb"]
 [ext_resource type="Script" path="res://Physics/MovementNode2D.cs" id="2_5touj"]
-[ext_resource type="Texture2D" uid="uid://6t00ks8ijtji" path="res://Graphics/Tourist/body-1.png" id="2_gqply"]
 [ext_resource type="Resource" uid="uid://oa7l6dux8j5r" path="res://Resources/Tourist/1.1.tres" id="2_nm8o8"]
 [ext_resource type="Script" path="res://Physics/JumpyRunningAnimation.cs" id="4_jx5yr"]
+[ext_resource type="Texture2D" uid="uid://ddhyhj6a228re" path="res://Graphics/Tourist/body-2.png" id="6_n4iyu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w3pyi"]
 radius = 25.0
 height = 116.0
 
 [node name="Tourist" type="Node2D"]
+scale = Vector2(0.9, 0.9)
 script = ExtResource("1_a1psb")
 Images = ExtResource("2_nm8o8")
 
@@ -26,13 +27,18 @@ script = ExtResource("4_jx5yr")
 Movement = NodePath("../Movement2D")
 
 [node name="head" type="Sprite2D" parent="SpriteContainer"]
-position = Vector2(-2, -95)
-scale = Vector2(0.5, 0.5)
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(2.22222, -95.5556)
+scale = Vector2(0.45, 0.45)
 texture = ExtResource("1_86e4r")
 
 [node name="Body" type="Sprite2D" parent="SpriteContainer"]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(0, -40)
-texture = ExtResource("2_gqply")
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("6_n4iyu")
 
 [node name="IdleTime" type="Timer" parent="."]
 autostart = true
@@ -40,6 +46,7 @@ autostart = true
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 position = Vector2(-1, -54)
 shape = SubResource("CapsuleShape2D_w3pyi")
 
