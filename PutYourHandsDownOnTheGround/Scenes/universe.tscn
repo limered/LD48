@@ -21,11 +21,14 @@ shader_parameter/heightOffset = 0.0
 shader_parameter/offset = 0.0
 
 [node name="Node2D" type="Node2D"]
+z_as_relative = false
+y_sort_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 editor_draw_limits = true
 
 [node name="Hero" parent="." instance=ExtResource("3_sqqph")]
+z_index = 0
 position = Vector2(-41, 115)
 
 [node name="Tiger" parent="." instance=ExtResource("6_vuf1x")]
@@ -35,19 +38,24 @@ position = Vector2(-152, 287)
 position = Vector2(170, 269)
 
 [node name="Spider" parent="." instance=ExtResource("5_taefx")]
+y_sort_enabled = true
 position = Vector2(223, 35)
 
 [node name="Spider2" parent="." instance=ExtResource("5_taefx")]
+y_sort_enabled = true
 position = Vector2(-196, -91)
 rotation = 2.98353
 
 [node name="Spider3" parent="." instance=ExtResource("5_taefx")]
+y_sort_enabled = true
 position = Vector2(28, -106)
 rotation = 2.98353
 
 [node name="Tree" parent="." instance=ExtResource("5_480ei")]
+z_index = 1
 material = SubResource("ShaderMaterial_s7pdw")
 position = Vector2(203, -90)
 
 [node name="TouristGroup" parent="." instance=ExtResource("6_jicrn")]
+y_sort_enabled = true
 position = Vector2(0, 497)

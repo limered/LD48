@@ -10,6 +10,9 @@ radius = 23.0
 height = 104.0
 
 [node name="Hero" type="Node2D"]
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_brmtt")
 
 [node name="Movement2D" type="Node" parent="."]
@@ -25,6 +28,8 @@ WobbleFactor = 0.02
 WobbleInterval = 0.02
 
 [node name="Sprite2D" type="Sprite2D" parent="Wobble"]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(0, -45)
 texture = ExtResource("3_2w1k8")
 

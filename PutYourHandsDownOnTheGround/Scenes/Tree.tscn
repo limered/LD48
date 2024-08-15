@@ -17,6 +17,8 @@ shader_parameter/heightOffset = 0.0
 shader_parameter/offset = 0.0
 
 [node name="Sprite2D" type="Sprite2D"]
+z_as_relative = false
+y_sort_enabled = true
 material = SubResource("ShaderMaterial_6pxmj")
 position = Vector2(-8, -225)
 texture = ExtResource("2_nvv33")

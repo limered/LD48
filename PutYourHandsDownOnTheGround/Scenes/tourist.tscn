@@ -12,6 +12,8 @@ radius = 25.0
 height = 116.0
 
 [node name="Tourist" type="Node2D"]
+z_as_relative = false
+y_sort_enabled = true
 scale = Vector2(0.9, 0.9)
 script = ExtResource("1_a1psb")
 Images = ExtResource("2_nm8o8")

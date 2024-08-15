@@ -70,6 +70,8 @@ _data = {
 radius = 135.093
 
 [node name="Butterfly" type="Node2D" groups=["distraction"]]
+z_as_relative = false
+y_sort_enabled = true
 scale = Vector2(0.2, 0.2)
 script = ExtResource("1_ukadx")
 DistractionDuration = 2.0
@@ -80,6 +82,8 @@ WaitingTimeBubble = ExtResource("2_otco0")
 BubbleColor = Color(0, 0.6, 1, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(0, -30)
 texture = ExtResource("1_agmfo")
 

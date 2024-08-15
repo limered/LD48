@@ -99,6 +99,8 @@ IsSpider = true
 BubbleColor = Color(0, 1, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_as_relative = false
+y_sort_enabled = true
 rotation = -0.117767
 texture = ExtResource("1_82po8")
 
