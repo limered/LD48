@@ -50,4 +50,4 @@ material = SubResource("ShaderMaterial_s7pdw")
 position = Vector2(203, -90)
 
 [node name="TouristGroup" parent="." instance=ExtResource("6_jicrn")]
-position = Vector2(-1, -340)
+position = Vector2(0, 497)

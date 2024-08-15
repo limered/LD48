@@ -27,7 +27,7 @@ public partial class HeroNode : Node2D
 
     public override void _Process(double delta)
     {
-        var targetVec = _targetedTourist?.Position ?? _targetVector;
+        var targetVec = _targetedTourist?.GlobalPosition ?? _targetVector;
         if (targetVec.DistanceTo(Position) < 5)
         {
             _movement.Stop();
