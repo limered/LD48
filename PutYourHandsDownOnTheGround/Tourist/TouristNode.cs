@@ -97,7 +97,7 @@ public partial class TouristNode : Node2D
             }
             case TouristState.ToAttraction:
                 GoToAttraction();
-                if (Position.DistanceTo(_currentDistraction.Position) < GameStatics.DistractionDistance)
+                if (GlobalPosition.DistanceTo(_currentDistraction.GlobalPosition) < GameStatics.DistractionDistance)
                     CurrentState = TouristState.Interacting;
                 break;
             case TouristState.ToIdleWithPlayer:
@@ -147,7 +147,7 @@ public partial class TouristNode : Node2D
 
     private void GoToAttraction()
     {
-        var goToDirection = (_currentDistraction.Position - Position).Normalized();
+        var goToDirection = (_currentDistraction.GlobalPosition - GlobalPosition).Normalized();
         _movement.AddForce(goToDirection * GameStatics.TouristDistractionSpeed);
     }
 
@@ -155,7 +155,7 @@ public partial class TouristNode : Node2D
     {
         _currentDistraction = DistractionCollection.RandomDistraction(_rnd);
         _distractedTourist = (DistractedTourist)_bubble.Instantiate();
-        _distractedTourist.Position = new Vector2(0, -160);
+        _distractedTourist.GlobalPosition = new Vector2(0, -160);
         _distractedTourist.Scale = new Vector2(0.7f, 0.7f);
         _distractedTourist.SetImage(_currentDistraction.WaitingTimeBubble);
         _distractedTourist.DistractionWaitTime = _currentDistraction.DistractionDuration;
@@ -174,13 +174,13 @@ public partial class TouristNode : Node2D
 
     private bool GoToIdlePosition()
     {
-        if (Position.DistanceTo(_idlePosition) < 2)
+        if (GlobalPosition.DistanceTo(_idlePosition) < 2)
         {
             _movement.Stop();
             return true;
         }
 
-        var goToDirection = (_idlePosition - Position).Normalized();
+        var goToDirection = (_idlePosition - GlobalPosition).Normalized();
         _movement.AddForce(goToDirection * GameStatics.TouristIdleSpeed);
         return false;
     }
@@ -191,7 +191,7 @@ public partial class TouristNode : Node2D
 
         var needsToStop = _rnd.RandfRange(0, 1) < 0.6;
         if (needsToStop)
-            _idlePosition = Position;
+            _idlePosition = GlobalPosition;
         else
             _idlePosition = _anchor + _rnd.RandomPointOnUnitRadius() * IdleRadius;
     }
