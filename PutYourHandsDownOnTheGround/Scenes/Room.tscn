@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://o8fnadf5ugkg"]
+[gd_scene load_steps=13 format=3 uid="uid://o8fnadf5ugkg"]
 
 [ext_resource type="Texture2D" uid="uid://b47hdo3oraa80" path="res://Graphics/Ground/boden-1.png" id="1_36uns"]
 [ext_resource type="Texture2D" uid="uid://nufunckw3mhj" path="res://Graphics/Ground/levelboundary.png" id="2_yscn4"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/Bush.tscn" id="6_4bsj3"]
 [ext_resource type="PackedScene" uid="uid://o1dpkera54d7" path="res://Scenes/Tiger.tscn" id="6_b74yy"]
 [ext_resource type="Texture2D" uid="uid://bc1gv04q7fp00" path="res://Graphics/Plants/bush03.png" id="7_ctd1t"]
+[ext_resource type="PackedScene" uid="uid://qbig6qx35maw" path="res://Scenes/grass.tscn" id="9_501i0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_atvs5"]
 resource_local_to_scene = true
@@ -53,8 +54,8 @@ z_as_relative = false
 y_sort_enabled = true
 
 [node name="Ground" type="Sprite2D" parent="."]
+z_index = -1
 z_as_relative = false
-y_sort_enabled = true
 position = Vector2(336, 452.625)
 scale = Vector2(0.769445, 0.942448)
 texture = ExtResource("1_36uns")
@@ -103,6 +104,53 @@ centered = false
 offset = Vector2(-145, -466)
 
 [node name="Grasses" type="Node" parent="."]
+
+[node name="Grass" parent="Grasses" instance=ExtResource("9_501i0")]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(177, 449)
+GrasSpriteId = 0
+
+[node name="Grass2" parent="Grasses" instance=ExtResource("9_501i0")]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(304, 496)
+
+[node name="Grass6" parent="Grasses" instance=ExtResource("9_501i0")]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(389, 835)
+
+[node name="Grass7" parent="Grasses" instance=ExtResource("9_501i0")]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(412, 669)
+FlipH = true
+GrasSpriteId = 0
+
+[node name="Grass8" parent="Grasses" instance=ExtResource("9_501i0")]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(482, 663)
+GrasSpriteId = 1
+
+[node name="Grass3" parent="Grasses" instance=ExtResource("9_501i0")]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(358, 338)
+FlipH = true
+
+[node name="Grass4" parent="Grasses" instance=ExtResource("9_501i0")]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(153, 327)
+GrasSpriteId = 0
+
+[node name="Grass5" parent="Grasses" instance=ExtResource("9_501i0")]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(264, 314)
+GrasSpriteId = 1
 
 [node name="Bushes" type="Node" parent="."]
 
