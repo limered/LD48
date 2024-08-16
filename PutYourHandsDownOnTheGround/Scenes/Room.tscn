@@ -1,13 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://o8fnadf5ugkg"]
+[gd_scene load_steps=11 format=3 uid="uid://o8fnadf5ugkg"]
 
 [ext_resource type="Texture2D" uid="uid://b47hdo3oraa80" path="res://Graphics/Ground/boden-1.png" id="1_36uns"]
 [ext_resource type="Texture2D" uid="uid://nufunckw3mhj" path="res://Graphics/Ground/levelboundary.png" id="2_yscn4"]
 [ext_resource type="PackedScene" uid="uid://bfuo8wux5ecuj" path="res://Scenes/Tree.tscn" id="3_mcpjr"]
 [ext_resource type="Shader" path="res://Shader/Tree.gdshader" id="4_fbfy2"]
 [ext_resource type="Texture2D" uid="uid://chj63xuixkq8i" path="res://Graphics/Plants/tree03.png" id="4_vbqv4"]
-[ext_resource type="PackedScene" path="res://Scenes/Bush.tscn" id="6_4bsj3"]
 [ext_resource type="PackedScene" uid="uid://o1dpkera54d7" path="res://Scenes/Tiger.tscn" id="6_b74yy"]
-[ext_resource type="Texture2D" uid="uid://bc1gv04q7fp00" path="res://Graphics/Plants/bush03.png" id="7_ctd1t"]
 [ext_resource type="PackedScene" uid="uid://qbig6qx35maw" path="res://Scenes/grass.tscn" id="9_501i0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_atvs5"]
@@ -153,124 +151,6 @@ position = Vector2(264, 314)
 GrasSpriteId = 1
 
 [node name="Bushes" type="Node" parent="."]
-
-[node name="Bush" parent="Bushes" instance=ExtResource("6_4bsj3")]
-z_index = 1
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(595.822, 772.471)
-rotation = -0.245039
-scale = Vector2(0.597866, 0.597866)
-
-[node name="Bush15" parent="Bushes" instance=ExtResource("6_4bsj3")]
-z_index = 1
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(457, 242)
-rotation = -0.245039
-scale = Vector2(0.597866, 0.597866)
-
-[node name="Bush2" parent="Bushes" instance=ExtResource("6_4bsj3")]
-z_index = 1
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(535.832, 765.854)
-rotation = 0.235493
-scale = Vector2(0.467007, 0.517059)
-
-[node name="Bush3" parent="Bushes" instance=ExtResource("6_4bsj3")]
-z_index = 1
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(579.832, 717.854)
-rotation = 0.297189
-scale = Vector2(0.345358, 0.345358)
-
-[node name="Bush4" parent="Bushes" instance=ExtResource("6_4bsj3")]
-z_index = 1
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(86, 191)
-rotation = 0.3844
-scale = Vector2(0.339505, 0.339505)
-
-[node name="Bush5" parent="Bushes" instance=ExtResource("6_4bsj3")]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(363, 773)
-rotation = 0.0502067
-scale = Vector2(0.36735, 0.36735)
-texture = ExtResource("7_ctd1t")
-
-[node name="Bush6" parent="Bushes" instance=ExtResource("6_4bsj3")]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(221, 622)
-rotation = 0.261799
-scale = Vector2(0.375508, 0.375508)
-texture = ExtResource("7_ctd1t")
-
-[node name="Bush7" parent="Bushes" instance=ExtResource("6_4bsj3")]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(166, 595)
-scale = Vector2(0.375508, 0.375508)
-texture = ExtResource("7_ctd1t")
-
-[node name="Bush8" parent="Bushes" instance=ExtResource("6_4bsj3")]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(131, 615)
-rotation = -0.785397
-scale = Vector2(0.375508, 0.375508)
-texture = ExtResource("7_ctd1t")
-
-[node name="Bush9" parent="Bushes" instance=ExtResource("6_4bsj3")]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(537, 257)
-rotation = 0.261799
-scale = Vector2(0.375508, 0.375508)
-texture = ExtResource("7_ctd1t")
-
-[node name="Bush14" parent="Bushes" instance=ExtResource("6_4bsj3")]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(504, 122)
-rotation = -0.261799
-scale = Vector2(0.375508, 0.375508)
-texture = ExtResource("7_ctd1t")
-
-[node name="Bush13" parent="Bushes" instance=ExtResource("6_4bsj3")]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(544, 110)
-rotation = 0.261799
-scale = Vector2(0.375508, 0.375508)
-texture = ExtResource("7_ctd1t")
-
-[node name="Bush12" parent="Bushes" instance=ExtResource("6_4bsj3")]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(480.709, 148.333)
-rotation = 0.261799
-scale = Vector2(0.2694, 0.2694)
-texture = ExtResource("7_ctd1t")
-
-[node name="Bush10" parent="Bushes" instance=ExtResource("6_4bsj3")]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(479.188, 252.425)
-scale = Vector2(0.375508, 0.375508)
-texture = ExtResource("7_ctd1t")
-
-[node name="Bush11" parent="Bushes" instance=ExtResource("6_4bsj3")]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(413, 262)
-rotation = -0.261799
-scale = Vector2(0.375508, 0.375508)
-texture = ExtResource("7_ctd1t")
 
 [node name="Distractions" type="Node" parent="."]
 

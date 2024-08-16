@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqtyldf3e0n8d"]
+[gd_scene load_steps=10 format=3 uid="uid://bqtyldf3e0n8d"]
 
 [ext_resource type="PackedScene" uid="uid://dc1nde2s41a34" path="res://Scenes/Hero.tscn" id="3_sqqph"]
 [ext_resource type="PackedScene" uid="uid://bfuo8wux5ecuj" path="res://Scenes/Tree.tscn" id="5_480ei"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://o1dpkera54d7" path="res://Scenes/Tiger.tscn" id="6_vuf1x"]
 [ext_resource type="Shader" path="res://Shader/Tree.gdshader" id="6_xp0vb"]
 [ext_resource type="PackedScene" uid="uid://qbig6qx35maw" path="res://Scenes/grass.tscn" id="7_rxwgy"]
+[ext_resource type="PackedScene" uid="uid://bv23gisjgqe7d" path="res://Scenes/bush.tscn" id="8_8yfi4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7pdw"]
 resource_local_to_scene = true
@@ -76,3 +77,17 @@ GrasSpriteId = 1
 position = Vector2(-245, 158)
 FlipH = true
 GrasSpriteId = 0
+
+[node name="Bush" parent="." instance=ExtResource("8_8yfi4")]
+z_index = 1
+position = Vector2(186, 145)
+rotation = -0.261799
+
+[node name="Bush2" parent="." instance=ExtResource("8_8yfi4")]
+z_index = 1
+position = Vector2(246, 145)
+
+[node name="Bush3" parent="." instance=ExtResource("8_8yfi4")]
+z_index = 1
+position = Vector2(271, 169)
+rotation = 0.523598
