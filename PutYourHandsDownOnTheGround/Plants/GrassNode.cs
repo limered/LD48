@@ -10,6 +10,7 @@ public partial class GrassNode : Node2D
 
     public override void _Ready()
     {
+        if (GrasSpriteId > Grasses.Length) GrasSpriteId = GD.RandRange(0, 2);
         var sprite = GetNode<Sprite2D>("Sprite2D");
         sprite.Texture = Grasses[GrasSpriteId];
         sprite.FlipH = FlipH;

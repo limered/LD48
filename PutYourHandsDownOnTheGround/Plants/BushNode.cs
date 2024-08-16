@@ -10,6 +10,7 @@ public partial class BushNode : Node2D
 	
 	public override void _Ready()
 	{
+		if (BushSpriteId > Bushes.Length) BushSpriteId = GD.RandRange(0, 2);
 		var sprite = GetNode<Sprite2D>("Sprite2D");
 		sprite.Texture = Bushes[BushSpriteId];
 		sprite.FlipH = FlipH;
@@ -35,9 +36,9 @@ public partial class BushNode : Node2D
 	{
 		var rnd = GD.RandRange(-0.3d, 0.3d);
 		var tween = GetTree().CreateTween();
-		tween.TweenProperty(this, "skew", rnd, 0.05f);
+		tween.TweenProperty(this, "skew", rnd, 0.1f);
 		tween.TweenProperty(this, "skew", 0f, 0.05f);
-		tween.TweenProperty(this, "skew", -rnd, 0.05f);
+		tween.TweenProperty(this, "skew", -rnd, 0.1f);
 		tween.TweenProperty(this, "skew", 0f, 0.05f);
 	}
 }
