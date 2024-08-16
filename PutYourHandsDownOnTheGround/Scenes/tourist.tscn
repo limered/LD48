@@ -46,6 +46,7 @@ texture = ExtResource("6_n4iyu")
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 visible = false
