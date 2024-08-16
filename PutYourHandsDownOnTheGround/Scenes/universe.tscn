@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqtyldf3e0n8d"]
+[gd_scene load_steps=9 format=3 uid="uid://bqtyldf3e0n8d"]
 
 [ext_resource type="PackedScene" uid="uid://dc1nde2s41a34" path="res://Scenes/Hero.tscn" id="3_sqqph"]
 [ext_resource type="PackedScene" uid="uid://bfuo8wux5ecuj" path="res://Scenes/Tree.tscn" id="5_480ei"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dfsw8ia7h8j78" path="res://Scenes/TouristSpawner.tscn" id="6_jicrn"]
 [ext_resource type="PackedScene" uid="uid://o1dpkera54d7" path="res://Scenes/Tiger.tscn" id="6_vuf1x"]
 [ext_resource type="Shader" path="res://Shader/Tree.gdshader" id="6_xp0vb"]
+[ext_resource type="PackedScene" uid="uid://qbig6qx35maw" path="res://Scenes/grass.tscn" id="7_rxwgy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7pdw"]
 resource_local_to_scene = true
@@ -59,3 +60,19 @@ position = Vector2(203, -90)
 [node name="TouristGroup" parent="." instance=ExtResource("6_jicrn")]
 y_sort_enabled = true
 position = Vector2(0, 497)
+
+[node name="Grass" parent="." instance=ExtResource("7_rxwgy")]
+position = Vector2(-244, 93)
+
+[node name="Grass2" parent="." instance=ExtResource("7_rxwgy")]
+position = Vector2(-18, 162)
+GrasSpriteId = 0
+
+[node name="Grass3" parent="." instance=ExtResource("7_rxwgy")]
+position = Vector2(-156, 96)
+GrasSpriteId = 1
+
+[node name="Grass4" parent="." instance=ExtResource("7_rxwgy")]
+position = Vector2(-245, 158)
+FlipH = true
+GrasSpriteId = 0
