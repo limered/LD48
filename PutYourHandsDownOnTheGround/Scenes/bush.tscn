@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://bv23gisjgqe7d"]
+
+[ext_resource type="Script" path="res://Plants/BushNode.cs" id="1_388ws"]
+[ext_resource type="Texture2D" uid="uid://bd66t26sgk8hi" path="res://Plants/Graphics/bush01.png" id="2_qg0gd"]
+[ext_resource type="Texture2D" uid="uid://caodm5fb1bs5j" path="res://Plants/Graphics/bush02.png" id="3_ehxj2"]
+[ext_resource type="Texture2D" uid="uid://vw4nbui26w42" path="res://Plants/Graphics/bush03.png" id="4_e316y"]
+[ext_resource type="Shader" path="res://Scenes/Tree.gdshader" id="5_5jxe7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qiun"]
+resource_local_to_scene = true
+shader = ExtResource("5_5jxe7")
+shader_parameter/speed = 5.0
+shader_parameter/minStrength = 0.01
+shader_parameter/maxStrength = 0.1
+shader_parameter/strenghtScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.05
+shader_parameter/offset = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uphiq"]
+radius = 83.006
+
+[node name="Bush" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_388ws")
+Bushes = Array[Texture2D]([ExtResource("2_qg0gd"), ExtResource("3_ehxj2"), ExtResource("4_e316y")])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_1qiun")
+texture = ExtResource("2_qg0gd")
+offset = Vector2(0, -100)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -83)
+shape = SubResource("CircleShape2D_uphiq")
